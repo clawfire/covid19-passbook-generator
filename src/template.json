@@ -1,0 +1,74 @@
+{
+    "formatVersion": 1,
+    "passTypeIdentifier": "pass.com.thibaultmilan.covid",
+    "serialNumber": "",
+    "webServiceURL": "",
+    "authenticationToken": "",
+    "teamIdentifier": "4699QGD4UQ",
+    "barcode": {
+        "message": "",
+        "format": "PKBarcodeFormatQR",
+        "messageEncoding": "iso-8859-1",
+        "altText": "Your QR code to show when requested"
+    },
+    "organizationName": "Thibault Milan",
+    "description": "Your EU Digital COVID certificate",
+    "logoText": "EU Digital COVID Certificate",
+    "foregroundColor": "rgb(255, 255, 255)",
+    "backgroundColor": "rgb(0, 51, 153)",
+    "labelColor": "#rgb(255, 204, 0)",
+    "generic": {
+        "secondaryFields": [{
+            "key": "surnames",
+            "label": "Surnames",
+            "value": ""
+        }, {
+            "key": "forenames",
+            "label": "Forenames",
+            "value": "",
+        }, {
+            "key": "dob",
+            "label": "Date of Birth",
+            "value": "",
+            "dateStyle": "short"
+        }, , {
+            "key": "uci",
+            "label": "Unique Certificate Identifier",
+            "value": "",
+        }],
+        "backFields": [{
+            "key": "disease-or-agent",
+            "label": "Disease or agent Targeted",
+            "value": ""
+        }, {
+            "key": "vaccine-or-prophylaxis",
+            "label": "Vaccine / Prophylaxis",
+            "value": ""
+        }, {
+            "key": "vaccine-medial-product",
+            "label": "Vaccine medicinal product",
+            "value": ""
+        }, {
+            "key": "vaccine-marketing-auth-holder",
+            "label": "Vaccine Marketing Authorisation holder or manufacturer",
+            "value": ""
+        }, {
+            "key": "doses",
+            "label": "Number in a series of vaccination / doses and the overall",
+            "value": ""
+        }, {
+            "key": "vaccination-date",
+            "label": "Date of vaccination",
+            "value": "",
+            "dateStyle": "short"
+        }, {
+            "key": "state-member",
+            "label": "Member State of vaccination",
+            "value": ""
+        }, {
+            "key": "certificate-issuer",
+            "label": "Certificate issuer",
+            "value": ""
+        }]
+    }
+}
