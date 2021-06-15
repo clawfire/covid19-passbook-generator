@@ -8,6 +8,7 @@
     "license": "NoHarm-draft",
     "private": false,
     "dependencies": {
+        "@pathcheck/dcc-sdk": "^0.0.11",
         "base45-js": "^1.0.1",
         "cbor-js": "^0.1.0",
         "handlebars": "^4.7.7",
@@ -20,5 +21,12 @@
     "scripts": {
         "start": "parcel serve src/index.html --https && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js",
         "build": "parcel build src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js"
-    }
+    },
+    "browserslist": [
+      "last 3 and_chr versions",
+      "last 3 chrome versions",
+      "last 3 opera versions",
+      "last 3 ios_saf versions",
+      "last 3 safari versions"
+    ]
 }

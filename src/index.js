@@ -1,23 +1,8 @@
 import Handlebars from 'handlebars';
 import QrScanner from 'qr-scanner';
-const b45 = require('base45-js');
-const zlib = require('pako');
-import cbor from 'cbor-js';
+const dcc = require('@pathcheck/dcc-sdk');
 
 import template from './template.json';
-
-
-// function decodeToUtf8String(utf8StringArg) {
-//
-//     let data = b45.decode(utf8StringArg);
-//
-//     var str = "";
-//     var count = data.length;
-//     for (let i = 0; i < count; ++i)
-//         str += String.fromCharCode(data[i]);
-//
-//     return str;
-// }
 
 window.addEventListener('load', function() {
 
@@ -42,34 +27,21 @@ window.addEventListener('load', function() {
         console.log("Data from the qr code %o", data);
         // Add it as a QRcode in the template
         template.barcode.message = data;
-        // Strip off the HC1 header if present
-        if (data.startsWith("HC1")) {
-            data = data.substring(3)
-            if (data.startsWith(':')) {
-                data = data.substring(1);
-            } else {
-                console.warn("Warning: unsafe HC1: header");
+
+        dcc.debug(data).then(obj => {
+            console.log(obj);
+            let certificate = obj.value[2].get(-260).get(1);
+            console.log(certificate);
+
+            if (certificate.v) {
+                // COVID-19 Vaccine Certificate
+            } else if (certificate.t) {
+                // COVID-19 Test Certificate
+            } else if (certificate.r) {
+                // COVID-19 Recovery Certificate
             }
-        } else {
-            console.warn("Warning: no HC1: header");
-        }
-        // Now decoding
-        data = b45.decode(data);
-        // Zlib magic headers:
-        // 78 01 - No Compression/low
-        // 78 9C - Default Compression
-        // 78 DA - Best Compression
-        console.log("B45 decoded data %o", data);
-        if (data[0] == 0x78) {
-            console.info("Inflating ...")
-            data = zlib.inflate(data)
-        }
-        console.log("Decoded Uint8Array data %o", data);
-        data = data.buffer;
-        console.log("Buffer data %o", data);
-        data = cbor.decode(data);
-        console.log("Whatever it is now %o", data);
-        console.log(new TextDecoder().decode(data[2]));
+            console.log("Salut %s %s", certificate.nam.gn, certificate.nam.fn);
+        })
     }
 
     // on démarre le scan
