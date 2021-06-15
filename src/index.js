@@ -59,18 +59,17 @@ window.addEventListener('load', function() {
         // 78 01 - No Compression/low
         // 78 9C - Default Compression
         // 78 DA - Best Compression
-        //
+        console.log("B45 decoded data %o", data);
         if (data[0] == 0x78) {
-            console.info("Deflating ...")
+            console.info("Inflating ...")
             data = zlib.inflate(data)
         }
         console.log("Decoded Uint8Array data %o", data);
-        data = String.fromCharCode.apply(null, data);
-        console.log("Decoded string data %o", data);
-        console.log(cbor.encode({
-            Hello: "World"
-        }));
+        data = data.buffer;
+        console.log("Buffer data %o", data);
         data = cbor.decode(data);
+        console.log("Whatever it is now %o", data);
+        console.log(new TextDecoder().decode(data[2]));
     }
 
     // on démarre le scan
