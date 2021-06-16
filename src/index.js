@@ -3,6 +3,36 @@ import QrScanner from 'qr-scanner';
 const dcc = require('@pathcheck/dcc-sdk');
 const iso = require('iso-3166-1');
 
+// Let's import all the references needed
+const targetAgent = require('/valuesets/disease-agent-targeted.json');
+const vaccineProphylaxis = require('/valuesets/vaccine-prophylaxis.json');
+const vaccineProduct = require('/valuesets/vaccine-medicinal-product.json');
+const vaccineManf = require('/valuesets/vaccine-mah-manf.json');
+const testType = require('/valuesets/test-type.json');
+const testResult = require('/valuesets/test-result.json');
+
+// Tests results manufacturers are available online,
+// but we need an offline fallback
+fetch('https://covid-19-diagnostics.jrc.ec.europa.eu/devices/hsc-common-recognition-rat').then(response => {
+    response.json().then(json => {
+        const testManf = json;
+    })
+}).catch(() => {
+    const testManf = require('/valuesets/hsc-common-recognition-rat.json');
+});
+
+const sampleOrigin = {
+    "258500001": "Nasopharyngeal swab",
+    "461911000124106": "Oropharyngeal swab",
+    "472881004": "Pharyngeal swab",
+    "472901003": "Swab from nasal sinus",
+    "119342007": "Saliva specimen",
+    "119297000": "Blood specimen",
+    "119361006": "Plasma specimen",
+    "119364003": "Serum specimen",
+    "122592007": "Acellular blood (serum or plasma) specimen"
+};
+
 let template = require('./template.json');
 
 window.addEventListener('load', function() {
@@ -35,7 +65,13 @@ window.addEventListener('load', function() {
             if (certificate.v) {
                 // COVID-19 Vaccine Certificate
                 template.generic.secondaryFields[4].value = certificate.v[0].ci;
-                template.generic.backFields[6] = iso.whereAlpha2(certificate.v[0].co).country.toUpperCase();
+                template.generic.backFields[1].value = "COVID-19";
+                template.generic.backFields[2].value = "";
+                template.generic.backFields[3].value = "";
+                template.generic.backFields[4].value = "";
+                template.generic.backFields[5].value = "";
+                template.generic.backFields[6].value = "";
+                iso.whereAlpha2(certificate.v[0].co).country.toUpperCase();
                 template.generic.backFields[7] = certificate.v[0].is;
             } else if (certificate.t) {
                 // COVID-19 Test Certificate
