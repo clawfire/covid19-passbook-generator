@@ -65,14 +65,14 @@ window.addEventListener('load', function() {
             if (certificate.v) {
                 // COVID-19 Vaccine Certificate
                 template.generic.secondaryFields[4].value = certificate.v[0].ci;
-                template.generic.backFields[1].value = "COVID-19";
-                template.generic.backFields[2].value = "";
-                template.generic.backFields[3].value = "";
-                template.generic.backFields[4].value = "";
-                template.generic.backFields[5].value = "";
-                template.generic.backFields[6].value = "";
-                iso.whereAlpha2(certificate.v[0].co).country.toUpperCase();
-                template.generic.backFields[7] = certificate.v[0].is;
+                template.generic.backFields[0].value = targetAgent.valueSetValues[certificate.v[0].tg].display;
+                template.generic.backFields[1].value = vaccineProphylaxis.valueSetValues[certificate.v[0].vp].display;
+                template.generic.backFields[2].value = vaccineProduct.valueSetValues[certificate.v[0].mp].display;
+                template.generic.backFields[3].value = vaccineManf.valueSetValues[certificate.v[0].ma].display;
+                template.generic.backFields[4].value = certificate.v[0].dn + "/" + certificate.v[0].sd;
+                template.generic.backFields[5].value = certificate.v[0].dt;
+                template.generic.backFields[6].value = iso.whereAlpha2(certificate.v[0].co).country.toUpperCase();
+                template.generic.backFields[7].value = certificate.v[0].is;
             } else if (certificate.t) {
                 // COVID-19 Test Certificate
             } else if (certificate.r) {
