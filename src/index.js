@@ -1,8 +1,9 @@
 import Handlebars from 'handlebars';
 import QrScanner from 'qr-scanner';
 const dcc = require('@pathcheck/dcc-sdk');
+const iso = require('iso-3166-1');
 
-import template from './template.json';
+let template = require('./template.json');
 
 window.addEventListener('load', function() {
 
@@ -23,24 +24,25 @@ window.addEventListener('load', function() {
     function decode(data) {
         // destroy the scanner, we gonna need memory
         scanner.destroy();
-        // What we read
-        console.log("Data from the qr code %o", data);
         // Add it as a QRcode in the template
         template.barcode.message = data;
 
         dcc.debug(data).then(obj => {
-            console.log(obj);
             let certificate = obj.value[2].get(-260).get(1);
-            console.log(certificate);
-
+            template.generic.secondaryFields[0].value = certificate.nam.gn;
+            template.generic.secondaryFields[1].value = certificate.nam.fn;
+            template.generic.secondaryFields[2].value = certificate.dob;
             if (certificate.v) {
                 // COVID-19 Vaccine Certificate
+                template.generic.secondaryFields[4].value = certificate.v[0].ci;
+                template.generic.backFields[6] = iso.whereAlpha2(certificate.v[0].co).country.toUpperCase();
+                template.generic.backFields[7] = certificate.v[0].is;
             } else if (certificate.t) {
                 // COVID-19 Test Certificate
             } else if (certificate.r) {
                 // COVID-19 Recovery Certificate
             }
-            console.log("Salut %s %s", certificate.nam.gn, certificate.nam.fn);
+            console.log('passbook template filled %o', template);
         })
     }
 

@@ -12,6 +12,7 @@
         "base45-js": "^1.0.1",
         "cbor-js": "^0.1.0",
         "handlebars": "^4.7.7",
+        "iso-3166-1": "^2.0.1",
         "parcel-bundler": "^1.12.5",
         "qr-scanner": "^1.2.0"
     },
@@ -23,10 +24,10 @@
         "build": "parcel build src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js"
     },
     "browserslist": [
-      "last 3 and_chr versions",
-      "last 3 chrome versions",
-      "last 3 opera versions",
-      "last 3 ios_saf versions",
-      "last 3 safari versions"
+        "last 3 and_chr versions",
+        "last 3 chrome versions",
+        "last 3 opera versions",
+        "last 3 ios_saf versions",
+        "last 3 safari versions"
     ]
 }
