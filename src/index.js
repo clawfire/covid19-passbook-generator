@@ -7,6 +7,7 @@ const dcc = require('@pathcheck/dcc-sdk');
 const iso = require('iso-3166-1');
 const JSZIP = require("jszip");
 
+
 // Let's import all the references needed
 const targetAgent = require('/valuesets/disease-agent-targeted.json');
 const vaccineProphylaxis = require('/valuesets/vaccine-prophylaxis.json');
@@ -14,6 +15,14 @@ const vaccineProduct = require('/valuesets/vaccine-medicinal-product.json');
 const vaccineManf = require('/valuesets/vaccine-mah-manf.json');
 const testType = require('/valuesets/test-type.json');
 const testResult = require('/valuesets/test-result.json');
+
+// import b64 string of ressources for the passbook
+import {
+    icon,
+    icon2x,
+    thumbnail,
+    thumbnail2x
+} from '/graphics/passbook-ressources';
 
 // Tests results manufacturers are available online,
 // but we need an offline fallback
@@ -88,6 +97,18 @@ window.addEventListener('load', function() {
             console.log('passbook template filled %o', template);
             let passbook = new JSZIP();
             passbook.file("pass.json", JSON.stringify(template));
+            passbook.file("icon.png", icon, {
+                base64: true
+            });
+            passbook.file("icon@2x.png", icon2x, {
+                base64: true
+            });
+            passbook.file("thumbnail.png", thumbnail, {
+                base64: true
+            });
+            passbook.file("thumbnail@2x.png", thumbnail2x, {
+                base64: true
+            });
             passbook.generateAsync({
                 type: "blob"
             }).then(blob => {
