@@ -1,7 +1,11 @@
 import Handlebars from 'handlebars';
 import QrScanner from 'qr-scanner';
+import {
+    saveAs
+} from 'file-saver';
 const dcc = require('@pathcheck/dcc-sdk');
 const iso = require('iso-3166-1');
+const JSZIP = require("jszip");
 
 // Let's import all the references needed
 const targetAgent = require('/valuesets/disease-agent-targeted.json');
@@ -77,8 +81,18 @@ window.addEventListener('load', function() {
                 // COVID-19 Test Certificate
             } else if (certificate.r) {
                 // COVID-19 Recovery Certificate
+            } else {
+                window.alert('Your scanned QRCode isn\'t a valid EU COVID certificate');
+                exit();
             }
             console.log('passbook template filled %o', template);
+            let passbook = new JSZIP();
+            passbook.file("pass.json", JSON.stringify(template));
+            passbook.generateAsync({
+                type: "blob"
+            }).then(blob => {
+                saveAs(blob, "certificate.pass");
+            })
         })
     }
 
