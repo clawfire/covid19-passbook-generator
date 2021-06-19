@@ -16,14 +16,6 @@ const vaccineManf = require('/valuesets/vaccine-mah-manf.json');
 const testType = require('/valuesets/test-type.json');
 const testResult = require('/valuesets/test-result.json');
 
-// import b64 string of ressources for the passbook
-import {
-    icon,
-    icon2x,
-    thumbnail,
-    thumbnail2x
-} from '/graphics/passbook-ressources';
-
 // Tests results manufacturers are available online,
 // but we need an offline fallback
 fetch('https://covid-19-diagnostics.jrc.ec.europa.eu/devices/hsc-common-recognition-rat').then(response => {
@@ -97,18 +89,20 @@ window.addEventListener('load', function() {
             console.log('passbook template filled %o', template);
             let passbook = new JSZIP();
             passbook.file("pass.json", JSON.stringify(template));
-            passbook.file("icon.png", icon, {
-                base64: true
+            // import b64 string of ressources for the passbook
+            fetch("/graphics/passbook-ressources/icon.png").then((response) => {
+                passbook.file("icon.png", response.blob());
             });
-            passbook.file("icon@2x.png", icon2x, {
-                base64: true
+            fetch("/graphics/passbook-ressources/icon@2x.png").then((response) => {
+                passbook.file("icon@2x.png", response.blob());
             });
-            passbook.file("thumbnail.png", thumbnail, {
-                base64: true
+            fetch("/graphics/passbook-ressources/thumbnail.png").then((response) => {
+                passbook.file("thumbnail.png", response.blob());
             });
-            passbook.file("thumbnail@2x.png", thumbnail2x, {
-                base64: true
+            fetch("/graphics/passbook-ressources/thumbnail@2x.png").then((response) => {
+                passbook.file("thumbnail@2x.png", response.blob());
             });
+
             passbook.generateAsync({
                 type: "blob"
             }).then(blob => {
