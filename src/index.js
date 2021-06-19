@@ -60,8 +60,9 @@ window.addEventListener('load', function() {
     });
 
     $('button[name="startScanning"]').on('click', () => {
-        $(this).closest('section').transition('slide up');
-        $("#video").transition('slide down');
+        $('#intro').transition('fade');
+        $("#video").transition('fade');
+        initScanner();
     })
 
 
