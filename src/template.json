@@ -1,42 +1,43 @@
 {
-    "formatVersion": 1,
-    "passTypeIdentifier": "pass.com.thibaultmilan.covid",
-    "serialNumber": "",
-    "webServiceURL": "",
-    "authenticationToken": "",
-    "teamIdentifier": "4699QGD4UQ",
-    "barcode": {
-        "message": "",
-        "format": "PKBarcodeFormatQR",
-        "messageEncoding": "iso-8859-1",
-        "altText": "Your QR code to show when requested"
-    },
-    "organizationName": "Thibault Milan",
-    "description": "Your EU Digital COVID certificate",
-    "logoText": "EU Digital COVID Certificate",
-    "foregroundColor": "rgb(255, 255, 255)",
-    "backgroundColor": "rgb(0, 51, 153)",
-    "labelColor": "#rgb(255, 204, 0)",
-    "generic": {
-        "secondaryFields": [{
+  "passTypeIdentifier" : "pass.com.thibaultmilan.covid",
+  "formatVersion" : 1,
+  "teamIdentifier" : "4699QGD4UQ",
+  "organizationName" : "Thibault Milan",
+  "serialNumber" : "0000001",
+  "description" : "Your EU Digital COVID Certificate",
+  "foregroundColor" : "rgb(255, 255, 255)",
+  "backgroundColor" : "rgb(0, 51, 153)",
+  "labelColor" : "rgb(255, 204, 0)",
+  "logoText" : "EU Digital COVID Certificate",
+  "barcode" : {
+  		"format" : "PKBarcodeFormatQR",
+  		"message" : "",
+  		"messageEncoding" : "iso-8859-1",
+  		"altText" : "Show this when requested"
+   },
+  "generic" : {
+    "primaryFields" : [
+        {
             "key": "surnames",
-            "label": "Surnames",
+            "label": "Surnames & Lastnames",
             "value": ""
-        }, {
-            "key": "forenames",
-            "label": "Forenames",
-            "value": "",
-        }, {
+        }
+    ],
+    "secondaryFields" : [
+        {
             "key": "dob",
             "label": "Date of Birth",
             "value": "",
-            "dateStyle": "short"
-        }, , {
+            "dateStyle" : "PKDateStyleShort"
+        },
+        {
             "key": "uci",
             "label": "Unique Certificate Identifier",
-            "value": "",
-        }],
-        "backFields": [{
+            "value": ""
+        }
+    ],
+    "backFields" : [
+        {
             "key": "disease-or-agent",
             "label": "Disease or agent Targeted",
             "value": ""
@@ -60,7 +61,7 @@
             "key": "vaccination-date",
             "label": "Date of vaccination",
             "value": "",
-            "dateStyle": "short"
+            "dateStyle" : "PKDateStyleShort"
         }, {
             "key": "state-member",
             "label": "Member State of vaccination",
@@ -69,6 +70,7 @@
             "key": "certificate-issuer",
             "label": "Certificate issuer",
             "value": ""
-        }]
-    }
+        }
+    ]
+  }
 }

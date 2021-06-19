@@ -16,6 +16,8 @@ const vaccineManf = require('/valuesets/vaccine-mah-manf.json');
 const testType = require('/valuesets/test-type.json');
 const testResult = require('/valuesets/test-result.json');
 
+let scanner;
+
 // Tests results manufacturers are available online,
 // but we need an offline fallback
 fetch('https://covid-19-diagnostics.jrc.ec.europa.eu/devices/hsc-common-recognition-rat').then(response => {
@@ -68,14 +70,14 @@ window.addEventListener('load', function() {
             }
         })
         // on créé un element de scanner
-        const scanner = new QrScanner(video, result => decode(result));
+        scanner = new QrScanner(video, result => decode(result));
 
         // on démarre le scan
         scanner.start().then(() => {
             scanner.hasFlash().then(hasFlash => {
                 if (hasFlash) {
                     flashlight_btn.classList.remove('disabled')
-                    flashlight_btn.addEventListener('clic', () => {
+                    flashlight_btn.addEventListener('click', () => {
                         scanner.toggleFlash();
                     })
                 }
@@ -91,18 +93,17 @@ window.addEventListener('load', function() {
 
         dcc.debug(data).then(obj => {
             let certificate = obj.value[2].get(-260).get(1);
-            template.generic.secondaryFields[0].value = certificate.nam.gn;
-            template.generic.secondaryFields[1].value = certificate.nam.fn;
-            template.generic.secondaryFields[2].value = certificate.dob;
+            template.generic.primaryFields[0].value = certificate.nam.gn + " " + certificate.nam.fn.toUpperCase();
+            template.generic.secondaryFields[0].value = certificate.dob + "T00:00Z";
             if (certificate.v) {
                 // COVID-19 Vaccine Certificate
-                template.generic.secondaryFields[4].value = certificate.v[0].ci;
+                template.generic.secondaryFields[1].value = certificate.v[0].ci;
                 template.generic.backFields[0].value = targetAgent.valueSetValues[certificate.v[0].tg].display;
                 template.generic.backFields[1].value = vaccineProphylaxis.valueSetValues[certificate.v[0].vp].display;
                 template.generic.backFields[2].value = vaccineProduct.valueSetValues[certificate.v[0].mp].display;
                 template.generic.backFields[3].value = vaccineManf.valueSetValues[certificate.v[0].ma].display;
                 template.generic.backFields[4].value = certificate.v[0].dn + "/" + certificate.v[0].sd;
-                template.generic.backFields[5].value = certificate.v[0].dt;
+                template.generic.backFields[5].value = certificate.v[0].dt + "T00:00Z";
                 template.generic.backFields[6].value = iso.whereAlpha2(certificate.v[0].co).country.toUpperCase();
                 template.generic.backFields[7].value = certificate.v[0].is;
             } else if (certificate.t) {
