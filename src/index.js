@@ -8,6 +8,16 @@ const iso = require('iso-3166-1');
 const JSZIP = require("jszip");
 
 
+function shaOne(str) {
+    const buffer = new TextEncoder("utf-8").encode(str);
+    return crypto.subtle.digest("SHA-1", buffer);
+}
+
+function hex(buffer) {
+    const hashArray = Array.from(new Uint8Array(buffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 // Let's import all the references needed
 const targetAgent = require('/valuesets/disease-agent-targeted.json');
 const vaccineProphylaxis = require('/valuesets/vaccine-prophylaxis.json');
@@ -41,6 +51,7 @@ const sampleOrigin = {
 let template = require('./template.json');
 
 window.addEventListener('load', function() {
+    console.log('init')
 
     QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
     //QrScanner.hasCamera().then(function() {
@@ -97,32 +108,33 @@ window.addEventListener('load', function() {
             };
 
             const passJson = JSON.stringify(template);
-            const sha1 = crypto.subtle.digest('sha1', passJson);
-            manifest['pass.json'] = sha1;
+            shaOne(passJson).then((sha) => {
+                manifest['pass.json'] = hex(sha);
 
-            let passbook = new JSZIP();
-            passbook.file("pass.json", passJson);
-            passbook.file("manifest.json", JSON.stringify(manifest));
-
-            // import b64 string of ressources for the passbook
-            fetch("/graphics/passbook-ressources/icon.png").then((response) => {
-                passbook.file("icon.png", response.blob());
+                let passbook = new JSZIP();
+                passbook.file("pass.json", passJson);
+                passbook.file("manifest.json", JSON.stringify(manifest));
+    
+                // import b64 string of ressources for the passbook
+                fetch("/graphics/passbook-ressources/icon.png").then((response) => {
+                    passbook.file("icon.png", response.blob());
+                });
+                fetch("/graphics/passbook-ressources/icon@2x.png").then((response) => {
+                    passbook.file("icon@2x.png", response.blob());
+                });
+                fetch("/graphics/passbook-ressources/thumbnail.png").then((response) => {
+                    passbook.file("thumbnail.png", response.blob());
+                });
+                fetch("/graphics/passbook-ressources/thumbnail@2x.png").then((response) => {
+                    passbook.file("thumbnail@2x.png", response.blob());
+                });
+    
+                passbook.generateAsync({
+                    type: "blob"
+                }).then(blob => {
+                    saveAs(blob, "certificate.pass");
+                })
             });
-            fetch("/graphics/passbook-ressources/icon@2x.png").then((response) => {
-                passbook.file("icon@2x.png", response.blob());
-            });
-            fetch("/graphics/passbook-ressources/thumbnail.png").then((response) => {
-                passbook.file("thumbnail.png", response.blob());
-            });
-            fetch("/graphics/passbook-ressources/thumbnail@2x.png").then((response) => {
-                passbook.file("thumbnail@2x.png", response.blob());
-            });
-
-            passbook.generateAsync({
-                type: "blob"
-            }).then(blob => {
-                saveAs(blob, "certificate.pass");
-            })
         })
     }
 
