@@ -20,7 +20,6 @@ const testResult = require('/valuesets/test-result.json');
 // but we need an offline fallback
 fetch('/.netlify/functions/test-results-manufacturers').then(response => {
     response.json().then(json => {
-        console.log('pouic')
         const testManf = json;
     })
 }).catch(() => {
