@@ -8,6 +8,16 @@ const iso = require('iso-3166-1');
 const JSZIP = require("jszip");
 
 
+function shaOne(str) {
+    const buffer = new TextEncoder("utf-8").encode(str);
+    return crypto.subtle.digest("SHA-1", buffer);
+}
+
+function hex(buffer) {
+    const hashArray = Array.from(new Uint8Array(buffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 // Let's import all the references needed
 const targetAgent = require('/valuesets/disease-agent-targeted.json');
 const vaccineProphylaxis = require('/valuesets/vaccine-prophylaxis.json');
@@ -20,7 +30,7 @@ let scanner;
 
 // Tests results manufacturers are available online,
 // but we need an offline fallback
-fetch('https://covid-19-diagnostics.jrc.ec.europa.eu/devices/hsc-common-recognition-rat').then(response => {
+fetch('/.netlify/functions/test-results-manufacturers').then(response => {
     response.json().then(json => {
         const testManf = json;
     })
@@ -43,6 +53,7 @@ const sampleOrigin = {
 let template = require('./template.json');
 
 window.addEventListener('load', function() {
+    console.log('init')
 
     // Message closing function
     // Will be use for all the messages
@@ -115,27 +126,43 @@ window.addEventListener('load', function() {
                 exit();
             }
             console.log('passbook template filled %o', template);
-            let passbook = new JSZIP();
-            passbook.file("pass.json", JSON.stringify(template));
-            // import b64 string of ressources for the passbook
-            fetch("/graphics/passbook-ressources/icon.png").then((response) => {
-                passbook.file("icon.png", response.blob());
-            });
-            fetch("/graphics/passbook-ressources/icon@2x.png").then((response) => {
-                passbook.file("icon@2x.png", response.blob());
-            });
-            fetch("/graphics/passbook-ressources/thumbnail.png").then((response) => {
-                passbook.file("thumbnail.png", response.blob());
-            });
-            fetch("/graphics/passbook-ressources/thumbnail@2x.png").then((response) => {
-                passbook.file("thumbnail@2x.png", response.blob());
-            });
 
-            passbook.generateAsync({
-                type: "blob"
-            }).then(blob => {
-                saveAs(blob, "certificate.pass");
-            })
+            // generate manifest file.
+            let manifest = {
+                "icon.png": "6af7196ef20b26ed4d84a233ab1bc23c8bca15a7", 
+                "icon@2x.png": "0bf60c38223505d69caba04cdec23431972c761f",
+                "thumbnail.png": "5d509a5f70fc415ec952a02a08c3e22c584b77f6",
+                "thumbnail@2x.png": "1d8c15c638a8cc19c09372faea60d40e10873f6d"
+            };
+
+            const passJson = JSON.stringify(template);
+            shaOne(passJson).then((sha) => {
+                manifest['pass.json'] = hex(sha);
+
+                let passbook = new JSZIP();
+                passbook.file("pass.json", passJson);
+                passbook.file("manifest.json", JSON.stringify(manifest));
+    
+                // import b64 string of ressources for the passbook
+                fetch("/graphics/passbook-ressources/icon.png").then((response) => {
+                    passbook.file("icon.png", response.blob());
+                });
+                fetch("/graphics/passbook-ressources/icon@2x.png").then((response) => {
+                    passbook.file("icon@2x.png", response.blob());
+                });
+                fetch("/graphics/passbook-ressources/thumbnail.png").then((response) => {
+                    passbook.file("thumbnail.png", response.blob());
+                });
+                fetch("/graphics/passbook-ressources/thumbnail@2x.png").then((response) => {
+                    passbook.file("thumbnail@2x.png", response.blob());
+                });
+    
+                passbook.generateAsync({
+                    type: "blob"
+                }).then(blob => {
+                    saveAs(blob, "certificate.pass");
+                })
+            });
         })
     }
 
