@@ -18,8 +18,9 @@ const testResult = require('/valuesets/test-result.json');
 
 // Tests results manufacturers are available online,
 // but we need an offline fallback
-fetch('https://covid-19-diagnostics.jrc.ec.europa.eu/devices/hsc-common-recognition-rat').then(response => {
+fetch('/.netlify/functions/test-results-manufacturers').then(response => {
     response.json().then(json => {
+        console.log('pouic')
         const testManf = json;
     })
 }).catch(() => {
