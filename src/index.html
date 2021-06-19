@@ -10,8 +10,6 @@
         <link rel="stylesheet" href="/styles/master.scss">
         <script src="https://cdn.jsdelivr.net/gh/jquery/jquery@3.2.1/dist/jquery.min.js" charset="utf-8"></script>
         <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-        <script src="/index.js" charset="utf-8"></script>
-        <script src=""></script>
     </head>
 
     <body class="">
@@ -20,7 +18,41 @@
                 <div class="header item">EU Digital COVID Certificate Passbook</div>
             </div>
         </section>
-        <section id="video">
+        <section id="intro" class="ui container">
+            <div class="ui info message">
+                <i class="close icon"></i>
+                <div class="header">What's that project?</div>
+                <p><i class="eu flag"></i>This web application is made by EU citizen in order to let you scan your EU Digital COVID certificate (vaccine, test or healing) and generate a passbook from it.</p>
+                <p>This application is working 100% on your device and store nothing remotly.<br/> However, <i class="ui icon apple"></i>Apple require the passbook to be signed and that cannot happen in your device without compromising the signing key.</p>
+                <p>All the source code can be read and audited <a href="https://github.com/clawfire/covid19-passbook-generator" title="See the project on github">right here</a></p>
+            </div>
+            <h1 class="ui header">How does it work?</h1>
+            <div class="ui vertical steps">
+                <div class="step">
+                    <div class="content">
+                        <div class="title">Scan</div>
+                        <div class="description">Point your device to your EU Digital COVID certificate</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="content">
+                        <div class="title">Signature</div>
+                        <div class="description">We are decoding the code, verify the informations and generate a passbook. We're sending the passbook to our server for signature. We don't store anything.</div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="content">
+                        <div class="title">Downnload</div>
+                        <div class="description">Your final passbook is ready. Add it to your wallet.</div>
+                    </div>
+                </div>
+            </div>
+            <button class="ui primary fluid icon button" name="startScanning">
+                <i class="qrcode icon"></i>
+                Start scanning
+            </button>
+        </section>
+        <section id="video" class="ui transition hidden">
             <div class="ui fluid card">
                 <div class="image">
                     <video id="scanner">

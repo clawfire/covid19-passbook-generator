@@ -53,19 +53,45 @@ let template = require('./template.json');
 window.addEventListener('load', function() {
     console.log('init')
 
-    QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
-    //QrScanner.hasCamera().then(function() {
-    const flashlight_btn = document.getElementsByClassName('button')[0];
-    // on localise l'element video qui va servir à donner le feedback client
-    const video = document.getElementById('scanner');
+    // Message closing function
+    // Will be use for all the messages
+    $('.message .close').on('click', function() {
+        $(this).closest('.message').transition('fade');
+    });
 
-    QrScanner.hasCamera().then(hasCamera => {
-        if (!hasCamera) {
-            window.alert("You need a camera to use this tool");
-        }
+    $('button[name="startScanning"]').on('click', () => {
+        $(this).closest('section').transition('slide up');
+        $("#video").transition('slide down');
     })
-    // on créé un element de scanner
-    const scanner = new QrScanner(video, result => decode(result));
+
+
+    function initScanner() {
+        QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
+        //QrScanner.hasCamera().then(function() {
+        const flashlight_btn = document.getElementsByClassName('button')[0];
+        // on localise l'element video qui va servir à donner le feedback client
+        const video = document.getElementById('scanner');
+
+        QrScanner.hasCamera().then(hasCamera => {
+            if (!hasCamera) {
+                window.alert("You need a camera to use this tool");
+            }
+        })
+        // on créé un element de scanner
+        const scanner = new QrScanner(video, result => decode(result));
+
+        // on démarre le scan
+        scanner.start().then(() => {
+            scanner.hasFlash().then(hasFlash => {
+                if (hasFlash) {
+                    flashlight_btn.classList.remove('disabled')
+                    flashlight_btn.addEventListener('clic', () => {
+                        scanner.toggleFlash();
+                    })
+                }
+            });
+        })
+    }
 
     function decode(data) {
         // destroy the scanner, we gonna need memory
@@ -137,18 +163,6 @@ window.addEventListener('load', function() {
             });
         })
     }
-
-    // on démarre le scan
-    scanner.start().then(() => {
-        scanner.hasFlash().then(hasFlash => {
-            if (hasFlash) {
-                flashlight_btn.classList.remove('disabled')
-                flashlight_btn.addEventListener('clic', () => {
-                    scanner.toggleFlash();
-                })
-            }
-        });
-    })
 
     // }).catch(function() {
     // })
