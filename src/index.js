@@ -95,8 +95,22 @@ window.addEventListener('load', function() {
                 exit();
             }
             console.log('passbook template filled %o', template);
+
+            // generate manifest file.
+            let manifest = {
+                "icon.png": "6af7196ef20b26ed4d84a233ab1bc23c8bca15a7", 
+                "icon@2x.png": "0bf60c38223505d69caba04cdec23431972c761f",
+                "thumbnail.png": "5d509a5f70fc415ec952a02a08c3e22c584b77f6",
+                "thumbnail@2x.png": "1d8c15c638a8cc19c09372faea60d40e10873f6d"
+            };
+
+            const passJson = JSON.stringify(template);
+            const sha1 = crypto.subtle.digest('sha1', passJson);
+            manifest['pass.json'] = sha1;
+
             let passbook = new JSZIP();
-            passbook.file("pass.json", JSON.stringify(template));
+            passbook.file("pass.json", passJson);
+            passbook.file("manifest.json", JSON.stringify(manifest));
             passbook.file("icon.png", icon, {
                 base64: true
             });
