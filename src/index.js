@@ -35,7 +35,7 @@ let scanner;
 
 // Tests results manufacturers are available online,
 // but we need an offline fallback
-fetch('/.netlify/functions/test-results-manufacturers').then(response => {
+fetch('/api/test-results-manufacturers').then(response => {
     response.json().then(json => {
         const testManf = json;
     }).catch(() => {
