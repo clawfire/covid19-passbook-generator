@@ -38,6 +38,8 @@ let scanner;
 fetch('/.netlify/functions/test-results-manufacturers').then(response => {
     response.json().then(json => {
         const testManf = json;
+    }).catch(() => {
+        const testManf = require('/valuesets/hsc-common-recognition-rat.json');
     })
 }).catch(() => {
     const testManf = require('/valuesets/hsc-common-recognition-rat.json');
