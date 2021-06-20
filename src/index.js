@@ -26,6 +26,11 @@ const vaccineManf = require('/valuesets/vaccine-mah-manf.json');
 const testType = require('/valuesets/test-type.json');
 const testResult = require('/valuesets/test-result.json');
 
+import iconUrl from "/graphics/icon.png";
+import icon2xUrl from "/graphics/icon@2x.png";
+import thumbnailUrl from "/graphics/thumbnail.png";
+import thumbnailx2Url from "/graphics/thumbnail@2x.png";
+
 let scanner;
 
 // Tests results manufacturers are available online,
@@ -142,25 +147,26 @@ window.addEventListener('load', function() {
                 let passbook = new JSZIP();
                 passbook.file("pass.json", passJson);
                 passbook.file("manifest.json", JSON.stringify(manifest));
-    
+
                 // import b64 string of ressources for the passbook
-                fetch("/graphics/passbook-ressources/icon.png").then((response) => {
+                let icon = fetch(iconUrl).then((response) => {
                     passbook.file("icon.png", response.blob());
                 });
-                fetch("/graphics/passbook-ressources/icon@2x.png").then((response) => {
+                let icon2x = fetch(icon2xUrl).then((response) => {
                     passbook.file("icon@2x.png", response.blob());
                 });
-                fetch("/graphics/passbook-ressources/thumbnail.png").then((response) => {
+                let thumbnail = fetch(thumbnailUrl).then((response) => {
                     passbook.file("thumbnail.png", response.blob());
                 });
-                fetch("/graphics/passbook-ressources/thumbnail@2x.png").then((response) => {
+                let thumbnailx2 = fetch(thumbnailx2Url).then((response) => {
                     passbook.file("thumbnail@2x.png", response.blob());
                 });
-    
-                passbook.generateAsync({
-                    type: "blob"
-                }).then(blob => {
-                    saveAs(blob, "certificate.pass");
+                Promise.all([icon, icon2x, thumbnail, thumbnailx2]).then(() => {
+                    passbook.generateAsync({
+                        type: "blob"
+                    }).then(blob => {
+                        saveAs(blob, "certificate.pass");
+                    })
                 })
             });
         })
