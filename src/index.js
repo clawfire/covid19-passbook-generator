@@ -134,23 +134,25 @@ window.addEventListener('load', function() {
             }
             console.log('passbook template filled %o', template);
 
-            // generate manifest file.
+
+            // generate manifest file.template file
             let manifest = {
-                "icon.png": "6af7196ef20b26ed4d84a233ab1bc23c8bca15a7", 
+                "icon.png": "6af7196ef20b26ed4d84a233ab1bc23c8bca15a7",
                 "icon@2x.png": "0bf60c38223505d69caba04cdec23431972c761f",
                 "thumbnail.png": "5d509a5f70fc415ec952a02a08c3e22c584b77f6",
                 "thumbnail@2x.png": "1d8c15c638a8cc19c09372faea60d40e10873f6d"
             };
-
             const passJson = JSON.stringify(template);
+            // Get the SHA1 of the pass JSON
             shaOne(passJson).then((sha) => {
                 manifest['pass.json'] = hex(sha);
-
+                // Create the ZIP instance
                 let passbook = new JSZIP();
+                // Add files into it
                 passbook.file("pass.json", passJson);
                 passbook.file("manifest.json", JSON.stringify(manifest));
 
-                // import b64 string of ressources for the passbook
+                // Add the static ressources
                 let icon = fetch(iconUrl).then((response) => {
                     passbook.file("icon.png", response.blob());
                 });
@@ -163,11 +165,15 @@ window.addEventListener('load', function() {
                 let thumbnailx2 = fetch(thumbnailx2Url).then((response) => {
                     passbook.file("thumbnail@2x.png", response.blob());
                 });
+
+                // Call for signature file
+                // Add signature file in the ZIP
+
                 Promise.all([icon, icon2x, thumbnail, thumbnailx2]).then(() => {
                     passbook.generateAsync({
                         type: "blob"
                     }).then(blob => {
-                        saveAs(blob, "certificate.pass");
+                        saveAs(blob, "certificate.pkpass");
                     })
                 })
             });
