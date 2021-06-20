@@ -13,12 +13,17 @@
 
   # (optional) Settings for Netlify Dev
   # https://github.com/netlify/cli/blob/main/docs/netlify-dev.md#project-detection
-  [dev]
-   port = 3000 # Port that the dev server will be listening on
-   publish = "dist" # Folder with the static content for _redirect file
+[dev]
+port = 3000 # Port that the dev server will be listening on
+publish = "dist" # Folder with the static content for _redirect file
 
-   framework = "#custom"
-   command = "parcel serve src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js" # Command to start your dev server
-   targetPort = 1234
+framework = "#custom"
+command = "parcel serve src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js" # Command to start your dev server
+targetPort = 1234
 
   ## more info on configuring this file: https://www.netlify.com/docs/netlify-toml-reference/
+[[redirects]]
+    from = "/api/*"
+    to = ".netlify/functions/:splat"
+    status= 200
+    force = true # ensure we are always redirecting
