@@ -187,7 +187,8 @@ window.addEventListener('load', function() {
 
                 Promise.all([icon, icon2x, thumbnail, thumbnailx2, signature]).then(() => {
                     passbook.generateAsync({
-                        type: "blob"
+                        type: "blob",
+                        mimeType: "application/vnd.apple.pkpass"
                     }).then(blob => {
                         saveAs(blob, "certificate.pkpass");
                     })
