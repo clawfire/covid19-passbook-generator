@@ -23,8 +23,8 @@
         "sass": "^1.34.1"
     },
     "scripts": {
-        "start": "parcel serve src/index.html --https && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js",
-        "build": "parcel build src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js"
+        "start": "NODE_ENV=development parcel serve src/index.html --https && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js",
+        "build": "NODE_ENV=production parcel build src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js"
     },
     "browserslist": [
         "last 3 and_chr versions",

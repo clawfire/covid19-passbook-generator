@@ -167,9 +167,25 @@ window.addEventListener('load', function() {
                 });
 
                 // Call for signature file
-                // Add signature file in the ZIP
+                let signature = fetch(process.env.API_SIGNATURE_URL, {
+                    method: "POST",
+                    body: JSON.stringify(manifest)
+                }).then((response) => {
+                    if (response.status == 200 && response.body != null && response.body != "") {
+                        // Add the signature to the file
+                        passbook.file('signature', response.text(), {
+                            base64: true,
+                            binary: true
+                        });
+                    } else {
+                        window.alert("Error while signing your passbook. Please try again later");
+                    }
+                }).catch((error) => {
+                    console.error("Error while calling λ", error);
+                    window.alert("Error while signing your passbook. Please refresh & try again");
+                })
 
-                Promise.all([icon, icon2x, thumbnail, thumbnailx2]).then(() => {
+                Promise.all([icon, icon2x, thumbnail, thumbnailx2, signature]).then(() => {
                     passbook.generateAsync({
                         type: "blob"
                     }).then(blob => {
