@@ -18,6 +18,29 @@ function hex(buffer) {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+function newPassbookItem(passbook, field, key, label, value, dateStyle) {
+    // check if we have the required parameters
+    if (passbook === undefined || field === undefined || key === undefined || value === undefined) {
+        console.error('Required parameters are missing');
+        return null;
+    }
+    // Test if fields is one allowed
+    if (!['primaryFields', 'secondaryFields', 'backFields'].includes(field)) {
+        console.error('The supplied field "%s" isn\'t not allowed', field);
+        return null;
+    }
+
+    let newObject = {
+        "key": key,
+        "label": label,
+        "value": value
+    };
+    if (dateStyle) {
+        newObject.dateStyle = dateStyle
+    };
+    passbook.generic[field].push(newObject);
+}
+
 // Let's import all the references needed
 const targetAgent = require('/valuesets/disease-agent-targeted.json');
 const vaccineProphylaxis = require('/valuesets/vaccine-prophylaxis.json');
@@ -60,8 +83,6 @@ const sampleOrigin = {
 let template = require('./template.json');
 
 window.addEventListener('load', function() {
-    console.log('init')
-
     // Message closing function
     // Will be used for all the messages
     $('.message .close').on('click', function() {
@@ -112,40 +133,63 @@ window.addEventListener('load', function() {
         dcc.debug(data).then(obj => {
             let certificate = obj.value[2].get(-260).get(1);
             // Use the UCI for passboook serial number
-            template.serialNumber = certificate.v[0].ci;
+            let certificateContent;
+            if (certificate.v) {
+                certificateContent = certificate.v[0];
+            } else if (certificate.r) {
+                certificateContent = certificate.r[0];
+            } else if (certificate.t) {
+                certificateContent = certificate.t[0];
+            } else {
+                console.error("Cannot read your unique certificate identifier. Aborting");
+                exit();
+            }
+            template.serialNumber = certificateContent.ci;
             // Surname(s) and Forename(s)
-            template.generic.primaryFields[0].value = certificate.nam.gn + " " + certificate.nam.fn.toUpperCase();
+            newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
             // Date of birth
-            template.generic.secondaryFields[0].value = certificate.dob + "T00:00Z";
+            newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", certificate.dob + "T00:00Z", "PKDateStyleShort");
             // Unique Certificate Identifier
-            template.generic.secondaryFields[1].value = certificate.v[0].ci;
-            // Member State
-            template.generic.backFields[6].value = iso.whereAlpha2(certificate.v[0].co).country.toUpperCase();
-            // Certificate Issuer
-            template.generic.backFields[7].value = certificate.v[0].is;
-            // Dissease or Agent
-            template.generic.backFields[0].value = targetAgent.valueSetValues[certificate.v[0].tg].display;
+            newPassbookItem(template, "secondaryFields", "uci", "Unique Certificate Identifier", certificateContent.ci);
+
             if (certificate.v) {
                 // COVID-19 Vaccine Certificate
                 // ----------------------------
+                // Dissease or Agent
+                newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent targeted", targetAgent.valueSetValues[certificateContent.tg].display);
                 // Vaccine / Prophylaxis
-                template.generic.backFields[1].value = vaccineProphylaxis.valueSetValues[certificate.v[0].vp].display;
+                newPassbookItem(template, "backFields", "vaccine-or-prophylaxis", "Vaccine / Prophylaxis", vaccineProphylaxis.valueSetValues[certificateContent.vp].display);
                 // Vaccine medicinal product
-                template.generic.backFields[2].value = vaccineProduct.valueSetValues[certificate.v[0].mp].display;
+                newPassbookItem(template, "backFields", "vaccine-medial-product", "Vaccine medicinal product", vaccineProduct.valueSetValues[certificateContent.mp].display);
                 // Vaccine marketing authorisation holder or manufacturer
-                template.generic.backFields[3].value = vaccineManf.valueSetValues[certificate.v[0].ma].display;
+                newPassbookItem(template, "backFields", "vaccine-marketing-auth-holder", "Vaccine Marketing Authorisation holder or manufacturer", vaccineManf.valueSetValues[certificateContent.ma].display);
                 // Numnber in a series of vaccination / doses and the overall
-                template.generic.backFields[4].value = certificate.v[0].dn + "/" + certificate.v[0].sd;
+                newPassbookItem(template, "backFields", "doses", "Number in a series of vaccination / doses and the overall", certificateContent.dn + "/" + certificateContent.sd);
                 // Date of vaccination
-                template.generic.backFields[5].value = certificate.v[0].dt + "T00:00Z";
+                newPassbookItem(template, "backFields", "vaccination-date", "Date of vaccination", certificateContent.dt + "T00:00Z", "PKDateStyleShort");
             } else if (certificate.t) {
                 // COVID-19 Test Certificate
             } else if (certificate.r) {
                 // COVID-19 Recovery Certificate
+                // -----------------------------
+                // Dissease or Agent
+                newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent the citizen has recovered from", targetAgent.valueSetValues[certificateContent.tg].display);
+                // Date of first positive test result
+                newPassbookItem(template, "backFields", "date-of-first-positive-test-result", "Date of first positive test result", certificateContent.fr + "T00:00Z", "PKDateStyleShort");
+                // Certificate valid from
+                newPassbookItem(template, "backFields", "valid-from", "Certificate valid from", certificateContent.df + "T00:00Z", "PKDateStyleShort");
+                // Certificate valid until
+                newPassbookItem(template, "backFields", "valid-until", "Certificate valid until", certificateContent.du + "T00:00Z", "PKDateStyleShort");
+                template.expirationDate = certificateContent.du + "T00:00:00Z";
             } else {
                 window.alert('Your scanned QRCode isn\'t a valid EU COVID certificate');
                 exit();
             }
+            // Member State
+            newPassbookItem(template, "backFields", "state-member", "Member State", iso.whereAlpha2(certificateContent.co).country.toUpperCase());
+            // Certificate Issuer
+            newPassbookItem(template, "backFields", "certificate-issuer", "Certificate issuer", certificateContent.is);
+
             console.log('passbook template filled %o', template);
 
 

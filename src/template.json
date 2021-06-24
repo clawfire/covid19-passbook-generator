@@ -17,60 +17,13 @@
    },
   "generic" : {
     "primaryFields" : [
-        {
-            "key": "surnames",
-            "label": "Surnames & Lastnames",
-            "value": ""
-        }
+
     ],
     "secondaryFields" : [
-        {
-            "key": "dob",
-            "label": "Date of Birth",
-            "value": "",
-            "dateStyle" : "PKDateStyleShort"
-        },
-        {
-            "key": "uci",
-            "label": "Unique Certificate Identifier",
-            "value": ""
-        }
+
     ],
     "backFields" : [
-        {
-            "key": "disease-or-agent",
-            "label": "Disease or agent",
-            "value": ""
-        }, {
-            "key": "vaccine-or-prophylaxis",
-            "label": "Vaccine / Prophylaxis",
-            "value": ""
-        }, {
-            "key": "vaccine-medial-product",
-            "label": "Vaccine medicinal product",
-            "value": ""
-        }, {
-            "key": "vaccine-marketing-auth-holder",
-            "label": "Vaccine Marketing Authorisation holder or manufacturer",
-            "value": ""
-        }, {
-            "key": "doses",
-            "label": "Number in a series of vaccination / doses and the overall",
-            "value": ""
-        }, {
-            "key": "vaccination-date",
-            "label": "Date of vaccination",
-            "value": "",
-            "dateStyle" : "PKDateStyleShort"
-        }, {
-            "key": "state-member",
-            "label": "Member State",
-            "value": ""
-        }, {
-            "key": "certificate-issuer",
-            "label": "Certificate issuer",
-            "value": ""
-        }
+
     ]
   }
 }
