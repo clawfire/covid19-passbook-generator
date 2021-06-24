@@ -5,7 +5,7 @@ The aim of this project is to let a user scan a EU Digital COVID Certificate wit
 - [x] Reading the QRCode & decode it
 - [x] Extracting informations from it
 - [x] Put the user data into the passbook template
-- [ ] Call the server for manifest signature
+- [x] Call the server for manifest signature
 - [x] Create the passbook archive with the signature
 
 Due to how Apple degigned their passbook, they need to be signed to be display in the wallet app. ~~At the moment I didn't find a way of doing this on the user's device without compromising the signing key~~ However, we just need to sign the manifest which contain `SHA-1` of your data, not the data itself. That's why we though about a small web service who do all of this in-memory:

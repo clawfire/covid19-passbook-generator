@@ -111,6 +111,7 @@ window.addEventListener('load', function() {
 
         dcc.debug(data).then(obj => {
             let certificate = obj.value[2].get(-260).get(1);
+            template.serialNumber = certificate.v[0].ci;
             template.generic.primaryFields[0].value = certificate.nam.gn + " " + certificate.nam.fn.toUpperCase();
             template.generic.secondaryFields[0].value = certificate.dob + "T00:00Z";
             if (certificate.v) {
