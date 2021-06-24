@@ -63,7 +63,7 @@ window.addEventListener('load', function() {
     console.log('init')
 
     // Message closing function
-    // Will be use for all the messages
+    // Will be used for all the messages
     $('.message .close').on('click', function() {
         $(this).closest('.message').transition('fade');
     });
@@ -79,7 +79,7 @@ window.addEventListener('load', function() {
         QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
         //QrScanner.hasCamera().then(function() {
         const flashlight_btn = document.getElementsByClassName('button')[0];
-        // on localise l'element video qui va servir à donner le feedback client
+        // we select the video element, which will provide the user feedback
         const video = document.getElementById('scanner');
 
         QrScanner.hasCamera().then(hasCamera => {
@@ -87,10 +87,10 @@ window.addEventListener('load', function() {
                 window.alert("You need a camera to use this tool");
             }
         })
-        // on créé un element de scanner
+        // we create a new scanner
         scanner = new QrScanner(video, result => decode(result));
 
-        // on démarre le scan
+        // we start scanning
         scanner.start().then(() => {
             scanner.hasFlash().then(hasFlash => {
                 if (hasFlash) {
@@ -197,7 +197,4 @@ window.addEventListener('load', function() {
             });
         })
     }
-
-    // }).catch(function() {
-    // })
 }, false)
