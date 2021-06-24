@@ -111,20 +111,33 @@ window.addEventListener('load', function() {
 
         dcc.debug(data).then(obj => {
             let certificate = obj.value[2].get(-260).get(1);
+            // Use the UCI for passboook serial number
             template.serialNumber = certificate.v[0].ci;
+            // Surname(s) and Forename(s)
             template.generic.primaryFields[0].value = certificate.nam.gn + " " + certificate.nam.fn.toUpperCase();
+            // Date of birth
             template.generic.secondaryFields[0].value = certificate.dob + "T00:00Z";
+            // Unique Certificate Identifier
+            template.generic.secondaryFields[1].value = certificate.v[0].ci;
+            // Member State
+            template.generic.backFields[6].value = iso.whereAlpha2(certificate.v[0].co).country.toUpperCase();
+            // Certificate Issuer
+            template.generic.backFields[7].value = certificate.v[0].is;
+            // Dissease or Agent
+            template.generic.backFields[0].value = targetAgent.valueSetValues[certificate.v[0].tg].display;
             if (certificate.v) {
                 // COVID-19 Vaccine Certificate
-                template.generic.secondaryFields[1].value = certificate.v[0].ci;
-                template.generic.backFields[0].value = targetAgent.valueSetValues[certificate.v[0].tg].display;
+                // ----------------------------
+                // Vaccine / Prophylaxis
                 template.generic.backFields[1].value = vaccineProphylaxis.valueSetValues[certificate.v[0].vp].display;
+                // Vaccine medicinal product
                 template.generic.backFields[2].value = vaccineProduct.valueSetValues[certificate.v[0].mp].display;
+                // Vaccine marketing authorisation holder or manufacturer
                 template.generic.backFields[3].value = vaccineManf.valueSetValues[certificate.v[0].ma].display;
+                // Numnber in a series of vaccination / doses and the overall
                 template.generic.backFields[4].value = certificate.v[0].dn + "/" + certificate.v[0].sd;
+                // Date of vaccination
                 template.generic.backFields[5].value = certificate.v[0].dt + "T00:00Z";
-                template.generic.backFields[6].value = iso.whereAlpha2(certificate.v[0].co).country.toUpperCase();
-                template.generic.backFields[7].value = certificate.v[0].is;
             } else if (certificate.t) {
                 // COVID-19 Test Certificate
             } else if (certificate.r) {

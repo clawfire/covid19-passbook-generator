@@ -39,7 +39,7 @@
     "backFields" : [
         {
             "key": "disease-or-agent",
-            "label": "Disease or agent Targeted",
+            "label": "Disease or agent",
             "value": ""
         }, {
             "key": "vaccine-or-prophylaxis",
@@ -64,7 +64,7 @@
             "dateStyle" : "PKDateStyleShort"
         }, {
             "key": "state-member",
-            "label": "Member State of vaccination",
+            "label": "Member State",
             "value": ""
         }, {
             "key": "certificate-issuer",
