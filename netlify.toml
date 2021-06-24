@@ -22,8 +22,3 @@ command = "parcel serve src/index.html && cp node_modules/qr-scanner/qr-scanner-
 targetPort = 1234
 
   ## more info on configuring this file: https://www.netlify.com/docs/netlify-toml-reference/
-[[redirects]]
-    from = "/api/*"
-    to = ".netlify/functions/:splat"
-    status= 200
-    force = true # ensure we are always redirecting
