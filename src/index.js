@@ -200,19 +200,19 @@ window.addEventListener('load', function() {
                 // Name of test
                 // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
                 if (certificateContent.nm) {
-                    newPassbookItem(template, "backFields", "name-of-test", "Name of test", testType.certificateContent.nm);
+                    newPassbookItem(template, "backFields", "name-of-test", "Name of test", certificateContent.nm);
                 }
                 // Test Manufacturer
                 // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
                 if (certificateContent.ma) {
-                    newPassbookItem(template, "backFields", "manufacturer-of-test", "Manufacturer of test", testType.certificateContent.ma);
+                    newPassbookItem(template, "backFields", "manufacturer-of-test", "Manufacturer of test", certificateContent.ma);
                 }
                 // Sample collection time
-                newPassbookItem(template, "backFields", "collection-time", "Sample Collection Time", testType.certificateContent.sc, "PKDateStyleShort");
+                newPassbookItem(template, "backFields", "collection-time", "Sample Collection Time", certificateContent.sc, "PKDateStyleShort");
                 // test result date time
                 // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
                 if (certificateContent.dr) {
-                    newPassbookItem(template, "backFields", "test-result-Time", "Test Result date time", testType.certificateContent.dr, "PKDateStyleShort");
+                    newPassbookItem(template, "backFields", "test-result-Time", "Test Result date time", certificateContent.dr, "PKDateStyleShort");
                 }
                 // test result
                 newPassbookItem(template, "backFields", "test-result", "Test Result", testResult.valueSetValues[certificateContent.tr].display);
