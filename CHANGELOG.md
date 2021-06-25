@@ -1,5 +1,9 @@
 ## [Unrealeased]
 
+## [1.1.1] - 2021-06-25
+### Changed
+- Typo fix on the test certificates
+
 ## [1.1] - 2021-06-25
 ### Added
 - Test data are now supported #7
