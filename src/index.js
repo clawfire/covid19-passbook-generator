@@ -157,7 +157,7 @@ window.addEventListener('load', function() {
                 certificateType = "Recovery";
             } else if (certificate.t) {
                 certificateContent = certificate.t[0];
-                certificateType = "Test";
+                certificateType = "Test Result";
             } else {
                 console.error("Cannot read your unique certificate identifier. Aborting");
                 exit();
@@ -169,7 +169,7 @@ window.addEventListener('load', function() {
             // Surname(s) and Forename(s)
             newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
             // Type of certificate
-            newPassbookItem(template, "secondaryFields", "certificate-type", "Certificate Type", certificateType);
+            newPassbookItem(template, "auxiliaryFields", "certificate-type", "Certificate Type", certificateType);
             // Date of birth
             newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", certificate.dob + "T00:00Z", "PKDateStyleShort");
             // Unique Certificate Identifier
@@ -227,9 +227,9 @@ window.addEventListener('load', function() {
                 // Date of first positive test result
                 newPassbookItem(template, "backFields", "date-of-first-positive-test-result", "Date of first positive test result", certificateContent.fr + "T00:00Z", "PKDateStyleShort");
                 // Certificate valid from
-                newPassbookItem(template, "backFields", "valid-from", "Certificate valid from", certificateContent.df + "T00:00Z", "PKDateStyleShort");
+                newPassbookItem(template, "auxiliaryFields", "valid-from", "Valid from", certificateContent.df + "T00:00Z", "PKDateStyleShort");
                 // Certificate valid until
-                newPassbookItem(template, "backFields", "valid-until", "Certificate valid until", certificateContent.du + "T00:00Z", "PKDateStyleShort");
+                newPassbookItem(template, "auxiliaryFields", "valid-until", "Valid until", certificateContent.du + "T00:00Z", "PKDateStyleShort");
                 template.expirationDate = certificateContent.du + "T00:00:00Z";
             } else {
                 window.alert('Your scanned QRCode isn\'t a valid EU COVID certificate');
