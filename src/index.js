@@ -172,6 +172,33 @@ window.addEventListener('load', function() {
                 newPassbookItem(template, "backFields", "vaccination-date", "Date of vaccination", certificateContent.dt + "T00:00Z", "PKDateStyleShort");
             } else if (certificate.t) {
                 // COVID-19 Test Certificate
+                // -------------------------
+                // Dissease or Agent
+                newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent tested for", targetAgent.valueSetValues[certificateContent.tg].display);
+                // Type of test
+                newPassbookItem(template, "backFields", "type-of-test", "Type of test", testType.valueSetValues[certificateContent.tt].display);
+                // Name of test
+                // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
+                if (certificateContent.nm) {
+                    newPassbookItem(template, "backFields", "name-of-test", "Name of test", testType.certificateContent.nm);
+                }
+                // Test Manufacturer
+                // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
+                if (certificateContent.ma) {
+                    newPassbookItem(template, "backFields", "manufacturer-of-test", "Manufacturer of test", testType.certificateContent.ma);
+                }
+                // Sample collection time
+                newPassbookItem(template, "backFields", "collection-time", "Sample Collection Time", testType.certificateContent.sc, "PKDateStyleShort");
+                // test result date time
+                // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
+                if (certificateContent.dr) {
+                    newPassbookItem(template, "backFields", "test-result-Time", "Test Result date time", testType.certificateContent.dr, "PKDateStyleShort");
+                }
+                // test result
+                newPassbookItem(template, "backFields", "test-result", "Test Result", testResult.valueSetValues[certificateContent.tr].display);
+                // test center
+                newPassbookItem(template, "backFields", "test-center", "Test Center", certificateContent.tc);
+
             } else if (certificate.r) {
                 // COVID-19 Recovery Certificate
                 // -----------------------------
