@@ -148,12 +148,16 @@ window.addEventListener('load', function() {
             let certificate = obj.value[2].get(-260).get(1);
             // Use the UCI for passboook serial number
             let certificateContent;
+            let certificateType;
             if (certificate.v) {
                 certificateContent = certificate.v[0];
+                certificateType = "Vaccination";
             } else if (certificate.r) {
                 certificateContent = certificate.r[0];
+                certificateType = "Recovery";
             } else if (certificate.t) {
                 certificateContent = certificate.t[0];
+                certificateType = "Test";
             } else {
                 console.error("Cannot read your unique certificate identifier. Aborting");
                 exit();
@@ -164,6 +168,8 @@ window.addEventListener('load', function() {
             template.serialNumber = certificateContent.ci;
             // Surname(s) and Forename(s)
             newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
+            // Type of certificate
+            newPassbookItem(template, "secondaryFields", "certificate-type", "Certificate Type", certificateType);
             // Date of birth
             newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", certificate.dob + "T00:00Z", "PKDateStyleShort");
             // Unique Certificate Identifier
