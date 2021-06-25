@@ -25,7 +25,7 @@ function newPassbookItem(passbook, field, key, label, value, dateStyle) {
         return null;
     }
     // Test if fields is one allowed
-    if (!['primaryFields', 'secondaryFields', 'backFields'].includes(field)) {
+    if (!['primaryFields', 'secondaryFields', 'auxiliaryFields', 'backFields'].includes(field)) {
         console.error('The supplied field "%s" isn\'t not allowed', field);
         return null;
     }
