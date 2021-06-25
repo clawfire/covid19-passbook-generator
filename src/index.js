@@ -99,7 +99,7 @@ window.addEventListener('load', function() {
     function initScanner() {
         QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
         //QrScanner.hasCamera().then(function() {
-        const flashlight_btn = document.getElementsByClassName('button')[0];
+        const flashlight_btn = document.getElementsByClassName('button')[1];
         // we select the video element, which will provide the user feedback
         const video = document.getElementById('scanner');
 
@@ -114,11 +114,25 @@ window.addEventListener('load', function() {
         // we start scanning
         scanner.start().then(() => {
             scanner.hasFlash().then(hasFlash => {
+                if (process.env.NODE_ENV === 'development') {
+                    console.group("\u{1F4A1} Testing flash support")
+                }
                 if (hasFlash) {
+                    if (process.env.NODE_ENV === 'development') {
+                        console.log("This device support it");
+                    }
                     flashlight_btn.classList.remove('disabled')
                     flashlight_btn.addEventListener('click', () => {
                         scanner.toggleFlash();
                     })
+                } else {
+                    if (process.env.NODE_ENV === 'development') {
+                        console.log("This device don't support it");
+                    }
+                    flashlight_btn.remove();
+                }
+                if (process.env.NODE_ENV === 'development') {
+                    console.groupEnd()
                 }
             });
         })
