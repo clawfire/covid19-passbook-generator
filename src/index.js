@@ -144,6 +144,9 @@ window.addEventListener('load', function() {
                 console.error("Cannot read your unique certificate identifier. Aborting");
                 exit();
             }
+            if (process.env.NODE_ENV === 'development') {
+                console.log('Data read from QRcode %o', certificate);
+            }
             template.serialNumber = certificateContent.ci;
             // Surname(s) and Forename(s)
             newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
@@ -190,8 +193,9 @@ window.addEventListener('load', function() {
             // Certificate Issuer
             newPassbookItem(template, "backFields", "certificate-issuer", "Certificate issuer", certificateContent.is);
 
-            console.log('passbook template filled %o', template);
-
+            if (process.env.NODE_ENV === 'development') {
+                console.log('passbook template filled %o', template);
+            }
 
             // generate manifest file.template file
             let manifest = {
