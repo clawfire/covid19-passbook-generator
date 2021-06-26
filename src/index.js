@@ -18,6 +18,31 @@ function hex(buffer) {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+function getCurrentRoute() {
+    let route = window.location.hash.split('#').pop();
+    route = (route == "")? "intro": route;
+    return route;
+}
+
+let currentRoute = getCurrentRoute();
+
+function navigationHandler(callback) {
+    window.addEventListener("popstate", () => {
+        const newRoute = getCurrentRoute();
+        const routes = Array.from($('section.container')).map(e => e.id);
+        if ((currentRoute != newRoute) && (routes.includes(newRoute))) {
+            $('#'+currentRoute).fadeTo('slow', 0).css('visibility', 'hidden').css('display', 'none');
+            $('#'+newRoute).fadeTo('slow', 1).css('visibility', 'visible').css('display', 'block');
+            callback(currentRoute, newRoute);
+            currentRoute = newRoute;
+        }
+     });
+}
+
+function navigateTo(route) {
+    window.location.hash = route;
+}
+
 function newPassbookItem(passbook, field, key, label, value, dateStyle) {
     // check if we have the required parameters
     if (passbook === undefined || field === undefined || key === undefined || value === undefined) {
@@ -83,6 +108,16 @@ const sampleOrigin = {
 let template = require('./template.json');
 
 window.addEventListener('load', function() {
+    navigationHandler((oldRoute, newRoute) => {
+        if (newRoute == 'video') {
+            initScanner();
+        }
+
+        if (oldRoute == 'video') {
+            scanner.stop();
+        }
+    });
+
     // Message closing function
     // Will be used for all the messages
     $('.message .close').on('click', function() {
@@ -90,9 +125,7 @@ window.addEventListener('load', function() {
     });
 
     $('button[name="startScanning"]').on('click', () => {
-        $('#intro').transition('fade');
-        $("#video").transition('fade');
-        initScanner();
+        navigateTo('video');
     })
 
 
@@ -300,6 +333,7 @@ window.addEventListener('load', function() {
                         mimeType: "application/vnd.apple.pkpass"
                     }).then(blob => {
                         saveAs(blob, "certificate.pkpass");
+                        navigateTo('feedback');
                     })
                 })
             });
