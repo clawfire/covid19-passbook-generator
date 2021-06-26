@@ -1266,7 +1266,7 @@ base32url@^0.0.6:
     esm "^3.2.25"
     hi-base32 "^0.5.1"
 
-base45-js@^1.0, base45-js@^1.0.1:
+base45-js@^1.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/base45-js/-/base45-js-1.0.1.tgz#c820cf85b275b4b217c1556f1a775074f7fe9a35"
   integrity sha512-AQW3SAO/VVaof+gE/QoQLstyzFRIuQZOwkAX9AY/Ur+qBkNqUfsv8h77vBqsiAgCrTBNBWU+c5m5B0QgKmAT+Q==
@@ -1556,11 +1556,6 @@ caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
-
-cbor-js@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/cbor-js/-/cbor-js-0.1.0.tgz#c80ce6120f387e8faa74370dfda21d965b8fc7f9"
-  integrity sha1-yAzmEg84fo+qdDcN/aIdlluPx/k=
 
 cbor@^3.0.3:
   version "3.0.3"
