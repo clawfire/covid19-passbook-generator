@@ -99,7 +99,7 @@ window.addEventListener('load', function() {
     function initScanner() {
         QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
         //QrScanner.hasCamera().then(function() {
-        const flashlight_btn = document.getElementsByClassName('button')[0];
+        const flashlight_btn = document.getElementById('flashlight_btn');
         // we select the video element, which will provide the user feedback
         const video = document.getElementById('scanner');
 
@@ -114,11 +114,25 @@ window.addEventListener('load', function() {
         // we start scanning
         scanner.start().then(() => {
             scanner.hasFlash().then(hasFlash => {
+                if (process.env.NODE_ENV === 'development') {
+                    console.group("\u{1F4A1} Testing flash support")
+                }
                 if (hasFlash) {
+                    if (process.env.NODE_ENV === 'development') {
+                        console.log("This device support it");
+                    }
                     flashlight_btn.classList.remove('disabled')
                     flashlight_btn.addEventListener('click', () => {
                         scanner.toggleFlash();
                     })
+                } else {
+                    if (process.env.NODE_ENV === 'development') {
+                        console.log("This device don't support it");
+                    }
+                    flashlight_btn.remove();
+                }
+                if (process.env.NODE_ENV === 'development') {
+                    console.groupEnd()
                 }
             });
         })
@@ -134,19 +148,28 @@ window.addEventListener('load', function() {
             let certificate = obj.value[2].get(-260).get(1);
             // Use the UCI for passboook serial number
             let certificateContent;
+            let certificateType;
             if (certificate.v) {
                 certificateContent = certificate.v[0];
+                certificateType = "Vaccination";
             } else if (certificate.r) {
                 certificateContent = certificate.r[0];
+                certificateType = "Recovery";
             } else if (certificate.t) {
                 certificateContent = certificate.t[0];
+                certificateType = "Test";
             } else {
                 console.error("Cannot read your unique certificate identifier. Aborting");
                 exit();
             }
+            if (process.env.NODE_ENV === 'development') {
+                console.log('Data read from QRcode %o', certificate);
+            }
             template.serialNumber = certificateContent.ci;
             // Surname(s) and Forename(s)
             newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
+            // Type of certificate
+            newPassbookItem(template, "secondaryFields", "certificate-type", "Certificate Type", certificateType);
             // Date of birth
             newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", certificate.dob + "T00:00Z", "PKDateStyleShort");
             // Unique Certificate Identifier
@@ -169,6 +192,33 @@ window.addEventListener('load', function() {
                 newPassbookItem(template, "backFields", "vaccination-date", "Date of vaccination", certificateContent.dt + "T00:00Z", "PKDateStyleShort");
             } else if (certificate.t) {
                 // COVID-19 Test Certificate
+                // -------------------------
+                // Dissease or Agent
+                newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent tested for", targetAgent.valueSetValues[certificateContent.tg].display);
+                // Type of test
+                newPassbookItem(template, "backFields", "type-of-test", "Type of test", testType.valueSetValues[certificateContent.tt].display);
+                // Name of test
+                // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
+                if (certificateContent.nm) {
+                    newPassbookItem(template, "backFields", "name-of-test", "Name of test", certificateContent.nm);
+                }
+                // Test Manufacturer
+                // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
+                if (certificateContent.ma) {
+                    newPassbookItem(template, "backFields", "manufacturer-of-test", "Manufacturer of test", certificateContent.ma);
+                }
+                // Sample collection time
+                newPassbookItem(template, "backFields", "collection-time", "Sample Collection Time", certificateContent.sc, "PKDateStyleShort");
+                // test result date time
+                // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
+                if (certificateContent.dr) {
+                    newPassbookItem(template, "backFields", "test-result-Time", "Test Result date time", certificateContent.dr, "PKDateStyleShort");
+                }
+                // test result
+                newPassbookItem(template, "backFields", "test-result", "Test Result", testResult.valueSetValues[certificateContent.tr].display);
+                // test center
+                newPassbookItem(template, "backFields", "test-center", "Test Center", certificateContent.tc);
+
             } else if (certificate.r) {
                 // COVID-19 Recovery Certificate
                 // -----------------------------
@@ -190,8 +240,9 @@ window.addEventListener('load', function() {
             // Certificate Issuer
             newPassbookItem(template, "backFields", "certificate-issuer", "Certificate issuer", certificateContent.is);
 
-            console.log('passbook template filled %o', template);
-
+            if (process.env.NODE_ENV === 'development') {
+                console.log('passbook template filled %o', template);
+            }
 
             // generate manifest file.template file
             let manifest = {
