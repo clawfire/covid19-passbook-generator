@@ -32,42 +32,57 @@
     <body class="">
         <section class="ui fixed menu">
             <div class="ui container">
-                <div class="header item">EU Digital COVID Certificate Passbook</div>
+                <div class="header item">&#x1F1EA;&#x1F1FA; COVID Certificate to your digital wallet</div>
             </div>
         </section>
         <section id="intro" class="ui container">
-            <div class="ui info message">
-                <i class="close icon"></i>
-                <div class="header">What's that project?</div>
-                <p><i class="eu flag"></i>This web application is made by EU citizens in order to let you scan your EU Digital COVID certificate (vaccine, test or healing) and generate a passbook from it.</p>
-                <p>This application is working 100% on your device and store nothing remotly.<br/> However, <i class="ui icon apple"></i>Apple requires the passbook to be signed and that cannot happen in your device without compromising the signing key.</p>
-                <p>All the source code can be read and audited <a href="https://github.com/clawfire/covid19-passbook-generator">right here</a></p>
-            </div>
-            <h1 class="ui header">How does it work?</h1>
-            <div class="ui vertical steps">
-                <div class="step">
-                    <div class="content">
-                        <div class="title">Scan</div>
-                        <div class="description">Point your device to your EU Digital COVID certificate</div>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="content">
-                        <div class="title">Signature</div>
-                        <div class="description">We are decoding the code, verifying the information and generating a passbook. We're sending the passbook to our server for signature. We don't store anything.</div>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="content">
-                        <div class="title">Download</div>
-                        <div class="description">Your final passbook is ready. Add it to your wallet.</div>
-                    </div>
-                </div>
-            </div>
+            <p>Put your COVID certificate in your iPhone’s wallet.</p>
+            <ul class="ui list">
+                <li class="item">
+                    <i class="checkmark green icon"></i>
+                    <div class="content">generated on your phone</div>
+                </li>
+                <li class="item">
+                    <i class="checkmark green icon"></i>
+                    <div class="content">no personnal data collection</div>
+                </li>
+                <li class="item">
+                    <i class="checkmark green icon"></i>
+                    <div class="content">no analytics</div>
+                </li>
+                <li class="item">
+                    <i class="checkmark green icon"></i>
+                    <div class="content">open source & transparent</div>
+                </li>
+            </ul>
             <button class="ui primary fluid icon button" name="startScanning">
                 <i class="qrcode icon"></i>
                 Start scanning
             </button>
+            <div class="ui horizontal divider">FAQ</div>
+            <div class="ui relaxed list">
+                <div class="item">
+                    <i class="info icon"></i>
+                    <div class="content">
+                        <div class="header">What's that project?</div>
+                        <div class="description">This web application is made by EU citizens in order to let you scan your EU Digital COVID certificate (vaccine, test or healing) and generate a passbook from it. You can then import it into your iPhone's wallet, or if you're using an Android phone, import it into an app that support it.</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="info icon"></i>
+                    <div class="content">
+                        <div class="header">How does it work?</div>
+                        <div class="description">When you scan the QR-code, we are decrypting it, get the data it containt and create the passbook (the file needed to have a card in your wallet). When it's ready, we send the hash of this passbook to our server for signature. For example: <em>9673a3bd335365fcf8291117dfad86bce8b642b1</em>. This signature is sent back to your phone which generate the final file and let you save it.</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="info icon"></i>
+                    <div class="content">
+                        <div class="header">Can I see the code?</div>
+                        <div class="description">Of course. You can read all the source code and dig more into how it works on <a href="https://github.com/clawfire/covid19-passbook-generator" title="open the project's Github page">the Github page of the project</a>. You can even contribute if you want!</div>
+                    </div>
+                </div>
+            </div>
         </section>
         <section id="video" class="ui transition hidden container">
             <div class="ui fluid card">
