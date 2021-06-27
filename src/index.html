@@ -76,14 +76,14 @@
                     <i class="info icon"></i>
                     <div class="content">
                         <div class="header">How does it work?</div>
-                        <div class="description">When you scan the QR-code, we decrypt it, get the data it contains and create the passbook (the file needed to have a card in your wallet). When it's ready, we calculate a signature for your files and send it for digital signature with a certificate on our server without sending your data themselves. The server sends the signature back to your phone, and your phone generates the final file and lets you save it.</div>
+                        <div class="description">When you scan the QR-code, we decrypt it, get the data it contains and create the passbook (the file needed to have a card in your wallet). When it's ready, we compute a digest of your files and send it for digital signature with a certificate on our server without sending your data itself. The server sends the signature back to your phone, and your phone generates the final file and let you save it.</div>
                     </div>
                 </div>
                 <div class="item">
                     <i class="info icon"></i>
                     <div class="content">
                         <div class="header">Is it secure?</div>
-                        <div class="description">Well, we put a lot of effort into making it the most secure we can. Your phone process all the personal data and only send "hash" to our server. It's like a verification number based on the file, and it's impossible to use it to know the original content. The server generates a signature for this hash, using Apple's certificate. No passbook can be open into your wallet without being signed like this. It's another safety from Apple. Then the final pass construction is made on your phone. We let you preview information before saving the actual pass.</div>
+                        <div class="description">Well, we put a lot of efforts into making it the most secure we can. Your phone processes all the personal data and only send a "hash" to our server. It's like a verification number based on the files, and it's impossible to use it to know the original content. The server generates a signature for this hash, using Apple's certificate. No passbook can be opened into your wallet without being signed like this. It's another safety from Apple. Then the last step is made on your phone. We let you preview your information before saving the actual pass.</div>
                     </div>
                 </div>
                 <div class="item">
@@ -109,7 +109,7 @@
                     <div class="content">
                         <div class="header">How to save the certificate on Android?</div>
                         <div class="description">
-                            <p>On Android, you can save the .pkpass file and open it with an application that supports this format. Here's some:</p>
+                            <p>On Android, you can save the .pkpass file and open it with an application that supports this format. Here are some:</p>
                             <ul>
                                 <li><a href="https://play.google.com/store/apps/details?id=de.stocard.stocard&hl=fr&gl=US">Stocard</a> (Google Play Store)</li>
                                 <li><a href="https://f-droid.org/fr/packages/org.ligi.passandroid/">PassAndroid</a> (F-Droid)</li>
