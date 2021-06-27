@@ -18,14 +18,52 @@ function hex(buffer) {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-function newPassbookItem(passbook, field, key, label, value, dateStyle) {
+function getCurrentRoute() {
+    let route = window.location.hash.split('#').pop();
+    route = (route == "") ? "intro" : route;
+    return route;
+}
+
+let navigationHandlerInit = false;
+let currentRoute = getCurrentRoute();
+
+function navigationHandler(callback) {
+    function changeState(oldRoute, newRoute, callback) {
+        const routes = Array.from($('section.container')).map(e => e.id);
+        if ((oldRoute != newRoute) && (routes.includes(newRoute))) {
+            $('#' + oldRoute).fadeTo('fast', 0).css('visibility', 'hidden').css('display', 'none');
+            $('#' + newRoute).fadeTo('fast', 1).css('visibility', 'visible').css('display', 'block');
+            callback(oldRoute, newRoute);
+            currentRoute = newRoute;
+        }
+    }
+
+    // if the user refreshes the page...
+    if (navigationHandlerInit == false) {
+        if (currentRoute != 'intro') {
+            changeState('intro', currentRoute, callback);
+        }
+        navigationHandlerInit = true;
+    }
+
+    window.addEventListener("popstate", () => {
+        const newRoute = getCurrentRoute();
+        changeState(currentRoute, newRoute, callback);
+    });
+}
+
+function navigateTo(route) {
+    window.location.hash = route;
+}
+
+function newPassbookItem(passbook, field, key, label, value = "", dateStyle) {
     // check if we have the required parameters
-    if (passbook === undefined || field === undefined || key === undefined || value === undefined) {
+    if (passbook === undefined || field === undefined || key === undefined) {
         console.error('Required parameters are missing');
         return null;
     }
     // Test if fields is one allowed
-    if (!['primaryFields', 'secondaryFields', 'backFields'].includes(field)) {
+    if (!['primaryFields', 'secondaryFields', 'auxiliaryFields', 'backFields'].includes(field)) {
         console.error('The supplied field "%s" isn\'t not allowed', field);
         return null;
     }
@@ -39,6 +77,20 @@ function newPassbookItem(passbook, field, key, label, value, dateStyle) {
         newObject.dateStyle = dateStyle
     };
     passbook.generic[field].push(newObject);
+}
+
+/**
+ * renderTpl - render template and push it in DOM
+ *
+ * @param {String} id ID selector of the Template
+ * @param {String} target ID selector where inject code
+ * @param {Object} data data to use to populate the template
+ */
+function renderTpl(id, target, data) {
+    let source = document.getElementById(id).innerHTML;
+    let template = Handlebars.compile(source);
+    let rendered = template(data);
+    document.getElementById(target).innerHTML = rendered
 }
 
 // Let's import all the references needed
@@ -55,6 +107,7 @@ import thumbnailUrl from "/graphics/thumbnail.png";
 import thumbnailx2Url from "/graphics/thumbnail@2x.png";
 
 let scanner;
+let qrcode;
 
 // Tests results manufacturers are available online,
 // but we need an offline fallback
@@ -82,7 +135,19 @@ const sampleOrigin = {
 
 let template = require('./template.json');
 
+let passbook;
+
 window.addEventListener('load', function() {
+    navigationHandler((oldRoute, newRoute) => {
+        if (newRoute == 'scan') {
+            initScanner();
+        }
+
+        if (oldRoute == 'scan') {
+            scanner.destroy();
+        }
+    });
+
     // Message closing function
     // Will be used for all the messages
     $('.message .close').on('click', function() {
@@ -90,11 +155,45 @@ window.addEventListener('load', function() {
     });
 
     $('button[name="startScanning"]').on('click', () => {
-        $('#intro').transition('fade');
-        $("#video").transition('fade');
-        initScanner();
+        navigateTo('scan');
     })
 
+    $('#saveInWallet').on('click', () => {
+        if (passbook !== undefined) {
+            saveAs(passbook, "certificate.pkpass");
+        }
+    })
+
+    $('#scanAnother').on('click', () => {
+        navigateTo('scan');
+    })
+
+
+    function adaptPreview(orientation) {
+        console.log('adaptPreview')
+        const video = document.getElementById('scanner');
+        const mask = document.getElementById('mask');
+        let width = 0;
+        let marginLeft = 0;
+        if (orientation !== undefined && orientation.matches) {
+            console.log('portrait')
+            width = $(video).width();
+        } else {
+            console.log('landscape')
+            width = Math.max($(video).width(), $(video).height())/2;
+            marginLeft = '25%';
+        }
+        $(video).width(width);
+        $(mask).width(width);
+        $(video).height(width);
+        $(mask).height(width);
+        $(video).css('margin-left', marginLeft);
+        $(mask).css('margin-left', marginLeft);      
+    }
+
+    window.addEventListener("orientationchange", event => {
+        adaptPreview(event.target.screen.orientation.angle != 90 && event.target.screen.orientation.angle != -90);
+    });
 
     function initScanner() {
         QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
@@ -102,6 +201,7 @@ window.addEventListener('load', function() {
         const flashlight_btn = document.getElementById('flashlight_btn');
         // we select the video element, which will provide the user feedback
         const video = document.getElementById('scanner');
+        adaptPreview(window.matchMedia("(orientation: portrait)"));
 
         QrScanner.hasCamera().then(hasCamera => {
             if (!hasCamera) {
@@ -129,7 +229,7 @@ window.addEventListener('load', function() {
                     if (process.env.NODE_ENV === 'development') {
                         console.log("This device don't support it");
                     }
-                    flashlight_btn.remove();
+                    $(flashlight_btn).hide();
                 }
                 if (process.env.NODE_ENV === 'development') {
                     console.groupEnd()
@@ -146,30 +246,40 @@ window.addEventListener('load', function() {
 
         dcc.debug(data).then(obj => {
             let certificate = obj.value[2].get(-260).get(1);
-            // Use the UCI for passboook serial number
             let certificateContent;
             let certificateType;
+            let nbCertificates = 1;
             if (certificate.v) {
-                certificateContent = certificate.v[0];
+                // This is a Vaccination certificate
                 certificateType = "Vaccination";
+                // Load the first (maybe only) certificate
+                certificateContent = certificate.v[0];
             } else if (certificate.r) {
-                certificateContent = certificate.r[0];
+                // This is a Recovery certificate
                 certificateType = "Recovery";
+                // Load the first (maybe only) certificate
+                certificateContent = certificate.r[0];
             } else if (certificate.t) {
+                // This is a Test certificate
+                certificateType = "Test Result";
+                // Load the first (maybe only) certificate
                 certificateContent = certificate.t[0];
-                certificateType = "Test";
             } else {
                 console.error("Cannot read your unique certificate identifier. Aborting");
                 exit();
             }
             if (process.env.NODE_ENV === 'development') {
+                console.group('\u{1F6C2} Passport data');
                 console.log('Data read from QRcode %o', certificate);
             }
+            // Filling Passbook Template from here
+            // -----------------------------------
+            // Use the UCI for passboook serial number
             template.serialNumber = certificateContent.ci;
             // Surname(s) and Forename(s)
             newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
             // Type of certificate
-            newPassbookItem(template, "secondaryFields", "certificate-type", "Certificate Type", certificateType);
+            newPassbookItem(template, "auxiliaryFields", "certificate-type", "Certificate Type", certificateType);
             // Date of birth
             newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", certificate.dob + "T00:00Z", "PKDateStyleShort");
             // Unique Certificate Identifier
@@ -178,59 +288,78 @@ window.addEventListener('load', function() {
             if (certificate.v) {
                 // COVID-19 Vaccine Certificate
                 // ----------------------------
-                // Dissease or Agent
-                newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent targeted", targetAgent.valueSetValues[certificateContent.tg].display);
-                // Vaccine / Prophylaxis
-                newPassbookItem(template, "backFields", "vaccine-or-prophylaxis", "Vaccine / Prophylaxis", vaccineProphylaxis.valueSetValues[certificateContent.vp].display);
-                // Vaccine medicinal product
-                newPassbookItem(template, "backFields", "vaccine-medial-product", "Vaccine medicinal product", vaccineProduct.valueSetValues[certificateContent.mp].display);
-                // Vaccine marketing authorisation holder or manufacturer
-                newPassbookItem(template, "backFields", "vaccine-marketing-auth-holder", "Vaccine Marketing Authorisation holder or manufacturer", vaccineManf.valueSetValues[certificateContent.ma].display);
-                // Numnber in a series of vaccination / doses and the overall
-                newPassbookItem(template, "backFields", "doses", "Number in a series of vaccination / doses and the overall", certificateContent.dn + "/" + certificateContent.sd);
-                // Date of vaccination
-                newPassbookItem(template, "backFields", "vaccination-date", "Date of vaccination", certificateContent.dt + "T00:00Z", "PKDateStyleShort");
+                certificate.v.forEach((certificateContent, i) => {
+                    if (certificate.v.length > 1) {
+                        let n = i + 1;
+                        newPassbookItem(template, "backFields", "header" + n, "--- Vaccine #" + n + " ---");
+                    }
+                    newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent targeted", targetAgent.valueSetValues[certificateContent.tg].display);
+                    // Vaccine / Prophylaxis
+                    newPassbookItem(template, "backFields", "vaccine-or-prophylaxis", "Vaccine / Prophylaxis", vaccineProphylaxis.valueSetValues[certificateContent.vp].display);
+                    // Vaccine medicinal product
+                    newPassbookItem(template, "backFields", "vaccine-medial-product", "Vaccine medicinal product", vaccineProduct.valueSetValues[certificateContent.mp].display);
+                    // Vaccine marketing authorisation holder or manufacturer
+                    newPassbookItem(template, "backFields", "vaccine-marketing-auth-holder", "Vaccine Marketing Authorisation holder or manufacturer", vaccineManf.valueSetValues[certificateContent.ma].display);
+                    // Numnber in a series of vaccination / doses and the overall
+                    newPassbookItem(template, "backFields", "doses", "Number in a series of vaccination / doses and the overall", certificateContent.dn + "/" + certificateContent.sd);
+                    // Date of vaccination
+                    newPassbookItem(template, "backFields", "vaccination-date", "Date of vaccination", certificateContent.dt + "T00:00Z", "PKDateStyleShort");
+                });
+
             } else if (certificate.t) {
                 // COVID-19 Test Certificate
                 // -------------------------
-                // Dissease or Agent
-                newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent tested for", targetAgent.valueSetValues[certificateContent.tg].display);
-                // Type of test
-                newPassbookItem(template, "backFields", "type-of-test", "Type of test", testType.valueSetValues[certificateContent.tt].display);
-                // Name of test
-                // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
-                if (certificateContent.nm) {
-                    newPassbookItem(template, "backFields", "name-of-test", "Name of test", certificateContent.nm);
-                }
-                // Test Manufacturer
-                // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
-                if (certificateContent.ma) {
-                    newPassbookItem(template, "backFields", "manufacturer-of-test", "Manufacturer of test", certificateContent.ma);
-                }
-                // Sample collection time
-                newPassbookItem(template, "backFields", "collection-time", "Sample Collection Time", certificateContent.sc, "PKDateStyleShort");
-                // test result date time
-                // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
-                if (certificateContent.dr) {
-                    newPassbookItem(template, "backFields", "test-result-Time", "Test Result date time", certificateContent.dr, "PKDateStyleShort");
-                }
-                // test result
-                newPassbookItem(template, "backFields", "test-result", "Test Result", testResult.valueSetValues[certificateContent.tr].display);
-                // test center
-                newPassbookItem(template, "backFields", "test-center", "Test Center", certificateContent.tc);
+                certificate.t.forEach((certificateContent, i) => {
+                    if (certificate.t.length > 1) {
+                        let n = i + 1;
+                        newPassbookItem(template, "backFields", "header" + n, "--- Test #" + n + " ---");
+                    }
+                    // Dissease or Agent
+                    newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent tested for", targetAgent.valueSetValues[certificateContent.tg].display);
+                    // Type of test
+                    newPassbookItem(template, "backFields", "type-of-test", "Type of test", testType.valueSetValues[certificateContent.tt].display);
+                    // Name of test
+                    // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
+                    if (certificateContent.nm) {
+                        newPassbookItem(template, "backFields", "name-of-test", "Name of test", certificateContent.nm);
+                    }
+                    // Test Manufacturer
+                    // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
+                    if (certificateContent.ma) {
+                        newPassbookItem(template, "backFields", "manufacturer-of-test", "Manufacturer of test", certificateContent.ma);
+                    }
+                    // Sample collection time
+                    newPassbookItem(template, "backFields", "collection-time", "Sample Collection Time", certificateContent.sc, "PKDateStyleShort");
+                    // test result date time
+                    // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
+                    if (certificateContent.dr) {
+                        newPassbookItem(template, "backFields", "test-result-Time", "Test Result date time", certificateContent.dr, "PKDateStyleShort");
+                    }
+                    // test result
+                    newPassbookItem(template, "backFields", "test-result", "Test Result", testResult.valueSetValues[certificateContent.tr].display);
+                    // test center
+                    newPassbookItem(template, "backFields", "test-center", "Test Center", certificateContent.tc);
+                });
 
             } else if (certificate.r) {
                 // COVID-19 Recovery Certificate
                 // -----------------------------
-                // Dissease or Agent
-                newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent the citizen has recovered from", targetAgent.valueSetValues[certificateContent.tg].display);
-                // Date of first positive test result
-                newPassbookItem(template, "backFields", "date-of-first-positive-test-result", "Date of first positive test result", certificateContent.fr + "T00:00Z", "PKDateStyleShort");
-                // Certificate valid from
-                newPassbookItem(template, "backFields", "valid-from", "Certificate valid from", certificateContent.df + "T00:00Z", "PKDateStyleShort");
-                // Certificate valid until
-                newPassbookItem(template, "backFields", "valid-until", "Certificate valid until", certificateContent.du + "T00:00Z", "PKDateStyleShort");
-                template.expirationDate = certificateContent.du + "T00:00:00Z";
+                certificate.r.forEach((certificateContent, i) => {
+                    if (certificate.r.length > 1) {
+                        let n = i + 1;
+                        newPassbookItem(template, "backFields", "header" + n, "--- Recovery #" + n + " ---");
+                    }
+                    // Dissease or Agent
+                    newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent the citizen has recovered from", targetAgent.valueSetValues[certificateContent.tg].display);
+                    // Date of first positive test result
+                    newPassbookItem(template, "backFields", "date-of-first-positive-test-result", "Date of first positive test result", certificateContent.fr + "T00:00Z", "PKDateStyleShort");
+                    // Certificate valid from
+                    newPassbookItem(template, "auxiliaryFields", "valid-from", "Valid from", certificateContent.df + "T00:00Z", "PKDateStyleShort");
+                    // Certificate valid until
+                    newPassbookItem(template, "auxiliaryFields", "valid-until", "Valid until", certificateContent.du + "T00:00Z", "PKDateStyleShort");
+                    template.expirationDate = certificateContent.du + "T00:00:00Z";
+                });
+
             } else {
                 window.alert('Your scanned QRCode isn\'t a valid EU COVID certificate');
                 exit();
@@ -242,6 +371,7 @@ window.addEventListener('load', function() {
 
             if (process.env.NODE_ENV === 'development') {
                 console.log('passbook template filled %o', template);
+                console.groupEnd();
             }
 
             // generate manifest file.template file
@@ -299,7 +429,43 @@ window.addEventListener('load', function() {
                         type: "blob",
                         mimeType: "application/vnd.apple.pkpass"
                     }).then(blob => {
-                        saveAs(blob, "certificate.pkpass");
+                        passbook = blob;
+                        $('#saveInWallet').removeClass('disabled');
+                        navigateTo('feedback');
+
+                        var canvas = document.getElementById('qrcode');
+                        if (process.env.NODE_ENV === 'development') {
+                            console.group("\u{1F5BC} QrCode Generation");
+                            console.log("message to encode : %s", template.barcode.message);
+                            console.log("will be generated here %o", canvas);
+                        }
+                        canvas.innerHTML = "";
+                        qrcode = new QRCode(canvas, {
+                            text: template.barcode.message,
+                            width: 400,
+                            height: 400,
+                            level: QRCode.CorrectLevel.M
+                        });
+                        if (process.env.NODE_ENV === 'development') {
+                            console.groupEnd();
+                            console.group('\u{1F4C7} Pass preview');
+                            console.table({
+                                "name": certificate.nam.gn + " " + certificate.nam.fn.toUpperCase(),
+                                "dob": certificate.dob,
+                                "uci": certificateContent.ci,
+                                "type": certificateType,
+                                "validuntil": certificate.r ? certificate.r[0].du : null
+                            })
+                        }
+                        renderTpl("card-content-tpl", "cardContent", {
+                            "name": certificate.nam.gn + " " + certificate.nam.fn.toUpperCase(),
+                            "dob": certificate.dob,
+                            "uci": certificateContent.ci
+                        });
+                        renderTpl("card-extra-content-tpl", "cardExtraContent", {
+                            "type": certificateType,
+                            "validuntil": certificate.r ? certificate.r[0].du : null
+                        })
                     })
                 })
             });

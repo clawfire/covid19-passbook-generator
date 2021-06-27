@@ -1,6 +1,6 @@
 {
     "name": "covid19-passbook-generator",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "description": "A simple PWA to scan your EU digital COVID Certificate and generate a passbook from it",
     "main": "index.html",
     "repository": "git@github.com:clawfire/covid19-passbook-generator.git",
@@ -9,8 +9,6 @@
     "private": false,
     "dependencies": {
         "@pathcheck/dcc-sdk": "^0.0.11",
-        "base45-js": "^1.0.1",
-        "cbor-js": "^0.1.0",
         "file-saver": "^2.0.5",
         "handlebars": "^4.7.7",
         "iso-3166-1": "^2.0.1",
@@ -23,9 +21,9 @@
         "sass": "^1.34.1"
     },
     "scripts": {
-        "start": "NODE_ENV=development parcel serve src/index.html --https && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js",
-        "deploy-preview": "NODE_ENV=development parcel build src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js",
-        "build": "NODE_ENV=production parcel build src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js"
+        "start": "NODE_ENV=development npx parcel serve src/index.html --https && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js",
+        "deploy-preview": "NODE_ENV=development npx parcel build src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js",
+        "build": "NODE_ENV=production npx parcel build src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js"
     },
     "browserslist": [
         "last 3 and_chr versions",
