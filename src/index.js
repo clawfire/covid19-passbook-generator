@@ -47,7 +47,6 @@ function navigationHandler(callback) {
     }
 
     window.addEventListener("popstate", () => {
-        console.log('popstate');
         const newRoute = getCurrentRoute();
         changeState(currentRoute, newRoute, callback);
      });
@@ -121,6 +120,8 @@ const sampleOrigin = {
 
 let template = require('./template.json');
 
+let passbook;
+
 window.addEventListener('load', function() {
     navigationHandler((oldRoute, newRoute) => {
         if (newRoute == 'scan') {
@@ -139,6 +140,16 @@ window.addEventListener('load', function() {
     });
 
     $('button[name="startScanning"]').on('click', () => {
+        navigateTo('scan');
+    })
+
+    $('#saveInWallet').on('click', () => {
+        if (passbook !== undefined) {
+            saveAs(passbook, "certificate.pkpass");
+        }
+    })
+
+    $('#scanAnother').on('click', () => {
         navigateTo('scan');
     })
 
@@ -176,7 +187,7 @@ window.addEventListener('load', function() {
                     if (process.env.NODE_ENV === 'development') {
                         console.log("This device don't support it");
                     }
-                    flashlight_btn.remove();
+                    $(flashlight_btn).hide();
                 }
                 if (process.env.NODE_ENV === 'development') {
                     console.groupEnd()
@@ -346,7 +357,8 @@ window.addEventListener('load', function() {
                         type: "blob",
                         mimeType: "application/vnd.apple.pkpass"
                     }).then(blob => {
-                        saveAs(blob, "certificate.pkpass");
+                        passbook = blob;
+                        $('#saveInWallet').removeClass('disabled');
                         navigateTo('feedback');
                     })
                 })
