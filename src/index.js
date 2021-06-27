@@ -20,7 +20,7 @@ function hex(buffer) {
 
 function getCurrentRoute() {
     let route = window.location.hash.split('#').pop();
-    route = (route == "")? "intro": route;
+    route = (route == "") ? "intro" : route;
     return route;
 }
 
@@ -31,8 +31,8 @@ function navigationHandler(callback) {
     function changeState(oldRoute, newRoute, callback) {
         const routes = Array.from($('section.container')).map(e => e.id);
         if ((oldRoute != newRoute) && (routes.includes(newRoute))) {
-            $('#'+oldRoute).fadeTo('fast', 0).css('visibility', 'hidden').css('display', 'none');
-            $('#'+newRoute).fadeTo('fast', 1).css('visibility', 'visible').css('display', 'block');
+            $('#' + oldRoute).fadeTo('fast', 0).css('visibility', 'hidden').css('display', 'none');
+            $('#' + newRoute).fadeTo('fast', 1).css('visibility', 'visible').css('display', 'block');
             callback(oldRoute, newRoute);
             currentRoute = newRoute;
         }
@@ -49,7 +49,7 @@ function navigationHandler(callback) {
     window.addEventListener("popstate", () => {
         const newRoute = getCurrentRoute();
         changeState(currentRoute, newRoute, callback);
-     });
+    });
 }
 
 function navigateTo(route) {
@@ -207,15 +207,34 @@ window.addEventListener('load', function() {
             // Use the UCI for passboook serial number
             let certificateContent;
             let certificateType;
+            let nbCertificates = 1;
             if (certificate.v) {
-                certificateContent = certificate.v[0];
+                // Do we have more than 1 certificate in the code ?
+                if (certificate.v.length > 1) {
+                    nbCertificates = certificate.v.length;
+                }
+                // This is a Vaccination certificate
                 certificateType = "Vaccination";
+                // Load the first (maybe only) certificate
+                certificateContent = certificate.v[0];
             } else if (certificate.r) {
-                certificateContent = certificate.r[0];
+                // Do we have more than 1 certificate in the code ?
+                if (certificate.r.length > 1) {
+                    nbCertificates = certificate.v.length;
+                }
+                // This is a Recovery certificate
                 certificateType = "Recovery";
+                // Load the first (maybe only) certificate
+                certificateContent = certificate.r[0];
             } else if (certificate.t) {
-                certificateContent = certificate.t[0];
+                // Do we have more than 1 certificate in the code ?
+                if (certificate.r.length > 1) {
+                    nbCertificates = certificate.v.length;
+                }
+                // This is a Test certificate
                 certificateType = "Test Result";
+                // Load the first (maybe only) certificate
+                certificateContent = certificate.t[0];
             } else {
                 console.error("Cannot read your unique certificate identifier. Aborting");
                 exit();
@@ -232,7 +251,6 @@ window.addEventListener('load', function() {
             newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", certificate.dob + "T00:00Z", "PKDateStyleShort");
             // Unique Certificate Identifier
             newPassbookItem(template, "secondaryFields", "uci", "Unique Certificate Identifier", certificateContent.ci);
-
             if (certificate.v) {
                 // COVID-19 Vaccine Certificate
                 // ----------------------------
