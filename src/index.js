@@ -56,9 +56,9 @@ function navigateTo(route) {
     window.location.hash = route;
 }
 
-function newPassbookItem(passbook, field, key, label, value, dateStyle) {
+function newPassbookItem(passbook, field, key, label, value = "", dateStyle) {
     // check if we have the required parameters
-    if (passbook === undefined || field === undefined || key === undefined || value === undefined) {
+    if (passbook === undefined || field === undefined || key === undefined) {
         console.error('Required parameters are missing');
         return null;
     }
@@ -247,6 +247,10 @@ window.addEventListener('load', function() {
                 // COVID-19 Vaccine Certificate
                 // ----------------------------
                 certificate.v.forEach((certificateContent, i) => {
+                    if (certificate.v.length > 1) {
+                        let n = i + 1;
+                        newPassbookItem(template, "backFields", "header" + n, "--- Vaccine #" + n + " ---");
+                    }
                     newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent targeted", targetAgent.valueSetValues[certificateContent.tg].display);
                     // Vaccine / Prophylaxis
                     newPassbookItem(template, "backFields", "vaccine-or-prophylaxis", "Vaccine / Prophylaxis", vaccineProphylaxis.valueSetValues[certificateContent.vp].display);
@@ -264,6 +268,10 @@ window.addEventListener('load', function() {
                 // COVID-19 Test Certificate
                 // -------------------------
                 certificate.t.forEach((certificateContent, i) => {
+                    if (certificate.t.length > 1) {
+                        let n = i + 1;
+                        newPassbookItem(template, "backFields", "header" + n, "--- Test #" + n + " ---");
+                    }
                     // Dissease or Agent
                     newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent tested for", targetAgent.valueSetValues[certificateContent.tg].display);
                     // Type of test
@@ -295,6 +303,10 @@ window.addEventListener('load', function() {
                 // COVID-19 Recovery Certificate
                 // -----------------------------
                 certificate.r.forEach((certificateContent, i) => {
+                    if (certificate.r.length > 1) {
+                        let n = i + 1;
+                        newPassbookItem(template, "backFields", "header" + n, "--- Recovery #" + n + " ---");
+                    }
                     // Dissease or Agent
                     newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent the citizen has recovered from", targetAgent.valueSetValues[certificateContent.tg].display);
                     // Date of first positive test result
