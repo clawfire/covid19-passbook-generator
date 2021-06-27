@@ -79,6 +79,20 @@ function newPassbookItem(passbook, field, key, label, value = "", dateStyle) {
     passbook.generic[field].push(newObject);
 }
 
+/**
+ * renderTpl - render template and push it in DOM
+ *
+ * @param {String} id ID selector of the Template
+ * @param {String} target ID selector where inject code
+ * @param {Object} data data to use to populate the template
+ */
+function renderTpl(id, target, data) {
+    let source = document.getElementById(id).innerHTML;
+    let template = Handlebars.compile(source);
+    let rendered = template(data);
+    document.getElementById(target).innerHTML = rendered
+}
+
 // Let's import all the references needed
 const targetAgent = require('/valuesets/disease-agent-targeted.json');
 const vaccineProphylaxis = require('/valuesets/vaccine-prophylaxis.json');
@@ -93,6 +107,7 @@ import thumbnailUrl from "/graphics/thumbnail.png";
 import thumbnailx2Url from "/graphics/thumbnail@2x.png";
 
 let scanner;
+let qrcode;
 
 // Tests results manufacturers are available online,
 // but we need an offline fallback
@@ -204,7 +219,6 @@ window.addEventListener('load', function() {
 
         dcc.debug(data).then(obj => {
             let certificate = obj.value[2].get(-260).get(1);
-            // Use the UCI for passboook serial number
             let certificateContent;
             let certificateType;
             let nbCertificates = 1;
@@ -233,6 +247,7 @@ window.addEventListener('load', function() {
             }
             // Filling Passbook Template from here
             // -----------------------------------
+            // Use the UCI for passboook serial number
             template.serialNumber = certificateContent.ci;
             // Surname(s) and Forename(s)
             newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
@@ -390,6 +405,40 @@ window.addEventListener('load', function() {
                         passbook = blob;
                         $('#saveInWallet').removeClass('disabled');
                         navigateTo('feedback');
+
+                        var canvas = document.getElementById('qrcode');
+                        if (process.env.NODE_ENV === 'development') {
+                            console.group("\u{1F5BC} QrCode Generation");
+                            console.log("message to encode : %s", template.barcode.message);
+                            console.log("will be generated here %o", canvas);
+                        }
+                        canvas.innerHTML = "";
+                        qrcode = new QRCode(canvas, {
+                            text: template.barcode.message,
+                            width: 400,
+                            height: 400,
+                            level: QRCode.CorrectLevel.M
+                        });
+                        if (process.env.NODE_ENV === 'development') {
+                            console.groupEnd();
+                            console.group('\u{1F4C7} Pass preview');
+                            console.table({
+                                "name": certificate.nam.gn + " " + certificate.nam.fn.toUpperCase(),
+                                "dob": certificate.dob,
+                                "uci": certificateContent.ci,
+                                "type": certificateType,
+                                "validuntil": certificate.r ? certificate.r[0].du : null
+                            })
+                        }
+                        renderTpl("card-content-tpl", "cardContent", {
+                            "name": certificate.nam.gn + " " + certificate.nam.fn.toUpperCase(),
+                            "dob": certificate.dob,
+                            "uci": certificateContent.ci
+                        });
+                        renderTpl("card-extra-content-tpl", "cardExtraContent", {
+                            "type": certificateType,
+                            "validuntil": certificate.r ? certificate.r[0].du : null
+                        })
                     })
                 })
             });
