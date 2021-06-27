@@ -209,28 +209,16 @@ window.addEventListener('load', function() {
             let certificateType;
             let nbCertificates = 1;
             if (certificate.v) {
-                // Do we have more than 1 certificate in the code ?
-                if (certificate.v.length > 1) {
-                    nbCertificates = certificate.v.length;
-                }
                 // This is a Vaccination certificate
                 certificateType = "Vaccination";
                 // Load the first (maybe only) certificate
                 certificateContent = certificate.v[0];
             } else if (certificate.r) {
-                // Do we have more than 1 certificate in the code ?
-                if (certificate.r.length > 1) {
-                    nbCertificates = certificate.v.length;
-                }
                 // This is a Recovery certificate
                 certificateType = "Recovery";
                 // Load the first (maybe only) certificate
                 certificateContent = certificate.r[0];
             } else if (certificate.t) {
-                // Do we have more than 1 certificate in the code ?
-                if (certificate.r.length > 1) {
-                    nbCertificates = certificate.v.length;
-                }
                 // This is a Test certificate
                 certificateType = "Test Result";
                 // Load the first (maybe only) certificate
@@ -240,8 +228,11 @@ window.addEventListener('load', function() {
                 exit();
             }
             if (process.env.NODE_ENV === 'development') {
+                console.group('\u{1F6C2} Passport data');
                 console.log('Data read from QRcode %o', certificate);
             }
+            // Filling Passbook Template from here
+            // -----------------------------------
             template.serialNumber = certificateContent.ci;
             // Surname(s) and Forename(s)
             newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
@@ -251,62 +242,70 @@ window.addEventListener('load', function() {
             newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", certificate.dob + "T00:00Z", "PKDateStyleShort");
             // Unique Certificate Identifier
             newPassbookItem(template, "secondaryFields", "uci", "Unique Certificate Identifier", certificateContent.ci);
+
             if (certificate.v) {
                 // COVID-19 Vaccine Certificate
                 // ----------------------------
-                // Dissease or Agent
-                newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent targeted", targetAgent.valueSetValues[certificateContent.tg].display);
-                // Vaccine / Prophylaxis
-                newPassbookItem(template, "backFields", "vaccine-or-prophylaxis", "Vaccine / Prophylaxis", vaccineProphylaxis.valueSetValues[certificateContent.vp].display);
-                // Vaccine medicinal product
-                newPassbookItem(template, "backFields", "vaccine-medial-product", "Vaccine medicinal product", vaccineProduct.valueSetValues[certificateContent.mp].display);
-                // Vaccine marketing authorisation holder or manufacturer
-                newPassbookItem(template, "backFields", "vaccine-marketing-auth-holder", "Vaccine Marketing Authorisation holder or manufacturer", vaccineManf.valueSetValues[certificateContent.ma].display);
-                // Numnber in a series of vaccination / doses and the overall
-                newPassbookItem(template, "backFields", "doses", "Number in a series of vaccination / doses and the overall", certificateContent.dn + "/" + certificateContent.sd);
-                // Date of vaccination
-                newPassbookItem(template, "backFields", "vaccination-date", "Date of vaccination", certificateContent.dt + "T00:00Z", "PKDateStyleShort");
+                certificate.v.forEach((certificateContent, i) => {
+                    newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent targeted", targetAgent.valueSetValues[certificateContent.tg].display);
+                    // Vaccine / Prophylaxis
+                    newPassbookItem(template, "backFields", "vaccine-or-prophylaxis", "Vaccine / Prophylaxis", vaccineProphylaxis.valueSetValues[certificateContent.vp].display);
+                    // Vaccine medicinal product
+                    newPassbookItem(template, "backFields", "vaccine-medial-product", "Vaccine medicinal product", vaccineProduct.valueSetValues[certificateContent.mp].display);
+                    // Vaccine marketing authorisation holder or manufacturer
+                    newPassbookItem(template, "backFields", "vaccine-marketing-auth-holder", "Vaccine Marketing Authorisation holder or manufacturer", vaccineManf.valueSetValues[certificateContent.ma].display);
+                    // Numnber in a series of vaccination / doses and the overall
+                    newPassbookItem(template, "backFields", "doses", "Number in a series of vaccination / doses and the overall", certificateContent.dn + "/" + certificateContent.sd);
+                    // Date of vaccination
+                    newPassbookItem(template, "backFields", "vaccination-date", "Date of vaccination", certificateContent.dt + "T00:00Z", "PKDateStyleShort");
+                });
+
             } else if (certificate.t) {
                 // COVID-19 Test Certificate
                 // -------------------------
-                // Dissease or Agent
-                newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent tested for", targetAgent.valueSetValues[certificateContent.tg].display);
-                // Type of test
-                newPassbookItem(template, "backFields", "type-of-test", "Type of test", testType.valueSetValues[certificateContent.tt].display);
-                // Name of test
-                // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
-                if (certificateContent.nm) {
-                    newPassbookItem(template, "backFields", "name-of-test", "Name of test", certificateContent.nm);
-                }
-                // Test Manufacturer
-                // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
-                if (certificateContent.ma) {
-                    newPassbookItem(template, "backFields", "manufacturer-of-test", "Manufacturer of test", certificateContent.ma);
-                }
-                // Sample collection time
-                newPassbookItem(template, "backFields", "collection-time", "Sample Collection Time", certificateContent.sc, "PKDateStyleShort");
-                // test result date time
-                // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
-                if (certificateContent.dr) {
-                    newPassbookItem(template, "backFields", "test-result-Time", "Test Result date time", certificateContent.dr, "PKDateStyleShort");
-                }
-                // test result
-                newPassbookItem(template, "backFields", "test-result", "Test Result", testResult.valueSetValues[certificateContent.tr].display);
-                // test center
-                newPassbookItem(template, "backFields", "test-center", "Test Center", certificateContent.tc);
+                certificate.t.forEach((certificateContent, i) => {
+                    // Dissease or Agent
+                    newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent tested for", targetAgent.valueSetValues[certificateContent.tg].display);
+                    // Type of test
+                    newPassbookItem(template, "backFields", "type-of-test", "Type of test", testType.valueSetValues[certificateContent.tt].display);
+                    // Name of test
+                    // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
+                    if (certificateContent.nm) {
+                        newPassbookItem(template, "backFields", "name-of-test", "Name of test", certificateContent.nm);
+                    }
+                    // Test Manufacturer
+                    // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
+                    if (certificateContent.ma) {
+                        newPassbookItem(template, "backFields", "manufacturer-of-test", "Manufacturer of test", certificateContent.ma);
+                    }
+                    // Sample collection time
+                    newPassbookItem(template, "backFields", "collection-time", "Sample Collection Time", certificateContent.sc, "PKDateStyleShort");
+                    // test result date time
+                    // Since at least LU don't generate it in their code, it's safe to assume other countries wouldn't
+                    if (certificateContent.dr) {
+                        newPassbookItem(template, "backFields", "test-result-Time", "Test Result date time", certificateContent.dr, "PKDateStyleShort");
+                    }
+                    // test result
+                    newPassbookItem(template, "backFields", "test-result", "Test Result", testResult.valueSetValues[certificateContent.tr].display);
+                    // test center
+                    newPassbookItem(template, "backFields", "test-center", "Test Center", certificateContent.tc);
+                });
 
             } else if (certificate.r) {
                 // COVID-19 Recovery Certificate
                 // -----------------------------
-                // Dissease or Agent
-                newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent the citizen has recovered from", targetAgent.valueSetValues[certificateContent.tg].display);
-                // Date of first positive test result
-                newPassbookItem(template, "backFields", "date-of-first-positive-test-result", "Date of first positive test result", certificateContent.fr + "T00:00Z", "PKDateStyleShort");
-                // Certificate valid from
-                newPassbookItem(template, "auxiliaryFields", "valid-from", "Valid from", certificateContent.df + "T00:00Z", "PKDateStyleShort");
-                // Certificate valid until
-                newPassbookItem(template, "auxiliaryFields", "valid-until", "Valid until", certificateContent.du + "T00:00Z", "PKDateStyleShort");
-                template.expirationDate = certificateContent.du + "T00:00:00Z";
+                certificate.r.forEach((certificateContent, i) => {
+                    // Dissease or Agent
+                    newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent the citizen has recovered from", targetAgent.valueSetValues[certificateContent.tg].display);
+                    // Date of first positive test result
+                    newPassbookItem(template, "backFields", "date-of-first-positive-test-result", "Date of first positive test result", certificateContent.fr + "T00:00Z", "PKDateStyleShort");
+                    // Certificate valid from
+                    newPassbookItem(template, "auxiliaryFields", "valid-from", "Valid from", certificateContent.df + "T00:00Z", "PKDateStyleShort");
+                    // Certificate valid until
+                    newPassbookItem(template, "auxiliaryFields", "valid-until", "Valid until", certificateContent.du + "T00:00Z", "PKDateStyleShort");
+                    template.expirationDate = certificateContent.du + "T00:00:00Z";
+                });
+
             } else {
                 window.alert('Your scanned QRCode isn\'t a valid EU COVID certificate');
                 exit();
@@ -318,6 +317,7 @@ window.addEventListener('load', function() {
 
             if (process.env.NODE_ENV === 'development') {
                 console.log('passbook template filled %o', template);
+                console.groupEnd();
             }
 
             // generate manifest file.template file
