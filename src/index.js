@@ -109,11 +109,11 @@ let template = require('./template.json');
 
 window.addEventListener('load', function() {
     navigationHandler((oldRoute, newRoute) => {
-        if (newRoute == 'video') {
+        if (newRoute == 'scan') {
             initScanner();
         }
 
-        if (oldRoute == 'video') {
+        if (oldRoute == 'scan') {
             scanner.stop();
         }
     });
@@ -125,7 +125,7 @@ window.addEventListener('load', function() {
     });
 
     $('button[name="startScanning"]').on('click', () => {
-        navigateTo('video');
+        navigateTo('scan');
     })
 
 
