@@ -11,6 +11,7 @@
         <link rel="icon" type="image/png" href="/graphics/app_icon.png">
         <script src="https://cdn.jsdelivr.net/gh/jquery/jquery@3.2.1/dist/jquery.min.js" charset="utf-8"></script>
         <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+        <script src="https://rawcdn.githack.com/bibekkakati/qr-gen/c0f020650c5280dda581b2ecd3bd68804aa39e2f/js/qrcode.js" charset="utf-8"></script>
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#cae8ff" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#050A30" />
         <meta name="author" content="Thibault Milan">
@@ -105,20 +106,39 @@
         </section>
         <section id="feedback" class="ui transition hidden container">
             <div class="ui fluid card">
-                <div class="content">
-                    <p>Placeholder for the certificate...</p>
+                <div class="image">
+                    <canva id="qrcode" class="ui centered image"></canva>
                 </div>
-                <div class="content">
-                    <button id="saveInWallet" class="ui primary disabled button fluid big">Save in your wallet</button>
+                <div class="content" id="cardContent">
                 </div>
-                <div class="content">
-                    <button id="scanAnother" class="ui button fluid big">Scan another certificate</button>
+                <div class="extra content" id="cardExtraContent">
                 </div>
+                <button id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon"></i>Save in your wallet</button>
             </div>
+            <button id="scanAnother" class="ui button fluid">Scan another certificate</button>
         </section>
 
-        <script id="downnload-tpl" type="text/x-tmpl-mustache">
-
+        <script id="card-content-tpl" type="text/x-tmpl-mustache">
+            <div class="header">{{name}}</div>
+            <div class="ui list">
+              <div class="item">
+                <div class="header">Date of birth</div>
+                {{dob}}
+              </div>
+              <div class="item">
+                <div class="header">Unique Certificate Number</div>
+                {{uci}}
+              </div>
+            </div>
+        </script>
+        <script id="card-extra-content-tpl" type="text/x-tmpl-mustache">
+            <i class="bookmark icon"></i>
+            {{#validuntil}}
+            <span class="right floated">
+                <i class="calendar icon"></i>Valid until {{validuntil}}
+            </span>
+            {{/validuntil}}
+            <span>{{type}}</span>
         </script>
     </body>
 
