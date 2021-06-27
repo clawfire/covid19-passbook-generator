@@ -24,18 +24,32 @@ function getCurrentRoute() {
     return route;
 }
 
+let navigationHandlerInit = false;
 let currentRoute = getCurrentRoute();
 
 function navigationHandler(callback) {
-    window.addEventListener("popstate", () => {
-        const newRoute = getCurrentRoute();
+    function changeState(oldRoute, newRoute, callback) {
         const routes = Array.from($('section.container')).map(e => e.id);
-        if ((currentRoute != newRoute) && (routes.includes(newRoute))) {
-            $('#'+currentRoute).fadeTo('slow', 0).css('visibility', 'hidden').css('display', 'none');
-            $('#'+newRoute).fadeTo('slow', 1).css('visibility', 'visible').css('display', 'block');
-            callback(currentRoute, newRoute);
+        if ((oldRoute != newRoute) && (routes.includes(newRoute))) {
+            $('#'+oldRoute).fadeTo('fast', 0).css('visibility', 'hidden').css('display', 'none');
+            $('#'+newRoute).fadeTo('fast', 1).css('visibility', 'visible').css('display', 'block');
+            callback(oldRoute, newRoute);
             currentRoute = newRoute;
         }
+    }
+
+    // if the user refreshes the page...
+    if (navigationHandlerInit == false) {
+        if (currentRoute != 'intro') {
+            changeState('intro', currentRoute, callback);
+        }
+        navigationHandlerInit = true;
+    }
+
+    window.addEventListener("popstate", () => {
+        console.log('popstate');
+        const newRoute = getCurrentRoute();
+        changeState(currentRoute, newRoute, callback);
      });
 }
 
