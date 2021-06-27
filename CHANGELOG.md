@@ -1,5 +1,10 @@
 ## [Unrealeased]
 
+## [1.2.1] - 2021-06-27
+### Changed
+- fixed the download button
+- fix the canva section
+
 ## [1.2] - 2021-06-27
 ### Added
 - There's an FAQ
