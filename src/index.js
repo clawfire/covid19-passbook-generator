@@ -144,7 +144,7 @@ window.addEventListener('load', function() {
         }
 
         if (oldRoute == 'scan') {
-            scanner.stop();
+            scanner.destroy();
         }
     });
 
@@ -169,18 +169,39 @@ window.addEventListener('load', function() {
     })
 
 
+    function adaptPreview(orientation) {
+        console.log('adaptPreview')
+        const video = document.getElementById('scanner');
+        const mask = document.getElementById('mask');
+        let width = 0;
+        let marginLeft = 0;
+        if (orientation !== undefined && orientation.matches) {
+            console.log('portrait')
+            width = $(video).width();
+        } else {
+            console.log('landscape')
+            width = Math.max($(video).width(), $(video).height())/2;
+            marginLeft = '25%';
+        }
+        $(video).width(width);
+        $(mask).width(width);
+        $(video).height(width);
+        $(mask).height(width);
+        $(video).css('margin-left', marginLeft);
+        $(mask).css('margin-left', marginLeft);      
+    }
+
+    window.addEventListener("orientationchange", event => {
+        adaptPreview(event.target.screen.orientation.angle != 90 && event.target.screen.orientation.angle != -90);
+    });
+
     function initScanner() {
         QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
         //QrScanner.hasCamera().then(function() {
         const flashlight_btn = document.getElementById('flashlight_btn');
         // we select the video element, which will provide the user feedback
         const video = document.getElementById('scanner');
-        const mask = document.getElementById('mask');
-        const width = Math.max($(video).width(), $(video).height())
-        $(video).width(width)
-        $(video).height(width)
-        $(mask).width(width)
-        $(mask).height(width)
+        adaptPreview(window.matchMedia("(orientation: portrait)"));
 
         QrScanner.hasCamera().then(hasCamera => {
             if (!hasCamera) {
