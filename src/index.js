@@ -160,6 +160,12 @@ window.addEventListener('load', function() {
         const flashlight_btn = document.getElementById('flashlight_btn');
         // we select the video element, which will provide the user feedback
         const video = document.getElementById('scanner');
+        const mask = document.getElementById('mask');
+        const width = Math.max($(video).width(), $(video).height())
+        $(video).width(width)
+        $(video).height(width)
+        $(mask).width(width)
+        $(mask).height(width)
 
         QrScanner.hasCamera().then(hasCamera => {
             if (!hasCamera) {
