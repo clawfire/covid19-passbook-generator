@@ -39,3 +39,5 @@ This work could never have been done without the support of the open source comm
 - [Path Check debug tool](https://github.pathcheck.org/debug.html) to help explore the QR code content
 - [Nimiq JS QR Scanner](https://github.com/nimiq/qr-scanner/)
 - [JSZIP](https://stuk.github.io/jszip/)
+- [QRCode](https://github.com/davidshimjs/qrcodejs) lib to generate qrcode for the card preview
+- [Raw Git](https://raw.githack.com/) to let you call github hosted file in your code using CloudFlare CDN function
