@@ -135,7 +135,7 @@ const sampleOrigin = {
 
 let template = require('./template.json');
 
-let passbook;
+let passbookBlob;
 
 window.addEventListener('load', function() {
     navigationHandler((oldRoute, newRoute) => {
@@ -159,8 +159,8 @@ window.addEventListener('load', function() {
     })
 
     $('#saveInWallet').on('click', () => {
-        if (passbook !== undefined) {
-            saveAs(passbook, "certificate.pkpass");
+        if (passbookBlob !== undefined) {
+            saveAs(passbookBlob, "certificate.pkpass");
         }
     })
 
@@ -429,7 +429,7 @@ window.addEventListener('load', function() {
                         type: "blob",
                         mimeType: "application/vnd.apple.pkpass"
                     }).then(blob => {
-                        passbook = blob;
+                        passbookBlob = blob;
                         $('#saveInWallet').removeClass('disabled');
                         navigateTo('feedback');
 
