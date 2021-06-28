@@ -1,5 +1,11 @@
 ## [Unrealeased]
 
+## [1.2.2] - 2021-06-28
+### Changed
+- Fixes #17 which caused duplicate data in passbook when using the scan again feature
+- Move the FAQ to the bottom in a dedicated space, always visible
+- Better preview rendering when resizing the window (or changing orientation)
+
 ## [1.2] - 2021-06-27
 ### Added
 - There's an FAQ
