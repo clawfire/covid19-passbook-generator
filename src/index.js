@@ -1,5 +1,7 @@
 import Handlebars from 'handlebars';
 import QrScanner from 'qr-scanner';
+import debounce from 'lodash.debounce';
+
 import {
     saveAs
 } from 'file-saver';
@@ -137,69 +139,65 @@ let template = require('./template.json');
 
 let passbookBlob;
 
+
+function adaptPreview() {
+    const container = document.getElementById('scannerContainer');
+    const video = document.getElementById('scanner');
+    const mask = document.getElementById('mask');
+    let width = 0;
+    let marginLeft = 0;
+    const orientation = window.matchMedia("(orientation: portrait)");
+    if (orientation !== undefined && orientation.matches) {
+        width = $(container).width();
+    } else {
+        width = $(container).width()/2;
+        marginLeft = '25%';
+    }
+    $(video).width(width);
+    $(mask).width(width);
+    $(video).height(width);
+    $(mask).height(width);
+    $(video).css('margin-left', marginLeft);
+    $(mask).css('margin-left', marginLeft);      
+}
+
+
 window.addEventListener('load', function() {
-            navigationHandler((oldRoute, newRoute) => {
-                if (newRoute == 'scan') {
-                    initScanner();
-                }
+                navigationHandler((oldRoute, newRoute) => {
+                    if (newRoute == 'scan') {
+                        initScanner();
+                    }
 
-                if (oldRoute == 'scan') {
-                    scanner.destroy();
-                }
-            });
+                    if (oldRoute == 'scan') {
+                        scanner.destroy();
+                    }
+                });
 
-            // Message closing function
-            // Will be used for all the messages
-            $('.message .close').on('click', function() {
-                $(this).closest('.message').transition('fade');
-            });
+                // Message closing function
+                // Will be used for all the messages
+                $('.message .close').on('click', function() {
+                    $(this).closest('.message').transition('fade');
+                });
 
-            $('button[name="startScanning"]').on('click', () => {
-                navigateTo('scan');
-            })
+                $('button[name="startScanning"]').on('click', () => {
+                    navigateTo('scan');
+                })
 
-            $('#saveInWallet').on('click', () => {
-                    <<
-                    << << < HEAD
-                    if (passbook !== undefined) {
-                        saveAs(passbook, "certificate.pkpass"); ===
-                        === =
-                        if (passbookBlob !== undefined) {
-                            saveAs(passbookBlob, "certificate.pkpass"); >>>
-                            >>> > hotfix / 1.2 .1
-                        }
-                    })
+                $('#saveInWallet').on('click', () => {
+                    if (passbookBlob !== undefined) {
+                        saveAs(passbookBlob, "certificate.pkpass"); 
+                    }
+                });
+
+                $(window).on('resize', debounce(function() {
+                    adaptPreview();
+                }, 400));
 
                 $('#scanAnother').on('click', () => {
                     navigateTo('scan');
                 })
 
 
-                function adaptPreview(orientation) {
-                    console.log('adaptPreview')
-                    const video = document.getElementById('scanner');
-                    const mask = document.getElementById('mask');
-                    let width = 0;
-                    let marginLeft = 0;
-                    if (orientation !== undefined && orientation.matches) {
-                        console.log('portrait')
-                        width = $(video).width();
-                    } else {
-                        console.log('landscape')
-                        width = Math.max($(video).width(), $(video).height()) / 2;
-                        marginLeft = '25%';
-                    }
-                    $(video).width(width);
-                    $(mask).width(width);
-                    $(video).height(width);
-                    $(mask).height(width);
-                    $(video).css('margin-left', marginLeft);
-                    $(mask).css('margin-left', marginLeft);
-                }
-
-                window.addEventListener("orientationchange", event => {
-                    adaptPreview(event.target.screen.orientation.angle != 90 && event.target.screen.orientation.angle != -90);
-                });
 
                 function initScanner() {
                     QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
@@ -207,7 +205,7 @@ window.addEventListener('load', function() {
                     const flashlight_btn = document.getElementById('flashlight_btn');
                     // we select the video element, which will provide the user feedback
                     const video = document.getElementById('scanner');
-                    adaptPreview(window.matchMedia("(orientation: portrait)"));
+                    adaptPreview();
 
                     QrScanner.hasCamera().then(hasCamera => {
                         if (!hasCamera) {
