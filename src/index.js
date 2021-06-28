@@ -135,7 +135,7 @@ const sampleOrigin = {
     "122592007": "Acellular blood (serum or plasma) specimen"
 };
 
-let template = require('./template.json');
+const sourceTpl = require('./template.json');
 
 let passbookBlob;
 
@@ -246,6 +246,7 @@ window.addEventListener('load', function() {
                     // destroy the scanner, we gonna need memory
                     scanner.destroy();
                     // Add it as a QRcode in the template
+                    const template = JSON.parse(JSON.stringify(sourceTpl));
                     template.barcode.message = data;
 
                     dcc.debug(data).then(obj => {
@@ -433,14 +434,8 @@ window.addEventListener('load', function() {
                                     type: "blob",
                                     mimeType: "application/vnd.apple.pkpass"
                                 }).then(blob => {
-                                    <<
-                                    << << < HEAD
-                                    passbook = blob; ===
-                                    === =
-                                    passbookBlob = blob; >>>
-                                    >>> > hotfix / 1.2 .1
+                                    passbookBlob = blob; 
                                     $('#saveInWallet').removeClass('disabled');
-                                    navigateTo('feedback');
 
                                     var canvas = document.getElementById('qrcode');
                                     if (process.env.NODE_ENV === 'development') {
@@ -475,6 +470,7 @@ window.addEventListener('load', function() {
                                         "type": certificateType,
                                         "validuntil": certificate.r ? certificate.r[0].du : null
                                     })
+                                    navigateTo('feedback');
                                 })
                             })
                         });
