@@ -60,6 +60,40 @@
                 <i class="qrcode icon"></i>
                 Start scanning
             </button>
+        </section>
+        <section id="scan" class="ui transition hidden container">
+            <div class="ui fluid card">
+                <div class="image" id="scannerContainer">
+                    <video id="scanner">
+                        <p>Your browser is not compatible with our technology.</p>
+                    </video>
+                    <div id="mask"></div>
+                </div>
+                <div class="content">
+                    <div class="description">
+                        <i class="qrcode icon"></i> Aim at the QR Code of your certificate to capture.
+                    </div>
+                </div>
+                <div class="ui bottom attached disabled button" id="flashlight_btn">
+                    <i class="lightbulb icon"></i>
+                    Toggle flashlight
+                </div>
+            </div>
+        </section>
+        <section id="feedback" class="ui transition hidden container">
+            <div class="ui fluid card">
+                <div class="image">
+                    <div id="qrcode" class="ui centered image"></div>
+                </div>
+                <div class="content" id="cardContent">
+                </div>
+                <div class="extra content" id="cardExtraContent">
+                </div>
+                <button id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon"></i>Save in your wallet</button>
+            </div>
+            <button id="scanAnother" class="ui button fluid">Scan another certificate</button>
+        </section>
+        <section id="faq" class="ui container">
             <h3 class="ui center aligned header">
                 FAQ
                 <div class="sub header">Know more about the project, security, how it works and more.</div>
@@ -135,38 +169,6 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <section id="scan" class="ui transition hidden container">
-            <div class="ui fluid card">
-                <div class="image">
-                    <video id="scanner">
-                        <p>Your browser is not compatible with our technology.</p>
-                    </video>
-                    <div id="mask"></div>
-                </div>
-                <div class="content">
-                    <div class="description">
-                        <i class="qrcode icon"></i> Aim at the QR Code of your certificate to capture.
-                    </div>
-                </div>
-                <div class="ui bottom attached disabled button" id="flashlight_btn">
-                    <i class="lightbulb icon"></i>
-                    Toggle flashlight
-                </div>
-            </div>
-        </section>
-        <section id="feedback" class="ui transition hidden container">
-            <div class="ui fluid card">
-                <div class="image">
-                    <div id="qrcode" class="ui centered image"></div>
-                </div>
-                <div class="content" id="cardContent">
-                </div>
-                <div class="extra content" id="cardExtraContent">
-                </div>
-                <button id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon"></i>Save in your wallet</button>
-            </div>
-            <button id="scanAnother" class="ui button fluid">Scan another certificate</button>
         </section>
 
         <script id="card-content-tpl" type="text/x-tmpl-mustache">
