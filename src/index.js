@@ -1,3 +1,7 @@
+const jquery = require('./vendor/jquery.min.js');
+window.$ = window.jQuery = jquery;
+require('./vendor/semantic.min.js');
+
 import Handlebars from 'handlebars';
 import QrScanner from 'qr-scanner';
 import debounce from 'lodash.debounce';
@@ -444,11 +448,11 @@ window.addEventListener('load', function() {
                                         console.log("will be generated here %o", canvas);
                                     }
                                     canvas.innerHTML = "";
-                                    qrcode = new QRCode(canvas, {
+                                    qrcode = new window.QRCode(canvas, {
                                         text: template.barcode.message,
                                         width: 400,
                                         height: 400,
-                                        level: QRCode.CorrectLevel.M
+                                        level: window.QRCode.CorrectLevel.M
                                     });
                                     if (process.env.NODE_ENV === 'development') {
                                         console.groupEnd();

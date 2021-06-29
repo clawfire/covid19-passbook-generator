@@ -5,13 +5,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <title>Save EU Digital COVID Certificate your iPhone Wallet</title>
-        <script src="index.js" charset="utf-8"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+        <link rel="stylesheet" href="/vendor/semantic.min.css">
         <link rel="stylesheet" href="/styles/master.scss">
         <link rel="icon" type="image/png" href="/graphics/app_icon.png">
-        <script src="https://cdn.jsdelivr.net/gh/jquery/jquery@3.2.1/dist/jquery.min.js" charset="utf-8"></script>
-        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-        <script src="https://rawcdn.githack.com/bibekkakati/qr-gen/c0f020650c5280dda581b2ecd3bd68804aa39e2f/js/qrcode.js" charset="utf-8"></script>
+        <script src="./vendor/qrcode.js" charset="utf-8"></script>
+        <script src="index.js" charset="utf-8"></script>
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#cae8ff" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#050A30" />
         <meta name="author" content="Thibault Milan">
@@ -132,8 +130,9 @@
                     <div class="content">
                         <div class="header">I can't scan my certificate.</div>
                         <div class="description">
+                            <p>Try to have a good light source and center sur QR code in the scan zone. The size of the visual aid is the size of the code we require. Also, your code need to be flat (curled paper will not work well)</p>
                             <p>We support the EU Digital COVID certificate of vaccination, recovery, test. The ones from Switzerland and the United Kingdom are also supported if they are following the EU format.</p>
-                            <p>First, please be sure to use the EU version of your certificate (if you're in France, you need to download it from <a href="https://attestation-vaccin.ameli.fr/" title="Visiter le site Ameli.fr pour télécharger votre certificat">Ameli's dedicated website</a>). Then, try to have a good light exposure and center the QRcode in the scan zone (it should be about half the scan size, don't zoom too much).</p>
+                            <p>First, please be sure to use the EU version of your certificate (if you are in Luxembourg, you can download it from <a href="http://guichet.lu/certificat-vaccination">myguichet</a>. If you're in France, you need to download it from <a href="https://attestation-vaccin.ameli.fr/" title="Visiter le site Ameli.fr pour télécharger votre certificat">Ameli's dedicated website</a>).</p>
                             <p>Ultimately, you can contact us directly or <a href="https://github.com/clawfire/covid19-passbook-generator/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D+" title="Submit a bug on Github">open an issue</a>.</p>
                         </div>
                     </div>
@@ -147,7 +146,6 @@
                             <ul>
                                 <li><a href="https://play.google.com/store/apps/details?id=de.stocard.stocard&hl=fr&gl=US">Stocard</a> (Google Play Store)</li>
                                 <li><a href="https://f-droid.org/fr/packages/org.ligi.passandroid/">PassAndroid</a> (F-Droid)</li>
-                                <li><a href="https://play.google.com/store/apps/details?id=io.walletcards.android">WalletCard</a> (Google Play Store)</li>
                                 <li><a href="https://play.google.com/store/apps/details?id=io.walletpasses.android">WalletPasses</a> (Google Play Store)</li>
                             </ul>
                             <p>You can also screenshot the pass preview we display before download; it contains all the main pieces of information you can find on the cover of your paper certificate.</p>
@@ -158,14 +156,17 @@
                     <i class="info icon"></i>
                     <div class="content">
                         <div class="header">How to contact the creator(s)?</div>
-                        <div class="description">This app is an original idea of <a href="https://thibaultmilan.com" title="Check Thibault's website">Thibault Milan</a> (<a href="https://twitter.com/thibaultmilan" title="See Thibault on Twitter">@thibaultmilan</a> on Twitter), with a lot of help from <a href="https://twitter.com/biou" title="Check out tweets from Biou">@biou</a>, a bit of help from <a href="https://twitter.com/alrouen" title="See Alain on Twitter">@alrouen</a>, and <a href="https://twitter.com/hellgy" title="Check out Lawrence tweets">@hellgy</a>. You can also see the complete list of contributors <a href="https://github.com/clawfire/covid19-passbook-generator/graphs/contributors" title="See the complete list of contributors on the Github project">on the Github project</a>.</div>
+                        <div class="description">This app is an original idea of <a href="https://thibaultmilan.com" title="Check Thibault's website">Thibault Milan</a> (<a href="https://twitter.com/thibaultmilan" title="See Thibault on Twitter">@thibaultmilan</a> on Twitter), with a lot of help from <a href="hhttps://www.linkedin.com/in/avagner/">Alain Vagner</a>, a bit of help from <a href="https://twitter.com/alrouen" title="See Alain on Twitter">@alrouen</a>. You can also see the complete list of contributors <a href="https://github.com/clawfire/covid19-passbook-generator/graphs/contributors" title="See the complete list of contributors on the Github project">on the Github project</a>.</div>
                     </div>
                 </div>
                 <div class="item">
                     <i class="info icon"></i>
                     <div class="content">
                         <div class="header">How can I help?</div>
-                        <div class="description">If you like the app, don't hesitate to share it with your friends and family. Then, if you want to help more, <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen" title="View all the opened issues">take a look at the issues</a>. It's not just about tech; there's also copyrighting tasks, design, etc. You can start <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22" title="See the issues recommended to start with">with those issues</a> if you want to get familiar with the project.</div>
+                        <div class="description">If you like the app, don't hesitate to share it with your friends and family. Then, if you want to help more, <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen" title="View all the opened issues">take a look at the issues</a>. It's not just about tech; there's also copyrighting tasks, design, etc. You can start <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22" title="See the issues recommended to start with">with those issues</a> if you want to get familiar with the project.
+                    </div>
+                    <div class="content">
+                        <a href="https://www.producthunt.com/posts/eu-digital-covid-certificate-to-passbook?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-eu-digital-covid-certificate-to-passbook" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=302170&theme=light" alt="EU Digital COVID Certificate to Passbook - Save EU Digital COVID Certificate your iPhone Wallet | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a></div>
                     </div>
                 </div>
             </div>
