@@ -1574,3 +1574,4 @@
      QRCode.CorrectLevel = QRErrorCorrectLevel;
  })();
  
+ window.QRCode = QRCode;
