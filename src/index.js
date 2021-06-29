@@ -246,17 +246,17 @@ window.addEventListener('load', function() {
                             }
                             if (hasFlash) {
                                 if (process.env.NODE_ENV === 'development') {
-                                    console.log("This device support it");
+                                    console.log("This device supports it");
                                 }
+                                $(flashlight_btn).show();
                                 flashlight_btn.classList.remove('disabled')
                                 flashlight_btn.addEventListener('click', () => {
                                     scanner.toggleFlash();
                                 })
                             } else {
                                 if (process.env.NODE_ENV === 'development') {
-                                    console.log("This device don't support it");
+                                    console.log("This device doesn't support it");
                                 }
-                                $(flashlight_btn).hide();
                             }
                             if (process.env.NODE_ENV === 'development') {
                                 console.groupEnd()
