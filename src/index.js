@@ -34,8 +34,9 @@ let navigationHandlerInit = false;
 let currentRoute = getCurrentRoute();
 
 function navigationHandler(callback) {
-    function changeState(oldRoute, newRoute, callback) {
-        const routes = Array.from($('section.container')).map(e => e.id);
+    const routes = Array.from($('section.container')).map(e => e.id);
+    
+    function changeState(oldRoute, newRoute, callback) {    
         if ((oldRoute != newRoute) && (routes.includes(newRoute))) {
             $('#' + oldRoute).fadeTo('fast', 0).css('visibility', 'hidden').css('display', 'none');
             $('#' + newRoute).fadeTo('fast', 1).css('visibility', 'visible').css('display', 'block');
@@ -46,7 +47,9 @@ function navigationHandler(callback) {
 
     // if the user refreshes the page...
     if (navigationHandlerInit == false) {
-        if (currentRoute != 'intro') {
+        if (!routes.includes(currentRoute) || currentRoute == 'feedback') {
+            window.location.hash = 'intro';
+        } else {
             changeState('intro', currentRoute, callback);
         }
         navigationHandlerInit = true;
