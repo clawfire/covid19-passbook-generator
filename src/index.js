@@ -34,8 +34,9 @@ let navigationHandlerInit = false;
 let currentRoute = getCurrentRoute();
 
 function navigationHandler(callback) {
-    function changeState(oldRoute, newRoute, callback) {
-        const routes = Array.from($('section.container')).map(e => e.id);
+    const routes = Array.from($('section.container')).map(e => e.id);
+    
+    function changeState(oldRoute, newRoute, callback) {    
         if ((oldRoute != newRoute) && (routes.includes(newRoute))) {
             $('#' + oldRoute).fadeTo('fast', 0).css('visibility', 'hidden').css('display', 'none');
             $('#' + newRoute).fadeTo('fast', 1).css('visibility', 'visible').css('display', 'block');
@@ -46,7 +47,9 @@ function navigationHandler(callback) {
 
     // if the user refreshes the page...
     if (navigationHandlerInit == false) {
-        if (currentRoute != 'intro') {
+        if (!routes.includes(currentRoute) || currentRoute == 'feedback') {
+            window.location.hash = 'intro';
+        } else {
             changeState('intro', currentRoute, callback);
         }
         navigationHandlerInit = true;
@@ -187,6 +190,10 @@ window.addEventListener('load', function() {
                     navigateTo('scan');
                 })
 
+                $('button[name="scanImage"]').on('click', () => {
+                    $('#qrfile').trigger("click");
+                });
+
                 $('#saveInWallet').on('click', () => {
                     if (passbookBlob !== undefined) {
                         saveAs(passbookBlob, "certificate.pkpass"); 
@@ -201,7 +208,19 @@ window.addEventListener('load', function() {
                     navigateTo('scan');
                 })
 
-
+                $('#qrfile').on('change', (e) => {
+                    const file = e.target.files[0]
+                    if (!file) {
+                        return;
+                    }
+                    QrScanner.scanImage(file)
+                    .then(result => decode(result))
+                    .catch((error) => {
+                        console.error("Error while decoding QR code", error);
+                        window.alert("No QR code found in image");
+                    })
+                }
+                )
 
                 function initScanner() {
                     QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
@@ -248,7 +267,10 @@ window.addEventListener('load', function() {
 
                 function decode(data) {
                     // destroy the scanner, we gonna need memory
-                    scanner.destroy();
+                    if(scanner){
+                        scanner.destroy();
+                    }
+                    
                     // Add it as a QRcode in the template
                     const template = JSON.parse(JSON.stringify(sourceTpl));
                     template.barcode.message = data;
@@ -385,10 +407,10 @@ window.addEventListener('load', function() {
 
                         // generate manifest file.template file
                         let manifest = {
-                            "icon.png": "6af7196ef20b26ed4d84a233ab1bc23c8bca15a7",
-                            "icon@2x.png": "0bf60c38223505d69caba04cdec23431972c761f",
-                            "thumbnail.png": "5d509a5f70fc415ec952a02a08c3e22c584b77f6",
-                            "thumbnail@2x.png": "1d8c15c638a8cc19c09372faea60d40e10873f6d"
+                            "icon.png": "b372117f003fbc0673e9befd9b8f2812a07e1f17",
+                            "icon@2x.png": "e77d741df2738a6be8e3324e85833f67f2210c2a",
+                            "thumbnail.png": "3f88d2819090a31881244e1d8fbcc00f1c192149",
+                            "thumbnail@2x.png": "f1fc4ceb0852fd7e18c2e94b02ceac17f975744e"
                         };
                         const passJson = JSON.stringify(template);
                         // Get the SHA1 of the pass JSON

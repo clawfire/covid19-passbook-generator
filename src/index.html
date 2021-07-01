@@ -54,10 +54,15 @@
                     <div class="content">open source & transparent</div>
                 </li>
             </ul>
-            <button class="ui primary fluid icon button" name="startScanning">
+            <button class="ui fluid primary icon button" name="startScanning">
                 <i class="qrcode icon"></i>
                 Start scanning
             </button>
+            <button class="ui fluid basic icon button" name="scanImage">
+                <i class="file image icon"></i>
+                Import picture
+            </button>
+            <input type="file" id="qrfile" style="display: none;" accept="image/*">
         </section>
         <section id="scan" class="ui transition hidden container">
             <div class="ui fluid card">
@@ -89,7 +94,18 @@
                 </div>
                 <button id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon"></i>Save in your wallet</button>
             </div>
-            <button id="scanAnother" class="ui button fluid">Scan another certificate</button>
+            <div class="ui buttons">
+                <button class="ui primary fluid icon button" id="scanAnother">
+                    <i class="qrcode icon"></i>
+                    Scan another code
+                </button>
+                <div class="or"></div>
+                <button class="ui fluid icon button" name="scanImage">
+                    <i class="file image icon"></i>
+                    Scan another screenshot or image
+                </button>
+                <input type="file" id="qrfile" style="display: none;" accept="image/*">
+            </div>
         </section>
         <section id="faq" class="ui container">
             <h3 class="ui center aligned header">
@@ -100,7 +116,7 @@
                 <div class="item">
                     <i class="info icon"></i>
                     <div class="content">
-                        <div class="header">I can't scan my certificate.</div>
+                        <div class="header">I can't scan my certificate.</div>
                         <div class="description">
                             <p>Have a good light source and align your QR code with the scan zone edge. The size of the visual aid is the size of the code we need. Your code must be flat (wrinkled paper won't work well).</p>
                             <p>We support the EU Digital COVID certificate of vaccination, recovery, test. The EU format certificates from Switzerland and the United Kingdom are also supported.</p>
@@ -115,6 +131,17 @@
                     <div class="content">
                         <div class="header">What's that project?</div>
                         <div class="description">This web application scans your EU Digital COVID certificate (vaccine, test, or healing) and generates a passbook from it. You can then import it into your iPhone's wallet, or if you're an Android user, import it into an app that supports it.</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="info icon"></i>
+                    <div class="content">
+                        <div class="header">How can I get my EU DCC (certificate) ?</div>
+                        <div class="description">
+                            <p>In &#x1F1EB;&#x1F1F7; France, you can download it from <a href="https://attestation-vaccin.ameli.fr/" title="Visiter le site Ameli.fr pour télécharger votre certificat">Ameli's dedicated website</a></p>
+                            <p>In &#x1F1F1;&#x1F1FA; Luxembourg, you can download it from <a href="http://guichet.lu/certificat-vaccination">myGuichet</a></p>
+                            <p>In &#x1F1E8;&#x1F1ED; Switzerland, the certificates are distributed by your canton. Get more information on <a href="https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/covid-zertifikat.html">Federal Office of Public Health</a>.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="item">
