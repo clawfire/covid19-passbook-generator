@@ -209,10 +209,8 @@ window.addEventListener('load', function() {
                 $('#qrfile').on('change', (e) => {
                     const file = e.target.files[0]
                     if (!file) {
-                        console.log("No file")
                         return;
                     }
-                    console.log(file)
                     QrScanner.scanImage(file)
                     .then(result => decode(result))
                     .catch((error) => {
