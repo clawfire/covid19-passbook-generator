@@ -97,7 +97,18 @@
                 </div>
                 <button id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon"></i>Save in your wallet</button>
             </div>
-            <button id="scanAnother" class="ui button fluid">Scan another certificate</button>
+            <div class="ui buttons">
+                <button class="ui primary fluid icon button" id="scanAnother">
+                    <i class="qrcode icon"></i>
+                    Scan another code
+                </button>
+                <div class="or"></div>
+                <button class="ui fluid icon button" name="scanImage">
+                    <i class="file image icon"></i>
+                    Scan another screenshot or image
+                </button>
+                <input type="file" id="qrfile" style="display: none;" accept="image/*">
+            </div>
         </section>
         <section id="faq" class="ui container">
             <h3 class="ui center aligned header">
