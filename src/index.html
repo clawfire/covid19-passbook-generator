@@ -94,68 +94,68 @@
         <section id="faq" class="ui container">
             <h3 class="ui center aligned header">
                 FAQ
-                <div class="sub header">Know more about the project, security, how it works and more.</div>
+                <div class="sub header">Learn more about the project, security, how it works and more.</div>
             </h3>
             <div class="ui relaxed list">
                 <div class="item">
                     <i class="info icon"></i>
                     <div class="content">
+                        <div class="header">I can't scan my certificate.</div>
+                        <div class="description">
+                            <p>Have a good light source and align your QR code with the scan zone edge. The size of the visual aid is the size of the code we need. Your code must be flat (wrinkled paper won't work well).</p>
+                            <p>We support the EU Digital COVID certificate of vaccination, recovery, test. The EU format certificates from Switzerland and the United Kingdom are also supported.</p>
+                            <p>Make sure you use the EU version of your certificate (in Luxembourg, download it from <a href="http://guichet.lu/certificat-vaccination">myguichet</a>. In France, download it from <a href="https://attestation-vaccin.ameli.fr/" title="Visiter le site Ameli.fr pour télécharger votre certificat">Ameli</a>).</p>
+                            <p>If all else fails, you can contact us or <a href="https://github.com/clawfire/covid19-passbook-generator/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D+" title="Submit a bug on Github">open an issue</a>.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <i class="info icon"></i>
+                    <div class="content">
                         <div class="header">What's that project?</div>
-                        <div class="description">This web application lets you scan your EU Digital COVID certificate (vaccine, test, or healing) and generate a passbook from it. You can then import it into your iPhone's wallet, or if you're using an Android phone, import it into an app that supports it.</div>
+                        <div class="description">This web application scans your EU Digital COVID certificate (vaccine, test, or healing) and generates a passbook from it. You can then import it into your iPhone's wallet, or if you're an Android user, import it into an app that supports it.</div>
                     </div>
                 </div>
                 <div class="item">
                     <i class="info icon"></i>
                     <div class="content">
                         <div class="header">How does it work?</div>
-                        <div class="description">When you scan the QR-code, we decrypt it, get the data it contains and create the passbook (the file needed to have a card in your wallet). When it's ready, we compute a digest of your files and send it for digital signature with a certificate on our server without sending your data itself. The server sends the signature back to your phone, and your phone generates the final file and let you save it.</div>
+                        <div class="description">When you scan the code, we read the data and create the passbook (the file needed to have a card in your wallet). We send a checksum for digital signature to our server, without sending your data. Your phone generates the final file and lets you save it.</div>
                     </div>
                 </div>
                 <div class="item">
                     <i class="info icon"></i>
                     <div class="content">
                         <div class="header">Is it secure?</div>
-                        <div class="description">Well, we put a lot of efforts into making it the most secure we can. Your phone processes all the personal data and only send a "hash" to our server. It's like a verification number based on the files, and it's impossible to use it to know the original content. The server generates a signature for this hash, using Apple's certificate. No passbook can be opened into your wallet without being signed like this. It's another safety from Apple. Then the last step is made on your phone. We let you preview your information before saving the actual pass.</div>
+                        <div class="description">We put a lot of effort into making it as secure as we could. Your personal data never leaves your phone. Apple requires a digital signature to open a pass. To generate this, the app only sends a checksum of your data to our server, and it's impossible to guess the original content. The last step happens on your phone: you preview your information before saving the pass.</div>
                     </div>
                 </div>
                 <div class="item">
                     <i class="info icon"></i>
                     <div class="content">
                         <div class="header">Can I see the code?</div>
-                        <div class="description">Of course. You can read all the source code and dig more into how it works on <a href="https://github.com/clawfire/covid19-passbook-generator" title="open the project's Github page">the Github page of the project</a>. You can even contribute if you want!</div>
+                        <div class="description">Of course. You can read the source code and dig more into how it works on <a href="https://github.com/clawfire/covid19-passbook-generator" title="open the project's Github page">the Github page of the project</a>. You can even contribute if you want!</div>
                     </div>
                 </div>
                 <div class="item">
                     <i class="info icon"></i>
                     <div class="content">
-                        <div class="header">I can't scan my certificate.</div>
+                        <div class="header">Can I save the certificate on Android?</div>
                         <div class="description">
-                            <p>Try to have a good light source and center sur QR code in the scan zone. The size of the visual aid is the size of the code we require. Also, your code need to be flat (curled paper will not work well)</p>
-                            <p>We support the EU Digital COVID certificate of vaccination, recovery, test. The ones from Switzerland and the United Kingdom are also supported if they are following the EU format.</p>
-                            <p>First, please be sure to use the EU version of your certificate (if you are in Luxembourg, you can download it from <a href="http://guichet.lu/certificat-vaccination">myguichet</a>. If you're in France, you need to download it from <a href="https://attestation-vaccin.ameli.fr/" title="Visiter le site Ameli.fr pour télécharger votre certificat">Ameli's dedicated website</a>).</p>
-                            <p>Ultimately, you can contact us directly or <a href="https://github.com/clawfire/covid19-passbook-generator/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D+" title="Submit a bug on Github">open an issue</a>.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <i class="info icon"></i>
-                    <div class="content">
-                        <div class="header">How to save the certificate on Android?</div>
-                        <div class="description">
-                            <p>On Android, you can save the .pkpass file and open it with an application that supports this format. Here are some:</p>
+                            <p>You can save the .pkpass file and open it with an application that supports this format, for example:</p>
                             <ul>
                                 <li><a href="https://play.google.com/store/apps/details?id=de.stocard.stocard&hl=fr&gl=US">Stocard</a> (Google Play Store)</li>
                                 <li><a href="https://f-droid.org/fr/packages/org.ligi.passandroid/">PassAndroid</a> (F-Droid)</li>
                                 <li><a href="https://play.google.com/store/apps/details?id=io.walletpasses.android">WalletPasses</a> (Google Play Store)</li>
                             </ul>
-                            <p>You can also screenshot the pass preview we display before download; it contains all the main pieces of information you can find on the cover of your paper certificate.</p>
+                            <p>You can also screenshot the pass preview we display before download; it contains all the relevant information you see on the cover of your paper certificate.</p>
                         </div>
                     </div>
                 </div>
                 <div class="item">
                     <i class="info icon"></i>
                     <div class="content">
-                        <div class="header">How to contact the creator(s)?</div>
+                        <div class="header">How can I contact the creator(s)?</div>
                         <div class="description">This app is an original idea of <a href="https://thibaultmilan.com" title="Check Thibault's website">Thibault Milan</a> (<a href="https://twitter.com/thibaultmilan" title="See Thibault on Twitter">@thibaultmilan</a> on Twitter), with a lot of help from <a href="hhttps://www.linkedin.com/in/avagner/">Alain Vagner</a>, a bit of help from <a href="https://twitter.com/alrouen" title="See Alain on Twitter">@alrouen</a>. You can also see the complete list of contributors <a href="https://github.com/clawfire/covid19-passbook-generator/graphs/contributors" title="See the complete list of contributors on the Github project">on the Github project</a>.</div>
                     </div>
                 </div>
