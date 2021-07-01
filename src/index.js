@@ -385,10 +385,10 @@ window.addEventListener('load', function() {
 
                         // generate manifest file.template file
                         let manifest = {
-                            "icon.png": "6af7196ef20b26ed4d84a233ab1bc23c8bca15a7",
-                            "icon@2x.png": "0bf60c38223505d69caba04cdec23431972c761f",
-                            "thumbnail.png": "5d509a5f70fc415ec952a02a08c3e22c584b77f6",
-                            "thumbnail@2x.png": "1d8c15c638a8cc19c09372faea60d40e10873f6d"
+                            "icon.png": "b372117f003fbc0673e9befd9b8f2812a07e1f17",
+                            "icon@2x.png": "e77d741df2738a6be8e3324e85833f67f2210c2a",
+                            "thumbnail.png": "3f88d2819090a31881244e1d8fbcc00f1c192149",
+                            "thumbnail@2x.png": "f1fc4ceb0852fd7e18c2e94b02ceac17f975744e"
                         };
                         const passJson = JSON.stringify(template);
                         // Get the SHA1 of the pass JSON
