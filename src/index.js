@@ -188,7 +188,6 @@ window.addEventListener('load', function() {
                 })
 
                 $('button[name="scanImage"]').on('click', () => {
-                    console.log("Scan an image")
                     $('#qrfile').trigger("click");
                 });
 
