@@ -187,6 +187,11 @@ window.addEventListener('load', function() {
                     navigateTo('scan');
                 })
 
+                $('button[name="scanImage"]').on('click', () => {
+                    console.log("Scan an image")
+                    $('#qrfile').trigger("click");
+                });
+
                 $('#saveInWallet').on('click', () => {
                     if (passbookBlob !== undefined) {
                         saveAs(passbookBlob, "certificate.pkpass"); 
@@ -201,7 +206,21 @@ window.addEventListener('load', function() {
                     navigateTo('scan');
                 })
 
-
+                $('#qrfile').on('change', (e) => {
+                    const file = e.target.files[0]
+                    if (!file) {
+                        console.log("No file")
+                        return;
+                    }
+                    console.log(file)
+                    QrScanner.scanImage(file)
+                    .then(result => decode(result))
+                    .catch((error) => {
+                        console.error("Error while decoding QR code", error);
+                        window.alert("No QR code found in image");
+                    })
+                }
+                )
 
                 function initScanner() {
                     QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
@@ -248,7 +267,10 @@ window.addEventListener('load', function() {
 
                 function decode(data) {
                     // destroy the scanner, we gonna need memory
-                    scanner.destroy();
+                    if(scanner){
+                        scanner.destroy();
+                    }
+                    
                     // Add it as a QRcode in the template
                     const template = JSON.parse(JSON.stringify(sourceTpl));
                     template.barcode.message = data;
