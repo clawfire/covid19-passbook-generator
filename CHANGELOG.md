@@ -1,5 +1,16 @@
 ## [Unrealeased]
 
+## [1.3] - 2021-06-29
+### Added
+- ProductHunt logo at the bottom of the FAQ
+
+### Changed
+- All ressources (jQuery, SemanticUI, etc) are now served localy
+
+### Removed
+- All call to 3rd party scripts have been removed. No more external library
+- Remove Google Fonts from Semantic UI #19
+
 ## [1.2.2] - 2021-06-28
 ### Changed
 - Fixes #17 which caused duplicate data in passbook when using the scan again feature
