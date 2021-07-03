@@ -1,5 +1,14 @@
 ## [Unrealeased]
 
+##[1.4] - 2021-07-04
+### Added
+- Picture upload feature to select a screenshot of the qrcode
+
+### Changed
+- If you're coming to /#feedback you're moved to the start of the workflow now #22
+- Assets for the passbook should have the good colors now
+- FAQ improvment #24
+
 ## [1.3] - 2021-06-29
 ### Added
 - ProductHunt logo at the bottom of the FAQ

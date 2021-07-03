@@ -7,6 +7,10 @@ section{
     margin-bottom: 1em;
 }
 
+.ui.button[name="startScanning"]{
+    margin-bottom: .5em;
+}
+
 #mask{
     position:absolute;
     top:0;
