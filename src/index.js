@@ -13,6 +13,10 @@ const dcc = require('@pathcheck/dcc-sdk');
 const iso = require('iso-3166-1');
 const JSZIP = require("jszip");
 
+const standalone = window.navigator.standalone;
+const userAgent = window.navigator.userAgent.toLowerCase();
+const safari = /safari/.test( userAgent );
+const ios = /iphone|ipod|ipad/.test( userAgent );
 
 function shaOne(str) {
     const buffer = new TextEncoder("utf-8").encode(str);
@@ -170,6 +174,11 @@ function adaptPreview() {
 
 
 window.addEventListener('load', function() {
+                if( ios && (standalone || !safari)) {
+                    console.error("Running on ios and not in browser: ", standalone, userAgent);
+                    window.alert("Open this page in Safari to be able to save the Covid certificate!");
+                }
+
                 navigationHandler((oldRoute, newRoute) => {
                     if (newRoute == 'scan') {
                         initScanner();
