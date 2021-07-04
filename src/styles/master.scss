@@ -1,6 +1,5 @@
-body{
-  font-size: 16px;
-}
+@import "semantic-override.scss";
+
 video {
     width     : 100%;
     object-fit: cover;
