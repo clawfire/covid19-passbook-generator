@@ -10,19 +10,23 @@ import {
   saveAs
 } from 'file-saver';
 
-window.onerror = function (msg, url, lineNo, columnNo, error) {
-    $('#error-modal').modal('show');
-    const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
-    const message = `What where you doing?\n\nError message: ${msg}\nPage: ${window.location.hash}\nFile: ${url}\nUser-Agent: ${navigator.userAgent}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\n\n`;
-    const container = $('#error-msg');
-    container.val(container.val() + message);
-    return false;
-}
-
 const dcc = require('@pathcheck/dcc-sdk');
 const iso = require('iso-3166-1');
 const JSZIP = require("jszip");
 
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+  const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
+  const extra = `File: ${url}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\n`;
+  manageError(msg, extra)
+  return false;
+}
+
+function manageError(msg, extra = '') {
+  $('#error-modal').modal('show');
+  const message = `What happened?\n\nError message: ${msg}\nPage: ${window.location.hash}\nUser-Agent: ${navigator.userAgent}\n${extra}`;
+  const container = $('#error-msg');
+  container.val(container.val() + message);
+}
 
 function shaOne(str) {
   const buffer = new TextEncoder("utf-8").encode(str);
@@ -200,6 +204,10 @@ window.addEventListener('load', function() {
   $('button[name="startScanning"]').on('click', () => {
     navigateTo('scan');
   })
+
+  // $('button[name="break"]').on('click', () => {
+  //   throw "error";
+  // })
 
   $('button[name="scanImage"]').on('click', () => {
     $('#qrfile').trigger("click");
