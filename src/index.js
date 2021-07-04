@@ -47,7 +47,7 @@ function navigationHandler(callback) {
 
   // if the user refreshes the page...
   if (navigationHandlerInit == false) {
-    if (!routes.includes(currentRoute) || currentRoute == 'qrcoderesult') {
+    if (!routes.includes(currentRoute) || currentRoute == 'preview') {
       window.location.hash = 'intro';
     } else {
       changeState('intro', currentRoute, callback);
@@ -498,7 +498,7 @@ window.addEventListener('load', function() {
               "type": certificateType,
               "validuntil": certificate.r ? certificate.r[0].du : null
             })
-            navigateTo('feedback');
+            navigateTo('preview');
           })
         })
       });
