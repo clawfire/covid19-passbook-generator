@@ -9,6 +9,16 @@ import debounce from 'lodash.debounce';
 import {
     saveAs
 } from 'file-saver';
+
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+    $('#error-modal').modal('show');
+    const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
+    const message = `What where you doing?\n\nError message: ${msg}\nPage: ${window.location.hash}\nFile: ${url}\nUser-Agent: ${navigator.userAgent}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\n\n`;
+    const container = $('#error-msg');
+    container.val(container.val() + message);
+    return false;
+}
+
 const dcc = require('@pathcheck/dcc-sdk');
 const iso = require('iso-3166-1');
 const JSZIP = require("jszip");
@@ -194,10 +204,36 @@ window.addEventListener('load', function() {
                     $('#qrfile').trigger("click");
                 });
 
+                $('button[name="break"]').on('click', () => {
+                    throw "Break";
+                });
+
                 $('#saveInWallet').on('click', () => {
                     if (passbookBlob !== undefined) {
                         saveAs(passbookBlob, "certificate.pkpass"); 
                     }
+                });
+
+                $('#error-close').on('click', () => {
+                    $('#error-msg').val('');
+                    $('#error-modal').addClass('hidden');
+                });
+
+                $('#error-send').on('click', () => {
+                    let signature = fetch('/.netlify/functions/create-issue', {
+                        method: "POST",
+                        body: $('#error-msg').val()
+                    }).then((response) => {
+                        if (response.status == 200) {
+                            $('#error-msg').val('');
+                        } else {
+                            window.alert("Error while sending your feedback. Please refresh & try again");
+                        }
+                    }).catch((error) => {
+                        console.error("Error while calling λ", error);
+                        window.alert("Error while sending your feedback. Please refresh & try again");
+                    })
+                    $('#error-modal').addClass('hidden');
                 });
 
                 $(window).on('resize', debounce(function() {
