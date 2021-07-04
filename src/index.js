@@ -34,7 +34,7 @@ let navigationHandlerInit = false;
 let currentRoute = getCurrentRoute();
 
 function navigationHandler(callback) {
-  const routes = Array.from($('section.container')).map(e => e.id);
+  const routes = Array.from($('section.column')).map(e => e.id);
 
   function changeState(oldRoute, newRoute, callback) {
     if ((oldRoute != newRoute) && (routes.includes(newRoute))) {
