@@ -30,3 +30,29 @@ section {
 .ui.grid > .column.hide{
   display: none;
 }
+
+#preview .card{
+  background-color: rgb(0, 51, 153);
+  color: white;
+
+  #qrcode,{
+    width: 100%;
+    img{
+      width: 100%
+    }
+  }
+
+  .content .header{
+    color: white;
+  }
+
+  .extra{
+    color: transparentize(white, $amount: 0.5);
+    border-top: 1px solid transparentize(white, 0.5) !important;
+  }
+
+  .ui.list .list>.item .header,
+  .ui.list>.item .header {
+    color:$yellow;
+  }
+}
