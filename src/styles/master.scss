@@ -76,3 +76,19 @@ section {
     color:$yellow;
   }
 }
+
+.ui.two.statistics {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  .statistic {
+    max-width: 50%;
+
+    .label,
+    .value {
+      text-transform: none;
+      color: white;
+      @extend %opensans;
+      font-weight: 300;
+    }
+  }
+}
