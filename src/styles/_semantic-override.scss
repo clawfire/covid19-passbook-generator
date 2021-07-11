@@ -1,7 +1,59 @@
 @import "colors.scss";
 @import "fonts.scss";
 
-body{
+body {
+  @extend %opensans;
   font-size: 16px;
+  color: $violet;
+}
+
+.ui.header {
+  @extend %opensans;
+  color: $teal;
+  .sub.header{
+    color:$violet
+  }
+}
+
+.ui.list .list>.item,
+.ui.list>.item {
+  .header {
+    color: $teal;
+    @extend %opensans;
+  }
+
+  &>i.icon {
+    color: $teal;
+  }
+
+  .description{
+    color: $violet;
+  }
+}
+
+.ui.primary.button,
+.ui.primary.buttons .button {
+  background: $primaryColor;
+  color: $violet;
+
+  &:hover {
+    background-color: darken($primaryColor, 10);
+    color: $violet;
+  }
+}
+
+.ui.violet.button,
+.ui.violet.buttons .button {
+  background: $violet;
+  color: white;
+
+  &:hover {
+    background-color: darken($violet, 10);
+    color: white;
+  }
+}
+
+.ui.card>.content>.description,
+.ui.cards>.card>.content>.description {
   color: $violet;
 }
