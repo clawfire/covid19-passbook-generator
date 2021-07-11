@@ -474,8 +474,8 @@ window.addEventListener('load', function() {
             canvas.innerHTML = "";
             qrcode = new window.QRCode(canvas, {
               text: template.barcode.message,
-              width: 400,
-              height: 400,
+              width: 375,
+              height: 375,
               level: window.QRCode.CorrectLevel.M
             });
             if (process.env.NODE_ENV === 'development') {
