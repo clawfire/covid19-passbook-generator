@@ -1,8 +1,7 @@
 name: Feature request
 description: Suggest an idea for this project
 title: "[feature request]"
-labels: enhancement
-assignees: ''
+labels: [enhancement,triage]
 body:
   - type: textarea
     id: related-to-problem
