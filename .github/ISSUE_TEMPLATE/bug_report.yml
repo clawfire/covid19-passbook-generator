@@ -1,9 +1,7 @@
 name: Bug report
 description: File a bug report
-about: Create a report to help us improve
 title: "[BUG] "
 labels: [bug, triage]
-assignees: ''
 body:
   - type: markdown
     attributes:
