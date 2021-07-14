@@ -3,6 +3,14 @@ description: Suggest an idea for this project
 title: "[feature request]"
 labels: [enhancement,triage]
 body:
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
   - type: textarea
     id: related-to-problem
     attributes:
