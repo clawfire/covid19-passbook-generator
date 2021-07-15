@@ -354,7 +354,7 @@ window.addEventListener('load', function() {
       newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
       if (process.env.NODE_ENV === 'development') {
         console.group('💬 Handling non-latin alphabets');
-        if(certificate.nam.gn.toUpperCase() == certificate.nam.gnt.replace("<", ' ')){
+        if(certificate.nam.gn.toUpperCase() == certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() == certificate.nam.fnt.replace("<", ' ')){
           console.log("✅ Pass is using latin char, no need to change anything");
         }else{
           console.warning("❌ non-latin char detected, will add international variation");
