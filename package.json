@@ -1,6 +1,6 @@
 {
     "name": "covid19-passbook-generator",
-    "version": "1.4",
+    "version": "1.5w",
     "description": "A simple PWA to scan your EU digital COVID Certificate and generate a passbook from it",
     "main": "index.html",
     "repository": "git@github.com:clawfire/covid19-passbook-generator.git",
@@ -15,6 +15,7 @@
         "jszip": "^3.6.0",
         "lodash.debounce": "^4.0.8",
         "node-fetch": "^2.6.1",
+        "octokit": "^1.1.0",
         "parcel-bundler": "^1.12.5",
         "qr-scanner": "^1.2.0"
     },
