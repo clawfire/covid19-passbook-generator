@@ -352,6 +352,18 @@ window.addEventListener('load', function() {
       template.serialNumber = certificateContent.ci;
       // Surname(s) and Forename(s)
       newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
+      if (process.env.NODE_ENV === 'development') {
+        console.group('💬 Handling non-latin alphabets');
+        if(certificate.nam.gn.toUpperCase() == certificate.nam.gnt.replace("<", ' ')){
+          console.log("✅ Pass is using latin char, no need to change anything");
+        }else{
+          console.warning("❌ non-latin char detected, will add international variation");
+        }
+        console.groupEnd();
+      }
+      if(certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replace("<", ' ')){
+        newPassbookItem(template,"primaryFields", "intl-surnames", "Surnames & Forenames", certificate.nam.gnt.replace("<", ' ') + " " + certificate.nam.fnt.replace("<", ' '));
+      }
       // Type of certificate
       newPassbookItem(template, "auxiliaryFields", "certificate-type", "Certificate Type", certificateType);
       // Date of birth
