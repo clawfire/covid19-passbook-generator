@@ -11,6 +11,11 @@ section{
     margin-bottom: .5em;
 }
 
+.productHuntContainer {
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+}
 #mask{
     position:absolute;
     top:0;
