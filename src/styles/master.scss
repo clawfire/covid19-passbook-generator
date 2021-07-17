@@ -1,3 +1,6 @@
+/**
+ * Generic HTML Elements
+ */
 body{
     font-size: 16px;
 }
@@ -11,10 +14,20 @@ section {
     margin-bottom: 1em;
 }
 
+/**
+ * Semantic UI Tweak
+ */
 .ui.button[name="startScanning"] {
     margin-bottom: .5em;
 }
 
+.ui.grid > .column.hide{
+    display: none;
+}
+
+/**
+ * Custom parts.
+ */
 #mask {
     position: absolute;
     top: 0;
@@ -23,8 +36,4 @@ section {
     background: rgba(117, 117, 117, 0.8);
     -webkit-clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
     clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
-}
-
-.ui.grid > .column.hide{
-    display: none;
 }
