@@ -25,6 +25,13 @@ section {
     display: none;
 }
 
+[id="intro"] .ui.list {
+    margin: 1.5em 0;
+}
+[id="intro"] .ui.list .item::before {
+    content: none;
+}
+
 /**
  * Custom parts.
  */
