@@ -65,7 +65,25 @@ ul.ui.list li,
     clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
 }
 
-[id="faq"] .ui.list .item,
+[id="faq"] .ui.list .item {
+    padding-top: 1.25rem;
+}
+
+[id="faq"] > .ui.list {
+    margin-left: 0;
+    list-style: none;
+}
+
+[id="faq"] > .ui.list > .item::before {
+    content: none;
+}
+
+[id="faq"] > .ui.list > .item,
 .ui.relaxed.list:not(.horizontal) > .item:not(:first-child) {
     padding-top: 2rem;
+}
+
+[id="faq"] .ui.list .item .header {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
 }
