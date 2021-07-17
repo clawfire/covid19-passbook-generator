@@ -1,7 +1,7 @@
 /**
  * Generic HTML Elements
  */
-body{
+body {
     font-size: 16px;
 }
 
@@ -12,6 +12,11 @@ video {
 
 section {
     margin-bottom: 1em;
+}
+
+p,
+li {
+    line-height: 1.6;
 }
 
 /**
@@ -28,8 +33,23 @@ section {
 [id="intro"] .ui.list {
     margin: 1.5em 0;
 }
+
 [id="intro"] .ui.list .item::before {
     content: none;
+}
+
+.ui.list .list > .item,
+.ui.list > .item,
+ol.ui.list li,
+ul.ui.list li,
+.ui.list .list > .item > .content,
+.ui.list > .item > .content {
+    line-height: 1.6;
+}
+
+.ui.grid > .column:not(.row) {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 /**
@@ -43,4 +63,9 @@ section {
     background: rgba(117, 117, 117, 0.8);
     -webkit-clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
     clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
+}
+
+[id="faq"] .ui.list .item,
+.ui.relaxed.list:not(.horizontal) > .item:not(:first-child) {
+    padding-top: 2rem;
 }
