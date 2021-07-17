@@ -148,13 +148,13 @@
                   FAQ
                   <div class="sub header">Learn more about the project, security, how it works and more.</div>
               </h2>
-              <div class="ui relaxed list">
+              <div class="ui relaxed list" itemscope itemtype="https://schema.org/FAQPage">
                   <div class="item">
                       <i class="info icon" role="presentation"></i>
-                      <div class="content">
-                          <div class="header">I can't scan my certificate.</div>
-                          <div class="description">
-                              <ol class="ui ordered list">
+                      <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                          <div class="header" itemprop="name">I can't scan my certificate.</div>
+                          <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                              <ol class="ui ordered list" itemprop="text">
                                   <li class="item">Have a good light source and align your QR code with the scan zone edge. The size of the visual aid is the size of the code we need. Your code must be flat (wrinkled paper won't work well).</li>
                                   <li class="item">If you have a screenshot or a picture of your code, you can use the "Import picture" button.</li>
                                   <li class="item">Please be sure to use the EU version of your certificate. See the following question if you don't know where to get yours.</li>
@@ -166,70 +166,70 @@
                   </div>
                   <div class="item">
                       <i class="info icon" role="presentation"></i>
-                      <div class="content">
-                          <div class="header">What's this project?</div>
-                          <div class="description">This web application scans your EU Digital COVID certificate (vaccine, test, or healing) and generates a passbook from it. You can then import it into your iPhone's wallet, or if you're an Android user, import it into an app that supports it.</div>
+                      <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                          <div class="header" itemprop="name">What's this project?</div>
+                          <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">This web application scans your EU Digital COVID certificate (vaccine, test, or healing) and generates a passbook from it. You can then import it into your iPhone's wallet, or if you're an Android user, import it into an app that supports it.</div>
                       </div>
                   </div>
                   <div class="item">
                       <i class="info icon" role="presentation"></i>
-                      <div class="content">
-                          <div class="header">Can I save the certificate on Android?</div>
-                          <div class="description">
-                              <p>Yes! You can save the .pkpass file and open it with an application that supports this format, for example:</p>
-                              <ul>
+                      <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                          <div class="header" itemprop="name">Can I save the certificate on Android?</div>
+                          <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                              <p itemprop="text">Yes! You can save the .pkpass file and open it with an application that supports this format, for example:</p>
+                              <ul itemprop="text">
                                   <li><a href="https://play.google.com/store/apps/details?id=de.stocard.stocard&hl=fr&gl=US">Stocard</a> (Google Play Store)</li>
                                   <li><a href="https://f-droid.org/fr/packages/org.ligi.passandroid/">PassAndroid</a> (F-Droid)</li>
                                   <li><a href="https://play.google.com/store/apps/details?id=io.walletpasses.android">WalletPasses</a> (Google Play Store)</li>
                               </ul>
-                              <p>You can also screenshot the pass preview we display before download; it contains all the relevant information you see on the cover of your paper certificate.</p>
+                              <p itemprop="text">You can also screenshot the pass preview we display before download; it contains all the relevant information you see on the cover of your paper certificate.</p>
                           </div>
                       </div>
                   </div>
                   <div class="item">
                       <i class="info icon" role="presentation"></i>
-                      <div class="content">
-                          <div class="header">How can I get my EU DCC (certificate) ?</div>
-                          <div class="description">
-                              <p>In &#x1F1EB;&#x1F1F7; France, you can download it from <a href="https://attestation-vaccin.ameli.fr/" title="Visiter le site Ameli.fr pour télécharger votre certificat">Ameli's dedicated website</a></p>
-                              <p>In &#x1F1F1;&#x1F1FA; Luxembourg, you can download it from <a href="http://guichet.lu/certificat-vaccination">myGuichet</a></p>
-                              <p>In &#x1F1E8;&#x1F1ED; Switzerland, the certificates are distributed by your canton. Get more information on <a href="https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/covid-zertifikat.html">Federal Office of Public Health</a>.</p>
+                      <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                          <div class="header" itemprop="name">How can I get my EU DCC (certificate) ?</div>
+                          <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                              <p itemprop="text">In &#x1F1EB;&#x1F1F7; France, you can download it from <a href="https://attestation-vaccin.ameli.fr/" title="Visiter le site Ameli.fr pour télécharger votre certificat">Ameli's dedicated website</a></p>
+                              <p itemprop="text">In &#x1F1F1;&#x1F1FA; Luxembourg, you can download it from <a href="http://guichet.lu/certificat-vaccination">myGuichet</a></p>
+                              <p itemprop="text">In &#x1F1E8;&#x1F1ED; Switzerland, the certificates are distributed by your canton. Get more information on <a href="https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/covid-zertifikat.html">Federal Office of Public Health</a>.</p>
                           </div>
                       </div>
                     </div>
                   <div class="item">
                       <i class="info icon" role="presentation"></i>
-                      <div class="content">
-                          <div class="header">How does it work?</div>
-                          <div class="description">When you scan the code, we read the data and create the passbook (the file needed to have a card in your wallet). We send a checksum for digital signature to our server, without sending your data. Your phone generates the final file and lets you save it.</div>
+                      <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                          <div class="header" itemprop="name">How does it work?</div>
+                          <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">When you scan the code, we read the data and create the passbook (the file needed to have a card in your wallet). We send a checksum for digital signature to our server, without sending your data. Your phone generates the final file and lets you save it.</div>
                       </div>
                   </div>
                   <div class="item">
                       <i class="info icon" role="presentation"></i>
-                      <div class="content">
-                          <div class="header">Is it secure?</div>
-                          <div class="description">We put a lot of effort into making it as secure as we could. Your personal data never leaves your phone. Apple requires a digital signature to open a pass. To generate this, the app only sends a checksum of your data to our server, and it's impossible to guess the original content. The last step happens on your phone: you preview your information before saving the pass. We don't track anyone, we don't collect any personal information, and we don't use cookies.</div>
+                      <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                          <div class="header" itemprop="name">Is it secure?</div>
+                          <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">We put a lot of effort into making it as secure as we could. Your personal data never leaves your phone. Apple requires a digital signature to open a pass. To generate this, the app only sends a checksum of your data to our server, and it's impossible to guess the original content. The last step happens on your phone: you preview your information before saving the pass. We don't track anyone, we don't collect any personal information, and we don't use cookies.</div>
                       </div>
                   </div>
                   <div class="item">
                       <i class="info icon" role="presentation"></i>
-                      <div class="content">
-                          <div class="header">Can I see the code?</div>
-                          <div class="description">Of course. You can read the source code and dig more into how it works on <a href="https://github.com/clawfire/covid19-passbook-generator" title="open the project's Github page">the Github page of the project</a>. You can even contribute if you want!</div>
+                      <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                          <div class="header" itemprop="name">Can I see the code?</div>
+                          <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">Of course. You can read the source code and dig more into how it works on <a href="https://github.com/clawfire/covid19-passbook-generator" title="open the project's Github page">the Github page of the project</a>. You can even contribute if you want!</div>
                       </div>
                   </div>
                   <div class="item">
                       <i class="info icon" role="presentation"></i>
-                      <div class="content">
-                          <div class="header">How can I contact the creator(s)?</div>
-                          <div class="description">This app is an original idea of <a href="https://thibaultmilan.com" title="Check Thibault's website">Thibault Milan</a> (<a href="https://twitter.com/thibaultmilan" title="See Thibault on Twitter">@thibaultmilan</a> on Twitter), with a lot of help from <a href="hhttps://www.linkedin.com/in/avagner/">Alain Vagner</a>, a bit of help from <a href="https://twitter.com/alrouen" title="See Alain on Twitter">@alrouen</a>. You can also see the complete list of contributors <a href="https://github.com/clawfire/covid19-passbook-generator/graphs/contributors" title="See the complete list of contributors on the Github project">on the Github project</a>.</div>
+                      <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                          <div class="header" itemprop="name">How can I contact the creator(s)?</div>
+                          <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">This app is an original idea of <a href="https://thibaultmilan.com" title="Check Thibault's website">Thibault Milan</a> (<a href="https://twitter.com/thibaultmilan" title="See Thibault on Twitter">@thibaultmilan</a> on Twitter), with a lot of help from <a href="hhttps://www.linkedin.com/in/avagner/">Alain Vagner</a>, a bit of help from <a href="https://twitter.com/alrouen" title="See Alain on Twitter">@alrouen</a>. You can also see the complete list of contributors <a href="https://github.com/clawfire/covid19-passbook-generator/graphs/contributors" title="See the complete list of contributors on the Github project">on the Github project</a>.</div>
                       </div>
                   </div>
                   <div class="item">
                       <i class="info icon" role="presentation"></i>
-                      <div class="content">
-                          <div class="header">How can I help?</div>
-                          <div class="description">If you like the app, don't hesitate to share it with your friends and family. Then, if you want to help more, <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen" title="View all the opened issues">take a look at the issues</a>. It's not just about tech; there's also copywriting tasks, design, etc. You can start <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22" title="See the issues recommended to start with">with those issues</a> if you want to get familiar with the project.
+                      <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                          <div class="header" itemprop="name">How can I help?</div>
+                          <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">If you like the app, don't hesitate to share it with your friends and family. Then, if you want to help more, <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen" title="View all the opened issues">take a look at the issues</a>. It's not just about tech; there's also copywriting tasks, design, etc. You can start <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22" title="See the issues recommended to start with">with those issues</a> if you want to get familiar with the project.
                       </div>
                       <div class="content">
                           <a href="https://www.producthunt.com/posts/eu-digital-covid-certificate-to-passbook?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-eu-digital-covid-certificate-to-passbook" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=302170&theme=light" alt="EU Digital COVID Certificate to Passbook - Save EU Digital COVID Certificate your iPhone Wallet | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a></div>
