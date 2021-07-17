@@ -33,7 +33,6 @@
                 <div class="header item">&#x1F1EA;&#x1F1FA; COVID Certificate to your digital wallet</div>
             </div>
         </section>
-
         <div id="error-modal" class="ui modal">
           <i class="close icon"></i>
           <div class="header">
@@ -242,7 +241,21 @@
                   </div>
               </div>
           </section>
-
+        </div>
+        <div class="ui basic modal" id="modal-offline">
+          <div class="ui icon header">
+            <i class="toggle off icon"></i>
+            Woops! You're offline
+          </div>
+          <div class="content">
+            <p>You will not be able to generate new pass when you're offline. If you want to continue using the app, you will need a data access.</p>
+          </div>
+          <div class="actions">
+            <div class="ui blue basic cancel inverted button">
+              <i class="checkmark icon"></i>
+              I understand, close this message
+            </div>
+          </div>
         </div>
         <script id="card-content-tpl" type="text/x-tmpl-mustache">
             <div class="header">{{name}}</div>

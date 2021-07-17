@@ -21,6 +21,13 @@ window.onerror = function (msg, url, lineNo, columnNo, error) {
   return false;
 }
 
+window.addEventListener('offline', () => {
+  $('#modal-offline').modal('show');
+})
+window.addEventListener('online', () => {
+  $('#modal-offline').modal('hide');
+})
+
 function manageError(msg, extra = '') {
   $('#error-modal').modal('show');
   const message = `What happened?\n\nError message: ${msg}\nPage: ${window.location.hash}\nUser-Agent: ${navigator.userAgent}\n${extra}`;
