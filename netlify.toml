@@ -13,14 +13,15 @@
 
 [context.production]
     command = "yarn run build"
+    NODE_ENV = "production"
 [content.branch-deploy]
     command = "yarn run deploy-preview"
+    NODE_ENV = "production"
 
 [dev]
 port = 3000 # Port that the dev server will be listening on
 publish = "dist" # Folder with the static content for _redirect file
-framework = "#custom"
-command = "NODE_ENV=development parcel serve src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js" # Command to start your dev server
+command = "yarn start" # Command to start your dev server
 targetPort = 1234
 
 ## more info on configuring this file: https://www.netlify.com/docs/netlify-toml-reference/
