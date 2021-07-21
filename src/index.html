@@ -33,7 +33,6 @@
                 <div class="header item">&#x1F1EA;&#x1F1FA; COVID Certificate to your digital wallet</div>
             </div>
         </section>
-
         <div id="error-modal" class="ui modal">
           <i class="close icon" role="presentation"></i>
           <div class="header">
@@ -159,7 +158,7 @@
                                   <li class="item">If you have a screenshot or a picture of your code, you can use the "Import picture" button.</li>
                                   <li class="item">Please be sure to use the EU version of your certificate. See the following question if you don't know where to get yours.</li>
                                   <li class="item">We support the EU Digital COVID certificate of vaccination, recovery, test. The ones from Switzerland and the United Kingdom are also supported if they are following the EU format.</li>
-                                  <li class="item">If all else fails, you can contact us or <a href="https://github.com/clawfire/covid19-passbook-generator/issues/new?assignees=&labels=bug&template=bug_report.md&title=%5BBUG%5D+" title="Submit a bug on Github">open an issue</a>.</li>
+                                  <li class="item">If all else fails, you can contact us or <a href="https://github.com/clawfire/covid19-passbook-generator/issues/new?assignees=&labels=bug%2Ctriage&template=bug_report.yml&title=%5BBUG%5D+" title="Submit a bug on Github">open an issue</a>.</li>
                               </ol>
                           </div>
                       </div>
@@ -235,9 +234,60 @@
                           <a href="https://www.producthunt.com/posts/eu-digital-covid-certificate-to-passbook?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-eu-digital-covid-certificate-to-passbook" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=302170&theme=light" alt="EU Digital COVID Certificate to Passbook - Save EU Digital COVID Certificate your iPhone Wallet | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a></div>
                       </div>
                   </li>
+                  <li class="item">
+                      <i class="info icon" role="presentation"></i>
+                      <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                          <div class="header" itemprop="name">What's your running fees?</div>
+                          <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">So far, this site is <a href="https://netlify.com/" title="Discover Netlify">powered by Netlify</a> mostly for about 30USD / month and AWS lambdas costs me under 1€ / month. You can find a <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSUDZX5ZdohZhLWxb1TyTtpamoRtkBg6z-wikv1b2OG1tWeNXwhNHX-a_wzxV5r4qoC9k8UauL3D-ay/pubhtml" title="open the transparency report on Google Sheet">transparency report</a> on the cost and donations (use Google Sheets).</div>
+                      </div>
+                  </li>
               </ul>
           </section>
-
+        </div>
+        <div class="ui basic modal" id="modal-offline">
+          <div class="ui icon header">
+            <i class="toggle off icon"></i>
+            Woops! You're offline
+          </div>
+          <div class="content">
+            <p>You will not be able to generate new pass when you're offline. If you want to continue using the app, you will need a data access.</p>
+          </div>
+          <div class="actions">
+            <div class="ui blue basic cancel inverted button">
+              <i class="checkmark icon"></i>
+              I understand, close this message
+            </div>
+          </div>
+        </div>
+        <div class="ui basic modal" id="modal-unsupported-browser-facebook">
+          <div class="ui icon header">
+            <i class="facebook icon"></i>
+            Your browser doesn't pass requirements for this app to work.
+          </div>
+          <div class="content">
+            <p>You're using a Facebook inc. app which open the link in a preview mode but prevent download (so you'll not be able to download the pass). Open the site in a regular browser.</p>
+          </div>
+          <div class="actions">
+            <div class="ui blue basic cancel inverted button">
+              <i class="checkmark icon"></i>
+              I understand, close this message
+            </div>
+          </div>
+        </div>
+        <div class="ui basic modal" id="modal-unsupported-browser-safari">
+          <div class="ui icon header">
+            <i class="apple icon"></i>
+            Your browser doesn't pass requirements for this app to work.
+          </div>
+          <div class="content">
+            <p>You need to open this site using Safari. Apple is preventing other browser to insert passes in wallet.</p>
+          </div>
+          <div class="actions">
+            <div class="ui blue basic cancel inverted button">
+              <i class="checkmark icon"></i>
+              I understand, close this message
+            </div>
+          </div>
         </div>
         <script id="card-content-tpl" type="text/x-tmpl-mustache">
             <div class="header">{{name}}</div>

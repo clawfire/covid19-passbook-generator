@@ -10,6 +10,8 @@ import {
   saveAs
 } from 'file-saver';
 
+var parser = require('ua-parser-js');
+
 const dcc = require('@pathcheck/dcc-sdk');
 const iso = require('iso-3166-1');
 const JSZIP = require("jszip");
@@ -20,6 +22,13 @@ window.onerror = function (msg, url, lineNo, columnNo, error) {
   manageError(msg, extra)
   return false;
 }
+
+window.addEventListener('offline', () => {
+  $('#modal-offline').modal('show');
+})
+window.addEventListener('online', () => {
+  $('#modal-offline').modal('hide');
+})
 
 function manageError(msg, extra = '') {
   $('#error-modal').modal('show');
@@ -184,6 +193,25 @@ function adaptPreview() {
 
 
 window.addEventListener('load', function() {
+
+  if (process.env.NODE_ENV === 'development') {
+    console.group('🕵🏻‍♂️ Inspecting your browser')
+    console.log($.ua.os.name);
+    console.log($.ua.browser.name);
+    console.log($.ua.device.type);
+  }
+  if($.ua.device.type == 'mobile'){
+    if (["Facebook","Instagram"].includes($.ua.browser.name)){
+      $('#modal-unsupported-browser-facebook').modal("show");
+    } else if ($.ua.os.name == "iOS" && $.ua.browser.name != "Mobile Safari"){
+      $('#modal-unsupported-browser-safari').modal("show");
+    } else {
+    if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
+    }
+  } else {
+    if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
+  }
+  if (process.env.NODE_ENV === 'development') {console.groupEnd()}
 
   navigationHandler((oldRoute, newRoute) => {
     if (newRoute == 'scan') {
