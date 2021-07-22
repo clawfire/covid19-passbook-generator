@@ -196,9 +196,9 @@ window.addEventListener('load', function() {
 
   if (process.env.NODE_ENV === 'development') {
     console.group('🕵🏻‍♂️ Inspecting your browser')
-    console.log($.ua.os.name);
-    console.log($.ua.browser.name);
-    console.log($.ua.device.type);
+    console.log("OS: %s",$.ua.os.name);
+    console.log("Browser: %s",$.ua.browser.name);
+    console.log("Device type: %s",$.ua.device.type);
   }
   if($.ua.device.type == 'mobile'){
     if (["Facebook","Instagram"].includes($.ua.browser.name)){
@@ -379,18 +379,18 @@ window.addEventListener('load', function() {
       // Use the UCI for passboook serial number
       template.serialNumber = certificateContent.ci;
       // Surname(s) and Forename(s)
-      newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
+      newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.fn.toUpperCase() + " " + certificate.nam.gn);
       if (process.env.NODE_ENV === 'development') {
         console.group('💬 Handling non-latin alphabets');
         if(certificate.nam.gn.toUpperCase() == certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() == certificate.nam.fnt.replace("<", ' ')){
           console.log("✅ Pass is using latin char, no need to change anything");
         }else{
-          console.warning("❌ non-latin char detected, will add international variation");
+          console.warn("❌ non-latin char detected, will add international variation");
         }
         console.groupEnd();
       }
-      if(certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replace("<", ' ')){
-        newPassbookItem(template,"primaryFields", "intl-surnames", "Surnames & Forenames", certificate.nam.gnt.replace("<", ' ') + " " + certificate.nam.fnt.replace("<", ' '));
+      if (certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() != certificate.nam.fnt.replace("<", ' ')) {
+        newPassbookItem(template,"primaryFields", "intl-surnames", "Surnames & Forenames", certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '));
       }
       // Type of certificate
       newPassbookItem(template, "auxiliaryFields", "certificate-type", "Certificate Type", certificateType);
