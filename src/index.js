@@ -32,7 +32,7 @@ window.addEventListener('online', () => {
 
 function manageError(msg, extra = '') {
   $('#error-modal').modal('show');
-  const message = `What happened?\n\nError message: ${msg}\nPage: ${window.location.hash}\nUser-Agent: ${navigator.userAgent}\n${extra}`;
+  const message = `What happened?\n\n[please describe]\n\n<details><summary>Technical details</summary>Error message: ${msg}\n\nPage: ${window.location.hash}\n\nBrowser:\n\`\`\`json\n${JSON.stringify($.ua)}\n\`\`\`\n\n${extra}</details>`;
   const container = $('#error-msg');
   container.val(container.val() + message);
 }
@@ -193,6 +193,8 @@ function adaptPreview() {
 
 
 window.addEventListener('load', function() {
+
+  throw "this is a test error"
 
   if (process.env.NODE_ENV === 'development') {
     console.group('🕵🏻‍♂️ Inspecting your browser')
