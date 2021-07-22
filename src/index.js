@@ -351,7 +351,7 @@ window.addEventListener('load', function() {
       // Use the UCI for passboook serial number
       template.serialNumber = certificateContent.ci;
       // Surname(s) and Forename(s)
-      newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
+      newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.fn.toUpperCase() + " " + certificate.nam.gn);
       if (process.env.NODE_ENV === 'development') {
         console.group('💬 Handling non-latin alphabets');
         if(certificate.nam.gn.toUpperCase() == certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() == certificate.nam.fnt.replace("<", ' ')){
@@ -362,7 +362,7 @@ window.addEventListener('load', function() {
         console.groupEnd();
       }
       if(certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replace("<", ' ')){
-        newPassbookItem(template,"primaryFields", "intl-surnames", "Surnames & Forenames", certificate.nam.gnt.replace("<", ' ') + " " + certificate.nam.fnt.replace("<", ' '));
+        newPassbookItem(template,"primaryFields", "intl-surnames", "Surnames & Forenames", certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '));
       }
       // Type of certificate
       newPassbookItem(template, "auxiliaryFields", "certificate-type", "Certificate Type", certificateType);
