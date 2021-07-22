@@ -1,5 +1,9 @@
 ## [Unrealeased]
 
+## [1.6.1] - 2021-07-22
+### Removed
+- test that breaks the app :D 
+
 ## [1.6] - 2021-07-22
 ### Added
 - Financing FAQ
