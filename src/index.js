@@ -194,8 +194,6 @@ function adaptPreview() {
 
 window.addEventListener('load', function() {
 
-  throw "this is a test error"
-
   if (process.env.NODE_ENV === 'development') {
     console.group('🕵🏻‍♂️ Inspecting your browser')
     console.log("OS: %s",$.ua.os.name);
