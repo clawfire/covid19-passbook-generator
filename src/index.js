@@ -9,10 +9,33 @@ import debounce from 'lodash.debounce';
 import {
   saveAs
 } from 'file-saver';
+
+var parser = require('ua-parser-js');
+
 const dcc = require('@pathcheck/dcc-sdk');
 const iso = require('iso-3166-1');
 const JSZIP = require("jszip");
 
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+  const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
+  const extra = `File: ${url}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\n`;
+  manageError(msg, extra)
+  return false;
+}
+
+window.addEventListener('offline', () => {
+  $('#modal-offline').modal('show');
+})
+window.addEventListener('online', () => {
+  $('#modal-offline').modal('hide');
+})
+
+function manageError(msg, extra = '') {
+  $('#error-modal').modal('show');
+  const message = `What happened?\n\n[please describe]\n\n<details><summary>Technical details</summary>Error message: ${msg}\n\nPage: ${window.location.hash}\n\nBrowser:\n\`\`\`json\n${JSON.stringify($.ua)}\n\`\`\`\n\n${extra}</details>`;
+  const container = $('#error-msg');
+  container.val(container.val() + message);
+}
 
 function shaOne(str) {
   const buffer = new TextEncoder("utf-8").encode(str);
@@ -170,6 +193,26 @@ function adaptPreview() {
 
 
 window.addEventListener('load', function() {
+
+  if (process.env.NODE_ENV === 'development') {
+    console.group('🕵🏻‍♂️ Inspecting your browser')
+    console.log("OS: %s",$.ua.os.name);
+    console.log("Browser: %s",$.ua.browser.name);
+    console.log("Device type: %s",$.ua.device.type);
+  }
+  if($.ua.device.type == 'mobile'){
+    if (["Facebook","Instagram"].includes($.ua.browser.name)){
+      $('#modal-unsupported-browser-facebook').modal("show");
+    } else if ($.ua.os.name == "iOS" && $.ua.browser.name != "Mobile Safari"){
+      $('#modal-unsupported-browser-safari').modal("show");
+    } else {
+    if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
+    }
+  } else {
+    if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
+  }
+  if (process.env.NODE_ENV === 'development') {console.groupEnd()}
+
   navigationHandler((oldRoute, newRoute) => {
     if (newRoute == 'scan') {
       initScanner();
@@ -190,6 +233,10 @@ window.addEventListener('load', function() {
     navigateTo('scan');
   })
 
+  // $('button[name="break"]').on('click', () => {
+  //   throw "error";
+  // })
+
   $('button[name="scanImage"]').on('click', () => {
     $('#qrfile').trigger("click");
   });
@@ -198,6 +245,28 @@ window.addEventListener('load', function() {
     if (passbookBlob !== undefined) {
       saveAs(passbookBlob, "certificate.pkpass");
     }
+  });
+
+  $('#error-close').on('click', () => {
+      $('#error-msg').val('');
+      $('#error-modal').addClass('hidden');
+  });
+
+  $('#error-send').on('click', () => {
+      let signature = fetch('/.netlify/functions/create-issue', {
+          method: "POST",
+          body: $('#error-msg').val()
+      }).then((response) => {
+          if (response.status == 200) {
+              $('#error-msg').val('');
+          } else {
+              window.alert("Error while sending your feedback. Please refresh & try again");
+          }
+      }).catch((error) => {
+          console.error("Error while calling λ", error);
+          window.alert("Error while sending your feedback. Please refresh & try again");
+      })
+      $('#error-modal').addClass('hidden');
   });
 
   $(window).on('resize', debounce(function() {
@@ -310,7 +379,19 @@ window.addEventListener('load', function() {
       // Use the UCI for passboook serial number
       template.serialNumber = certificateContent.ci;
       // Surname(s) and Forename(s)
-      newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
+      newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.fn.toUpperCase() + " " + certificate.nam.gn);
+      if (process.env.NODE_ENV === 'development') {
+        console.group('💬 Handling non-latin alphabets');
+        if(certificate.nam.gn.toUpperCase() == certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() == certificate.nam.fnt.replace("<", ' ')){
+          console.log("✅ Pass is using latin char, no need to change anything");
+        }else{
+          console.warn("❌ non-latin char detected, will add international variation");
+        }
+        console.groupEnd();
+      }
+      if (certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() != certificate.nam.fnt.replace("<", ' ')) {
+        newPassbookItem(template,"primaryFields", "intl-surnames", "Surnames & Forenames", certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '));
+      }
       // Type of certificate
       newPassbookItem(template, "auxiliaryFields", "certificate-type", "Certificate Type", certificateType);
       // Date of birth
@@ -505,3 +586,4 @@ window.addEventListener('load', function() {
     })
   }
 }, false)
+
