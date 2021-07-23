@@ -51,28 +51,28 @@ section {
   color: white;
 }
 
-#preview .card{
+#preview .card {
   background-color: rgb(0, 51, 153);
   color: white;
 
-  #qrcode{
+  #qrcode {
     width: 100%;
     img{
       width: 100%
     }
   }
 
-  .content .header{
+  .content .header {
     color: white;
   }
 
-  .extra{
+  .extra {
     color: transparentize(white, $amount: 0.5);
     border-top: 1px solid transparentize(white, 0.5) !important;
   }
 
   .ui.list .list>.item .header,
-  .ui.list>.item .header {
+  .ui.list > .item .header {
     color:$yellow;
   }
 }
@@ -80,6 +80,7 @@ section {
 .ui.two.statistics {
   margin-bottom: 1rem;
   margin-top: 1rem;
+
   .statistic {
     max-width: 50%;
 
