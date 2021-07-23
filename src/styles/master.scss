@@ -40,7 +40,24 @@ a {
         &::before {
             content: none;
         }
+
+        &.item {
+          border-left: 0;
+        }
     }
+}
+
+.ui.stackable {
+  section {
+    .ui.button {
+      min-height: 52px;
+      font-size: 1.25rem;
+
+      svg {
+        margin-right: .5rem;
+      }
+    }
+  }
 }
 
 .ui.button[name="startScanning"] {
@@ -49,15 +66,9 @@ a {
     justify-content: center;
     margin-bottom: 1rem;
 
-    svg {
-        margin-right: .5rem;
-    }
-
     + .button.inverted.basic.ui {
-        font-size: 1.25rem;
         box-shadow: none!important;
         background: rgba(255,255,255, .1)!important;
-        min-height: 52px;
 
         &:hover,
         &:focus {
@@ -86,14 +97,11 @@ a {
   color: white;
 
   .ui.header{
-    color:inherit;
+    color: inherit;
   }
 }
 
 #intro {
-  position: relative;
-  align-self: flex-start;
-  padding: 2rem;
   background: $violet-dark;
   color: white;
 
@@ -131,6 +139,17 @@ a {
     top: -300px;
     z-index: $zi-sticky-intro;
   }
+}
+
+/**
+ * Pointy end of block.
+ */
+#intro,
+#scan,
+#preview {
+  position: relative;
+  align-self: flex-start;
+  padding: 2rem;
 
   &::before {
     content: '';
@@ -143,6 +162,42 @@ a {
     clip-path: polygon(0 0, 100% 0, 100% 12%, 50% 100%, 0% 12%);
   }
 }
+
+#scan,
+#preview {
+  background-color: $teal;
+  color: white;
+}
+
+#preview .card {
+  background-color: rgb(0, 51, 153);
+  color: white;
+
+  #qrcode {
+    width: 100%;
+    img{
+      width: 100%
+    }
+  }
+
+  .content .header {
+    color: white;
+  }
+
+  .extra {
+    color: transparentize(white, $amount: 0.5);
+    border-top: 1px solid transparentize(white, 0.5) !important;
+  }
+
+  .ui.list .list>.item .header,
+  .ui.list > .item .header {
+    color:$yellow;
+  }
+}
+
+/** 
+ * FAQ
+ */
 
 #faq {
 
@@ -228,37 +283,6 @@ a {
   } // end of media query
 }
 
-#scan,
-#preview {
-  background-color: $teal;
-  color: white;
-}
-
-#preview .card {
-  background-color: rgb(0, 51, 153);
-  color: white;
-
-  #qrcode {
-    width: 100%;
-    img{
-      width: 100%
-    }
-  }
-
-  .content .header {
-    color: white;
-  }
-
-  .extra {
-    color: transparentize(white, $amount: 0.5);
-    border-top: 1px solid transparentize(white, 0.5) !important;
-  }
-
-  .ui.list .list>.item .header,
-  .ui.list > .item .header {
-    color:$yellow;
-  }
-}
 
 .ui.two.statistics {
   margin-bottom: 1rem;
