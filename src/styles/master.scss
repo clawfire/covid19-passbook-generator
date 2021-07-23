@@ -2,6 +2,15 @@
 
 body {
   padding-top: 1rem;
+  @extend %opensans;
+  font-size: 16px;
+  line-height: 1.7;
+  color: $violet-dark;
+}
+
+p,
+li {
+    line-height: 1.6;
 }
 
 video {
@@ -11,6 +20,20 @@ video {
 
 section {
     margin-bottom: 1em;
+}
+
+a {
+    color: $teal;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+        color: $teal-dark;
+    }
+
+    &:focus-visible {
+        background: $yellow-light;
+    }
 }
 
 .ui.button[name="startScanning"] {
@@ -32,7 +55,7 @@ section {
 }
 
 #intro {
-  background: $violet;
+  background: $violet-dark;
   color: white;
 }
 
