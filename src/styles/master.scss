@@ -13,7 +13,7 @@ li {
 }
 
 video {
-    width     : 100%;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -78,18 +78,66 @@ a {
     }
 }
 
-#mask {
-    position         : absolute;
-    top              : 0;
-    width            : 100%;
-    height           : 100%;
-    background       : transparentize($yellow, 0.3);
-    -webkit-clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
-    clip-path        : polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
+.ui.grid > .column.hide{
+    display: none;
 }
 
-.ui.grid > .column.hide{
-  display: none;
+[id="intro"] .ui.list {
+    margin: 1.5em 0;
+}
+
+[id="intro"] .ui.list .item::before {
+    content: none;
+}
+
+.ui.list .list > .item,
+.ui.list > .item,
+ol.ui.list li,
+ul.ui.list li,
+.ui.list .list > .item > .content,
+.ui.list > .item > .content {
+    line-height: 1.6;
+}
+
+.ui.grid > .column:not(.row) {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/**
+ * Custom parts.
+ */
+#mask {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(117, 117, 117, 0.8);
+    -webkit-clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
+    clip-path: polygon(0% 0%, 0% 100%, 25% 100%, 25% 25%, 75% 25%, 75% 75%, 25% 75%, 25% 100%, 100% 100%, 100% 0%);
+}
+
+[id="faq"] .ui.list .item {
+    padding-top: 1.25rem;
+}
+
+[id="faq"] > .ui.list {
+    margin-left: 0;
+    list-style: none;
+}
+
+[id="faq"] > .ui.list > .item::before {
+    content: none;
+}
+
+[id="faq"] > .ui.list > .item,
+.ui.relaxed.list:not(.horizontal) > .item:not(:first-child) {
+    padding-top: 2rem;
+}
+
+[id="faq"] .ui.list .item .header {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
 }
 
 #header {
@@ -194,7 +242,7 @@ a {
   }
 }
 
-/** 
+/**
  * FAQ
  */
 
@@ -245,7 +293,7 @@ a {
                 line-height: 1.55;
                 background: $yellow;
                 clip-path: polygon(0 0, 80% 0, 100% 50%, 80% 100%, 0 100%);
-              } 
+              }
             }
           }
         }
@@ -273,7 +321,7 @@ a {
       }
    }
 
-  @media (max-width: $ui-breakpoint-sm) { 
+  @media (max-width: $ui-breakpoint-sm) {
     padding-top: 80px!important;
 
     .ui.header {

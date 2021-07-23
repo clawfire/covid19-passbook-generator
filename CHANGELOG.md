@@ -1,5 +1,22 @@
 ## [Unrealeased]
 
+## [1.6.1] - 2021-07-22
+### Removed
+- test that breaks the app :D 
+
+## [1.6] - 2021-07-22
+### Added
+- Financing FAQ
+- Offline detection (since you cannot generate offline)
+- Support button on the github repo
+- Unsupported browser detection (facebook webview and everything but Safari on iOS)
+- Portugal information thanks to @webdados
+
+### Changed
+- A11Y by @geoffreycrofte
+- Fixes non Latin name handling
+- Wording edits here and there, thanks to @grischard
+
 ## [1.5.1] - 2021-07-15
 ### Changed
 - Check non-latin firstname and not just names
