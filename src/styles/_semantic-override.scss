@@ -5,24 +5,80 @@ body {
   @extend %opensans;
   font-size: 16px;
   color: $violet;
+  line-height: 1.7;
 }
 
+p,
+li {
+    line-height: 1.6;
+}
+
+/**
+ * Semantic UI Lists
+ */
+.ui.list .list > .item,
+.ui.list > .item,
+ol.ui.list li,
+ul.ui.list li,
+.ui.list .list > .item > .content,
+.ui.list > .item > .content {
+    line-height: 1.6;
+}
+
+/**
+ * Grid Tweaking
+ */
+.ui.grid > .column:not(.row) {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/**
+ * FAQ
+ */
+[id="faq"] .ui.list .item {
+    padding-top: 1.25rem;
+}
+
+[id="faq"] > .ui.list {
+    margin-left: 0;
+    list-style: none;
+}
+
+[id="faq"] > .ui.list > .item::before {
+    content: none;
+}
+
+[id="faq"] > .ui.list > .item,
+.ui.relaxed.list:not(.horizontal) > .item:not(:first-child) {
+    padding-top: 2rem;
+}
+
+[id="faq"] .ui.list .item .header {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+/**
+ * Other parts (to be split/named)
+ */
 .ui.header {
   @extend %opensans;
   color: $teal;
-  .sub.header{
-    color:$violet
+
+  .sub.header {
+    color: $violet
   }
 }
 
-.ui.list .list>.item,
-.ui.list>.item {
+.ui.list .list > .item,
+.ui.list > .item {
   .header {
     color: $teal;
     @extend %opensans;
   }
 
-  &>i.icon {
+  & > i.icon {
     color: $teal;
   }
 
@@ -36,7 +92,8 @@ body {
   background: $primaryColor;
   color: $violet;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: darken($primaryColor, 10);
     color: $violet;
   }
@@ -47,13 +104,14 @@ body {
   background: $violet;
   color: white;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: darken($violet, 10);
     color: white;
   }
 }
 
-.ui.card>.content>.description,
-.ui.cards>.card>.content>.description {
+.ui.card > .content > .description,
+.ui.cards > .card > .content > .description {
   color: $violet;
 }
