@@ -1,7 +1,6 @@
 @import "semantic-override.scss";
 
 body {
-  padding-top: 1rem;
   @extend %opensans;
   font-size: 16px;
   line-height: 1.7;
@@ -36,8 +35,36 @@ a {
     }
 }
 
+#top-header {
+    .header {
+        &::before {
+            content: none;
+        }
+    }
+}
+
 .ui.button[name="startScanning"] {
-    margin-bottom: .5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+
+    svg {
+        margin-right: .5rem;
+    }
+
+    + .button.inverted.basic.ui {
+        font-size: 1.25rem;
+        box-shadow: none!important;
+        background: rgba(255,255,255, .1)!important;
+        min-height: 52px;
+
+        &:hover,
+        &:focus {
+            color: $yellow!important;
+            background: rgba(255,255,255, .15)!important;
+        }
+    }
 }
 
 #mask {
@@ -54,18 +81,73 @@ a {
   display: none;
 }
 
-#intro {
-  background: $violet-dark;
-  color: white;
-}
-
-#header{
-  padding-top: 1rem !important;
+#header {
   background: $teal;
   color: white;
+
   .ui.header{
     color:inherit;
   }
+}
+
+#intro {
+  position: relative;
+  align-self: flex-start;
+  padding: 2rem;
+  background: $violet-dark;
+  color: white;
+
+  > * {
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .statistics {
+    gap: 1rem;
+  }
+
+  .statistic {
+    min-width: calc(50% - .5rem);
+    max-width: calc(50% - .5rem);
+  }
+
+  .value i {
+    margin-bottom: .75rem;
+  }
+
+  .label {
+    font-weight: 500;
+  }
+
+  @media (min-height: $breakpoint-sm-h) and (min-width: $ui-breakpoint-sm) {
+    position: sticky;
+    top: 0;
+    z-index: $zi-sticky-intro;
+  }
+
+  @media (min-height: $breakpoint-sm-h) and (max-width: $ui-breakpoint-sm) {
+    position: sticky;
+    top: -300px;
+    z-index: $zi-sticky-intro;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    background: inherit;
+    height: 54px;
+    left: 0;
+    right: 0;
+    bottom: -52px;
+    clip-path: polygon(0 0, 100% 0, 100% 12%, 50% 100%, 0% 12%);
+  }
+}
+
+@media (max-width: $ui-breakpoint-sm) { 
+    #faq {
+        padding-top: 80px!important;
+    }
 }
 
 #scan,

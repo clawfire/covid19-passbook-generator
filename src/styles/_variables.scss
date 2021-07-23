@@ -12,3 +12,14 @@ $violet-dark:   #282343;
 
 $primaryColor: $yellow;
 $secondaryColor: $violet;
+
+/**
+ * Breakpoints
+ */
+$ui-breakpoint-sm: 768px;
+$breakpoint-sm-h: 500px;
+
+/**
+ * Z-index, index… :D
+ */
+$zi-sticky-intro: 1000;
