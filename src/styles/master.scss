@@ -144,14 +144,92 @@ a {
   }
 }
 
-@media (max-width: $ui-breakpoint-sm) { 
-    #faq {
-        padding-top: 80px!important;
+#faq {
+
+  .ui.header {
+    line-height: 1.7;
+
+    abbr {
+      font-size: 2.5rem;
     }
+
+    .sub {
+      font-size: 1.5rem;
+      line-height: 1.7;
+    }
+  }
+
+  .list {
+      .item {
+        .header {
+          font-size: 1.5rem;
+        }
+
+        .description {
+          &,
+          li,
+          p {
+            font-size: 1.25rem;
+            line-height: 1.65;
+          }
+
+          p {
+            margin-top: 1.5em;
+            margin-bottom: 1.5em;
+          }
+
+          ol {
+            margin-left: 2.5rem;
+            li {
+              list-style: none;
+
+              &::before {
+                padding: 0 8px 0 6px;
+                margin-left: -2.2rem;
+                color: $violet-dark;
+                font-weight: bold;
+                line-height: 1.55;
+                background: $yellow;
+                clip-path: polygon(0 0, 80% 0, 100% 50%, 80% 100%, 0 100%);
+              } 
+            }
+          }
+        }
+      }
+    }
+
+  @media (min-width: $ui-breakpoint-md) {
+    .content a[href^="https://www.producthunt.com"] {
+      position: fixed;
+      bottom: 32px;
+      right: 48px;
+    }
+
+    &-list {
+      > .item:last-child .content {
+        padding-bottom: 60px;
+      }
+    }
+  }
+
+   @media (max-width: $ui-breakpoint-md) {
+      .content a[href^="https://www.producthunt.com"] {
+        display: block;
+        margin-top: 2rem;
+      }
+   }
+
+  @media (max-width: $ui-breakpoint-sm) { 
+    padding-top: 80px!important;
+
+    .ui.header {
+      text-align: center;
+    }
+  } // end of media query
 }
 
 #scan,
-#preview{
+#preview {
   background-color: $teal;
   color: white;
 }
@@ -198,3 +276,4 @@ a {
     }
   }
 }
+
