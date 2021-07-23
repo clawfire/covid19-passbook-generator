@@ -28,6 +28,41 @@
     </head>
 
     <body class="">
+        <section class="ui menu">
+            <div class="ui container">
+                <div class="header item">&#x1F1EA;&#x1F1FA; COVID Certificate to your digital wallet</div>
+            </div>
+        </section>
+
+        <div id="error-modal" class="ui modal">
+          <i class="close icon"></i>
+          <div class="header">
+              An error has just been detected.
+          </div>
+          <div class="content">
+            <div class="description">
+              <p>You can help us by sending the information about this error to the development team in order to prevent it to happen again.</p>
+              <p>Feel free to check that the error information below does not contain any personal information. You can also add some context information if you wish. Thanks for your help!</p>
+              <div class="ui form">
+                  <div class="field">
+                    <label>Error message</label>
+                    <textarea rows="10" id="error-msg"></textarea>
+                  </div>
+                </div>
+
+              </textarea>
+          </div>
+          </div>
+          <div class="actions">
+            <button class="ui black deny button" id="error-close">
+              Nope
+            </button>
+            <button class="ui positive right labeled icon button" id="error-send">
+              Yep, send the error
+              <i class="checkmark icon"></i>
+            </button>
+          </div>
+      </div>
         <div class="ui stackable grid container">
           <div class="sixteen wide column" id="header">
             <h1 class="ui header">Keep your COVID certificate in your iPhone’s wallet.</h1>
@@ -61,7 +96,7 @@
             </button>
             <input type="file" id="qrfile" style="display: none;" accept="image/*">
           </section>
-          <section id="scan" class="ui hide six wide column">
+          <section id="scan" class="hide six wide column">
               <div class="ui fluid card">
                   <div class="image" id="scannerContainer">
                       <video id="scanner">
@@ -80,7 +115,7 @@
                   </div>
               </div>
           </section>
-          <section id="preview" class="ui hide six wide column">
+          <section id="preview" class="hide six wide column">
               <div class="ui fluid card">
                   <div class="image">
                       <div id="qrcode" class="ui centered image"></div>
@@ -100,6 +135,7 @@
                   Import another picture
               </button>
           </section>
+
           <section id="faq" class="ten wide column">
               <h3 class="ui center aligned header">
                   FAQ
@@ -194,6 +230,7 @@
                   </div>
               </div>
           </section>
+
         </div>
         <script id="card-content-tpl" type="text/x-tmpl-mustache">
             <div class="header">{{name}}</div>

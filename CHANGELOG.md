@@ -1,6 +1,22 @@
 ## [Unrealeased]
 
-##[1.4] - 2021-07-04
+## [1.5.1] - 2021-07-15
+### Changed
+- Check non-latin firstname and not just names
+- Fix a small ui big on desktop
+
+## [1.5] - 2021-07-15
+### Added
+- Editor config for working in harmony all togethers
+- Desktop version of the app !
+- Semi-automatic feedback when having errors
+- Add lating version for names for non-latin alphabet
+
+### Changed
+- feedback page use different technical name to evade some false positive detection as ads by ad blockers like Hush
+- Base font size is bigger
+
+## [1.4] - 2021-07-04
 ### Added
 - Picture upload feature to select a screenshot of the qrcode
 

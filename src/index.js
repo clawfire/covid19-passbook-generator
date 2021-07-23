@@ -9,10 +9,24 @@ import debounce from 'lodash.debounce';
 import {
   saveAs
 } from 'file-saver';
+
 const dcc = require('@pathcheck/dcc-sdk');
 const iso = require('iso-3166-1');
 const JSZIP = require("jszip");
 
+window.onerror = function (msg, url, lineNo, columnNo, error) {
+  const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
+  const extra = `File: ${url}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\n`;
+  manageError(msg, extra)
+  return false;
+}
+
+function manageError(msg, extra = '') {
+  $('#error-modal').modal('show');
+  const message = `What happened?\n\nError message: ${msg}\nPage: ${window.location.hash}\nUser-Agent: ${navigator.userAgent}\n${extra}`;
+  const container = $('#error-msg');
+  container.val(container.val() + message);
+}
 
 function shaOne(str) {
   const buffer = new TextEncoder("utf-8").encode(str);
@@ -170,6 +184,7 @@ function adaptPreview() {
 
 
 window.addEventListener('load', function() {
+
   navigationHandler((oldRoute, newRoute) => {
     if (newRoute == 'scan') {
       initScanner();
@@ -190,6 +205,10 @@ window.addEventListener('load', function() {
     navigateTo('scan');
   })
 
+  // $('button[name="break"]').on('click', () => {
+  //   throw "error";
+  // })
+
   $('button[name="scanImage"]').on('click', () => {
     $('#qrfile').trigger("click");
   });
@@ -198,6 +217,28 @@ window.addEventListener('load', function() {
     if (passbookBlob !== undefined) {
       saveAs(passbookBlob, "certificate.pkpass");
     }
+  });
+
+  $('#error-close').on('click', () => {
+      $('#error-msg').val('');
+      $('#error-modal').addClass('hidden');
+  });
+
+  $('#error-send').on('click', () => {
+      let signature = fetch('/.netlify/functions/create-issue', {
+          method: "POST",
+          body: $('#error-msg').val()
+      }).then((response) => {
+          if (response.status == 200) {
+              $('#error-msg').val('');
+          } else {
+              window.alert("Error while sending your feedback. Please refresh & try again");
+          }
+      }).catch((error) => {
+          console.error("Error while calling λ", error);
+          window.alert("Error while sending your feedback. Please refresh & try again");
+      })
+      $('#error-modal').addClass('hidden');
   });
 
   $(window).on('resize', debounce(function() {
@@ -311,6 +352,18 @@ window.addEventListener('load', function() {
       template.serialNumber = certificateContent.ci;
       // Surname(s) and Forename(s)
       newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.gn + " " + certificate.nam.fn.toUpperCase());
+      if (process.env.NODE_ENV === 'development') {
+        console.group('💬 Handling non-latin alphabets');
+        if(certificate.nam.gn.toUpperCase() == certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() == certificate.nam.fnt.replace("<", ' ')){
+          console.log("✅ Pass is using latin char, no need to change anything");
+        }else{
+          console.warning("❌ non-latin char detected, will add international variation");
+        }
+        console.groupEnd();
+      }
+      if(certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replace("<", ' ')){
+        newPassbookItem(template,"primaryFields", "intl-surnames", "Surnames & Forenames", certificate.nam.gnt.replace("<", ' ') + " " + certificate.nam.fnt.replace("<", ' '));
+      }
       // Type of certificate
       newPassbookItem(template, "auxiliaryFields", "certificate-type", "Certificate Type", certificateType);
       // Date of birth
@@ -505,3 +558,4 @@ window.addEventListener('load', function() {
     })
   }
 }, false)
+
