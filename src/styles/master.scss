@@ -36,13 +36,33 @@ a {
 }
 
 #top-header {
+    border-radius: 0;
+    padding: 24px 16px;
+    min-height: none;
+
+    .container {
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        flex-shrink: 0;
+        margin-right: 16px;
+      }
+    }
+
     .header {
+        margin-top: 0;
+
         &::before {
             content: none;
         }
 
         &.item {
           border-left: 0;
+        }
+
+        @media (max-width: $ui-breakpoint-sm) {
+          font-size: 1.5rem;
         }
     }
 }
@@ -140,7 +160,7 @@ ul.ui.list li,
     margin-bottom: 1rem;
 }
 
-#header {
+#top-header {
   background: $teal;
   color: white;
 
