@@ -34,32 +34,6 @@
             </div>
         </header>
 
-        <div id="error-modal" class="ui modal">
-          <i class="close icon" role="presentation"></i>
-          <div class="header">
-              An error has just been detected.
-          </div>
-          <div class="content">
-            <div class="description">
-              <p>You can help us by sending the information about this error to the development team in order to prevent it to happen again.</p>
-              <p>Feel free to check that the error information below does not contain any personal information. You can also add some context information if you wish. Thanks for your help!</p>
-              <div class="ui form">
-                <div class="field">
-                  <label>Error message</label>
-                  <textarea rows="10" id="error-msg"></textarea>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="actions">
-            <button type="button" class="ui black deny button" id="error-close">Nope</button>
-            <button type="button" class="ui positive right labeled icon button" id="error-send">
-              Yep, send the error
-              <i class="checkmark icon" role="presentation"></i>
-            </button>
-          </div>
-        </div>
-
         <div class="ui stackable grid container">
           <div class="sixteen wide column" id="header">
             <h1 class="ui aligned center header">Keep your COVID certificate in your iPhone’s wallet.</h1>
@@ -376,6 +350,7 @@
               </ul>
           </section>
         </div>
+
         <div class="ui basic modal" id="modal-offline">
           <div class="ui icon header">
             <i class="toggle off icon"></i>
@@ -391,6 +366,7 @@
             </div>
           </div>
         </div>
+
         <div class="ui basic modal" id="modal-unsupported-browser-facebook">
           <div class="ui icon header">
             <i class="facebook icon"></i>
@@ -406,6 +382,7 @@
             </div>
           </div>
         </div>
+
         <div class="ui basic modal" id="modal-unsupported-browser-safari">
           <div class="ui icon header">
             <i class="apple icon"></i>
@@ -421,6 +398,33 @@
             </div>
           </div>
         </div>
+
+        <div id="error-modal" class="ui modal">
+          <i class="close icon" role="presentation"></i>
+          <div class="header">
+              An error has just been detected.
+          </div>
+          <div class="content">
+            <div class="description">
+              <p>You can help us by sending the information about this error to the development team in order to prevent it to happen again.</p>
+              <p>Feel free to check that the error information below does not contain any personal information. You can also add some context information if you wish. Thanks for your help!</p>
+              <div class="ui form">
+                <div class="field">
+                  <label>Error message</label>
+                  <textarea rows="10" id="error-msg"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="button" class="ui black deny button" id="error-close">Nope</button>
+            <button type="button" class="ui positive right labeled icon button" id="error-send">
+              Yep, send the error
+              <i class="checkmark icon" role="presentation"></i>
+            </button>
+          </div>
+        </div>
+
         <script id="card-content-tpl" type="text/x-tmpl-mustache">
             <div class="header">{{name}}</div>
             <div class="ui list">
