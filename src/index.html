@@ -52,19 +52,19 @@
           <section id="intro" class="six wide floated column">
             <div class="ui two small statistics">
               <div class="statistic">
-                <div class="value"><i class="shield alternate icon"></i></div>
+                <div class="value"><i class="shield alternate icon" aria-hidden="true"></i></div>
                 <div class="label">generated on your phone</div>
               </div>
               <div class="statistic">
-                <div class="value"><i class="times circle outline icon"></i></div>
+                <div class="value"><i class="times circle outline icon" aria-hidden="true"></i></div>
                 <div class="label">no personnal data collection</div>
               </div>
               <div class="statistic">
-                <div class="value"><i class="times circle outline icon"></i></div>
+                <div class="value"><i class="times circle outline icon" aria-hidden="true"></i></div>
                 <div class="label">no analytics or data sharing</div>
               </div>
               <div class="statistic">
-                <div class="value"><i class="search icon"></i></div>
+                <div class="value"><i class="search icon" aria-hidden="true"></i></div>
                 <div class="label">open source & transparent</div>
               </div>
             </div>
@@ -137,7 +137,7 @@
                 Start scanning
             </button>
             <button type="button" class="ui fluid basic inverted icon button big" name="scanImage">
-                <i class="file image icon"></i>
+                <i class="file image icon" aria-hidden="true"></i>
                 Import picture
             </button>
             <input type="file" id="qrfile" style="display: none;" accept="image/*">
@@ -152,11 +152,11 @@
                   </div>
                   <div class="content">
                       <div class="description">
-                          <i class="qrcode icon"></i> Aim at the QR Code of your certificate to capture.
+                          <i class="qrcode icon" aria-hidden="true"></i> Aim at the QR Code of your certificate to capture.
                       </div>
                   </div>
                   <div class="ui bottom attached disabled button" id="flashlight_btn" >
-                      <i class="lightbulb icon"></i>
+                      <i class="lightbulb icon" aria-hidden="true"></i>
                       <span>Flashlight unavailable</span>
                   </div>
               </div>
@@ -170,7 +170,7 @@
                   </div>
                   <div class="extra content" id="cardExtraContent">
                   </div>
-                  <button type="button" id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon"></i>Save in your wallet</button>
+                  <button type="button" id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon" aria-hidden="true"></i>Save in your wallet</button>
               </div>
               <button type="button" class="ui fluid violet icon button" name="startScanning">
                   <svg width="24" height="24" viewBox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -241,7 +241,7 @@
                   Scan another certificate
               </button>
               <button type="button" class="ui fluid basic inverted icon button" name="scanImage">
-                  <i class="file image icon"></i>
+                  <i class="file image icon" aria-hidden="true"></i>
                   Import another picture
               </button>
           </section>
@@ -364,7 +364,7 @@
 
         <div class="ui basic modal" id="modal-offline">
           <div class="ui icon header">
-            <i class="toggle off icon"></i>
+            <i class="toggle off icon" aria-hidden="true"></i>
             Whoops! You’re offline
            </div>
           <div class="content">
@@ -372,7 +372,7 @@
           </div>
           <div class="actions">
             <div class="ui blue basic cancel inverted button">
-              <i class="checkmark icon"></i>
+              <i class="checkmark icon" aria-hidden="true"></i>
               I understand, close this message.
             </div>
           </div>
@@ -380,7 +380,7 @@
 
         <div class="ui basic modal" id="modal-unsupported-browser-facebook">
           <div class="ui icon header">
-            <i class="facebook icon"></i>
+            <i class="facebook icon" aria-hidden="true"></i>
             Your browser doesn’t meet the requirements for this app to work.
           </div>
           <div class="content">
@@ -388,7 +388,7 @@
           </div>
           <div class="actions">
             <div class="ui blue basic cancel inverted button">
-              <i class="checkmark icon"></i>
+              <i class="checkmark icon" aria-hidden="true"></i>
               I understand, close this message.
             </div>
           </div>
@@ -396,7 +396,7 @@
 
         <div class="ui basic modal" id="modal-unsupported-browser-safari">
           <div class="ui icon header">
-            <i class="apple icon"></i>
+            <i class="apple icon" aria-hidden="true"></i>
             Your browser doesn’t meet the requirements for this app to work.
           </div>
           <div class="content">
@@ -404,14 +404,14 @@
           </div>
           <div class="actions">
             <div class="ui blue basic cancel inverted button">
-              <i class="checkmark icon"></i>
+              <i class="checkmark icon" aria-hidden="true"></i>
               I understand, close this message
             </div>
           </div>
         </div>
 
         <div id="error-modal" class="ui modal">
-          <i class="close icon"></i>
+          <i class="close icon" aria-hidden="true"></i>
           <div class="header">
               An error has just been detected.
           </div>
@@ -431,7 +431,7 @@
             <button type="button" class="ui black deny button" id="error-close">Nope</button>
             <button type="button" class="ui positive right labeled icon button" id="error-send">
               Yep, send the error
-              <i class="checkmark icon"></i>
+              <i class="checkmark icon" aria-hidden="true"></i>
             </button>
           </div>
         </div>
@@ -450,10 +450,10 @@
             </div>
         </script>
         <script id="card-extra-content-tpl" type="text/x-tmpl-mustache">
-            <i class="bookmark icon"></i>
+            <i class="bookmark icon" aria-hidden="true"></i>
             {{#validuntil}}
             <span class="right floated">
-                <i class="calendar icon"></i>Valid until {{validuntil}}
+                <i class="calendar icon" aria-hidden="true"></i>Valid until {{validuntil}}
             </span>
             {{/validuntil}}
             <span>{{type}}</span>
