@@ -30,7 +30,7 @@
     <body class="">
         <header id="top-header" class="ui menu" role="banner">
             <div class="ui container">
-              <svg width="45" height="48" viewBox="0 0 470 504" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="45" height="48" viewBox="0 0 470 504" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M334.667 494H124C115.2 494 108 486.8 108 478V26C108 17.2 115.2 9.99999 124 9.99999H334.667C343.467 9.99999 350.667 17.2 350.667 26V478C350.667 486.8 343.467 494 334.667 494Z" fill="#363155"/>
                 <path d="M325.58 486.63H133.404C119.315 486.63 107.74 474.694 107.74 460.165V431.108H350.714V460.165C351.226 475.201 339.651 486.63 325.582 486.63H325.58ZM351.224 415.545H108.251V82.5105H351.224V415.545ZM133.402 16.6345H325.559C339.648 16.6345 351.222 28.5692 351.222 43.0985V66.9691L108.248 66.9492V42.5718C108.248 28.5705 119.822 16.6345 133.4 16.6345H133.402ZM325.579 0.54247H133.402C110.766 0.54247 92.1564 19.7345 92.1564 43.0785V460.676C92.1564 484.018 110.766 503.209 133.402 503.209H325.559C348.195 503.209 366.804 484.018 366.804 460.676L366.823 42.5692C366.823 19.7532 348.215 0.54247 325.579 0.54247V0.54247Z" fill="white"/>
                 <path d="M245.49 458.55C245.49 480.762 213.49 480.762 213.49 458.55C213.49 436.318 245.49 436.318 245.49 458.55Z" fill="white"/>
@@ -52,24 +52,24 @@
           <section id="intro" class="six wide floated column">
             <div class="ui two small statistics">
               <div class="statistic">
-                <div class="value"><i class="shield alternate icon" role="presentation"></i></div>
+                <div class="value"><i class="shield alternate icon"></i></div>
                 <div class="label">generated on your phone</div>
               </div>
               <div class="statistic">
-                <div class="value"><i class="times circle outline icon" role="presentation"></i></div>
+                <div class="value"><i class="times circle outline icon"></i></div>
                 <div class="label">no personnal data collection</div>
               </div>
               <div class="statistic">
-                <div class="value"><i class="times circle outline icon" role="presentation"></i></div>
+                <div class="value"><i class="times circle outline icon"></i></div>
                 <div class="label">no analytics or data sharing</div>
               </div>
               <div class="statistic">
-                <div class="value"><i class="search icon" role="presentation"></i></div>
+                <div class="value"><i class="search icon"></i></div>
                 <div class="label">open source & transparent</div>
               </div>
             </div>
             <button type="button" class="ui fluid primary icon button big" name="startScanning">
-                <svg width="24" height="24" viewBox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+                <svg width="24" height="24" viewBox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M2.01072e-06 1.75643e-06H27V8H2.01072e-06V1.75643e-06Z" fill="currentColor"/>
                   <path d="M8 1.75643e-06L8 27H6.03983e-07L2.01072e-06 1.75643e-06H8Z" fill="currentColor"/>
                   <path d="M111 2.58695e-06V27H103V2.23726e-06L111 2.58695e-06Z" fill="currentColor"/>
@@ -137,7 +137,7 @@
                 Start scanning
             </button>
             <button type="button" class="ui fluid basic inverted icon button big" name="scanImage">
-                <i class="file image icon" role="presentation"></i>
+                <i class="file image icon"></i>
                 Import picture
             </button>
             <input type="file" id="qrfile" style="display: none;" accept="image/*">
@@ -152,11 +152,11 @@
                   </div>
                   <div class="content">
                       <div class="description">
-                          <i class="qrcode icon" role="presentation"></i> Aim at the QR Code of your certificate to capture.
+                          <i class="qrcode icon"></i> Aim at the QR Code of your certificate to capture.
                       </div>
                   </div>
                   <div class="ui bottom attached disabled button" id="flashlight_btn" >
-                      <i class="lightbulb icon" role="presentation"></i>
+                      <i class="lightbulb icon"></i>
                       <span>Flashlight unavailable</span>
                   </div>
               </div>
@@ -170,10 +170,10 @@
                   </div>
                   <div class="extra content" id="cardExtraContent">
                   </div>
-                  <button type="button" id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon" role="presentation"></i>Save in your wallet</button>
+                  <button type="button" id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon"></i>Save in your wallet</button>
               </div>
               <button type="button" class="ui fluid violet icon button" name="startScanning">
-                  <svg width="24" height="24" viewBox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg" role="presentation">
+                  <svg width="24" height="24" viewBox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path d="M2.01072e-06 1.75643e-06H27V8H2.01072e-06V1.75643e-06Z" fill="currentColor"/>
                   <path d="M8 1.75643e-06L8 27H6.03983e-07L2.01072e-06 1.75643e-06H8Z" fill="currentColor"/>
                   <path d="M111 2.58695e-06V27H103V2.23726e-06L111 2.58695e-06Z" fill="currentColor"/>
@@ -241,7 +241,7 @@
                   Scan another certificate
               </button>
               <button type="button" class="ui fluid basic inverted icon button" name="scanImage">
-                  <i class="file image icon" role="presentation"></i>
+                  <i class="file image icon"></i>
                   Import another picture
               </button>
           </section>
@@ -411,7 +411,7 @@
         </div>
 
         <div id="error-modal" class="ui modal">
-          <i class="close icon" role="presentation"></i>
+          <i class="close icon"></i>
           <div class="header">
               An error has just been detected.
           </div>
@@ -431,7 +431,7 @@
             <button type="button" class="ui black deny button" id="error-close">Nope</button>
             <button type="button" class="ui positive right labeled icon button" id="error-send">
               Yep, send the error
-              <i class="checkmark icon" role="presentation"></i>
+              <i class="checkmark icon"></i>
             </button>
           </div>
         </div>
@@ -450,10 +450,10 @@
             </div>
         </script>
         <script id="card-extra-content-tpl" type="text/x-tmpl-mustache">
-            <i class="bookmark icon" role="presentation"></i>
+            <i class="bookmark icon"></i>
             {{#validuntil}}
             <span class="right floated">
-                <i class="calendar icon" role="presentation"></i>Valid until {{validuntil}}
+                <i class="calendar icon"></i>Valid until {{validuntil}}
             </span>
             {{/validuntil}}
             <span>{{type}}</span>
