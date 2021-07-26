@@ -21,7 +21,8 @@
 [dev]
 port = 3000 # Port that the dev server will be listening on
 publish = "dist" # Folder with the static content for _redirect file
-command = "yarn start" # Command to start your dev server
+command = "yarn start-netlify-dev" # Command to start your dev server
 targetPort = 1234
+NODE_ENV = "development"
 
 ## more info on configuring this file: https://www.netlify.com/docs/netlify-toml-reference/
