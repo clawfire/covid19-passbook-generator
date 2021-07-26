@@ -25,6 +25,7 @@
     },
     "scripts": {
         "start": "npx parcel serve src/index.html --https && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js",
+        "start-netlify-dev": "npx parcel serve src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js",
         "deploy-preview": "npx parcel build src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js",
         "build": "npx parcel build src/index.html && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js"
     },
