@@ -20,8 +20,8 @@ jobs:
         stale-pr-message: 'This PR seems to ba old. The main code of the app may already have changed so much. Please check it again. If no activy in the next 15 days, it will be automatically closed'
         stale-issue-label: 'no-issue-activity'
         stale-pr-label: 'no-pr-activity'
-        days-before-issue-stale: 20
-        days-before-issue-close: 45
+        days-before-issue-stale: 10
+        days-before-issue-close: 20
         days-before-pr-stale: 15
         days-before-pr-close: 30
         close-issue-message: "Sorry this issue cannot be solved 😔 . We may not have enough workforce to handle it. Please reopen it if you want to add something new."
