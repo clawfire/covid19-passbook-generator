@@ -256,7 +256,7 @@
               <ul id="faq-list" aria-labelledby="faq-title" class="ui relaxed list" itemscope itemtype="https://schema.org/FAQPage">
                   <li class="item">
                       <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                          <div class="header" itemprop="name">I can't scan my certificate.</div>
+                          <h3 class="header" itemprop="name">I can't scan my certificate.</h3>
                           <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                               <ol class="ui ordered list" itemprop="text">
                                   <li class="item">Have a good light source and align your QR code with the scan zone edge. The size of the visual aid is the size of the code we need. Your code must be flat (wrinkled paper won't work well).</li>
@@ -270,13 +270,13 @@
                   </li>
                   <li class="item">
                       <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                          <div class="header" itemprop="name">What's this project?</div>
+                          <h3 class="header" itemprop="name">What's this project?</h3>
                           <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">This web application scans your EU Digital COVID certificate (vaccine, test, or healing) and generates a passbook from it. You can then import it into your iPhone's wallet, or if you're an Android user, import it into an app that supports it.</div>
                       </div>
                   </li>
                   <li class="item">
                       <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                          <div class="header" itemprop="name">Can I save the certificate on Android?</div>
+                          <h3 class="header" itemprop="name">Can I save the certificate on Android?</h3>
                           <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                               <p itemprop="text">Yes! You can save the .pkpass file and open it with an application that supports this format, for example:</p>
                               <ul itemprop="text">
@@ -290,7 +290,7 @@
                   </li>
                   <li class="item">
                       <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                          <div class="header" itemprop="name">How can I get my EU DCC (certificate)?</div>
+                          <h3 class="header" itemprop="name">How can I get my EU DCC (certificate)?</h3>
                           <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                               <p itemprop="text">In &#x1F1EB;&#x1F1F7; France, you can download it from <a href="https://attestation-vaccin.ameli.fr/">Ameli's dedicated website</a></p>
                               <p itemprop="text">In &#x1F1F1;&#x1F1FA; Luxembourg, you can download it from <a href="http://guichet.lu/certificat-vaccination">myGuichet</a></p>
@@ -303,25 +303,25 @@
                   </li>
                   <li class="item">
                       <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                          <div class="header" itemprop="name">How does it work?</div>
+                          <h3 class="header" itemprop="name">How does it work?</h3>
                           <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">When you scan the code, we read the data and create the passbook (the file needed to have a card in your wallet). We send a checksum for digital signature to our server, without sending your data. Your phone generates the final file and lets you save it.</div>
                       </div>
                   </li>
                   <li class="item">
                       <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                          <div class="header" itemprop="name">Is it secure?</div>
+                          <h3 class="header" itemprop="name">Is it secure?</h3>
                           <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">We put a lot of effort into making it as secure as we could. Your personal data never leaves your phone. Apple requires a digital signature to open a pass. To generate this, the app only sends a checksum of your data to our server, and it's impossible to guess the original content. The last step happens on your phone: you preview your information before saving the pass. We don't track anyone, we don't collect any personal information, and we don't use cookies.</div>
                       </div>
                   </li>
                   <li class="item">
                       <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                          <div class="header" itemprop="name">Can I see the code?</div>
+                          <h3 class="header" itemprop="name">Can I see the code?</h3>
                           <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">Of course. You can read the source code and dig more into how it works on <a href="https://github.com/clawfire/covid19-passbook-generator">the Github page of the project</a>. You can even contribute if you want!</div>
                       </div>
                   </li>
                   <li class="item">
                       <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                          <div class="header" itemprop="name">How can I contact the creator(s)?</div>
+                          <h3 class="header" itemprop="name">How can I contact the creators?</h3>
                           <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                             <p>
                               This app is an original idea and work of <a href="https://thibaultmilan.com">Thibault Milan</a> (<a href="https://twitter.com/thibaultmilan">@thibaultmilan</a> on Twitter), with the help from <a href="https://www.linkedin.com/in/avagner/">Alain Vagner</a>, <a href="https://twitter.com/grischard">Guillaume Rischard</a> and the advices from <a href="https://twitter.com/alrouen">@alrouen</a>.
@@ -340,13 +340,13 @@
                   </li>
                   <li class="item">
                       <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                          <div class="header" itemprop="name">How can I help?</div>
+                          <h3 class="header" itemprop="name">How can I help?</h3>
                           <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">If you like the app, don't hesitate to share it with your friends and family. Then, if you want to help more, <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen">take a look at the issues</a>. It's not just about tech; there's also copywriting tasks, design, etc. You can start <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22">with those issues</a> if you want to get familiar with the project.
                       </div>
                   </li>
                   <li class="item">
                       <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                          <div class="header" itemprop="name">What are your running fees?</div>
+                          <h3 class="header" itemprop="name">What are your running fees?</h3>
                           <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">So far, this site is <a href="https://netlify.com/">powered by Netlify</a> for free (many MANY thanks to them for their support to this project) and AWS Lambda costs me under €1/month. You can find a <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSUDZX5ZdohZhLWxb1TyTtpamoRtkBg6z-wikv1b2OG1tWeNXwhNHX-a_wzxV5r4qoC9k8UauL3D-ay/pubhtml">transparency report</a> on the cost and donations (uses Google Sheets).</div>
                       </div>
                       <div class="content">
@@ -412,9 +412,9 @@
 
         <div id="error-modal" class="ui modal">
           <i class="close icon" aria-hidden="true"></i>
-          <div class="header">
+          <h3 class="header">
               An error has just been detected.
-          </div>
+          </h3>
           <div class="content">
             <div class="description">
               <p>You can help us by sending the information about this error to the development team in order to prevent it to happen again.</p>
