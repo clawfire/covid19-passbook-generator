@@ -88,7 +88,8 @@ a {
 
     + .button.inverted.basic.ui {
         box-shadow: none!important;
-        background: rgba(255,255,255, .1)!important;
+        background: rgba(255,255,255, .9)!important;
+        color: #282343 !important;
 
         &:hover,
         &:focus {
