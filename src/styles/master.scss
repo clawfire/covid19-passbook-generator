@@ -92,7 +92,6 @@ a {
     margin-bottom: 1rem;
 
     + .button.inverted.basic.ui {
-        box-shadow: none!important;
         background: rgba(255,255,255, .9)!important;
         color: #282343 !important;
 
@@ -102,6 +101,10 @@ a {
             background: rgba(255,255,255, .15)!important;
         }
     }
+}
+
+.ui.button:focus, .ui.button:hover, .ui.button[name="startScanning"] + .button.inverted.basic.ui:focus, .ui.button[name="startScanning"] + .button.inverted.basic.ui:hover {
+  box-shadow: 0 0 0 .2rem white;
 }
 
 .ui.grid > .column.hide{
