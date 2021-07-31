@@ -397,11 +397,11 @@ window.addEventListener('load', function() {
         newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.fn.toUpperCase() + " " + certificate.nam.gn);
       }
       // Type of certificate
-      newPassbookItem(template, "auxiliaryFields", "certificate-type", "Certificate Type", certificateType);
+      newPassbookItem(template, "secondaryFields", "certificate-type", "Certificate Type", certificateType);
       // Date of birth
       newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", certificate.dob + "T00:00Z", "PKDateStyleShort");
       // Unique Certificate Identifier
-      newPassbookItem(template, "secondaryFields", "uci", "Unique Certificate Identifier", certificateContent.ci);
+      newPassbookItem(template, "auxiliaryFields", "uci", "Unique Certificate Identifier", certificateContent.ci);
 
       if (certificate.v) {
         // COVID-19 Vaccine Certificate
