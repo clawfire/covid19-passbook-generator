@@ -12,6 +12,22 @@ img.producthunt {
   height: 54px;
 }
 
+.top-container {
+  position: relative;
+}
+
+a.skip-link {
+  position: absolute;
+  left: -7000px;
+  z-index: 1000;
+}
+
+a.skip-link:focus {
+  position:absolute;
+  top: 0em;
+  left: 0em;
+}
+
 p,
 li {
     line-height: 1.6;
