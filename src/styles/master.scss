@@ -101,7 +101,7 @@ a {
   }
 }
 
-.ui.button[name="startScanning"] {
+.ui.button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -114,12 +114,12 @@ a {
         &:hover,
         &:focus {
             color: $yellow!important;
-            background: rgba(255,255,255, .15)!important;
+            background: #282343!important;
         }
     }
 }
 
-.ui.button:focus, .ui.button:hover, .ui.button[name="startScanning"] + .button.inverted.basic.ui:focus, .ui.button[name="startScanning"] + .button.inverted.basic.ui:hover {
+.ui.button:focus, .ui.button:hover, .ui.button + .button.inverted.basic.ui:focus, .ui.button + .button.inverted.basic.ui:hover {
   box-shadow: 0 0 0 .2rem white;
 }
 
