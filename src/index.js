@@ -15,6 +15,7 @@ var parser = require('ua-parser-js');
 const dcc = require('@pathcheck/dcc-sdk');
 const iso = require('iso-3166-1');
 const JSZIP = require("jszip");
+let successfulGeneration = false;
 
 window.onerror = function (msg, url, lineNo, columnNo, error) {
   const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
@@ -57,13 +58,18 @@ let navigationHandlerInit = false;
 let currentRoute = getCurrentRoute();
 
 function navigationHandler(callback) {
-  const routes = Array.from($('section.column')).map(e => e.id);
+  const routes = ['intro', 'scan', 'preview'];
+  const titles = ['Keep your COVID certificate in your iPhone’s wallet.', 'Scan your QR code.', 'Your certificate is ready!'];
+
 
   function changeState(oldRoute, newRoute, callback) {
     if ((oldRoute != newRoute) && (routes.includes(newRoute))) {
-      $('#' + oldRoute).fadeTo('fast', 0).css('visibility', 'hidden').css('display', 'none');
-      $('#' + newRoute).fadeTo('fast', 1).css('visibility', 'visible').css('display', 'block');
+      $('#' + oldRoute).css('visibility', 'hidden').css('display', 'none');
+      $('#' + newRoute).css('visibility', 'visible').css('display', 'block');
+      document.title = titles[routes.indexOf(newRoute)] + ' - Covid19-Passbook';
+      document.getElementById('mainTitle').innerText = titles[routes.indexOf(newRoute)];
       callback(oldRoute, newRoute);
+      document.getElementById('mainTitle').focus();
       currentRoute = newRoute;
     }
   }
@@ -221,6 +227,16 @@ window.addEventListener('load', function() {
     if (oldRoute == 'scan') {
       scanner.destroy();
     }
+
+    if (newRoute == 'preview' && successfulGeneration) {
+      document.getElementById('feedbackMsg').innerText = 'Your pass has been successfully generated!';
+    }
+
+    if (oldRoute == 'preview') {
+      successfulGeneration = false;
+      document.getElementById('feedbackMsg').innerText = '';
+    }
+
   });
 
   // Message closing function
@@ -579,6 +595,7 @@ window.addEventListener('load', function() {
               "type": certificateType,
               "validuntil": certificate.r ? certificate.r[0].du : null
             })
+            successfulGeneration = true;
             navigateTo('preview');
           })
         })

@@ -218,6 +218,14 @@ ul.ui.list li,
   }
 }
 
+[role="status"]:empty {
+  display: none;
+}
+
+.ui.green.message[role="status"] {
+  color: #0C8220;
+}
+
 /**
  * Pointy end of block.
  */
