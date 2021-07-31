@@ -564,6 +564,7 @@ window.addEventListener('load', function() {
               console.group('\u{1F4C7} Pass preview');
               console.table({
                 "name": certificate.nam.gn + " " + certificate.nam.fn.toUpperCase(),
+                "name intl": certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '),
                 "dob": certificate.dob,
                 "uci": certificateContent.ci,
                 "type": certificateType,
@@ -571,7 +572,8 @@ window.addEventListener('load', function() {
               })
             }
             renderTpl("card-content-tpl", "cardContent", {
-              "name": certificate.nam.gn + " " + certificate.nam.fn.toUpperCase(),
+              "name": certificate.nam.fn + " " + certificate.nam.gn.toUpperCase(),
+              "name-intl": certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '),
               "dob": certificate.dob,
               "uci": certificateContent.ci
             });
