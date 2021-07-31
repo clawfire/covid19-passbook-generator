@@ -64,8 +64,11 @@ function navigationHandler(callback) {
 
   function changeState(oldRoute, newRoute, callback) {
     if ((oldRoute != newRoute) && (routes.includes(newRoute))) {
-      $('#' + oldRoute).css('visibility', 'hidden').css('display', 'none');
-      $('#' + newRoute).css('visibility', 'visible').css('display', 'block');
+      console.log('changeState', oldRoute, newRoute);
+      document.getElementById(oldRoute).style.visibility = 'hidden';
+      document.getElementById(oldRoute).style.display = 'none';
+      document.getElementById(newRoute).style.visibility = 'visible';
+      document.getElementById(newRoute).style.display = 'block';
       document.title = titles[routes.indexOf(newRoute)] + ' - Covid19-Passbook';
       document.getElementById('mainTitle').innerText = titles[routes.indexOf(newRoute)];
       callback(oldRoute, newRoute);

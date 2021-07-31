@@ -120,7 +120,7 @@ a {
 }
 
 .ui.button:focus, .ui.button:hover, .ui.button + .button.inverted.basic.ui:focus, .ui.button + .button.inverted.basic.ui:hover {
-  box-shadow: 0 0 0 .2rem white;
+  box-shadow: 0 0 0 .2rem white !important;
 }
 
 .ui.grid > .column.hide{
