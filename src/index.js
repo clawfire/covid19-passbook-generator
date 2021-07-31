@@ -377,7 +377,11 @@ window.addEventListener('load', function() {
       // Filling Passbook Template from here
       // -----------------------------------
       // Use the UCI for passboook serial number
-      template.serialNumber = certificateContent.ci;
+      if (certificateContent.ci.startsWith('URN:UVCI:')){
+        template.serialNumber = certificateContent.ci.substring(8)
+      }else{
+        template.serialNumber = certificateContent.ci
+      }
       // Surname(s) and Forename(s)
       const isNonLatin = (certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() != certificate.nam.fnt.replace("<", ' '));
 
@@ -579,7 +583,7 @@ window.addEventListener('load', function() {
               "name": certificate.nam.fn + " " + certificate.nam.gn.toUpperCase(),
               "name-intl": certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '),
               "dob": certificate.dob,
-              "uci": certificateContent.ci
+              "uci": certificateContent.ci.startsWith('URN:UVCI:') ? certificateContent.ci.substring(9) : certificateContent.ci
             });
             renderTpl("card-extra-content-tpl", "cardExtraContent", {
               "type": certificateType,
