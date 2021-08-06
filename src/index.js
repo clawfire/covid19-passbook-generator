@@ -12,10 +12,6 @@ import {
 
 var parser = require('ua-parser-js');
 
-const dcc = require('@pathcheck/dcc-sdk');
-const iso = require('iso-3166-1');
-const JSZIP = require("jszip");
-
 window.onerror = function (msg, url, lineNo, columnNo, error) {
   const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
   const extra = `File: ${url}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\n`;
@@ -200,13 +196,16 @@ window.addEventListener('load', function() {
     console.log("Browser: %s",$.ua.browser.name);
     console.log("Device type: %s",$.ua.device.type);
   }
+
   if($.ua.device.type == 'mobile'){
     if (["Facebook","Instagram"].includes($.ua.browser.name)){
       $('#modal-unsupported-browser-facebook').modal("show");
     } else if ($.ua.os.name == "iOS" && $.ua.browser.name != "Mobile Safari"){
       $('#modal-unsupported-browser-safari').modal("show");
+    } else if ($.ua.os.name == "iOS" && $.ua.browser.name == "Mobile Safari" && $.ua.browser.version < 14) {
+      $('#modal-unsupported-old-browser').modal({ "closable": false}).modal('show');
     } else {
-    if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
+      if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
     }
   } else {
     if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
@@ -342,8 +341,12 @@ window.addEventListener('load', function() {
       scanner.destroy();
     }
 
-    // Add it as a QRcode in the template
     const template = JSON.parse(JSON.stringify(sourceTpl));
+    const dcc = require('@pathcheck/dcc-sdk');
+    const iso = require('iso-3166-1');
+
+
+    // Add it as a QRcode in the template
     template.barcode.message = data;
 
     dcc.debug(data).then(obj => {
@@ -508,6 +511,7 @@ window.addEventListener('load', function() {
       shaOne(passJson).then((sha) => {
         manifest['pass.json'] = hex(sha);
         // Create the ZIP instance
+        const JSZIP = require("jszip");
         let passbook = new JSZIP();
         // Add files into it
         passbook.file("pass.json", passJson);
