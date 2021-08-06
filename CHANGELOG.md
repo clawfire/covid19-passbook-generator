@@ -1,5 +1,23 @@
 ## [Unrealeased]
 
+## [1.7] - 2021-08-06
+### Added
+- Add CovidShield vaccine to the list of accepted vaccine
+- Netlify dev pipleline is working
+- Add IT way of getting EUDCC
+- Add DK way of getting EUDCC
+- Add BG way of getting EUDCC
+- Render latin and non-latin name on the preview
+- Filter out the URN:UVCI: for countried using it in the Unique Certificate Number
+- Version number and build date appears on the bottom of the page now
+- Add "old browser" modal for ios < 14 (lack of support for bigInt and no polyfill available)
+
+### Changed
+- Card is now displaying latin name on the front and non-latin name if applicable on the back
+- Move Unique Certificate Number as an aux. field on the front of the pass
+- Certificate type (vaccine, recovery, test) is now in front of the pass
+- Sort alphabeticaly the FAQ section with all the countries method to get EUDCC
+
 ## [1.6.1] - 2021-07-22
 ### Removed
 - test that breaks the app :D 
