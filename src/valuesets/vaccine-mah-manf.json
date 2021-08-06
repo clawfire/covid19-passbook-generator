@@ -1,6 +1,6 @@
 {
   "valueSetId": "vaccines-covid-19-auth-holders",
-  "valueSetDate": "2021-04-27",
+  "valueSetDate": "2021-05-07",
   "valueSetValues": {
     "ORG-100001699": {
       "display": "AstraZeneca AB",
@@ -99,6 +99,13 @@
       "active": true,
       "system": "http://ec.europa.eu/temp/vaccinemanufacturer",
       "version": "1.0"
+    },
+    "ORG-100001981": {
+      "display": "Serum Institute Of India Private Limited",
+      "lang": "en",
+      "active": true,
+      "system": "https://spor.ema.europa.eu/v1/organisations",
+      "version": ""
     }
   }
 }

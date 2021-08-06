@@ -64,6 +64,16 @@
       </div>
 
         <div class="ui stackable grid container">
+          <div class="ui labels" id="buildInfos">
+            <div class="ui label">
+              Version
+              <div class="detail">1.7.0</div>
+            </div>
+            <div class="ui label">
+              Published on
+              <div class="detail">August 6th 2021</div>
+            </div>
+          </div>
           <section id="intro" class="six wide floated column">
               <h1 class="ui header">Put your COVID certificate in your iPhone’s wallet.</h1>
               <ul class="ui list">
@@ -190,10 +200,13 @@
                       <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                           <div class="header" itemprop="name">How can I get my EU&nbsp;DCC (certificate)?</div>
                           <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                              <p itemprop="text">In &#x1F1E7;&#x1F1EC; Bulgaria, the certificate can be downloaded from the <a href="https://www.his.bg/bg/dgc">Ministry of Health's website</a></p>
+                              <p itemprop="text">In &#x1F1E9;&#x1F1F0; Denmark, you can get it in the Coronapas mobile app, when you select the travel option.</p>
                               <p itemprop="text">In &#x1F1EB;&#x1F1F7; France, you can download it from <a href="https://attestation-vaccin.ameli.fr/" title="Visiter le site Ameli.fr pour télécharger votre certificat">Ameli’s dedicated website</a>.</p>
+                              <p itemprop="text">In &#x1F1EE;&#x1F1F9; Italy, you can download it from <a href="https://www.dgc.gov.it/web/">this website</a> using a SPID Identity (Public Digital Identity System) or the European Health Insurance Card (EHIC).</p>
                               <p itemprop="text">In &#x1F1F1;&#x1F1FA; Luxembourg, you can download it from <a href="http://guichet.lu/certificat-vaccination">myGuichet</a>.</p>
-                              <p itemprop="text">In &#x1F1E8;&#x1F1ED; Switzerland, the certificates are distributed by your canton. Get more information on <a href="https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/covid-zertifikat.html">Federal Office of Public Health</a>.</p>
                               <p itemprop="text">In &#x1F1F5;&#x1F1F9; Portugal, you can download it from the <a href="https://www.sns24.gov.pt/certificado-digital-covid/" title="Visite o site do SNS24 para descarregar o seu certificado">SNS24 dedicated website</a>, or the “SNS24” iOS and Android apps.</p>
+                              <p itemprop="text">In &#x1F1E8;&#x1F1ED; Switzerland, the certificates are distributed by your canton. Get more information on <a href="https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/covid-zertifikat.html">Federal Office of Public Health</a>.</p>
                               <p itemprop="text">If you know how to download the certificates from health authorities elsewhere, please contact us so we can add the instructions here.</p>
                             </div>
                       </div>
@@ -291,8 +304,20 @@
             </div>
           </div>
         </div>
+        <div class="ui basic modal" id="modal-unsupported-old-browser">
+          <div class="ui icon header">
+            <i class="exclamation circle icon"></i>
+            Your browser is too old.
+          </div>
+          <div class="content">
+            <p>Sorry but your browser is too old and can't handle the cryptographic mathematic operation required to decode your QR code.</p>
+            <p>For iOS user, iOS 14 is required. If you have an iPhone starting iPhone6S, you need to upgrade iOS to use the app.</p>
+            <p>If you cannot upgrade or don't want, you can open this website on your computer and use it to generate your card.</p>
+          </div>
+        </div>
         <script id="card-content-tpl" type="text/x-tmpl-mustache">
-            <div class="header">{{name}}</div>
+            <div class="header">{{name-intl}}</div>
+            <div class="meta">{{name}}</div>
             <div class="ui list">
               <div class="item">
                 <div class="header">Date of birth</div>
