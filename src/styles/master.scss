@@ -87,3 +87,12 @@ ul.ui.list li,
     font-size: 1.2rem;
     margin-bottom: 1rem;
 }
+
+#buildInfos{
+  position:fixed;
+  bottom: 0;
+  width: 100vh;
+  background: linear-gradient(rgba(255,255,255,0) 20%,#fff);
+  height: 2em;
+  z-index:3;
+}
