@@ -1,6 +1,6 @@
 {
   "valueSetId": "vaccines-covid-19-names",
-  "valueSetDate": "2021-04-27",
+  "valueSetDate": "2021-05-07",
   "valueSetValues": {
     "EU/1/20/1528": {
       "display": "Comirnaty",
@@ -10,7 +10,7 @@
       "version": ""
     },
     "EU/1/20/1507": {
-      "display": "COVID-19 Vaccine Moderna",
+      "display": "Spikevax (previously COVID-19 Vaccine Moderna)",
       "lang": "en",
       "active": true,
       "system": "https://ec.europa.eu/health/documents/community-register/html/",
@@ -81,6 +81,13 @@
     },
     "Covaxin": {
       "display": "Covaxin (also known as BBV152 A, B, C)",
+      "lang": "en",
+      "active": true,
+      "system": "http://ec.europa.eu/temp/vaccineproductname",
+      "version": "1.0"
+    },
+    "Covishield": {
+      "display": "Covishield (ChAdOx1_nCoV-19)",
       "lang": "en",
       "active": true,
       "system": "http://ec.europa.eu/temp/vaccineproductname",

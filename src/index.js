@@ -12,9 +12,6 @@ import {
 
 var parser = require('ua-parser-js');
 
-const dcc = require('@pathcheck/dcc-sdk');
-const iso = require('iso-3166-1');
-const JSZIP = require("jszip");
 let successfulGeneration = false;
 
 window.onerror = function (msg, url, lineNo, columnNo, error) {
@@ -209,13 +206,16 @@ window.addEventListener('load', function() {
     console.log("Browser: %s",$.ua.browser.name);
     console.log("Device type: %s",$.ua.device.type);
   }
+
   if($.ua.device.type == 'mobile'){
     if (["Facebook","Instagram"].includes($.ua.browser.name)){
       $('#modal-unsupported-browser-facebook').modal("show");
     } else if ($.ua.os.name == "iOS" && $.ua.browser.name != "Mobile Safari"){
       $('#modal-unsupported-browser-safari').modal("show");
+    } else if ($.ua.os.name == "iOS" && $.ua.browser.name == "Mobile Safari" && $.ua.browser.version < 14) {
+      $('#modal-unsupported-old-browser').modal({ "closable": false}).modal('show');
     } else {
-    if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
+      if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
     }
   } else {
     if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
@@ -361,8 +361,12 @@ window.addEventListener('load', function() {
       scanner.destroy();
     }
 
-    // Add it as a QRcode in the template
     const template = JSON.parse(JSON.stringify(sourceTpl));
+    const dcc = require('@pathcheck/dcc-sdk');
+    const iso = require('iso-3166-1');
+
+
+    // Add it as a QRcode in the template
     template.barcode.message = data;
 
     dcc.debug(data).then(obj => {
@@ -396,27 +400,35 @@ window.addEventListener('load', function() {
       // Filling Passbook Template from here
       // -----------------------------------
       // Use the UCI for passboook serial number
-      template.serialNumber = certificateContent.ci;
+      if (certificateContent.ci.startsWith('URN:UVCI:')){
+        template.serialNumber = certificateContent.ci.substring(8)
+      }else{
+        template.serialNumber = certificateContent.ci
+      }
       // Surname(s) and Forename(s)
-      newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.fn.toUpperCase() + " " + certificate.nam.gn);
+      const isNonLatin = (certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() != certificate.nam.fnt.replace("<", ' '));
+
       if (process.env.NODE_ENV === 'development') {
         console.group('💬 Handling non-latin alphabets');
-        if(certificate.nam.gn.toUpperCase() == certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() == certificate.nam.fnt.replace("<", ' ')){
-          console.log("✅ Pass is using latin char, no need to change anything");
-        }else{
+        if(isNonLatin){
           console.warn("❌ non-latin char detected, will add international variation");
+        }else{
+          console.log("✅ Pass is using latin char, no need to change anything");
         }
         console.groupEnd();
       }
-      if (certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() != certificate.nam.fnt.replace("<", ' ')) {
+      if (isNonLatin){
         newPassbookItem(template,"primaryFields", "intl-surnames", "Surnames & Forenames", certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '));
+        newPassbookItem(template, "backFields", "surnames", "Surnames & Forenames", certificate.nam.fn.toUpperCase() + " " + certificate.nam.gn);
+      }else{
+        newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.fn.toUpperCase() + " " + certificate.nam.gn);
       }
       // Type of certificate
-      newPassbookItem(template, "auxiliaryFields", "certificate-type", "Certificate Type", certificateType);
+      newPassbookItem(template, "secondaryFields", "certificate-type", "Certificate Type", certificateType);
       // Date of birth
       newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", certificate.dob + "T00:00Z", "PKDateStyleShort");
       // Unique Certificate Identifier
-      newPassbookItem(template, "secondaryFields", "uci", "Unique Certificate Identifier", certificateContent.ci);
+      newPassbookItem(template, "auxiliaryFields", "uci", "Unique Certificate Identifier", certificateContent.ci);
 
       if (certificate.v) {
         // COVID-19 Vaccine Certificate
@@ -519,6 +531,7 @@ window.addEventListener('load', function() {
       shaOne(passJson).then((sha) => {
         manifest['pass.json'] = hex(sha);
         // Create the ZIP instance
+        const JSZIP = require("jszip");
         let passbook = new JSZIP();
         // Add files into it
         passbook.file("pass.json", passJson);
@@ -583,6 +596,7 @@ window.addEventListener('load', function() {
               console.group('\u{1F4C7} Pass preview');
               console.table({
                 "name": certificate.nam.gn + " " + certificate.nam.fn.toUpperCase(),
+                "name intl": certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '),
                 "dob": certificate.dob,
                 "uci": certificateContent.ci,
                 "type": certificateType,
@@ -590,9 +604,10 @@ window.addEventListener('load', function() {
               })
             }
             renderTpl("card-content-tpl", "cardContent", {
-              "name": certificate.nam.gn + " " + certificate.nam.fn.toUpperCase(),
+              "name": certificate.nam.fn + " " + certificate.nam.gn.toUpperCase(),
+              "name-intl": certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '),
               "dob": certificate.dob,
-              "uci": certificateContent.ci
+              "uci": certificateContent.ci.startsWith('URN:UVCI:') ? certificateContent.ci.substring(9) : certificateContent.ci
             });
             renderTpl("card-extra-content-tpl", "cardExtraContent", {
               "type": certificateType,

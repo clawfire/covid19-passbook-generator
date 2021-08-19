@@ -16,14 +16,14 @@ jobs:
     - uses: actions/stale@v3
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        stale-issue-message: 'This issue seems to be a little bit old and no ones seems to be able to help 😕. Or waiting for more informations from the reporter ⏳. If no new activity, It will be closed in 25 days'
-        stale-pr-message: 'This PR seems to ba old. The main code of the app may already have changed so much. Please check it again. If no activy in the next 15 days, it will be automatically closed'
+        stale-issue-message: 'This issue seems to be a little bit old and no ones seems to be able to help 😕. Or waiting for more informations from the reporter ⏳. If no new activity, It will be closed in 5 days'
+        stale-pr-message: 'This PR seems to ba old. The main code of the app may already have changed so much. Please check it again. If no activy in the next 5 days, it will be automatically closed'
         stale-issue-label: 'no-issue-activity'
         stale-pr-label: 'no-pr-activity'
-        days-before-issue-stale: 20
-        days-before-issue-close: 45
+        days-before-issue-stale: 10
+        days-before-issue-close: 15
         days-before-pr-stale: 15
-        days-before-pr-close: 30
+        days-before-pr-close: 20
         close-issue-message: "Sorry this issue cannot be solved 😔 . We may not have enough workforce to handle it. Please reopen it if you want to add something new."
         close-pr-message: "This PR is outdated now. Please rebase `develop` on it and reopen the PR if you want us to inspect it and merge it"
         exempt-milestone: true
