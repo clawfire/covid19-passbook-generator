@@ -406,7 +406,7 @@ window.addEventListener('load', function() {
         template.serialNumber = certificateContent.ci
       }
       // Surname(s) and Forename(s)
-      const isNonLatin = (certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() != certificate.nam.fnt.replace("<", ' '));
+      const isNonLatin = (certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replaceAll("<", ' ') || certificate.nam.fn.toUpperCase() != certificate.nam.fnt.replaceAll("<", ' '));
 
       if (process.env.NODE_ENV === 'development') {
         console.group('💬 Handling non-latin alphabets');
@@ -418,7 +418,7 @@ window.addEventListener('load', function() {
         console.groupEnd();
       }
       if (isNonLatin){
-        newPassbookItem(template,"primaryFields", "intl-surnames", "Surnames & Forenames", certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '));
+        newPassbookItem(template,"primaryFields", "intl-surnames", "Surnames & Forenames", certificate.nam.fnt.replaceAll("<", ' ') + " " + certificate.nam.gnt.replaceAll("<", ' '));
         newPassbookItem(template, "backFields", "surnames", "Surnames & Forenames", certificate.nam.fn.toUpperCase() + " " + certificate.nam.gn);
       }else{
         newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.fn.toUpperCase() + " " + certificate.nam.gn);
@@ -596,7 +596,7 @@ window.addEventListener('load', function() {
               console.group('\u{1F4C7} Pass preview');
               console.table({
                 "name": certificate.nam.gn + " " + certificate.nam.fn.toUpperCase(),
-                "name intl": certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '),
+                "name intl": certificate.nam.fnt.replaceAll("<", ' ') + " " + certificate.nam.gnt.replaceAll("<", ' '),
                 "dob": certificate.dob,
                 "uci": certificateContent.ci,
                 "type": certificateType,
@@ -605,7 +605,7 @@ window.addEventListener('load', function() {
             }
             renderTpl("card-content-tpl", "cardContent", {
               "name": certificate.nam.fn + " " + certificate.nam.gn.toUpperCase(),
-              "name-intl": certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '),
+              "name-intl": certificate.nam.fnt.replaceAll("<", ' ') + " " + certificate.nam.gnt.replaceAll("<", ' '),
               "dob": certificate.dob,
               "uci": certificateContent.ci.startsWith('URN:UVCI:') ? certificateContent.ci.substring(9) : certificateContent.ci
             });
