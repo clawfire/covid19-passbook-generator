@@ -1,24 +1,23 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.0.0"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 2.0.0Report-Msgid-Bugs-To:\n"
 "POT-Creation-Date: 2021-08-30 20:28+0200\n"
-"PO-Revision-Date: 2021-08-30 20:49+0200\n"
+"PO-Revision-Date: 2021-08-30 21:44+0200\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
-"Last-Translator: Thibault Milan <hello@thibaultmilan.com>\n"
+"Last-Translator: Thibault Milan <hello@thibaultmialn.com>\n"
 "Language-Team: \n"
-"Language: nl_NL\n"
+"Language: el_GR\n"
 
 #: index.html%2Bhtml[lang]:2-1
 msgid "en"
-msgstr "nl"
+msgstr "el"
 
 #: index.html%2Bhtml.head.title:6-9
 msgid "Covid19-Passbook"
-msgstr "Covid19-Passboek"
+msgstr "Βιβλίο διέλευσης Covid19"
 
 #: index.html%2Bhtml.head.meta[content]:15-9
 msgid ""
@@ -26,9 +25,9 @@ msgid ""
 "Digital COVID certificate (vaccine, test or healing) and generate a passbook "
 "from it."
 msgstr ""
-"Deze webapplicatie is gemaakt door EU-burgers om u uw EU Digital COVID-"
-"certificaat (vaccin, test of genezing) te laten scannen en er een passbook "
-"van te genereren."
+"Αυτή η διαδικτυακή εφαρμογή γίνεται από πολίτες της ΕΕ προκειμένου να σας "
+"επιτρέψει να σαρώσετε το ψηφιακό πιστοποιητικό COVID της ΕΕ (εμβόλιο, δοκιμή "
+"ή επούλωση) και να δημιουργήσετε ένα εγχειρίδιο από αυτό."
 
 #: index.html%2Bhtml.head.meta[content]:16-9
 msgid ""
@@ -36,9 +35,10 @@ msgid ""
 "vaccination, COVID test, COVID recovery, generator, Passbook, Apple, Apple "
 "wallet, Wallet, card, digital certificate, green certificate"
 msgstr ""
-"covid19, certificaat, Europa, EU-certificaat, EU Digital COVID-certificaat, "
-"vaccinatie, COVID-test, COVID-herstel, generator, Passbook, Apple, Apple-"
-"portemonnee, Portemonnee, kaart, digitaal certificaat, groen certificaat"
+"covid19, πιστοποιητικό, Ευρώπη, πιστοποιητικό ΕΕ, ψηφιακό πιστοποιητικό "
+"COVID της ΕΕ, εμβολιασμός, τεστ COVID, ανάκτηση COVID, γεννήτρια, passbook, "
+"Apple, πορτοφόλι Apple, πορτοφόλι, κάρτα, ψηφιακό πιστοποιητικό, πράσινο "
+"πιστοποιητικό"
 
 #: index.html%2Bhtml.body.header.div:32-13
 msgid "content"
@@ -46,24 +46,23 @@ msgstr "content"
 
 #: index.html%2Bhtml.body.header.div.h1:48-15
 msgid "Keep your COVID certificate in your iPhone’s wallet."
-msgstr ""
-"Bewaar uw COVID certificaat op uw iPhone op de iPhone Wallet applicatie."
+msgstr "Το πιστοποιητικό COVID τώρα στο iPhone Wallet σου."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.p:57-38
 msgid "generated on your phone"
-msgstr "gegenereerd op uw telefoon"
+msgstr "δημιουργείται στη συσκευή σου"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.p:61-38
 msgid "no personal data collection"
-msgstr "geen verzameling van persoonlijke gegevens"
+msgstr "χωρίς συλλογή προσωπικών δεδομένων"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.p:65-38
 msgid "no analytics or data sharing"
-msgstr "geen analyses of gegevens delen"
+msgstr "χωρίς ανάλυση ή διαμοιρασμό δεδομένων"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.p:69-38
 msgid "open source & transparent"
-msgstr "open source & transparant"
+msgstr "με ανοιχτό κώδικα και διαφάνεια"
 
 #: index.html%2Bhtml.body.main.div.section:71-15
 msgid ""
@@ -180,26 +179,26 @@ msgstr ""
 "\" /> <path d=\"M80 56H89V61H80V56Z\" fill=\"currentColor\" /> <path d=\"M84 "
 "61H89V71H84V61Z\" fill=\"currentColor\" /> <path d=\"M89 89H94V94H89V89Z\" "
 "fill=\"currentColor\" /> <path d=\"M89 84V71H94V84H89Z\" fill=\"currentColor"
-"\" /> <path d=\"M51 41V36H56V41H51Z\" fill=\"currentColor\" /> </svg> Mijn "
-"certificaat scannen</button> <button type=\"button\" class=\"ui fluid basic "
-"inverted icon button big\" name=\"scanImage\"> <i class=\"file image icon\" "
-"aria-hidden=\"true\"></i> Afbeelding importeren </button>"
+"\" /> <path d=\"M51 41V36H56V41H51Z\" fill=\"currentColor\" /> </svg> Σάρωση "
+"του πιστοποιητικού μου </button> <button type=\"button\" class=\"ui fluid "
+"basic inverted icon button big\" name=\"scanImage\"> <i class=\"file image "
+"icon\" aria-hidden=\"true\"></i> Εισαγωγή εικόνας </button>"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.video.p:150-29
 msgid "Your browser is not compatible with our technology."
-msgstr "Uw browser is niet compatibel met onze technologie."
+msgstr "Το πρόγραμμα περιήγησής σας δεν είναι συμβατό με την τεχνολογία μας."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.p:156-29
 msgid "Aim at the QR Code of your certificate to capture."
-msgstr "Richt u op de QR-code van uw certificaat om vast te leggen."
+msgstr "Στοχεύστε στον κωδικό QR του πιστοποιητικού σας για να καταγράψετε."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.p:160-25
 msgid "Flashlight unavailable"
-msgstr "Zaklamp niet beschikbaar"
+msgstr "Ο φακός δεν είναι διαθέσιμος"
 
 #: index.html%2Bhtml.body.main.div.section.div:174-21
 msgid "Save in your wallet"
-msgstr "Bespaar in je portemonnee"
+msgstr "Αποθηκεύστε στο πορτοφόλι σας"
 
 #: index.html%2Bhtml.body.main.div.section:176-17
 msgid ""
@@ -316,26 +315,27 @@ msgstr ""
 "\" /> <path d=\"M80 56H89V61H80V56Z\" fill=\"currentColor\" /> <path d=\"M84 "
 "61H89V71H84V61Z\" fill=\"currentColor\" /> <path d=\"M89 89H94V94H89V89Z\" "
 "fill=\"currentColor\" /> <path d=\"M89 84V71H94V84H89Z\" fill=\"currentColor"
-"\" /> <path d=\"M51 41V36H56V41H51Z\" fill=\"currentColor\" /> </svg> Een "
-"ander certificaat scannen </button> <button type=\"button\" class=\"ui fluid "
+"\" /> <path d=\"M51 41V36H56V41H51Z\" fill=\"currentColor\" /> </svg> Σάρωση "
+"άλλου πιστοποιητικού </button> <button type=\"button\" class=\"ui fluid "
 "basic inverted icon button\" name=\"scanImage\"> <i class=\"file image icon"
-"\" aria-hidden=\"true\"></i> Een andere afbeelding importeren </button>"
+"\" aria-hidden=\"true\"></i> Εισαγωγή άλλης εικόνας </button>"
 
 #: index.html%2Bhtml.body.main.div.section.h2.abbr[title]:255-21
 msgid "Frequently Asked Questions"
-msgstr "Veelgestelde vragen"
+msgstr "Συχνές Ερωτήσεις"
 
 #: index.html%2Bhtml.body.main.div.section.h2:254-17
 msgid "FAQ"
-msgstr "FAQ"
+msgstr "Συχνές Ερωτήσεις"
 
 #: index.html%2Bhtml.body.main.div.section.div.p:257-40
 msgid "Learn more about the project, security, how it works and more."
-msgstr "Lees meer over het project, beveiliging, hoe het werkt en meer."
+msgstr ""
+"Μάθε περισσότερα για την εφαρμογή, την ασφάλεια, τον τρόπο λειτουργίας κ.ά."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.h3:261-29
 msgid "I can't scan my certificate."
-msgstr "Ik kan mijn certificaat niet scannen."
+msgstr "Δεν μπορώ να σαρώσω το πιστοποιητικό μου."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.ol.li:264-37
 msgid ""
@@ -343,26 +343,25 @@ msgid ""
 "size of the visual aid is the size of the code we need. Your code must be "
 "flat (wrinkled paper won't work well)."
 msgstr ""
-"Zorg voor een goede lichtbron en lijn uw QR code uit met de rand van de "
-"scanzone. De grootte van het visuele hulpmiddel is de grootte van de code. "
-"Uw code moet op een plat opperverlakte zijn (gekreukeld papier werkt niet "
-"goed)."
+"Σε σημείο με καλό φωτισμό, ευθυγράμμισε τον κωδικό QR με τη ζώνη σάρωσης. Η "
+"επιφάνεια με τον κωδικό πρέπει να είναι επίπεδη (το τσαλακωμένο χαρτί δεν θα "
+"βοηθήσει)."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.ol.li:265-37
 msgid ""
 "If you have a screenshot or a picture of your code, you can use the \"Import "
 "picture\" button."
 msgstr ""
-"Als u een screenshot of een foto van uw code heeft, kunt u de knop "
-"« Afbeelding importeren » gebruiken."
+"Εάν έχεις στιγμιότυπο οθόνης ή εικόνα του κωδικού σου μπορείς να "
+"χρησιμοποιήσεις το κουμπί «Εισαγωγή εικόνας»."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.ol.li:266-37
 msgid ""
 "Please be sure to use the EU version of your certificate. See the following "
 "question if you don't know where to get yours."
 msgstr ""
-"Zorg ervoor dat u de EU-versie van uw certificaat gebruikt. Zie de volgende "
-"vraag als u niet weet waar u deze kunt krijgen."
+"Βεβαίωσου πως έχεις την ευρωπαϊκή έκδοση του πιστοποιητικού. Δες την επόμενη "
+"ερώτηση αν δεν γνωρίζεις πώς να το αποκτήσεις."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.ol.li:267-37
 msgid ""
@@ -370,9 +369,9 @@ msgid ""
 "The ones from Switzerland and the United Kingdom are also supported if they "
 "are following the EU format."
 msgstr ""
-"Wij ondersteunen het digitale COVID-certificaat voor vaccinatie, herstel en "
-"test van de EU. Die van Zwitserland en het Verenigd Koninkrijk worden ook "
-"ondersteund als deze het EU-formaat volgen."
+"Υποστηρίζουμε το Eυρωπαϊκό Ψηφιακό Πιστοποιητικό COVID, εμβολιασμού, "
+"ανάρρωσης ή εξέτασης. Μπορεί επίσης κάποιος να έχει ελβετικό ή αγγλικό "
+"πιστοποιητικό, αρκεί να να ακολουθεί τις ευρωπαιϊκές προδιαγραφές."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.ol.li:268-37
 msgid ""
@@ -381,14 +380,14 @@ msgid ""
 "%2Ctriage&template=bug_report.yml&title=%5BBUG%5D+\" title=\"Submit a bug on "
 "Github\">open an issue</a>."
 msgstr ""
-"Indien het nog steeds niet werkt, kunt u contact met ons opnemen of<a href="
-"\"https://github.com/clawfire/covid19-passbook-generator/issues/new?"
-"assignees=&labels=bug%2Ctriage&template=bug_report.yml&title=%5BBUG%5D+\" "
-"title=\"Submit a bug on Github\">een ticket openen</a>."
+"Εάν δεν σε βοήθησαν τα παραπάνω, μπορείς να επικοινωνήσεις μαζί μας ή να "
+"ανοίξεις <a href=\"https://github.com/clawfire/covid19-passbook-generator/"
+"issues/new?assignees=&labels=bug%2Ctriage&template=bug_report.yml&title="
+"%5BBUG%5D+\" title=\"Submit a bug on Github\">ένα αίτημα υποστήριξης</a>."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.h3:275-29
 msgid "What's this project?"
-msgstr "Waar gaat dit project over?"
+msgstr "Τι κάνει αυτή η εφαρμογή;"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div:276-29
 msgid ""
@@ -397,22 +396,22 @@ msgid ""
 "your iPhone's wallet, or if you're an Android user, import it into an app "
 "that supports it."
 msgstr ""
-"Deze webapplicatie scant uw digitaal EU COVID-certificaat (vaccin, test of "
-"genezing) en genereert er een pasboekje van. U kunt het vervolgens "
-"importeren op uw iPhone op de applicatie iPhone Wallet, of als u een Android-"
-"gebruiker bent, kunt u het ook importeren op een app die dit ondersteunt."
+"Πρόκειται για μια εφαρμογή που σαρώνει το Ευρωπαϊκό Ψηφιακό Πιστοποιητικό "
+"COVID (εμβολιασμού, ανάρρωσης ή εξέτασης) και δημιουργεί ένα ψηφιακό πάσο το "
+"οποίο μπορείς να αποθηκεύσεις στην εφαρμογή Wallet του iPhone ή σε "
+"αντίστοιχη εφαρμογή Android."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.h3:281-29
 msgid "Can I save the certificate on Android?"
-msgstr "Kan ik het certificaat opslaan op Android?"
+msgstr "Μπορώ να αποθηκεύσω το πιστοποιητικό σε κινητό Android;"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:283-33
 msgid ""
 "Yes! You can save the .pkpass file and open it with an application that "
 "supports this format, for example:"
 msgstr ""
-"Ja! U kunt het .pkpass-bestand opslaan en openen met een applicatie die dit "
-"formaat ondersteunt, bijvoorbeeld:"
+"Ναι! Μπορείς να αποθηκεύσεις το αρχείο .pkpass και να το ανοίξεις με "
+"εφαρμοφές που το υποστηρίζουν, όπως:"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.ul.li:285-37
 msgid ""
@@ -444,13 +443,13 @@ msgid ""
 "contains all the relevant information you see on the cover of your paper "
 "certificate."
 msgstr ""
-"U kunt ook een screenshot maken van het voorbeelddocument dat we weergeven "
-"voordat u het downloadt; het bevat alle relevante informatie die u op de "
-"omslag van uw papieren certificaat ziet."
+"Μπορείς επίσης να αποθηκεύσεις ως στιγμιότυπο οθόνης την προεπισκόπηση του "
+"πιστοποιητικού που εμφανίζεται πριν το κατεβάσεις. Περιλαμβάνει όλες τις "
+"πληροφορίες που εμφανίζονται στο εξώφυλλο του έντυπου πιστοποιητικού."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.h3:295-29
 msgid "How can I get my EU DCC (certificate)?"
-msgstr "Hoe kan ik mijn EU DCC (certificaat) krijgen?"
+msgstr "Πώς μπορώ να αποκτήσω το Ευρωπαϊκό Ψηφιακό Πιστοποιητικό COVID;"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:297-31
 msgid ""
@@ -458,17 +457,17 @@ msgid ""
 "downloaded from the <a href=\"https://www.his.bg/bg/dgc\">Ministry of "
 "Health's website</a>"
 msgstr ""
-"<span aria-hidden=\"true\">🇧🇬</span> In Bulgarije kan het certificaat worden "
-"gedownload van de website van het <a href=\"https://www.his.bg/bg/dgc"
-"\">ministerie van Volksgezondheid</a>"
+"<span aria-hidden=\"true\">🇧🇬</span> Στη Βουλγαρία, μπορείτε να κατεβάσετε "
+"το πιστοποιητικό από την <a href=\"https://www.his.bg/bg/dgc\">ιστοσελίδα "
+"του Υπουργείου Υγείας</a>"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:298-31
 msgid ""
 "<span aria-hidden=\"true\">🇩🇰</span> In Denmark, you can get it in the "
 "Coronapas mobile app, when you select the travel option."
 msgstr ""
-"<span aria-hidden=\"true\">🇩🇰</span> In Denemarken kun je het krijgen in de "
-"coronapas mobiele app, wanneer je de reisoptie selecteert."
+"<span aria-hidden=\"true\">🇩🇰</span> Στη Δανία, μπορείτε να το αποκτήσετε "
+"στην εφαρμογή Coronapas για κινητά, όταν επιλέγετε την επιλογή ταξιδιού."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:299-31
 msgid ""
@@ -476,10 +475,9 @@ msgid ""
 "href=\"https://attestation-vaccin.ameli.fr/\" title=\"Visiter le site Ameli."
 "fr pour télécharger votre certificat\">Ameli’s dedicated website</a>."
 msgstr ""
-"<span aria-hidden=\"true\">🇫🇷</span> In Frankrijk kunt u de certificaat "
-"downloaden via de website van <a href=\"https://attestation-vaccin.ameli.fr/"
-"\" title=\"Visiter le site Ameli.fr pour télécharger votre certificat"
-"\">Ameli.</a>"
+"<span aria-hidden=\"true\">🇫🇷</span> Στη Γαλλία, μπορείς να το κατεβάσεις "
+"από το <a href=\"https://attestation-vaccin.ameli.fr/\" title=\"Visiter le "
+"site Ameli.fr pour télécharger votre certificat\">Ameli</a>."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:300-31
 msgid ""
@@ -488,18 +486,19 @@ msgid ""
 "(Public Digital Identity System) or the European Health Insurance Card "
 "(EHIC)."
 msgstr ""
-"<span aria-hidden=\"true\">🇮🇹</span> In Italië kunt u deze van <a href="
-"\"https://www.dgc.gov.it/web/\">deze website</a> downloaden met behulp van "
-"een SPID Identity (Public Digital Identity System) of de European Health "
-"Insurance Card (EHIC)."
+"<span aria-hidden=\"true\">🇮🇹</span> Στην Ιταλία, μπορείτε να το κατεβάσετε "
+"από <a href=\"https://www.dgc.gov.it/web/\">αυτόν τον ιστότοπο</a> "
+"χρησιμοποιώντας μια ταυτότητα SPID (Δημόσιο Σύστημα Ψηφιακής Ταυτότητας) ή "
+"την Ευρωπαϊκή Κάρτα Ασφάλισης Ασθένειας (ΕΚΑΑ)."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:301-31
 msgid ""
 "<span aria-hidden=\"true\">🇱🇺</span> In Luxembourg, you can download it from "
 "<a href=\"http://guichet.lu/certificat-vaccination\">myGuichet</a>."
 msgstr ""
-"<span aria-hidden=\"true\">🇱🇺</span> In Luxemburg kunt u het downloaden van "
-"<a href=\"http://guichet.lu/certificat-vaccination\">myGuichet</a>."
+"<span aria-hidden=\"true\">🇱🇺</span> Στο Λουξεμβούργο, μπορείτε να το "
+"κατεβάσετε από το <a href=\"http://guichet.lu/certificat-vaccination"
+"\">myGuichet</a>."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:302-31
 msgid ""
@@ -508,10 +507,10 @@ msgid ""
 "\"Visite o site do SNS24 para descarregar o seu certificado\">SNS24 "
 "dedicated website</a>, or the “SNS24” iOS and Android apps."
 msgstr ""
-"<span aria-hidden=\"true\">🇵🇹</span> In Portugal kunt u de certificaten "
-"downloaden op de <a href=\"https://www.sns24.gov.pt/certificado-digital-"
+"<span aria-hidden=\"true\">🇵🇹</span> Στην Πορτογαλία, μπορείς να το "
+"κατεβάσεις από το <a href=\"https://www.sns24.gov.pt/certificado-digital-"
 "covid/\" title=\"Visite o site do SNS24 para descarregar o seu certificado"
-"\">speciale website van SNS24</a>of de \"SNS24\" iOS- en Android-apps."
+"\">SNS24</a>ή από τις εφαρμογές SNS24 σε iOS και Android."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:303-31
 msgid ""
@@ -519,9 +518,9 @@ msgid ""
 "<a href=\"https://covidbevis.se/vaccinationsbevis-web/\">Swedish E-health "
 "agency's Covidbevis website</a>."
 msgstr ""
-"<span aria-hidden=\"true\">🇸🇪</span> In Zweden kunt u het downloaden van de "
-"<a href=\"https://covidbevis.se/vaccinationsbevis-web/\">Covidbevis-website "
-"van het Zweedse E-health-agentschap.</a>"
+"<span aria-hidden=\"true\">🇸🇪</span> Στη Σουηδία, μπορείτε να το κατεβάσετε "
+"από τον <a href=\"https://covidbevis.se/vaccinationsbevis-web/\">ιστότοπο "
+"covidbevis της σουηδικής υπηρεσίας ηλεκτρονικής υγείας</a>."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:304-31
 msgid ""
@@ -531,23 +530,23 @@ msgid ""
 "ausbrueche-epidemien/novel-cov/covid-zertifikat.html\">Federal Office of "
 "Public Health</a>."
 msgstr ""
-"<span aria-hidden=\"true\">🇨🇭</span> Zwitserland worden de certificaten per "
-"kanton verdeeld. U kunt meer informatie vinden op de website van <a href="
-"\"https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-"
-"pandemien/aktuelle-ausbrueche-epidemien/novel-cov/covid-zertifikat.html"
-"\">het Federaal Bureau voor Volksgezondheid</a>."
+"<span aria-hidden=\"true\">🇨🇭</span> Στην Ελβετία, τα πιστοποιητικά "
+"διανέμονται από το καντόνι σας. Λάβετε περισσότερες πληροφορίες σχετικά με "
+"το <a href=\"https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-"
+"epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/covid-zertifikat."
+"html\">Ομοσπονδιακό Γραφείο Δημόσιας Υγείας</a>."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:305-31
 msgid ""
 "If you know how to download the certificates from health authorities "
 "elsewhere, please contact us so we can add the instructions here."
 msgstr ""
-"Indien u certificaten van gezondheidsautoriteiten elders kunt downloaden, "
-"neem dan contact met ons op zodat we de instructies hier kunnen toevoegen."
+"Αν γνωρίζεις τι ισχύει στις άλλες χώρες μπορείς να επικοινωνήσεις μαζί μας "
+"για να προσθέσουμε τις οδηγίες."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.h3:311-29
 msgid "How does it work?"
-msgstr "Hoe werkt het?"
+msgstr "Πώς λειτουργεί;"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:312-127
 msgid ""
@@ -556,15 +555,15 @@ msgid ""
 "signature to our server, without sending your data. Your phone generates the "
 "final file and lets you save it."
 msgstr ""
-"Wanneer u de code scant, lezen we de gegevens en maken we het passbook (het "
-"bestand dat nodig is om een kaart in uw portemonnee te hebben). We sturen "
-"een checkum voor digitale handtekening naar onze server, zonder uw gegevens "
-"te verzenden. Uw telefoon genereert het uiteindelijke bestand en laat u het "
-"opslaan."
+"Κατά τη σάρωση του κωδικού, διαβάζουμε τα δεδομένα και δημιουργούμε το "
+"ψηφιακό πάσο που θα προστεθεί στην εφαρμογή Wallet. Στέλνουμε έλεγχο "
+"αθροίσματος της ψηφιακής υπογραφής στον server μας, χωρίς να στείλουμε τα "
+"δεδομένα σου. Η συσκευή σου παράγει το τελικό αρχείο και σου επιτρέπει να το "
+"αποθηκεύσεις."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.h3:317-29
 msgid "Is it secure?"
-msgstr "Is het veilig?"
+msgstr "Είναι ασφαλής;"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:318-127
 msgid ""
@@ -576,18 +575,18 @@ msgid ""
 "We don't track anyone, we don't collect any personal information, and we "
 "don't use cookies."
 msgstr ""
-"We hebben veel moeite gedaan om het zo veilig mogelijk te maken. U "
-"persoonlijke gegevens verlaten nooit uw telefoon. Apple vereist een digitale "
-"handtekening om een certificaat te openen. Om die te genereren, stuurt de "
-"app alleen een checksum (controlegetal) van u gegevens naar onze server en "
-"het is onmogelijk om de originele inhoud te raden. De laatste stap gebeurt "
-"op uw telefoon: u kunt uw gegevens raadplegen voordat u de certificaat "
-"opslaat. We volgen niemand, we verzamelen geen persoonlijke informatie en "
-"gebruiken geen cookies."
+"Καταβάλαμε μεγάλη προσπάθεια ώστε να κάνουμε την εφαρμογή όσο το δυνατόν πιο "
+"ασφαλή. Τα προσωπικά δεδομένα σου παραμένουν στο τηλέφωνό σου. Η Apple "
+"απαιτεί ψηφιακή υπογραφή ώστε να ανοίξει το ψηφιακό πάσο. Για τον λόγο αυτό "
+"στέλνουμε έλεγχο αθροίσματος με την ψηφιακή υπογραφή σου στον server μας, "
+"χωρίς καμία σύνδεση με το αρχικό περιεχόμενο. Το τελευταίο βήμα λαμβάνει "
+"χώρα στη συσκευή σου: βλέπεις τις πληροφορίες προτού αποθηκεύσεις το αρχείο. "
+"Δεν παρακολουθούμε κανέναν, δεν συλλέγουμε προσωπικές πληροφορίες και δεν "
+"χρησιμοποιούμε cookies."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.h3:323-29
 msgid "Can I see the code?"
-msgstr "Kan ik de code zien?"
+msgstr "Μπορώ να δω τον κώδικα;"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:324-127
 msgid ""
@@ -595,14 +594,14 @@ msgid ""
 "href=\"https://github.com/clawfire/covid19-passbook-generator\">the Github "
 "page of the project</a>. You can even contribute if you want!"
 msgstr ""
-"Natuurlijk. U kunt de broncode lezen, om meer te weten te komen over hoe het "
-"werkt, kunt u op <a href=\"https://github.com/clawfire/covid19-passbook-"
-"generator\">de Github-pagina van het project</a> terecht. U kunt zelfs "
-"bijdragen als u wilt!"
+"Φυσικά! Μπορείτε να διαβάσετε τον πηγαίο κώδικα και να ερευνήσετε "
+"περισσότερο τον τρόπο λειτουργίας <a href=\"https://github.com/clawfire/"
+"covid19-passbook-generator\">του στη σελίδα Github του έργου</a>. Μπορείς "
+"επίσης να συνεισφέρεις αν θέλεις!"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.h3:329-29
 msgid "How can I contact the creators?"
-msgstr "Hoe kan ik contact opnemen met de makers?"
+msgstr "Πώς μπορώ να επικοινωνήσω με τους δημιουργούς;"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:331-31
 msgid ""
@@ -613,12 +612,12 @@ msgid ""
 "grischard\">Guillaume Rischard</a> and the advices from <a href=\"https://"
 "twitter.com/alrouen\">@alrouen</a>."
 msgstr ""
-"Deze app is een origineel idee en werk van <a href=\"https://thibaultmilan."
-"com\">Thibault Milan</a> (<a href=\"https://twitter.com/thibaultmilan"
-"\">@thibaultmilan</a> op Twitter), met de hulp van <a href=\"https://www."
-"linkedin.com/in/avagner/\">Alain Vagner</a>, <a href=\"https://twitter.com/"
-"grischard\">Guillaume Rischard</a> en de advies van <a href=\"https://"
-"twitter.com/alrouen\">@alrouen</a>."
+"Η εφαρμογή αυτή είναι μια πρωτότυπη ιδέα του <a href=\"https://thibaultmilan."
+"com\">Thibault Milan</a> <a href=\"https://twitter.com/thibaultmilan"
+"\">(@thibaultmilan</a> στο Twitter), την οποία και υλοποίησε με τη βοήθεια "
+"των  <a href=\"https://www.linkedin.com/in/avagner/\">Alain Vagner</a>, <a "
+"href=\"https://twitter.com/grischard\">guillaume Rischard</a> και σύμβουλο "
+"τον <a href=\"https://twitter.com/alrouen\">@alrouen</a>."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:335-31
 msgid ""
@@ -626,10 +625,10 @@ msgid ""
 "redisdead.net/\">Laurence Vagner</a>.<br> Accessibility improvements and CSS "
 "made by <a href=\"https://geoffrey.crofte.fr/en/\">Geoffrey Crofte</a>."
 msgstr ""
-"Nieuwe (sinds eind 08/2021) Ontwerppropositie gemaakt door <a href=\"https://"
-"www.redisdead.net/\">Laurence Vagner</a>.<br> Toegankelijkheidsverbeteringen "
-"en CSS gemaakt door <a href=\"https://geoffrey.crofte.fr/en/\">Geoffrey "
-"Crofte</a>."
+"Το νέο design (Τέλη Ιουλίου 2021) δημιουργήθηκε από τη <a href=\"https://www."
+"redisdead.net/\">Laurence Vagner.</a><br> ενώ oi βελτιώσεις στην "
+"προσβασιμότητα και τη CSS πραγματοποιήθηκαν από τον <a href=\"https://"
+"geoffrey.crofte.fr/en/\">Geoffrey Crofte</a>."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:340-31
 msgid ""
@@ -637,13 +636,13 @@ msgid ""
 "com/clawfire/covid19-passbook-generator/graphs/contributors\">on the Github "
 "project</a>."
 msgstr ""
-"U kunt ook de volledige lijst van bijdragers zien <a href=\"https://github."
-"com/clawfire/covid19-passbook-generator/graphs/contributors\">op het Github-"
-"project</a>."
+"Μπορείς να δεις την πλήρη λίστα των συντελεστών στη σελίδα <a href=\"https://"
+"github.com/clawfire/covid19-passbook-generator/graphs/contributors\">μας στο "
+"Github</a>."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.h3:348-29
 msgid "How can I help?"
-msgstr "Hoe kan ik helpen?"
+msgstr "Πώς μπορώ να βοηθήσω;"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.p:349-127
 msgid ""
@@ -655,18 +654,18 @@ msgid ""
 "passbook-generator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue"
 "%22\">with those issues</a> if you want to get familiar with the project."
 msgstr ""
-"Indien u deze app interessant vindt, aarzel dan niet om deze te delen met je "
-"vrienden en familie. Als u vervolgens verder wilt helpen, <a href=\"https://"
-"github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen\">neem dan "
-"een kijkje bij de problemen</a>. Het gaat niet alleen om technologie; er "
-"zijn ook copywriting taken, design, enz. U kunt beginnen <a href=\"https://"
-"github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen+is%3Aissue"
-"+label%3A%22good+first+issue%22\">met deze problemen</a> als u vertrouwd "
-"wilt raken met het project."
+"Αν σου αρέσει η εφαρμογή μας μην διστάσεις να τη μοιραστείς με τους φίλους "
+"και την οικογένειά σου. Στη συνέχεια, αν θέλεις να βοηθήσεις περισσότερο, <a "
+"href=\"https://github.com/clawfire/covid19-passbook-generator/issues?q=is"
+"%3Aopen\">μπορείς να ρίξεις μια ματιά στα ζητήματα που αντιμετωπίζουμε</a>. "
+"Δεν είναι μόνο τεχνολογικά. Χρειαζόμαστε βοήθεια στην κειμενογράφηση, το "
+"design κ.ά. Μπορείτε να ξεκινήσεις <a href=\"https://github.com/clawfire/"
+"covid19-passbook-generator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good"
+"+first+issue%22\">από αυτά</a> αν θέλεις να εξοικειωθείς με την εφαρμογή."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.h3:354-29
 msgid "What are your running fees?"
-msgstr "Wat zijn uw exploitatiekosten?"
+msgstr "Ποια είναι τα έξοδα λειτουργίας σας;"
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.div.p:355-127
 msgid ""
@@ -677,43 +676,46 @@ msgid ""
 "wikv1b2OG1tWeNXwhNHX-a_wzxV5r4qoC9k8UauL3D-ay/pubhtml\">transparency report</"
 "a> on the cost and donations (uses Google Sheets)."
 msgstr ""
-"Tot nu toe wordt deze site gratis <a href=\"https://netlify.com/"
-"\">aangedreven door Netlify</a> (HARTELIJK dank voor hun steun op dit "
-"project) en AWS Lambda kost me minder dan € 1 / maand. U kunt een <a href="
-"\"https://docs.google.com/spreadsheets/d/"
+"Μέχρι στιγμής, η ιστοσελίδα <a href=\"https://netlify.com/\">υποστηρίζεται "
+"πλήρως από το Netlify</a>,εντελώς δωρεάν, (τους ευχαριστούμε απεριόριστα για "
+"τη βοήθειά τους) ενώ το AWS Lambda κοστίζει λιγότερο από 1 € τον μήνα. "
+"Μπορείτε να βρείτε μια <a href=\"https://docs.google.com/spreadsheets/d/"
 "e/2PACX-1vSUDZX5ZdohZhLWxb1TyTtpamoRtkBg6z-wikv1b2OG1tWeNXwhNHX-"
-"a_wzxV5r4qoC9k8UauL3D-ay/pubhtml\">transparantierapport</a> vinden over de "
-"kosten en donaties (maakt gebruik van Google Spreadsheets)."
+"a_wzxV5r4qoC9k8UauL3D-ay/pubhtml\">αναφορά διαφάνειας</a> σχετικά με το "
+"κόστος και τις δωρεές (χρησιμοποιεί Google Sheet)."
 
 #: index.html%2Bhtml.body.main.div.section.div.div.div.div.a.img[alt]:359-45
 msgid ""
 "EU Digital COVID Certificate to Passbook - come join us on Product Hunt (new "
 "window)"
 msgstr ""
-"EU Digital COVID-certificaat naar Passbook - kom met ons mee op Product Hunt "
-"(nieuw venster)"
+"Ψηφιακό πιστοποιητικό COVID της ΕΕ στο passbook - ελάτε μαζί μας στο Κυνήγι "
+"προϊόντων (νέο παράθυρο)"
 
 #: index.html%2Bhtml.body.main.div.div.p:371-15
 msgid "Whoops! You’re offline"
-msgstr "Oeps! Je bent offline."
+msgstr "Ουπς! Είστε εκτός σύνδεσης"
 
 #: index.html%2Bhtml.body.main.div.div.p:375-15
 msgid ""
 "You will not be able to generate a new pass while you’re offline. If you "
 "want to continue using the app, you will need a data access."
 msgstr ""
-"U kunt geen nieuwe pas genereren terwijl u offline bent. Als u de app wilt "
-"blijven gebruiken, hebt u een gegevenstoegang nodig."
+"Δεν θα μπορείτε να δημιουργήσετε ένα νέο πέρασμα ενώ είστε εκτός σύνδεσης. "
+"Αν θέλετε να συνεχίσετε να χρησιμοποιείτε την εφαρμογή, θα χρειαστείτε "
+"πρόσβαση στα δεδομένα."
 
 #: index.html%2Bhtml.body.main.div.div.div.p:379-17
 msgctxt "./index.html+html.body.main.div.div.div.p:379-17"
 msgid "I understand, close this message."
-msgstr "Ik begrijp het, sluit dit bericht."
+msgstr "Καταλαβαίνω, κλείσε αυτό το μήνυμα."
 
 #: index.html%2Bhtml.body.main.div.div.p:387-15
 msgctxt "./index.html+html.body.main.div.div.p:387-15"
 msgid "Your browser doesn’t meet the requirements for this app to work."
-msgstr "Uw browser voldoet niet aan de vereisten voor het werken van deze app."
+msgstr ""
+"Το πρόγραμμα περιήγησής σας δεν πληροί τις απαιτήσεις για να λειτουργήσει "
+"αυτή η εφαρμογή."
 
 #: index.html%2Bhtml.body.main.div.div.p:391-15
 msgid ""
@@ -721,71 +723,77 @@ msgid ""
 "prevents downloads, so you won’t be able to download the pass. Open the site "
 "in a regular browser."
 msgstr ""
-"Je gebruikt een Facebook app die de link opent in de preview-modus, maar "
-"downloads voorkomt, zodat je de pas niet kunt downloaden. Open de site in "
-"een gewone browser."
+"Χρησιμοποιείτε μια εταιρεία Facebook app η οποία ανοίγει τον σύνδεσμο σε "
+"λειτουργία προεπισκόπησης, αλλά αποτρέπει τις λήψεις, ώστε να μην μπορείτε "
+"να κατεβάσετε το πάσο. Ανοίξτε την τοποθεσία σε ένα κανονικό πρόγραμμα "
+"περιήγησης."
 
 #: index.html%2Bhtml.body.main.div.div.div.p:395-17
 msgctxt "./index.html+html.body.main.div.div.div.p:395-17"
 msgid "I understand, close this message."
-msgstr "Ik begrijp het, sluit dit bericht."
+msgstr "Καταλαβαίνω, κλείσε αυτό το μήνυμα."
 
 #: index.html%2Bhtml.body.main.div.div.p:403-15
 msgctxt "./index.html+html.body.main.div.div.p:403-15"
 msgid "Your browser doesn’t meet the requirements for this app to work."
-msgstr "Uw browser voldoet niet aan de vereisten voor het werken van deze app."
+msgstr ""
+"Το πρόγραμμα περιήγησής σας δεν πληροί τις απαιτήσεις για να λειτουργήσει "
+"αυτή η εφαρμογή."
 
 #: index.html%2Bhtml.body.main.div.div.p:407-15
 msgid ""
 "You need to open this site using Safari. Apple doesn’t allow other browsers "
 "to download passes to the Wallet app."
 msgstr ""
-"U moet deze site openen met Safari. Apple staat niet toe dat andere browsers "
-"passen downloaden naar de Wallet-app."
+"Πρέπει να ανοίξετε αυτόν τον ιστότοπο χρησιμοποιώντας το Safari. Η Apple δεν "
+"επιτρέπει σε άλλα προγράμματα περιήγησης να κατεβάζουν κάρτες στην εφαρμογή "
+"Wallet."
 
 #: index.html%2Bhtml.body.main.div.div.div.p:411-17
 msgid "I understand, close this message"
-msgstr "Ik begrijp het, sluit dit bericht."
+msgstr "Καταλαβαίνω, κλείσε αυτό το μήνυμα"
 
 #: index.html%2Bhtml.body.main.div.div:418-13
 msgid "Your browser is too old."
-msgstr "Uw browser is te oud."
+msgstr "Το πρόγραμμα περιήγησής σας είναι πολύ παλιό."
 
 #: index.html%2Bhtml.body.main.div.div.p:423-15
 msgid ""
 "Sorry but your browser is too old and can't handle the cryptographic "
 "mathematic operation required to decode your QR code."
 msgstr ""
-"Sorry, maar uw browser is te oud en kan de cryptografische wiskundige "
-"bewerking die nodig is om uw QR-code te decoderen niet aan."
+"Λυπούμαστε, αλλά το πρόγραμμα περιήγησής σας είναι πολύ παλιό και δεν μπορεί "
+"να χειριστεί την κρυπτογραφική μαθηματική λειτουργία που απαιτείται για την "
+"αποκωδικοποίηση του κωδικού QR."
 
 #: index.html%2Bhtml.body.main.div.div.p:424-15
 msgid ""
 "For iOS user, iOS 14 is required. If you have an iPhone starting iPhone6S, "
 "you need to upgrade iOS to use the app."
 msgstr ""
-"Voor iOS-gebruikers is iOS 14 vereist. Als je een iPhone hebt die iPhone6S "
-"start, moet je iOS upgraden om de app te gebruiken."
+"Για το χρήστη iOS, απαιτείται iOS 14. Εάν έχετε ένα iPhone που ξεκινά το "
+"iPhone6S, πρέπει να αναβαθμίσετε το iOS για να χρησιμοποιήσετε την εφαρμογή."
 
 #: index.html%2Bhtml.body.main.div.div.p:425-15
 msgid ""
 "If you cannot upgrade or don't want, you can open this website on your "
 "computer and use it to generate your card."
 msgstr ""
-"Als u niet kunt upgraden of niet wilt, kunt u deze website op uw computer "
-"openen en deze gebruiken om uw kaart te genereren."
+"Εάν δεν μπορείτε να κάνετε αναβάθμιση ή δεν θέλετε, μπορείτε να ανοίξετε "
+"αυτόν τον ιστότοπο στον υπολογιστή σας και να τον χρησιμοποιήσετε για να "
+"δημιουργήσετε την κάρτα σας."
 
 #: index.html%2Bhtml.body.main.div.h3:431-13
 msgid "An error has just been detected."
-msgstr "Er is zojuist een fout gedetecteerd."
+msgstr "Μόλις εντοπίστηκε ένα σφάλμα."
 
 #: index.html%2Bhtml.body.main.div.div.div.p:436-17
 msgid ""
 "You can help us by sending the information about this error to the "
 "development team in order to prevent it to happen again."
 msgstr ""
-"U kunt ons helpen door de informatie over deze fout naar het ontwikkelteam "
-"te sturen om te voorkomen dat het opnieuw gebeurt."
+"Μπορείτε να μας βοηθήσετε στέλνοντας τις πληροφορίες σχετικά με αυτό το "
+"σφάλμα στην ομάδα ανάπτυξης, προκειμένου να αποφευχθεί η επανάληψη του."
 
 #: index.html%2Bhtml.body.main.div.div.div.p:437-17
 msgid ""
@@ -793,13 +801,13 @@ msgid ""
 "personal information. You can also add some context information if you wish. "
 "Thanks for your help!"
 msgstr ""
-"Voel je vrij om te controleren of de onderstaande foutinformatie geen "
-"persoonlijke informatie bevat. U kunt desgewenst ook enkele "
-"contextinformatie toevoegen. Bedankt voor je hulp!"
+"Μη διστάσετε να ελέγξετε ότι οι παρακάτω πληροφορίες σφάλματος δεν περιέχουν "
+"προσωπικές πληροφορίες. Μπορείτε επίσης να προσθέσετε ορισμένες πληροφορίες "
+"περιβάλλοντος, εάν το επιθυμείτε. Ευχαριστώ για τη βοήθειά σου!"
 
 #: index.html%2Bhtml.body.main.div.div.div.div.div:439-19
 msgid "Error message"
-msgstr "Foutmelding"
+msgstr "Μήνυμα Σφάλμα"
 
 #: index.html%2Bhtml.body.main.div.div:446-13
 msgid ""
@@ -810,12 +818,12 @@ msgid ""
 msgstr ""
 "<button type=\"button\" class=\"ui black deny button\" id=\"error-close"
 "\">Nope</button> <button type=\"button\" class=\"ui positive right labeled "
-"icon button\" id=\"error-send\"> Yep, stuur de fout<i class=\"checkmark icon"
-"\" aria-hidden=\"true\"></i></button>"
+"icon button\" id=\"error-send\"> Yep, στείλτε το σφάλμα <i class=\"checkmark "
+"icon\" aria-hidden=\"true\"></i></button>"
 
 #: index.html%2Bhtml.body.footer.div.div.div:458-15
 msgid "Version"
-msgstr "Versie"
+msgstr "Έκδοση"
 
 #: index.html%2Bhtml.body.footer.div.div.div.div:460-17
 msgid "2.0.0"
@@ -823,8 +831,8 @@ msgstr "2.0.0"
 
 #: index.html%2Bhtml.body.footer.div.div.div:462-15
 msgid "Published on"
-msgstr "Gepubliceerd op"
+msgstr "Ημ. δημοσίευσης"
 
 #: index.html%2Bhtml.body.footer.div.div.div.div:464-17
 msgid "August 19th 2021"
-msgstr "19 augustus 2021"
+msgstr "19 Αυγούστου 2021"
