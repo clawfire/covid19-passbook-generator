@@ -294,20 +294,25 @@ window.addEventListener('load', function() {
 
   $('#scanAnother').on('click', () => {
     navigateTo('scan');
-  })
+  });
 
   $('#qrfile').on('change', (e) => {
     const file = e.target.files[0]
     if (!file) {
       return;
     }
-    QrScanner.scanImage(file)
+
+    if (['image/jpg', 'image/jpeg', 'image/png'].includes(file.type)) {
+      QrScanner.scanImage(file)
       .then(result => decode(result))
       .catch((error) => {
         console.error("Error while decoding QR code", error);
         window.alert("No QR code found in image");
-      })
-  })
+      });
+    } else {
+      window.alert('Image type not supported. Try again with a valid JPG, JPEG, or PNG image');
+    }
+  });
 
   function initScanner() {
     QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
