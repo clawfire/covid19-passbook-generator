@@ -26,3 +26,178 @@ targetPort = 1234
 NODE_ENV = "development"
 
 ## more info on configuring this file: https://www.netlify.com/docs/netlify-toml-reference/
+
+[[redirects]]
+from = "/"
+to = "/bg"
+force = true
+status = 302
+condition = {Language=["bg"]}
+
+[[redirects]]
+from = "/"
+to = "/cs"
+force = true
+status = 302
+condition = {Language=["cs"]}
+
+[[redirects]]
+from = "/"
+to = "/da"
+force = true
+status = 302
+condition = {Language=["da"]}
+
+[[redirects]]
+from = "/"
+to = "/de"
+force = true
+status = 302
+condition = {Language=["de"]}
+
+[[redirects]]
+from = "/"
+to = "/"
+force = true
+status = 302
+condition = {Language=["el"]}
+
+[[redirects]]
+from = "/"
+to = "/el"
+force = true
+status = 302
+condition = {Language=["el"]}
+
+[[redirects]]
+from = "/"
+to = "/es"
+force = true
+status = 302
+condition = {Language=["es"]}
+
+[[redirects]]
+from = "/"
+to = "/fi"
+status = 302
+force = true
+condition = {Language=["fi"]}
+
+[[redirects]]
+from = "/"
+to = "/fr"
+status = 302
+force = true
+condition = {Language=["fr"]}
+
+[[redirects]]
+from = "/"
+to = "/ga"
+status = 302
+force = true
+condition = {Language=["ga"]}
+
+[[redirects]]
+from = "/"
+to = "/hr"
+status = 302
+force = true
+condition = {Language=["hr"]}
+
+[[redirects]]
+from = "/"
+to = "/hu"
+status = 302
+force = true
+condition = {Language=["hu"]}
+
+[[redirects]]
+from = "/"
+to = "/it"
+status = 302
+force = true
+condition = {Language=["it"]}
+
+[[redirects]]
+from = "/"
+to = "/lb"
+force = true
+status = 302
+condition = {Language=["lb"]}
+
+[[redirects]]
+from = "/"
+to = "/lt"
+force = true
+status = 302
+condition = {Language=["lt"]}
+
+[[redirects]]
+from = "/"
+to = "/lv"
+force = true
+status = 302
+condition = {Language=["lv"]}
+
+[[redirects]]
+from = "/"
+to = "/mt"
+force = true
+status = 302
+condition = {Language=["mt"]}
+
+[[redirects]]
+from = "/"
+to = "/nl"
+force = true
+status = 302
+condition = {Language=["nl"]}
+
+[[redirects]]
+from = "/"
+to = "/pl"
+force = true
+status = 302
+condition = {Language=["pl"]}
+
+[[redirects]]
+from = "/"
+to = "/pt"
+force = true
+status = 302
+condition = {Language=["pt"]}
+
+[[redirects]]
+from = "/"
+to = "/ro"
+force = true
+status = 302
+condition = {Language=["ro"]}
+
+[[redirects]]
+from = "/"
+to = "/ru"
+force = true
+status = 302
+condition = {Language=["ru"]}
+
+[[redirects]]
+from = "/"
+to = "/sk"
+force = true
+status = 302
+condition = {Language=["sk"]}
+
+[[redirects]]
+from = "/"
+to = "/sl"
+force = true
+status = 302
+condition = {Language=["sl"]}
+
+[[redirects]]
+from = "/"
+to = "/sv"
+force = true
+status = 302
+condition = {Language=["sv"]}
