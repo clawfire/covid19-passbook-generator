@@ -302,7 +302,7 @@ window.addEventListener('load', function() {
       return;
     }
 
-    if (['image/jpg', 'image/jpeg', 'image/png'].includes(file.type)) {
+    if (['image/jpeg', 'image/png'].includes(file.type)) {
       QrScanner.scanImage(file)
       .then(result => decode(result))
       .catch((error) => {
