@@ -242,6 +242,16 @@ window.addEventListener('load', function() {
 
   });
 
+  // Dropdown handling function
+  $('.ui.dropdown').dropdown({
+    onChange: function(value, text, $selectedItem){
+      if(value == "en"){value=""}
+      let path = "/"+value
+      if(window.location.pathname !== path){
+        window.location.href=path
+      }
+    }
+  }).dropdown('set selected','en');
   // Message closing function
   // Will be used for all the messages
   $('.message .close').on('click', function() {
