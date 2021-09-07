@@ -245,15 +245,27 @@ window.addEventListener('load', function() {
   });
 
   // Dropdown handling function
-  $('.ui.dropdown').dropdown({
-    onChange: function(value, text, $selectedItem){
+  // --------------------------
+  // First, which language we are using now
+  let currentLanguage = window.location.pathname == "/" ? "en" : window.location.pathname.substring(1);
+  // Then activate this language as the currently selected language
+  $("#language-selector").find("[value='"+currentLanguage+"']").prop({selected: true});
+  // Add some log infos
+  if (process.env.NODE_ENV === 'development') {
+    console.group('💬 Language selection');
+    console.log('URL PATH : %s', window.location.pathname);
+    console.log('Language is %s', currentLanguage);
+    console.groupEnd();
+  }
+  // init the dropdown and bind page change to it
+  $('#language-selector').on('change',(event)=>{
+    let value= $(event.target).val();
       if(value == "en"){value=""}
       let path = "/"+value
       if(window.location.pathname !== path){
         window.location.href=path
       }
-    }
-  }).dropdown('set selected','en');
+  });
   // Message closing function
   // Will be used for all the messages
   $('.message .close').on('click', function() {
