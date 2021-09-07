@@ -14,11 +14,13 @@ var parser = require('ua-parser-js');
 
 let successfulGeneration = false;
 
+if (process.env.NODE_ENV !== 'development') {
 window.onerror = function (msg, url, lineNo, columnNo, error) {
   const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
   const extra = `File: ${url}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\n`;
   manageError(msg, extra)
   return false;
+}
 }
 
 window.addEventListener('offline', () => {
