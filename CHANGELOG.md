@@ -1,5 +1,31 @@
 ## [Unrealeased]
 
+## [2.0] - 2021-09-07
+### Added
+- netlify dev is working
+- Main region on the code (A11y)
+- visible focus indicator on buttons
+- alternate text on the scanner preview
+- Rendering for non-lating names on preview
+- skip to content link
+- Sweden way of getting EUDCC
+- Componed first names and last names supported no matter how many you have
+- Internationalization ! [Help us translate in your language](https://crowdin.com/project/covid19-passbook/invite)
+
+### Changed
+- Using local instance of openSans (bye bye Google fonts)
+- Review color a11y
+- New theme from Laurence & geoffrey
+- Move all the modals code at the end of the index file
+- New header
+- better routing accessibility
+- better button contrasts & text contrats
+- text alignments
+
+### Removed
+- unnecessary title on links
+- inline styles
+
 ## [1.7] - 2021-08-06
 ### Added
 - Add CovidShield vaccine to the list of accepted vaccine
