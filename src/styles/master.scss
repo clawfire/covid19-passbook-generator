@@ -1,8 +1,36 @@
-/**
- * Generic HTML Elements
- */
+@import "semantic-override.scss";
+
 body {
-    font-size: 16px;
+  @extend %opensans;
+  font-size: 16px;
+  line-height: 1.7;
+  color: $violet-dark;
+}
+
+img.producthunt {
+  width: 250px;
+  height: 54px;
+}
+
+.top-container {
+  position: relative;
+}
+
+a.skip-link {
+  position: absolute;
+  left: -7000px;
+  z-index: 1000;
+}
+
+a.skip-link:focus {
+  position:absolute;
+  top: 0em;
+  left: 0em;
+}
+
+p,
+li {
+    line-height: 1.6;
 }
 
 video {
@@ -14,16 +42,93 @@ section {
     margin-bottom: 1em;
 }
 
-p,
-li {
-    line-height: 1.6;
+a {
+    color: $teal;
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+        color: $teal-dark;
+    }
+
+    &:focus-visible {
+        background: $yellow-light;
+    }
 }
 
-/**
- * Semantic UI Tweak
- */
-.ui.button[name="startScanning"] {
-    margin-bottom: .5em;
+#top-header {
+    border-radius: 0;
+    padding: 24px 16px;
+    min-height: none;
+
+    .container {
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        flex-shrink: 0;
+        margin-right: 16px;
+      }
+    }
+
+    .header {
+        margin-top: 0;
+
+        &::before {
+            content: none;
+        }
+
+        &.item {
+          border-left: 0;
+        }
+
+        @media (max-width: $ui-breakpoint-sm) {
+          font-size: 1.5rem;
+        }
+    }
+}
+
+.ui.stackable {
+  section {
+    .ui.button {
+      min-height: 52px;
+      font-size: 1.25rem;
+
+      svg {
+        margin-right: .5rem;
+      }
+    }
+  }
+}
+
+.ui.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+
+    + .button.inverted.basic.ui {
+        background: rgba(255,255,255, .9)!important;
+        color: #282343 !important;
+
+        &:hover,
+        &:focus {
+            color: $yellow!important;
+            background: #282343!important;
+        }
+    }
+}
+
+.ui.button.fluid.icon {
+  display: flex;
+}
+
+.ui.button:focus, .ui.button:hover, .ui.button + .button.inverted.basic.ui:focus, .ui.button + .button.inverted.basic.ui:hover {
+  box-shadow: 0 0 0 .2rem white !important;
+}
+
+span.certType {
+  color: white;
 }
 
 .ui.grid > .column.hide{
@@ -86,6 +191,222 @@ ul.ui.list li,
 [id="faq"] .ui.list .item .header {
     font-size: 1.2rem;
     margin-bottom: 1rem;
+}
+
+#top-header {
+  background: $teal;
+  color: white;
+
+  .ui.header{
+    color: inherit;
+  }
+}
+
+#intro {
+  background: $violet-dark;
+  color: white;
+
+  > * {
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .statistics {
+    gap: 1rem;
+  }
+
+  .statistic {
+    min-width: calc(50% - .5rem);
+    max-width: calc(50% - .5rem);
+  }
+
+  .value i {
+    margin-bottom: .75rem;
+  }
+
+  .label {
+    font-weight: 500;
+  }
+
+  @media (min-height: $breakpoint-sm-h) and (min-width: $ui-breakpoint-sm) {
+    position: sticky;
+    top: 0;
+    z-index: $zi-sticky-intro;
+  }
+
+  @media (min-height: $breakpoint-sm-h) and (max-width: $ui-breakpoint-sm) {
+    position: sticky;
+    top: -300px;
+    z-index: $zi-sticky-intro;
+  }
+}
+
+[role="status"]:empty {
+  display: none;
+}
+
+.ui.green.message[role="status"] {
+  color: #0C8220;
+}
+
+/**
+ * Pointy end of block.
+ */
+#intro,
+#scan,
+#preview {
+  align-self: flex-start;
+  padding: 2rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    background: inherit;
+    height: 54px;
+    left: 0;
+    right: 0;
+    bottom: -52px;
+    clip-path: polygon(0 0, 100% 0, 100% 12%, 50% 100%, 0% 12%);
+  }
+}
+
+#scan,
+#preview {
+  background-color: $teal;
+  color: white;
+}
+
+#preview .card {
+  background-color: rgb(0, 51, 153);
+  color: white;
+
+  #qrcode {
+    width: 100%;
+    img{
+      width: 100%
+    }
+  }
+
+  .content .header, .content .meta {
+    color: white;
+  }
+
+  .extra {
+    color: transparentize(white, $amount: 0.5);
+    border-top: 1px solid transparentize(white, 0.5) !important;
+  }
+
+  .ui.list .list>.item .header,
+  .ui.list > .item .header {
+    color:$yellow;
+  }
+}
+
+/**
+ * FAQ
+ */
+
+#faq {
+
+  .ui.header {
+    line-height: 1.7;
+
+    abbr {
+      font-size: 2.5rem;
+    }
+
+    .sub {
+      font-size: 1.5rem;
+      line-height: 1.7;
+    }
+  }
+
+  .list {
+      .item {
+        .header {
+          font-size: 1.5rem;
+        }
+
+        .description {
+          &,
+          li,
+          p {
+            font-size: 1.25rem;
+            line-height: 1.65;
+          }
+
+          p {
+            margin-top: 1.5em;
+            margin-bottom: 1.5em;
+          }
+
+          ol {
+            margin-left: 2.5rem;
+            li {
+              list-style: none;
+
+              &::before {
+                padding: 0 8px 0 6px;
+                margin-left: -2.2rem;
+                color: $violet-dark;
+                font-weight: bold;
+                line-height: 1.55;
+                background: $yellow;
+                clip-path: polygon(0 0, 80% 0, 100% 50%, 80% 100%, 0 100%);
+              }
+            }
+          }
+        }
+      }
+    }
+
+  @media (min-width: $ui-breakpoint-md) {
+    .content a[href^="https://www.producthunt.com"] {
+      position: fixed;
+      bottom: 32px;
+      right: 48px;
+    }
+
+    &-list {
+      > .item:last-child .content {
+        padding-bottom: 60px;
+      }
+    }
+  }
+
+   @media (max-width: $ui-breakpoint-md) {
+      .content a[href^="https://www.producthunt.com"] {
+        display: block;
+        margin-top: 2rem;
+      }
+   }
+
+  @media (max-width: $ui-breakpoint-sm) {
+    padding-top: 80px!important;
+
+    .ui.header {
+      text-align: center;
+    }
+  } // end of media query
+}
+
+
+.ui.two.statistics {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+
+  .statistic {
+    max-width: 50%;
+
+    .label,
+    .value {
+      text-transform: none;
+      color: white;
+      @extend %opensans;
+      font-weight: 300;
+    }
+  }
 }
 
 #buildInfos{

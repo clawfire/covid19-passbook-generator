@@ -12,11 +12,15 @@ import {
 
 var parser = require('ua-parser-js');
 
+let successfulGeneration = false;
+
+if (process.env.NODE_ENV !== 'development') {
 window.onerror = function (msg, url, lineNo, columnNo, error) {
   const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
   const extra = `File: ${url}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\n`;
   manageError(msg, extra)
   return false;
+}
 }
 
 window.addEventListener('offline', () => {
@@ -53,13 +57,21 @@ let navigationHandlerInit = false;
 let currentRoute = getCurrentRoute();
 
 function navigationHandler(callback) {
-  const routes = Array.from($('section.column')).map(e => e.id);
+  const routes = ['intro', 'scan', 'preview'];
+  const titles = ['Keep your COVID certificate in your iPhone’s wallet.', 'Scan your QR code.', 'Your certificate is ready!'];
+
 
   function changeState(oldRoute, newRoute, callback) {
     if ((oldRoute != newRoute) && (routes.includes(newRoute))) {
-      $('#' + oldRoute).fadeTo('fast', 0).css('visibility', 'hidden').css('display', 'none');
-      $('#' + newRoute).fadeTo('fast', 1).css('visibility', 'visible').css('display', 'block');
+      console.log('changeState', oldRoute, newRoute);
+      document.getElementById(oldRoute).style.visibility = 'hidden';
+      document.getElementById(oldRoute).style.display = 'none';
+      document.getElementById(newRoute).style.visibility = 'visible';
+      document.getElementById(newRoute).style.display = 'block';
+      document.title = titles[routes.indexOf(newRoute)] + ' - Covid19-Passbook';
+      document.getElementById('mainTitle').innerText = titles[routes.indexOf(newRoute)];
       callback(oldRoute, newRoute);
+      document.getElementById('mainTitle').focus();
       currentRoute = newRoute;
     }
   }
@@ -220,8 +232,40 @@ window.addEventListener('load', function() {
     if (oldRoute == 'scan') {
       scanner.destroy();
     }
+
+    if (newRoute == 'preview' && successfulGeneration) {
+      document.getElementById('feedbackMsg').innerText = 'Your pass has been successfully generated!';
+    }
+
+    if (oldRoute == 'preview') {
+      successfulGeneration = false;
+      document.getElementById('feedbackMsg').innerText = '';
+    }
+
   });
 
+  // Dropdown handling function
+  // --------------------------
+  // First, which language we are using now
+  let currentLanguage = window.location.pathname == "/" ? "en" : window.location.pathname.substring(1);
+  // Then activate this language as the currently selected language
+  $("#language-selector").find("[value='"+currentLanguage+"']").prop({selected: true});
+  // Add some log infos
+  if (process.env.NODE_ENV === 'development') {
+    console.group('💬 Language selection');
+    console.log('URL PATH : %s', window.location.pathname);
+    console.log('Language is %s', currentLanguage);
+    console.groupEnd();
+  }
+  // init the dropdown and bind page change to it
+  $('#language-selector').on('change',(event)=>{
+    let value= $(event.target).val();
+      if(value == "en"){value=""}
+      let path = "/"+value
+      if(window.location.pathname !== path){
+        window.location.href=path
+      }
+  });
   // Message closing function
   // Will be used for all the messages
   $('.message .close').on('click', function() {
@@ -274,20 +318,25 @@ window.addEventListener('load', function() {
 
   $('#scanAnother').on('click', () => {
     navigateTo('scan');
-  })
+  });
 
   $('#qrfile').on('change', (e) => {
     const file = e.target.files[0]
     if (!file) {
       return;
     }
-    QrScanner.scanImage(file)
+
+    if (['image/jpeg', 'image/png'].includes(file.type)) {
+      QrScanner.scanImage(file)
       .then(result => decode(result))
       .catch((error) => {
         console.error("Error while decoding QR code", error);
         window.alert("No QR code found in image");
-      })
-  })
+      });
+    } else {
+      window.alert('Image type not supported. Try again with a valid JPG, JPEG, or PNG image');
+    }
+  });
 
   function initScanner() {
     QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
@@ -386,7 +435,7 @@ window.addEventListener('load', function() {
         template.serialNumber = certificateContent.ci
       }
       // Surname(s) and Forename(s)
-      const isNonLatin = (certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replace("<", ' ') || certificate.nam.fn.toUpperCase() != certificate.nam.fnt.replace("<", ' '));
+      const isNonLatin = (certificate.nam.gn.toUpperCase() != certificate.nam.gnt.replaceAll("<", ' ') || certificate.nam.fn.toUpperCase() != certificate.nam.fnt.replaceAll("<", ' '));
 
       if (process.env.NODE_ENV === 'development') {
         console.group('💬 Handling non-latin alphabets');
@@ -398,7 +447,7 @@ window.addEventListener('load', function() {
         console.groupEnd();
       }
       if (isNonLatin){
-        newPassbookItem(template,"primaryFields", "intl-surnames", "Surnames & Forenames", certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '));
+        newPassbookItem(template,"primaryFields", "intl-surnames", "Surnames & Forenames", certificate.nam.fnt.replaceAll("<", ' ') + " " + certificate.nam.gnt.replaceAll("<", ' '));
         newPassbookItem(template, "backFields", "surnames", "Surnames & Forenames", certificate.nam.fn.toUpperCase() + " " + certificate.nam.gn);
       }else{
         newPassbookItem(template, "primaryFields", "surnames", "Surnames & Forenames", certificate.nam.fn.toUpperCase() + " " + certificate.nam.gn);
@@ -567,8 +616,8 @@ window.addEventListener('load', function() {
             canvas.innerHTML = "";
             qrcode = new window.QRCode(canvas, {
               text: template.barcode.message,
-              width: 400,
-              height: 400,
+              width: 375,
+              height: 375,
               level: window.QRCode.CorrectLevel.M
             });
             if (process.env.NODE_ENV === 'development') {
@@ -576,7 +625,7 @@ window.addEventListener('load', function() {
               console.group('\u{1F4C7} Pass preview');
               console.table({
                 "name": certificate.nam.gn + " " + certificate.nam.fn.toUpperCase(),
-                "name intl": certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '),
+                "name intl": certificate.nam.fnt.replaceAll("<", ' ') + " " + certificate.nam.gnt.replaceAll("<", ' '),
                 "dob": certificate.dob,
                 "uci": certificateContent.ci,
                 "type": certificateType,
@@ -585,7 +634,7 @@ window.addEventListener('load', function() {
             }
             renderTpl("card-content-tpl", "cardContent", {
               "name": certificate.nam.fn + " " + certificate.nam.gn.toUpperCase(),
-              "name-intl": certificate.nam.fnt.replace("<", ' ') + " " + certificate.nam.gnt.replace("<", ' '),
+              "name-intl": certificate.nam.fnt.replaceAll("<", ' ') + " " + certificate.nam.gnt.replaceAll("<", ' '),
               "dob": certificate.dob,
               "uci": certificateContent.ci.startsWith('URN:UVCI:') ? certificateContent.ci.substring(9) : certificateContent.ci
             });
@@ -593,6 +642,7 @@ window.addEventListener('load', function() {
               "type": certificateType,
               "validuntil": certificate.r ? certificate.r[0].du : null
             })
+            successfulGeneration = true;
             navigateTo('preview');
           })
         })

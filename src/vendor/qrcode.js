@@ -30,12 +30,12 @@
          this.mode = QRMode.MODE_8BIT_BYTE;
          this.data = data;
          this.parsedData = [];
- 
+
          // Added to support UTF-8 Characters
          for (var i = 0, l = this.data.length; i < l; i++) {
              var byteArray = [];
              var code = this.data.charCodeAt(i);
- 
+
              if (code > 0x10000) {
                  byteArray[0] = 0xf0 | ((code & 0x1c0000) >>> 18);
                  byteArray[1] = 0x80 | ((code & 0x3f000) >>> 12);
@@ -51,19 +51,19 @@
              } else {
                  byteArray[0] = code;
              }
- 
+
              this.parsedData.push(byteArray);
          }
- 
+
          this.parsedData = Array.prototype.concat.apply([], this.parsedData);
- 
+
          if (this.parsedData.length != this.data.length) {
              this.parsedData.unshift(191);
              this.parsedData.unshift(187);
              this.parsedData.unshift(239);
          }
      }
- 
+
      QR8bitByte.prototype = {
          getLength: function (buffer) {
              return this.parsedData.length;
@@ -74,7 +74,7 @@
              }
          },
      };
- 
+
      function QRCodeModel(typeNumber, errorCorrectLevel) {
          this.typeNumber = typeNumber;
          this.errorCorrectLevel = errorCorrectLevel;
@@ -83,7 +83,7 @@
          this.dataCache = null;
          this.dataList = [];
      }
- 
+
      QRCodeModel.prototype = {
          addData: function (data) {
              var newData = new QR8bitByte(data);
@@ -1024,44 +1024,44 @@
          [2809, 2213, 1579, 1219],
          [2953, 2331, 1663, 1273],
      ];
- 
+
      function _isSupportCanvas() {
          return typeof CanvasRenderingContext2D != "undefined";
      }
- 
+
      // android 2.x doesn't support Data-URI spec
      function _getAndroid() {
          var android = false;
          var sAgent = navigator.userAgent;
- 
+
          if (/android/i.test(sAgent)) {
              // android
              android = true;
              var aMat = sAgent.toString().match(/android ([0-9]\.[0-9])/i);
- 
+
              if (aMat && aMat[1]) {
                  android = parseFloat(aMat[1]);
              }
          }
- 
+
          return android;
      }
- 
+
      var svgDrawer = (function () {
          var Drawing = function (el, htOption) {
              this._el = el;
              this._htOption = htOption;
          };
- 
+
          Drawing.prototype.draw = function (oQRCode) {
              var _htOption = this._htOption;
              var _el = this._el;
              var nCount = oQRCode.getModuleCount();
              var nWidth = Math.floor(_htOption.width / nCount);
              var nHeight = Math.floor(_htOption.height / nCount);
- 
+
              this.clear();
- 
+
              function makeSVG(tag, attrs) {
                  var el = document.createElementNS(
                      "http://www.w3.org/2000/svg",
@@ -1071,7 +1071,7 @@
                      if (attrs.hasOwnProperty(k)) el.setAttribute(k, attrs[k]);
                  return el;
              }
- 
+
              var svg = makeSVG("svg", {
                  viewBox: "0 0 " + String(nCount) + " " + String(nCount),
                  width: "100%",
@@ -1084,7 +1084,7 @@
                  "http://www.w3.org/1999/xlink"
              );
              _el.appendChild(svg);
- 
+
              svg.appendChild(
                  makeSVG("rect", {
                      fill: _htOption.colorLight,
@@ -1100,7 +1100,7 @@
                      id: "template",
                  })
              );
- 
+
              for (var row = 0; row < nCount; row++) {
                  for (var col = 0; col < nCount; col++) {
                      if (oQRCode.isDark(row, col)) {
@@ -1124,9 +1124,9 @@
          };
          return Drawing;
      })();
- 
+
      var useSVG = document.documentElement.tagName.toLowerCase() === "svg";
- 
+
      // Drawing in DOM by using Table tag
      var Drawing = useSVG
          ? svgDrawer
@@ -1136,7 +1136,7 @@
                      this._el = el;
                      this._htOption = htOption;
                  };
- 
+
                  /**
                   * Draw the QRCode
                   *
@@ -1151,10 +1151,10 @@
                      var aHTML = [
                          '<table style="border:0;border-collapse:collapse;">',
                      ];
- 
+
                      for (var row = 0; row < nCount; row++) {
                          aHTML.push("<tr>");
- 
+
                          for (var col = 0; col < nCount; col++) {
                              aHTML.push(
                                  '<td style="border:0;border-collapse:collapse;padding:0;margin:0;width:' +
@@ -1168,33 +1168,33 @@
                                      ';"></td>'
                              );
                          }
- 
+
                          aHTML.push("</tr>");
                      }
- 
+
                      aHTML.push("</table>");
                      _el.innerHTML = aHTML.join("");
- 
+
                      // Fix the margin values as real size.
                      var elTable = _el.childNodes[0];
                      var nLeftMarginTable =
                          (_htOption.width - elTable.offsetWidth) / 2;
                      var nTopMarginTable =
                          (_htOption.height - elTable.offsetHeight) / 2;
- 
+
                      if (nLeftMarginTable > 0 && nTopMarginTable > 0) {
                          elTable.style.margin =
                              nTopMarginTable + "px " + nLeftMarginTable + "px";
                      }
                  };
- 
+
                  /**
                   * Clear the QRCode
                   */
                  Drawing.prototype.clear = function () {
                      this._el.innerHTML = "";
                  };
- 
+
                  return Drawing;
            })()
          : (function () {
@@ -1204,7 +1204,7 @@
                      this._elImage.style.display = "block";
                      this._elCanvas.style.display = "none";
                  }
- 
+
                  // Android 2.1 bug workaround
                  // http://code.google.com/p/android/issues/detail?id=5141
                  if (this._android && this._android <= 2.1) {
@@ -1235,11 +1235,11 @@
                              arguments[3] *= factor;
                              arguments[4] *= factor;
                          }
- 
+
                          drawImage.apply(this, arguments);
                      };
                  }
- 
+
                  /**
                   * Check whether the user's browser supports Data URI or not
                   *
@@ -1251,25 +1251,25 @@
                      var self = this;
                      self._fFail = fFail;
                      self._fSuccess = fSuccess;
- 
+
                      // Check it just once
                      if (self._bSupportDataURI === null) {
                          var el = document.createElement("img");
                          var fOnError = function () {
                              self._bSupportDataURI = false;
- 
+
                              if (self._fFail) {
                                  self._fFail.call(self);
                              }
                          };
                          var fOnSuccess = function () {
                              self._bSupportDataURI = true;
- 
+
                              if (self._fSuccess) {
                                  self._fSuccess.call(self);
                              }
                          };
- 
+
                          el.onabort = fOnError;
                          el.onerror = fOnError;
                          el.onload = fOnSuccess;
@@ -1285,7 +1285,7 @@
                          self._fFail.call(self);
                      }
                  }
- 
+
                  /**
                   * Drawing QRCode by using canvas
                   *
@@ -1296,7 +1296,7 @@
                  var Drawing = function (el, htOption) {
                      this._bIsPainted = false;
                      this._android = _getAndroid();
- 
+
                      this._htOption = htOption;
                      this._elCanvas = document.createElement("canvas");
                      this._elCanvas.width = htOption.width;
@@ -1306,12 +1306,12 @@
                      this._oContext = this._elCanvas.getContext("2d");
                      this._bIsPainted = false;
                      this._elImage = document.createElement("img");
-                     this._elImage.alt = "Scan me!";
+                     this._elImage.alt = "QR-code";
                      this._elImage.style.display = "none";
                      this._el.appendChild(this._elImage);
                      this._bSupportDataURI = null;
                  };
- 
+
                  /**
                   * Draw the QRCode
                   *
@@ -1321,16 +1321,16 @@
                      var _elImage = this._elImage;
                      var _oContext = this._oContext;
                      var _htOption = this._htOption;
- 
+
                      var nCount = oQRCode.getModuleCount();
                      var nWidth = _htOption.width / nCount;
                      var nHeight = _htOption.height / nCount;
                      var nRoundedWidth = Math.round(nWidth);
                      var nRoundedHeight = Math.round(nHeight);
- 
+
                      _elImage.style.display = "none";
                      this.clear();
- 
+
                      for (var row = 0; row < nCount; row++) {
                          for (var col = 0; col < nCount; col++) {
                              var bIsDark = oQRCode.isDark(row, col);
@@ -1344,7 +1344,7 @@
                                  ? _htOption.colorDark
                                  : _htOption.colorLight;
                              _oContext.fillRect(nLeft, nTop, nWidth, nHeight);
- 
+
                              // 안티 앨리어싱 방지 처리
                              _oContext.strokeRect(
                                  Math.floor(nLeft) + 0.5,
@@ -1352,7 +1352,7 @@
                                  nRoundedWidth,
                                  nRoundedHeight
                              );
- 
+
                              _oContext.strokeRect(
                                  Math.ceil(nLeft) - 0.5,
                                  Math.ceil(nTop) - 0.5,
@@ -1361,10 +1361,10 @@
                              );
                          }
                      }
- 
+
                      this._bIsPainted = true;
                  };
- 
+
                  /**
                   * Make the image from Canvas if the browser supports Data URI.
                   */
@@ -1373,7 +1373,7 @@
                          _safeSetDataURI.call(this, _onMakeImage);
                      }
                  };
- 
+
                  /**
                   * Return whether the QRCode is painted or not
                   *
@@ -1382,7 +1382,7 @@
                  Drawing.prototype.isPainted = function () {
                      return this._bIsPainted;
                  };
- 
+
                  /**
                   * Clear the QRCode
                   */
@@ -1395,7 +1395,7 @@
                      );
                      this._bIsPainted = false;
                  };
- 
+
                  /**
                   * @private
                   * @param {Number} nNumber
@@ -1404,13 +1404,13 @@
                      if (!nNumber) {
                          return nNumber;
                      }
- 
+
                      return Math.floor(nNumber * 1000) / 1000;
                  };
- 
+
                  return Drawing;
            })();
- 
+
      /**
       * Get the type by string length
       *
@@ -1422,10 +1422,10 @@
      function _getTypeNumber(sText, nCorrectLevel) {
          var nType = 1;
          var length = _getUTF8Length(sText);
- 
+
          for (var i = 0, len = QRCodeLimitLength.length; i <= len; i++) {
              var nLimit = 0;
- 
+
              switch (nCorrectLevel) {
                  case QRErrorCorrectLevel.L:
                      nLimit = QRCodeLimitLength[i][0];
@@ -1440,28 +1440,28 @@
                      nLimit = QRCodeLimitLength[i][3];
                      break;
              }
- 
+
              if (length <= nLimit) {
                  break;
              } else {
                  nType++;
              }
          }
- 
+
          if (nType > QRCodeLimitLength.length) {
              throw new Error("Too long data");
          }
- 
+
          return nType;
      }
- 
+
      function _getUTF8Length(sText) {
          var replacedText = encodeURI(sText)
              .toString()
              .replace(/\%[0-9a-fA-F]{2}/g, "a");
          return replacedText.length + (replacedText.length != sText ? 3 : 0);
      }
- 
+
      /**
       * @class QRCode
       * @constructor
@@ -1496,38 +1496,38 @@
              colorLight: "#ffffff",
              correctLevel: QRErrorCorrectLevel.H,
          };
- 
+
          if (typeof vOption === "string") {
              vOption = {
                  text: vOption,
              };
          }
- 
+
          // Overwrites options
          if (vOption) {
              for (var i in vOption) {
                  this._htOption[i] = vOption[i];
              }
          }
- 
+
          if (typeof el == "string") {
              el = document.getElementById(el);
          }
- 
+
          if (this._htOption.useSVG) {
              Drawing = svgDrawer;
          }
- 
+
          this._android = _getAndroid();
          this._el = el;
          this._oQRCode = null;
          this._oDrawing = new Drawing(this._el, this._htOption);
- 
+
          if (this._htOption.text) {
              this.makeCode(this._htOption.text);
          }
      };
- 
+
      /**
       * Make the QRCode
       *
@@ -1544,7 +1544,7 @@
          this._oDrawing.draw(this._oQRCode);
          this.makeImage();
      };
- 
+
      /**
       * Make the Image from Canvas element
       * - It occurs automatically
@@ -1560,18 +1560,18 @@
              this._oDrawing.makeImage();
          }
      };
- 
+
      /**
       * Clear the QRCode
       */
      QRCode.prototype.clear = function () {
          this._oDrawing.clear();
      };
- 
+
      /**
       * @name QRCode.CorrectLevel
       */
      QRCode.CorrectLevel = QRErrorCorrectLevel;
  })();
- 
+
  window.QRCode = QRCode;
