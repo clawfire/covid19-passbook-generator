@@ -17,7 +17,7 @@ let successfulGeneration = false;
 if (process.env.NODE_ENV !== 'development') {
 window.onerror = function (msg, url, lineNo, columnNo, error) {
   const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
-  const extra = `File: ${url}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\n`;
+  const extra = `File: ${url}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\nCurrentRoute: ${currentRoute}\n`;
   manageError(msg, extra)
   return false;
 }
