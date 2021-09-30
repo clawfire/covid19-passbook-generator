@@ -29,7 +29,7 @@
 
     <body class="">
         <header id="top-header" class="ui menu" role="banner">
-            <div class="top-container"><a class="skip-link" href="#main">content</a></div>
+            <div class="top-container"><a class="skip-link" href="#main">conteúdo</a></div>
             <div class="ui container">
               <svg width="45" height="48" viewBox="0 0 470 504" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M334.667 494H124C115.2 494 108 486.8 108 478V26C108 17.2 115.2 9.99999 124 9.99999H334.667C343.467 9.99999 350.667 17.2 350.667 26V478C350.667 486.8 343.467 494 334.667 494Z" fill="#363155"/>
@@ -54,11 +54,11 @@
               <div class="ui two small statistics">
                 <div class="statistic">
                   <div class="value"><i class="shield alternate icon" aria-hidden="true"></i></div>
-                  <div class="label"><p>generated on your phone</p></div>
+                  <div class="label"><p>gerado no seu telefone</p></div>
                 </div>
                 <div class="statistic">
                   <div class="value"><i class="times circle outline icon" aria-hidden="true"></i></div>
-                  <div class="label"><p>no personal data collection</p></div>
+                  <div class="label"><p>sem guardar dados pessoais</p></div>
                 </div>
                 <div class="statistic">
                   <div class="value"><i class="times circle outline icon" aria-hidden="true"></i></div>
@@ -135,11 +135,11 @@
                     <path d="M89 84V71H94V84H89Z" fill="currentColor"/>
                     <path d="M51 41V36H56V41H51Z" fill="currentColor"/>
                   </svg>
-                  Scan my certificate
+                  Ler o meu certificado
               </button>
               <button type="button" class="ui fluid basic inverted icon button big" name="scanImage">
                   <i class="file image icon" aria-hidden="true"></i>
-                  Import picture
+                  Importar imagem
               </button>
               <input type="file" id="qrfile" style="display: none;" accept="image/jpeg, image/png">
             </section>
@@ -147,18 +147,18 @@
                 <div class="ui fluid card">
                     <div class="image" id="scannerContainer">
                         <video id="scanner" aria-labelledby="video-desc">
-                            <p>Your browser is not compatible with our technology.</p>
+                            <p>O seu browser não é compatível com a nossa tecnologia.</p>
                         </video>
                         <div id="mask"></div>
                     </div>
                     <div class="content">
                         <div class="description" id="video-desc">
-                            <p><i class="qrcode icon" aria-hidden="true"></i> Aim at the QR Code of your certificate to capture.</p>
+                            <p><i class="qrcode icon" aria-hidden="true"></i> Aponte o código QR do seu certificado para capturar.</p>
                         </div>
                     </div>
                     <div class="ui bottom attached disabled button" id="flashlight_btn" >
                         <p><i class="lightbulb icon" aria-hidden="true"></i>
-                        <span>Flashlight unavailable</span></p>
+                        <span>Lanterna indisponível</span></p>
                     </div>
                 </div>
             </section>
@@ -172,7 +172,7 @@
                     </div>
                     <div class="extra content" id="cardExtraContent">
                     </div>
-                    <button type="button" id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon" aria-hidden="true"></i>Save in your wallet</button>
+                    <button type="button" id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon" aria-hidden="true"></i>Guardar na sua carteira</button>
                 </div>
                 <button type="button" class="ui fluid violet icon button" name="startScanning">
                     <svg width="24" height="24" viewbox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -240,11 +240,11 @@
                     <path d="M89 84V71H94V84H89Z" fill="currentColor"/>
                     <path d="M51 41V36H56V41H51Z" fill="currentColor"/>
                   </svg>
-                    Scan another certificate
+                    Ler outro certificado
                 </button>
                 <button type="button" class="ui fluid basic inverted icon button" name="scanImage">
                     <i class="file image icon" aria-hidden="true"></i>
-                    Import another picture
+                    Importar outra imagem
                 </button>
             </section>
 
@@ -253,11 +253,11 @@
               <section id="language" class="row">
                 <h2 class="ui header">
                   <i class="translate icon"></i>
-                  <div class="content">Language</div>
+                  <div class="content">Idioma</div>
                 </h2>
                 <div class="ui form">
                   <div class="field">
-                    <label for="language-selection">Select your language</label>
+                    <label for="language-selection">Selecione o seu idioma</label>
                     <select name="language-selection" id="language-selector">
                       <option value="bg">български език</option>
                       <option value="cs">Česky</option>
@@ -287,20 +287,20 @@
                     </select>
                   </div>
                 </div>
-                <p>If this page is still in English after selecting another language, that means we are missing translations for your selected language. <a href="https://crwd.in/covid19-passbook">Help us to translate</a>.</p>
+                <p>Se esta página ainda estiver em Inglês depois de selecionar outro idioma, significa que ainda não temos traduções para o idioma selecionado. <a href="https://crwd.in/covid19-passbook">Ajude-nos a traduzir</a>.</p>
               </section>
               <section id="faq" class="row">
                   <h2 class="ui header">
                       <abbr title="Frequently Asked Questions" id="faq-title">FAQ</abbr>
                   </h2>
-                  <div class="ui header"><p class="sub header">Learn more about the project, security, how it works and more.</p></div>
+                  <div class="ui header"><p class="sub header">Saiba mais sobre o projeto, a sua segurança, como ele funciona e outros assuntos.</p></div>
                   <div id="faq-list" class="ui relaxed list" itemscope itemtype="https://schema.org/FAQPage">
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                              <h3 class="header" itemprop="name">I can't scan my certificate.</h3>
+                              <h3 class="header" itemprop="name">Eu não consigo ler o meu certificado.</h3>
                               <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                                   <ol class="ui ordered list" itemprop="text" role="list">
-                                      <li class="item">Have a good light source and align your QR code with the scan zone edge. The size of the visual aid is the size of the code we need. Your code must be flat (wrinkled paper won't work well).</li>
+                                      <li class="item">Tenha uma boa fonte de luz e alinhe o seu código QR com a borda da zona de digitalização. The size of the visual aid is the size of the code we need. Your code must be flat (wrinkled paper won't work well).</li>
                                       <li class="item">If you have a screenshot or a picture of your code, you can use the "Import picture" button.</li>
                                       <li class="item">Please be sure to use the EU version of your certificate. See the following question if you don't know where to get yours.</li>
                                       <li class="item">We support the EU Digital COVID certificate of vaccination, recovery, test. The ones from Switzerland and the United Kingdom are also supported if they are following the EU format.</li>
@@ -498,11 +498,11 @@
             <div class="ui labels" id="buildInfos">
               <div class="ui label">
                 Version
-                <div class="detail">2.0.0</div>
+                <div class="detail">2.0.1</div>
               </div>
               <div class="ui label">
                 Published on
-                <div class="detail">September 7th 2021</div>
+                <div class="detail">September 26th 2021</div>
               </div>
             </div>
           </div>
