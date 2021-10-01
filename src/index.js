@@ -104,7 +104,7 @@ function newPassbookItem(passbook, field, key, label, value = "", dateStyle) {
   }
   // Test if fields is one allowed
   if (!['primaryFields', 'secondaryFields', 'auxiliaryFields', 'backFields'].includes(field)) {
-    console.error('The supplied field "%s" isn\'t not allowed', field);
+    console.error('The supplied field "%s" is not allowed', field);
     return null;
   }
 
@@ -113,8 +113,14 @@ function newPassbookItem(passbook, field, key, label, value = "", dateStyle) {
     "label": label,
     "value": value
   };
+  // if there's a dataStyle passed, check it against the possible values
   if (dateStyle) {
-    newObject.dateStyle = dateStyle
+    if (['PKDateStyleNone', 'PKDateStyleShort', 'PKDateStyleMedium', 'PKDateStyleLong', 'PKDateStyleFull'].includes(dateStyle)){
+      newObject.dateStyle = dateStyle
+      newObject.ignoresTimeZone = true
+    }else{
+      console.error('The supplied dateStyle "%s" is not allowed', dateStyle);
+    }
   };
   passbook.generic[field].push(newObject);
 }
