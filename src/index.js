@@ -457,7 +457,7 @@ window.addEventListener('load', function() {
       // Date of birth
       newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", certificate.dob + "T00:00Z", "PKDateStyleShort");
       // Unique Certificate Identifier
-      newPassbookItem(template, "auxiliaryFields", "uci", "Unique Certificate Identifier", certificateContent.ci);
+      newPassbookItem(template, "auxiliaryFields", "uci", "Unique Certificate Identifier", template.serialNumber);
 
       if (certificate.v) {
         // COVID-19 Vaccine Certificate
