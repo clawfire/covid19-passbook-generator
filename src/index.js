@@ -96,6 +96,31 @@ function navigateTo(route) {
   window.location.hash = route;
 }
 
+/**
+ * Return date formated as YYYY-MM-DDTHH:MM or YYYY-MM-DDTHH:MM:SS
+ * @param {string} string
+ * @param {boolean} withseconds
+ */
+function formatDate(string, withseconds = false) {
+  switch (string.length) {
+    case 10:
+      // Just the date
+      return withseconds ? string + "T00:00:00" : string + "T00:00";
+      break;
+    case 16:
+      // Date + time but no seconds
+      return withseconds ? string + ":00" : string;
+      break;
+    case 19:
+      // Date + time + seconds
+      return withseconds ? string : string.substring(0, 16);
+      break;
+    default:
+      console.error("The provided string \"%s\” isn't compatible with what was espected for the formatDate function",string);
+      break;
+  }
+}
+
 function newPassbookItem(passbook, field, key, label, value = "", dateStyle) {
   // check if we have the required parameters
   if (passbook === undefined || field === undefined || key === undefined) {
@@ -461,7 +486,7 @@ window.addEventListener('load', function() {
       // Type of certificate
       newPassbookItem(template, "secondaryFields", "certificate-type", "Certificate Type", certificateType);
       // Date of birth
-      newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", certificate.dob + "T00:00Z", "PKDateStyleShort");
+      newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", formatDate(certificate.dob), "PKDateStyleShort");
       // Unique Certificate Identifier
       newPassbookItem(template, "auxiliaryFields", "uci", "Unique Certificate Identifier", template.serialNumber);
 
@@ -483,7 +508,7 @@ window.addEventListener('load', function() {
           // Numnber in a series of vaccination / doses and the overall
           newPassbookItem(template, "backFields", "doses", "Number in a series of vaccination / doses and the overall", certificateContent.dn + "/" + certificateContent.sd);
           // Date of vaccination
-          newPassbookItem(template, "backFields", "vaccination-date", "Date of vaccination", certificateContent.dt + "T00:00Z", "PKDateStyleShort");
+          newPassbookItem(template, "backFields", "vaccination-date", "Date of vaccination", formatDate(certificateContent.dt), "PKDateStyleShort");
         });
 
       } else if (certificate.t) {
@@ -532,12 +557,12 @@ window.addEventListener('load', function() {
           // Dissease or Agent
           newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent the citizen has recovered from", targetAgent.valueSetValues[certificateContent.tg].display);
           // Date of first positive test result
-          newPassbookItem(template, "backFields", "date-of-first-positive-test-result", "Date of first positive test result", certificateContent.fr + "T00:00Z", "PKDateStyleShort");
+          newPassbookItem(template, "backFields", "date-of-first-positive-test-result", "Date of first positive test result", formatDate(certificateContent.fr), "PKDateStyleShort");
           // Certificate valid from
-          newPassbookItem(template, "auxiliaryFields", "valid-from", "Valid from", certificateContent.df + "T00:00Z", "PKDateStyleShort");
+          newPassbookItem(template, "auxiliaryFields", "valid-from", "Valid from", formatDate(certificateContent.df), "PKDateStyleShort");
           // Certificate valid until
-          newPassbookItem(template, "auxiliaryFields", "valid-until", "Valid until", certificateContent.du + "T00:00Z", "PKDateStyleShort");
-          template.expirationDate = certificateContent.du + "T00:00:00Z";
+          newPassbookItem(template, "auxiliaryFields", "valid-until", "Valid until", formatDate(certificateContent.du), "PKDateStyleShort");
+          template.expirationDate = formatDate(certificateContent.du, true) + "Z";
         });
 
       } else {
