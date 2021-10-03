@@ -55,6 +55,7 @@ function getCurrentRoute() {
 
 let navigationHandlerInit = false;
 let currentRoute = getCurrentRoute();
+//console.log('currentRoute', currentRoute)
 
 function navigationHandler(callback) {
   const routes = ['intro', 'scan', 'preview'];
@@ -64,14 +65,17 @@ function navigationHandler(callback) {
   function changeState(oldRoute, newRoute, callback) {
     if ((oldRoute != newRoute) && (routes.includes(newRoute))) {
       console.log('changeState', oldRoute, newRoute);
-      document.getElementById(oldRoute).style.visibility = 'hidden';
-      document.getElementById(oldRoute).style.display = 'none';
+      // hide all pages
+      document.querySelectorAll('section.page').forEach(e => { e.style.visibility = 'hidden'; e.style.display = 'none'})
+
+      // display the page
       document.getElementById(newRoute).style.visibility = 'visible';
       document.getElementById(newRoute).style.display = 'block';
       document.title = titles[routes.indexOf(newRoute)] + ' - Covid19-Passbook';
       document.getElementById('mainTitle').innerText = titles[routes.indexOf(newRoute)];
       callback(oldRoute, newRoute);
       document.getElementById('mainTitle').focus();
+      document.querySelector('a.skip-link').setAttribute('href', '#'+newRoute);
       currentRoute = newRoute;
     }
   }
@@ -79,8 +83,11 @@ function navigationHandler(callback) {
   // if the user refreshes the page...
   if (navigationHandlerInit == false) {
     if (!routes.includes(currentRoute) || currentRoute == 'preview') {
+      //console.log('this route does not exist:', currentRoute)
       window.location.hash = 'intro';
+      currentRoute = 'intro';
     } else {
+      //console.log('route found:', currentRoute);
       changeState('intro', currentRoute, callback);
     }
     navigationHandlerInit = true;
