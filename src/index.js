@@ -66,6 +66,18 @@ const sampleOrigin = {
   "122592007": "Acellular blood (serum or plasma) specimen"
 };
 
+// Some national services endpoint.
+// See https://github.com/clawfire/covid19-passbook-generator/issues/126
+const nationalServices = [
+  {
+    url: "https://ekosova.rks-gov.net/SubService/285?code=",
+    message: "Σφάλμα. Ο σαρωμένος κωδικός QR δεν αντιστοιχεί σε αυτόν που παρέχει η Ευρωπαϊκή Ένωση. Διαβάστε στο FAS πώς να το κατεβάσετε."
+  },{
+    url: "https://dilosi.services.gov.gr/show/",
+    message: "Извињавам се. Још не подржавамо косовске КР кодове. Надамо се да ћемо то ускоро учинити. Me falni. Ne ende nuk i mbështesim kodet QR të Kosovës. Shpresojmë të jemi në gjendje ta bëjmë këtë shumë shpejt."
+  }
+]
+
 const sourceTpl = require('./template.json');
 
 let passbookBlob;
@@ -477,6 +489,17 @@ window.addEventListener('load', function() {
   }
 
   function decode(data) {
+
+    if(data.startsWith("http")){
+      console.warn("⚠️ It's not a digitaly signed covid certificate. Let's compare to our known services");
+      let wasNationalService = false;
+      nationalServices.forEach((value) => {
+        if(data.startsWith(value.url)){ window.alert(value.message); wasNationalService=true; return}
+      })
+      if (!wasNationalService){window.alert("Sorry, you are trying to scan a code which is an internet address but not a supported QR code. Please read the FAQ.")}
+      return;
+    };
+
     // destroy the scanner, we gonna need memory
     if (scanner) {
       scanner.destroy();
