@@ -241,7 +241,7 @@ function adaptPreview() {
 window.addEventListener('load', function() {
 
   if (process.env.NODE_ENV === 'development') {
-    console.group('🕵🏻‍♂️ Inspecting your browser')
+    console.groupCollapsed('🕵🏻‍♂️ Inspecting your browser')
     console.log("OS: %s",$.ua.os.name);
     console.log("Browser: %s",$.ua.browser.name);
     console.log("Device type: %s",$.ua.device.type);
@@ -290,7 +290,7 @@ window.addEventListener('load', function() {
   $("#language-selector").find("[value='"+currentLanguage+"']").prop({selected: true});
   // Add some log infos
   if (process.env.NODE_ENV === 'development') {
-    console.group('💬 Language selection');
+    console.groupCollapsed('💬 Language selection');
     console.log('URL PATH : %s', window.location.pathname);
     console.log('Language is %s', currentLanguage);
     console.groupEnd();
@@ -386,7 +386,7 @@ window.addEventListener('load', function() {
 
     QrScanner.hasCamera().then(hasCamera => {
       if (!hasCamera) {
-        window.alert("You need a camera to use this tool");
+        window.alert("You need a camera to use this tool. Please allow access to your camera if you have one.");
       }
     })
     // we create a new scanner
@@ -394,13 +394,23 @@ window.addEventListener('load', function() {
 
     // we start scanning
     scanner.start().then(() => {
+      QrScanner.listCameras(true).then(camerasList =>{
+        if (process.env.NODE_ENV === 'development') {
+          console.groupCollapsed("📷 Listing cameras available")
+          console.table(camerasList)
+          console.groupEnd()
+        }
+      })
+      scanner.setCamera('environment').then(bidule => {
+        console.log("✅ Asked the device to use the environment camera")
+      })
       scanner.hasFlash().then(hasFlash => {
         if (process.env.NODE_ENV === 'development') {
-          console.group("\u{1F4A1} Testing flash support")
+          console.groupCollapsed("💡 Testing flash support")
         }
         if (hasFlash) {
           if (process.env.NODE_ENV === 'development') {
-            console.log("This device supports it");
+            console.log("✅ This device supports it");
           }
           flashlight_btn.getElementsByTagName("span")[0].innerHTML = "Toggle Flashlight";
           flashlight_btn.classList.remove('disabled')
@@ -412,7 +422,7 @@ window.addEventListener('load', function() {
           })
         } else {
           if (process.env.NODE_ENV === 'development') {
-            console.log("This device doesn't support it");
+            console.log("❌ This device doesn't support it");
           }
         }
         if (process.env.NODE_ENV === 'development') {
