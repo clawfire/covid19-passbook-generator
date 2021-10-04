@@ -1,3 +1,6 @@
+/**
+ * 1. Imports
+ */
 const jquery = require('./vendor/jquery.min.js');
 window.$ = window.jQuery = jquery;
 require('./vendor/semantic.min.js');
@@ -12,23 +15,73 @@ import {
 
 var parser = require('ua-parser-js');
 
+// Let's import all the references needed
+const targetAgent = require('/valuesets/disease-agent-targeted.json');
+const vaccineProphylaxis = require('/valuesets/vaccine-prophylaxis.json');
+const vaccineProduct = require('/valuesets/vaccine-medicinal-product.json');
+const vaccineManf = require('/valuesets/vaccine-mah-manf.json');
+const testType = require('/valuesets/test-type.json');
+const testResult = require('/valuesets/test-result.json');
+
+import iconUrl from "/graphics/icon.png";
+import icon2xUrl from "/graphics/icon@2x.png";
+import thumbnailUrl from "/graphics/thumbnail.png";
+import thumbnailx2Url from "/graphics/thumbnail@2x.png";
+
+// Tests results manufacturers are available online,
+// but we need an offline fallback
+fetch('/.netlify/functions/test-results-manufacturers').then(response => {
+  response.json().then(json => {
+    const testManf = json;
+  }).catch(() => {
+    const testManf = require('/valuesets/hsc-common-recognition-rat.json');
+  })
+}).catch(() => {
+  const testManf = require('/valuesets/hsc-common-recognition-rat.json');
+});
+
+/**
+ * 2. Variable definition
+ */
+
 let successfulGeneration = false;
 
-if (process.env.NODE_ENV !== 'development') {
-window.onerror = function (msg, url, lineNo, columnNo, error) {
-  const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
-  const extra = `File: ${url}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\nCurrentRoute: ${currentRoute}\n`;
-  manageError(msg, extra)
-  return false;
-}
-}
+let navigationHandlerInit = false;
+let currentRoute = getCurrentRoute();
 
-window.addEventListener('offline', () => {
-  $('#modal-offline').modal('show');
-})
-window.addEventListener('online', () => {
-  $('#modal-offline').modal('hide');
-})
+
+let scanner;
+let qrcode;
+
+
+const sampleOrigin = {
+  "258500001": "Nasopharyngeal swab",
+  "461911000124106": "Oropharyngeal swab",
+  "472881004": "Pharyngeal swab",
+  "472901003": "Swab from nasal sinus",
+  "119342007": "Saliva specimen",
+  "119297000": "Blood specimen",
+  "119361006": "Plasma specimen",
+  "119364003": "Serum specimen",
+  "122592007": "Acellular blood (serum or plasma) specimen"
+};
+
+const sourceTpl = require('./template.json');
+
+let passbookBlob;
+
+/**
+ * 3. Function definitions
+ */
+
+if (process.env.NODE_ENV !== 'development') {
+  window.onerror = function (msg, url, lineNo, columnNo, error) {
+    const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
+    const extra = `File: ${url}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\nCurrentRoute: ${currentRoute}\n`;
+    manageError(msg, extra)
+    return false;
+  }
+}
 
 function manageError(msg, extra = '') {
   $('#error-modal').modal('show');
@@ -52,10 +105,6 @@ function getCurrentRoute() {
   route = (route == "") ? "intro" : route;
   return route;
 }
-
-let navigationHandlerInit = false;
-let currentRoute = getCurrentRoute();
-//console.log('currentRoute', currentRoute)
 
 function navigationHandler(callback) {
   const routes = ['intro', 'scan', 'preview'];
@@ -171,51 +220,6 @@ function renderTpl(id, target, data) {
   document.getElementById(target).innerHTML = rendered
 }
 
-// Let's import all the references needed
-const targetAgent = require('/valuesets/disease-agent-targeted.json');
-const vaccineProphylaxis = require('/valuesets/vaccine-prophylaxis.json');
-const vaccineProduct = require('/valuesets/vaccine-medicinal-product.json');
-const vaccineManf = require('/valuesets/vaccine-mah-manf.json');
-const testType = require('/valuesets/test-type.json');
-const testResult = require('/valuesets/test-result.json');
-
-import iconUrl from "/graphics/icon.png";
-import icon2xUrl from "/graphics/icon@2x.png";
-import thumbnailUrl from "/graphics/thumbnail.png";
-import thumbnailx2Url from "/graphics/thumbnail@2x.png";
-
-let scanner;
-let qrcode;
-
-// Tests results manufacturers are available online,
-// but we need an offline fallback
-fetch('/.netlify/functions/test-results-manufacturers').then(response => {
-  response.json().then(json => {
-    const testManf = json;
-  }).catch(() => {
-    const testManf = require('/valuesets/hsc-common-recognition-rat.json');
-  })
-}).catch(() => {
-  const testManf = require('/valuesets/hsc-common-recognition-rat.json');
-});
-
-const sampleOrigin = {
-  "258500001": "Nasopharyngeal swab",
-  "461911000124106": "Oropharyngeal swab",
-  "472881004": "Pharyngeal swab",
-  "472901003": "Swab from nasal sinus",
-  "119342007": "Saliva specimen",
-  "119297000": "Blood specimen",
-  "119361006": "Plasma specimen",
-  "119364003": "Serum specimen",
-  "122592007": "Acellular blood (serum or plasma) specimen"
-};
-
-const sourceTpl = require('./template.json');
-
-let passbookBlob;
-
-
 function adaptPreview() {
   const container = document.getElementById('scannerContainer');
   const video = document.getElementById('scanner');
@@ -237,7 +241,20 @@ function adaptPreview() {
   $(mask).css('margin-left', marginLeft);
 }
 
+/**
+ * 4. Event binding
+ */
+window.addEventListener('offline', () => {
+  $('#modal-offline').modal('show');
+})
+window.addEventListener('online', () => {
+  $('#modal-offline').modal('hide');
+})
 
+
+/**
+ * PAGE LOAD EVENT (MAIN)
+ */
 window.addEventListener('load', function() {
 
   if (process.env.NODE_ENV === 'development') {
