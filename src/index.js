@@ -362,10 +362,6 @@ window.addEventListener('load', function() {
     navigateTo('scan');
   })
 
-  // $('button[name="break"]').on('click', () => {
-  //   throw "error";
-  // })
-
   $('button[name="scanImage"]').on('click', () => {
     $('#qrfile').trigger("click");
   });
