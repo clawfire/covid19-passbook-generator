@@ -498,6 +498,8 @@ window.addEventListener('load', function() {
       })
       if (!wasNationalService){window.alert("Sorry, you are trying to scan a code which is an internet address but not a supported QR code. Please read the FAQ.")}
       return;
+    }else if(data == "42"){
+      window.location = "https://www.youtube.com/watch?v=aboZctrHfK8";
     };
 
     // destroy the scanner, we gonna need memory
@@ -762,6 +764,9 @@ window.addEventListener('load', function() {
           })
         })
       });
+    }).catch(() => {
+      window.alert("Sorry. Your QRcode doesn't seems to contains informations we are capable of handling right now. Please read the FAQ for more informations.")
+      navigateTo("intro");
     })
   }
 }, false)
