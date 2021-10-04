@@ -83,6 +83,11 @@ if (process.env.NODE_ENV !== 'development') {
   }
 }
 
+/**
+ * Trigger the popup display for the error feedback form (which will post on github as issue)
+ * @param {string} msg Error message you want to display and include in the log
+ * @param {*} extra information you want to add to the log
+ */
 function manageError(msg, extra = '') {
   $('#error-modal').modal('show');
   const message = `What happened?\n\n[please describe]\n\n<details><summary>Technical details</summary>Error message: ${msg}\n\nPage: ${window.location.hash}\n\nBrowser:\n\`\`\`json\n${JSON.stringify($.ua)}\n\`\`\`\n\n${extra}</details>`;
@@ -90,6 +95,11 @@ function manageError(msg, extra = '') {
   container.val(container.val() + message);
 }
 
+/**
+ * Return SHA-1 value from a string.
+ * @param {string} String you want to get SHA-1
+ * @returns string
+ */
 function shaOne(str) {
   const buffer = new TextEncoder("utf-8").encode(str);
   return crypto.subtle.digest("SHA-1", buffer);
@@ -100,12 +110,20 @@ function hex(buffer) {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+/**
+ * Returns you the current route (URL fragment)
+ * @returns string
+ */
 function getCurrentRoute() {
   let route = window.location.hash.split('#').pop();
   route = (route == "") ? "intro" : route;
   return route;
 }
 
+/**
+ * Handle the navigation and the associated states
+ * @param {function} callback function you want to execture as a callback. Will receive oldroute, newroute
+ */
 function navigationHandler(callback) {
   const routes = ['intro', 'scan', 'preview'];
   const titles = ['Keep your COVID certificate in your iPhone’s wallet.', 'Scan your QR code.', 'Your certificate is ready!'];
@@ -148,6 +166,10 @@ function navigationHandler(callback) {
   });
 }
 
+/**
+ * Change the URL to the route fragment specified
+ * @param {string} route the route you want to go to
+ */
 function navigateTo(route) {
   window.location.hash = route;
 }
@@ -177,6 +199,15 @@ function formatDate(string, withseconds = false) {
   }
 }
 
+/**
+ * Handle the addition in a passbook object of a new "item" or "line"
+ * @param {object} passbook the passbook object you want to manipulate
+ * @param {string} field can be primadyFields, secondaryFields, auxiliaryFields or backFields
+ * @param {string} key the key you want to use for the item you're adding
+ * @param {string} label the lavel displayed to the user on the passbook
+ * @param {string} value the value you want to use
+ * @param {string} dateStyle format: 'PKDateStyleNone', 'PKDateStyleShort', 'PKDateStyleMedium', 'PKDateStyleLong', 'PKDateStyleFull'
+ */
 function newPassbookItem(passbook, field, key, label, value = "", dateStyle) {
   // check if we have the required parameters
   if (passbook === undefined || field === undefined || key === undefined) {
