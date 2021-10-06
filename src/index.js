@@ -71,7 +71,7 @@ const sampleOrigin = {
 const nationalServices = [
   {
     url: "https://ekosova.rks-gov.net/SubService/285?code=",
-    message: "Σφάλμα. Ο σαρωμένος κωδικός QR δεν αντιστοιχεί σε αυτόν που παρέχει η Ευρωπαϊκή Ένωση. Διαβάστε στο FAS πώς να το κατεβάσετε."
+    message: "Παρουσιάστηκε ένα σφάλμα. Ο κωδικός QR που σαρώσατε δεν αντιστοιχεί σε αυτόν που παρέχει η Ε.Ε. Παρακαλώ διαβάστε στο FAQ πως να το κατεβάσετε."
   },{
     url: "https://dilosi.services.gov.gr/show/",
     message: "Извињавам се. Још не подржавамо косовске КР кодове. Надамо се да ћемо то ускоро учинити. Me falni. Ne ende nuk i mbështesim kodet QR të Kosovës. Shpresojmë të jemi në gjendje ta bëjmë këtë shumë shpejt."
