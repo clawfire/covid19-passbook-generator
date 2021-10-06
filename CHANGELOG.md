@@ -1,5 +1,26 @@
 ## [Unrealeased]
 
+## [2.1.0] - 2021-10-06
+### Added
+- Date string management function for passbook fixing #152 and #125
+- Add basic error message when user scan an URL instead of a supported QR code
+- Implement basic pattern detection in order to try to handle #126 one day. So far it gives instructions in the different languages to the users
+- Add basic error message when a code is detected but nothing can be done with it
+
+### Changed
+- updating libraries
+- Implement Apple's ignore timeZone flag to fix #125
+- urn:uvci is now correctly detected if lowercase
+- Router behavior changed slightly to handle previous url scheme and not trigger JS error if visitor coming from a link with an older fragment pattern
+- Sort out a bit of the JS code to get some clarity (lot of comments and function documentation)
+
+### Deleted
+- Some dead code there and here
+
+## [2.0.1] - 2021-09-26
+### Added
+- Router debug information when submitting an issue on github from the app
+
 ## [2.0] - 2021-09-07
 ### Added
 - netlify dev is working

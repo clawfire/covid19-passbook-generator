@@ -1,3 +1,6 @@
+/**
+ * 1. Imports
+ */
 const jquery = require('./vendor/jquery.min.js');
 window.$ = window.jQuery = jquery;
 require('./vendor/semantic.min.js');
@@ -12,24 +15,91 @@ import {
 
 var parser = require('ua-parser-js');
 
+// Let's import all the references needed
+const targetAgent = require('/valuesets/disease-agent-targeted.json');
+const vaccineProphylaxis = require('/valuesets/vaccine-prophylaxis.json');
+const vaccineProduct = require('/valuesets/vaccine-medicinal-product.json');
+const vaccineManf = require('/valuesets/vaccine-mah-manf.json');
+const testType = require('/valuesets/test-type.json');
+const testResult = require('/valuesets/test-result.json');
+
+import iconUrl from "/graphics/icon.png";
+import icon2xUrl from "/graphics/icon@2x.png";
+import thumbnailUrl from "/graphics/thumbnail.png";
+import thumbnailx2Url from "/graphics/thumbnail@2x.png";
+
+// Tests results manufacturers are available online,
+// but we need an offline fallback
+fetch('/.netlify/functions/test-results-manufacturers').then(response => {
+  response.json().then(json => {
+    const testManf = json;
+  }).catch(() => {
+    const testManf = require('/valuesets/hsc-common-recognition-rat.json');
+  })
+}).catch(() => {
+  const testManf = require('/valuesets/hsc-common-recognition-rat.json');
+});
+
+/**
+ * 2. Variable definition
+ */
+
 let successfulGeneration = false;
 
+let navigationHandlerInit = false;
+let currentRoute = getCurrentRoute();
+
+
+let scanner;
+let qrcode;
+
+
+const sampleOrigin = {
+  "258500001": "Nasopharyngeal swab",
+  "461911000124106": "Oropharyngeal swab",
+  "472881004": "Pharyngeal swab",
+  "472901003": "Swab from nasal sinus",
+  "119342007": "Saliva specimen",
+  "119297000": "Blood specimen",
+  "119361006": "Plasma specimen",
+  "119364003": "Serum specimen",
+  "122592007": "Acellular blood (serum or plasma) specimen"
+};
+
+// Some national services endpoint.
+// See https://github.com/clawfire/covid19-passbook-generator/issues/126
+const nationalServices = [
+  {
+    url: "https://ekosova.rks-gov.net/SubService/285?code=",
+    message: "Παρουσιάστηκε ένα σφάλμα. Ο κωδικός QR που σαρώσατε δεν αντιστοιχεί σε αυτόν που παρέχει η Ε.Ε. Παρακαλώ διαβάστε στο FAQ πως να το κατεβάσετε."
+  },{
+    url: "https://dilosi.services.gov.gr/show/",
+    message: "Извињавам се. Још не подржавамо косовске КР кодове. Надамо се да ћемо то ускоро учинити. Me falni. Ne ende nuk i mbështesim kodet QR të Kosovës. Shpresojmë të jemi në gjendje ta bëjmë këtë shumë shpejt."
+  }
+]
+
+const sourceTpl = require('./template.json');
+
+let passbookBlob;
+
+/**
+ * 3. Function definitions
+ */
+
 if (process.env.NODE_ENV !== 'development') {
-window.onerror = function (msg, url, lineNo, columnNo, error) {
-  const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
-  const extra = `File: ${url}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\nCurrentRoute: ${currentRoute}\n`;
-  manageError(msg, extra)
-  return false;
-}
+  window.onerror = function (msg, url, lineNo, columnNo, error) {
+    const stack = (error !== undefined && error.stack !== undefined)?error.stack:''
+    const extra = `File: ${url}\nLine: ${lineNo}\nColumn: ${columnNo}\nStack: ${stack}\nCurrentRoute: ${currentRoute}\n`;
+    manageError(msg, extra)
+    return false;
+  }
 }
 
-window.addEventListener('offline', () => {
-  $('#modal-offline').modal('show');
-})
-window.addEventListener('online', () => {
-  $('#modal-offline').modal('hide');
-})
-
+/**
+ * Trigger the popup display for the error feedback form (which will post on github as issue)
+ * @param {string} msg Error message you want to display and include in the log
+ * @param {*} extra information you want to add to the log
+ */
 function manageError(msg, extra = '') {
   $('#error-modal').modal('show');
   const message = `What happened?\n\n[please describe]\n\n<details><summary>Technical details</summary>Error message: ${msg}\n\nPage: ${window.location.hash}\n\nBrowser:\n\`\`\`json\n${JSON.stringify($.ua)}\n\`\`\`\n\n${extra}</details>`;
@@ -37,6 +107,11 @@ function manageError(msg, extra = '') {
   container.val(container.val() + message);
 }
 
+/**
+ * Return SHA-1 value from a string.
+ * @param {string} String you want to get SHA-1
+ * @returns string
+ */
 function shaOne(str) {
   const buffer = new TextEncoder("utf-8").encode(str);
   return crypto.subtle.digest("SHA-1", buffer);
@@ -47,15 +122,20 @@ function hex(buffer) {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+/**
+ * Returns you the current route (URL fragment)
+ * @returns string
+ */
 function getCurrentRoute() {
   let route = window.location.hash.split('#').pop();
   route = (route == "") ? "intro" : route;
   return route;
 }
 
-let navigationHandlerInit = false;
-let currentRoute = getCurrentRoute();
-
+/**
+ * Handle the navigation and the associated states
+ * @param {function} callback function you want to execture as a callback. Will receive oldroute, newroute
+ */
 function navigationHandler(callback) {
   const routes = ['intro', 'scan', 'preview'];
   const titles = ['Keep your COVID certificate in your iPhone’s wallet.', 'Scan your QR code.', 'Your certificate is ready!'];
@@ -64,14 +144,17 @@ function navigationHandler(callback) {
   function changeState(oldRoute, newRoute, callback) {
     if ((oldRoute != newRoute) && (routes.includes(newRoute))) {
       console.log('changeState', oldRoute, newRoute);
-      document.getElementById(oldRoute).style.visibility = 'hidden';
-      document.getElementById(oldRoute).style.display = 'none';
+      // hide all pages
+      document.querySelectorAll('section.page').forEach(e => { e.style.visibility = 'hidden'; e.style.display = 'none'})
+
+      // display the page
       document.getElementById(newRoute).style.visibility = 'visible';
       document.getElementById(newRoute).style.display = 'block';
       document.title = titles[routes.indexOf(newRoute)] + ' - Covid19-Passbook';
       document.getElementById('mainTitle').innerText = titles[routes.indexOf(newRoute)];
       callback(oldRoute, newRoute);
       document.getElementById('mainTitle').focus();
+      document.querySelector('a.skip-link').setAttribute('href', '#'+newRoute);
       currentRoute = newRoute;
     }
   }
@@ -79,8 +162,11 @@ function navigationHandler(callback) {
   // if the user refreshes the page...
   if (navigationHandlerInit == false) {
     if (!routes.includes(currentRoute) || currentRoute == 'preview') {
+      //console.log('this route does not exist:', currentRoute)
       window.location.hash = 'intro';
+      currentRoute = 'intro';
     } else {
+      //console.log('route found:', currentRoute);
       changeState('intro', currentRoute, callback);
     }
     navigationHandlerInit = true;
@@ -92,10 +178,48 @@ function navigationHandler(callback) {
   });
 }
 
+/**
+ * Change the URL to the route fragment specified
+ * @param {string} route the route you want to go to
+ */
 function navigateTo(route) {
   window.location.hash = route;
 }
 
+/**
+ * Return date formated as YYYY-MM-DDTHH:MM or YYYY-MM-DDTHH:MM:SS
+ * @param {string} string
+ * @param {boolean} withseconds
+ */
+function formatDate(string, withseconds = false) {
+  switch (string.length) {
+    case 10:
+      // Just the date
+      return withseconds ? string + "T00:00:00" : string + "T00:00";
+      break;
+    case 16:
+      // Date + time but no seconds
+      return withseconds ? string + ":00" : string;
+      break;
+    case 19:
+      // Date + time + seconds
+      return withseconds ? string : string.substring(0, 16);
+      break;
+    default:
+      console.error("The provided string \"%s\” isn't compatible with what was espected for the formatDate function",string);
+      break;
+  }
+}
+
+/**
+ * Handle the addition in a passbook object of a new "item" or "line"
+ * @param {object} passbook the passbook object you want to manipulate
+ * @param {string} field can be primadyFields, secondaryFields, auxiliaryFields or backFields
+ * @param {string} key the key you want to use for the item you're adding
+ * @param {string} label the lavel displayed to the user on the passbook
+ * @param {string} value the value you want to use
+ * @param {string} dateStyle format: 'PKDateStyleNone', 'PKDateStyleShort', 'PKDateStyleMedium', 'PKDateStyleLong', 'PKDateStyleFull'
+ */
 function newPassbookItem(passbook, field, key, label, value = "", dateStyle) {
   // check if we have the required parameters
   if (passbook === undefined || field === undefined || key === undefined) {
@@ -104,7 +228,7 @@ function newPassbookItem(passbook, field, key, label, value = "", dateStyle) {
   }
   // Test if fields is one allowed
   if (!['primaryFields', 'secondaryFields', 'auxiliaryFields', 'backFields'].includes(field)) {
-    console.error('The supplied field "%s" isn\'t not allowed', field);
+    console.error('The supplied field "%s" is not allowed', field);
     return null;
   }
 
@@ -113,8 +237,14 @@ function newPassbookItem(passbook, field, key, label, value = "", dateStyle) {
     "label": label,
     "value": value
   };
+  // if there's a dataStyle passed, check it against the possible values
   if (dateStyle) {
-    newObject.dateStyle = dateStyle
+    if (['PKDateStyleNone', 'PKDateStyleShort', 'PKDateStyleMedium', 'PKDateStyleLong', 'PKDateStyleFull'].includes(dateStyle)){
+      newObject.dateStyle = dateStyle
+      newObject.ignoresTimeZone = true
+    }else{
+      console.error('The supplied dateStyle "%s" is not allowed', dateStyle);
+    }
   };
   passbook.generic[field].push(newObject);
 }
@@ -132,51 +262,6 @@ function renderTpl(id, target, data) {
   let rendered = template(data);
   document.getElementById(target).innerHTML = rendered
 }
-
-// Let's import all the references needed
-const targetAgent = require('/valuesets/disease-agent-targeted.json');
-const vaccineProphylaxis = require('/valuesets/vaccine-prophylaxis.json');
-const vaccineProduct = require('/valuesets/vaccine-medicinal-product.json');
-const vaccineManf = require('/valuesets/vaccine-mah-manf.json');
-const testType = require('/valuesets/test-type.json');
-const testResult = require('/valuesets/test-result.json');
-
-import iconUrl from "/graphics/icon.png";
-import icon2xUrl from "/graphics/icon@2x.png";
-import thumbnailUrl from "/graphics/thumbnail.png";
-import thumbnailx2Url from "/graphics/thumbnail@2x.png";
-
-let scanner;
-let qrcode;
-
-// Tests results manufacturers are available online,
-// but we need an offline fallback
-fetch('/.netlify/functions/test-results-manufacturers').then(response => {
-  response.json().then(json => {
-    const testManf = json;
-  }).catch(() => {
-    const testManf = require('/valuesets/hsc-common-recognition-rat.json');
-  })
-}).catch(() => {
-  const testManf = require('/valuesets/hsc-common-recognition-rat.json');
-});
-
-const sampleOrigin = {
-  "258500001": "Nasopharyngeal swab",
-  "461911000124106": "Oropharyngeal swab",
-  "472881004": "Pharyngeal swab",
-  "472901003": "Swab from nasal sinus",
-  "119342007": "Saliva specimen",
-  "119297000": "Blood specimen",
-  "119361006": "Plasma specimen",
-  "119364003": "Serum specimen",
-  "122592007": "Acellular blood (serum or plasma) specimen"
-};
-
-const sourceTpl = require('./template.json');
-
-let passbookBlob;
-
 
 function adaptPreview() {
   const container = document.getElementById('scannerContainer');
@@ -199,11 +284,24 @@ function adaptPreview() {
   $(mask).css('margin-left', marginLeft);
 }
 
+/**
+ * 4. Event binding
+ */
+window.addEventListener('offline', () => {
+  $('#modal-offline').modal('show');
+})
+window.addEventListener('online', () => {
+  $('#modal-offline').modal('hide');
+})
 
+
+/**
+ * PAGE LOAD EVENT (MAIN)
+ */
 window.addEventListener('load', function() {
 
   if (process.env.NODE_ENV === 'development') {
-    console.group('🕵🏻‍♂️ Inspecting your browser')
+    console.groupCollapsed('🕵🏻‍♂️ Inspecting your browser')
     console.log("OS: %s",$.ua.os.name);
     console.log("Browser: %s",$.ua.browser.name);
     console.log("Device type: %s",$.ua.device.type);
@@ -252,7 +350,7 @@ window.addEventListener('load', function() {
   $("#language-selector").find("[value='"+currentLanguage+"']").prop({selected: true});
   // Add some log infos
   if (process.env.NODE_ENV === 'development') {
-    console.group('💬 Language selection');
+    console.groupCollapsed('💬 Language selection');
     console.log('URL PATH : %s', window.location.pathname);
     console.log('Language is %s', currentLanguage);
     console.groupEnd();
@@ -275,10 +373,6 @@ window.addEventListener('load', function() {
   $('button[name="startScanning"]').on('click', () => {
     navigateTo('scan');
   })
-
-  // $('button[name="break"]').on('click', () => {
-  //   throw "error";
-  // })
 
   $('button[name="scanImage"]').on('click', () => {
     $('#qrfile').trigger("click");
@@ -348,7 +442,7 @@ window.addEventListener('load', function() {
 
     QrScanner.hasCamera().then(hasCamera => {
       if (!hasCamera) {
-        window.alert("You need a camera to use this tool");
+        window.alert("You need a camera to use this tool. Please allow access to your camera if you have one.");
       }
     })
     // we create a new scanner
@@ -356,13 +450,23 @@ window.addEventListener('load', function() {
 
     // we start scanning
     scanner.start().then(() => {
+      QrScanner.listCameras(true).then(camerasList =>{
+        if (process.env.NODE_ENV === 'development') {
+          console.groupCollapsed("📷 Listing cameras available")
+          console.table(camerasList)
+          console.groupEnd()
+        }
+      })
+      scanner.setCamera('environment').then(bidule => {
+        console.log("✅ Asked the device to use the environment camera")
+      })
       scanner.hasFlash().then(hasFlash => {
         if (process.env.NODE_ENV === 'development') {
-          console.group("\u{1F4A1} Testing flash support")
+          console.groupCollapsed("💡 Testing flash support")
         }
         if (hasFlash) {
           if (process.env.NODE_ENV === 'development') {
-            console.log("This device supports it");
+            console.log("✅ This device supports it");
           }
           flashlight_btn.getElementsByTagName("span")[0].innerHTML = "Toggle Flashlight";
           flashlight_btn.classList.remove('disabled')
@@ -374,7 +478,7 @@ window.addEventListener('load', function() {
           })
         } else {
           if (process.env.NODE_ENV === 'development') {
-            console.log("This device doesn't support it");
+            console.log("❌ This device doesn't support it");
           }
         }
         if (process.env.NODE_ENV === 'development') {
@@ -385,6 +489,19 @@ window.addEventListener('load', function() {
   }
 
   function decode(data) {
+
+    if(data.startsWith("http")){
+      console.warn("⚠️ It's not a digitaly signed covid certificate. Let's compare to our known services");
+      let wasNationalService = false;
+      nationalServices.forEach((value) => {
+        if(data.startsWith(value.url)){ window.alert(value.message); wasNationalService=true; return}
+      })
+      if (!wasNationalService){window.alert("Sorry, you are trying to scan a code which is an internet address but not a supported QR code. Please read the FAQ.")}
+      return;
+    }else if(data == "42"){
+      window.location = "https://www.youtube.com/watch?v=aboZctrHfK8";
+    };
+
     // destroy the scanner, we gonna need memory
     if (scanner) {
       scanner.destroy();
@@ -429,8 +546,8 @@ window.addEventListener('load', function() {
       // Filling Passbook Template from here
       // -----------------------------------
       // Use the UCI for passboook serial number
-      if (certificateContent.ci.startsWith('URN:UVCI:')){
-        template.serialNumber = certificateContent.ci.substring(8)
+      if (certificateContent.ci.startsWith('URN:UVCI:') || certificateContent.ci.startsWith('urn:uvci:')){
+        template.serialNumber = certificateContent.ci.substring(9)
       }else{
         template.serialNumber = certificateContent.ci
       }
@@ -455,9 +572,9 @@ window.addEventListener('load', function() {
       // Type of certificate
       newPassbookItem(template, "secondaryFields", "certificate-type", "Certificate Type", certificateType);
       // Date of birth
-      newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", certificate.dob + "T00:00Z", "PKDateStyleShort");
+      newPassbookItem(template, "secondaryFields", "dob", "Date of Birth", formatDate(certificate.dob), "PKDateStyleShort");
       // Unique Certificate Identifier
-      newPassbookItem(template, "auxiliaryFields", "uci", "Unique Certificate Identifier", certificateContent.ci);
+      newPassbookItem(template, "auxiliaryFields", "uci", "Unique Certificate Identifier", template.serialNumber);
 
       if (certificate.v) {
         // COVID-19 Vaccine Certificate
@@ -477,7 +594,7 @@ window.addEventListener('load', function() {
           // Numnber in a series of vaccination / doses and the overall
           newPassbookItem(template, "backFields", "doses", "Number in a series of vaccination / doses and the overall", certificateContent.dn + "/" + certificateContent.sd);
           // Date of vaccination
-          newPassbookItem(template, "backFields", "vaccination-date", "Date of vaccination", certificateContent.dt + "T00:00Z", "PKDateStyleShort");
+          newPassbookItem(template, "backFields", "vaccination-date", "Date of vaccination", formatDate(certificateContent.dt), "PKDateStyleShort");
         });
 
       } else if (certificate.t) {
@@ -526,12 +643,12 @@ window.addEventListener('load', function() {
           // Dissease or Agent
           newPassbookItem(template, "backFields", "disease-or-agent", "Disease or agent the citizen has recovered from", targetAgent.valueSetValues[certificateContent.tg].display);
           // Date of first positive test result
-          newPassbookItem(template, "backFields", "date-of-first-positive-test-result", "Date of first positive test result", certificateContent.fr + "T00:00Z", "PKDateStyleShort");
+          newPassbookItem(template, "backFields", "date-of-first-positive-test-result", "Date of first positive test result", formatDate(certificateContent.fr), "PKDateStyleShort");
           // Certificate valid from
-          newPassbookItem(template, "auxiliaryFields", "valid-from", "Valid from", certificateContent.df + "T00:00Z", "PKDateStyleShort");
+          newPassbookItem(template, "auxiliaryFields", "valid-from", "Valid from", formatDate(certificateContent.df), "PKDateStyleShort");
           // Certificate valid until
-          newPassbookItem(template, "auxiliaryFields", "valid-until", "Valid until", certificateContent.du + "T00:00Z", "PKDateStyleShort");
-          template.expirationDate = certificateContent.du + "T00:00:00Z";
+          newPassbookItem(template, "auxiliaryFields", "valid-until", "Valid until", formatDate(certificateContent.du), "PKDateStyleShort");
+          template.expirationDate = formatDate(certificateContent.du, true) + "Z";
         });
 
       } else {
@@ -636,7 +753,7 @@ window.addEventListener('load', function() {
               "name": certificate.nam.fn + " " + certificate.nam.gn.toUpperCase(),
               "name-intl": certificate.nam.fnt.replaceAll("<", ' ') + " " + certificate.nam.gnt.replaceAll("<", ' '),
               "dob": certificate.dob,
-              "uci": certificateContent.ci.startsWith('URN:UVCI:') ? certificateContent.ci.substring(9) : certificateContent.ci
+              "uci": certificateContent.ci.startsWith('URN:UVCI:') || certificateContent.ci.startsWith('urn:uvci:') ? certificateContent.ci.substring(9) : certificateContent.ci
             });
             renderTpl("card-extra-content-tpl", "cardExtraContent", {
               "type": certificateType,
@@ -647,6 +764,9 @@ window.addEventListener('load', function() {
           })
         })
       });
+    }).catch(() => {
+      window.alert("Sorry. Your QRcode doesn't seems to contains informations we are capable of handling right now. Please read the FAQ for more informations.")
+      navigateTo("intro");
     })
   }
 }, false)
