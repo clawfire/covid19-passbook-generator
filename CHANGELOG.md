@@ -1,5 +1,9 @@
 ## [Unrealeased]
 
+## [2.1.1] - 2021-10-06
+### Changed
+- Fix the camera instanciation on IOS. 
+
 ## [2.1.0] - 2021-10-06
 ### Added
 - Date string management function for passbook fixing #152 and #125
