@@ -434,7 +434,7 @@ window.addEventListener('load', function() {
 
   function initScanner() {
     QrScanner.WORKER_PATH = "/qr-scanner-worker.min.js";
-    //QrScanner.hasCamera().then(function() {
+
     const flashlight_btn = document.getElementById('flashlight_btn');
     // we select the video element, which will provide the user feedback
     const video = document.getElementById('scanner');
@@ -450,16 +450,17 @@ window.addEventListener('load', function() {
 
     // we start scanning
     scanner.start().then(() => {
-      QrScanner.listCameras(true).then(camerasList =>{
+      QrScanner.listCameras().then(camerasList =>{
         if (process.env.NODE_ENV === 'development') {
           console.groupCollapsed("📷 Listing cameras available")
           console.table(camerasList)
           console.groupEnd()
         }
       })
-      scanner.setCamera('environment').then(bidule => {
+      scanner.setCamera('environment').then(() => {
         console.log("✅ Asked the device to use the environment camera")
       })
+
       scanner.hasFlash().then(hasFlash => {
         if (process.env.NODE_ENV === 'development') {
           console.groupCollapsed("💡 Testing flash support")
@@ -489,7 +490,7 @@ window.addEventListener('load', function() {
   }
 
   function decode(data) {
-
+    console.log("Decoding ...")
     if(data.startsWith("http")){
       console.warn("⚠️ It's not a digitaly signed covid certificate. Let's compare to our known services");
       let wasNationalService = false;
