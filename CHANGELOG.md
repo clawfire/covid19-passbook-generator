@@ -1,5 +1,14 @@
 ## [Unrealeased]
 
+## [2.2.0] - 2021-11-01
+### Changed
+- Upgrade ua-tester package to fix a security issue
+- Fixes timezone into formatDate function
+
+### Added
+- CZ instructions
+- Detection support for Safari desktop < 14
+
 ## [2.1.1] - 2021-10-06
 ### Changed
 - Fix the camera instanciation on IOS. 
