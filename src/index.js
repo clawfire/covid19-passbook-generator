@@ -318,6 +318,9 @@ window.addEventListener('load', function() {
       if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
     }
   } else {
+    if($.ua.browser.name === "Safari" && $.ua.browser.version < 14){
+      ('#modal-unsupported-old-browser').modal({ "closable": false }).modal('show');
+    }
     if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
   }
   if (process.env.NODE_ENV === 'development') {console.groupEnd()}
