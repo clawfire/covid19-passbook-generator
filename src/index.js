@@ -187,7 +187,7 @@ function navigateTo(route) {
 }
 
 /**
- * Return date formated as YYYY-MM-DDTHH:MM or YYYY-MM-DDTHH:MM:SS
+ * Return date formated as YYYY-MM-DDTHH:MMZ or YYYY-MM-DDTHH:MM:SSZ
  * @param {string} string
  * @param {boolean} withseconds
  */
@@ -195,15 +195,15 @@ function formatDate(string, withseconds = false) {
   switch (string.length) {
     case 10:
       // Just the date
-      return withseconds ? string + "T00:00:00" : string + "T00:00";
+      return withseconds ? string + "T00:00:00Z" : string + "T00:00Z";
       break;
     case 16:
       // Date + time but no seconds
-      return withseconds ? string + ":00" : string;
+      return withseconds ? string + ":00Z" : string + "Z";
       break;
     case 19:
       // Date + time + seconds
-      return withseconds ? string : string.substring(0, 16);
+      return withseconds ? string+"Z" : string.substring(0, 16)+"Z";
       break;
     default:
       console.error("The provided string \"%s\” isn't compatible with what was espected for the formatDate function",string);
@@ -318,6 +318,9 @@ window.addEventListener('load', function() {
       if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
     }
   } else {
+    if($.ua.browser.name === "Safari" && $.ua.browser.version < 14){
+      ('#modal-unsupported-old-browser').modal({ "closable": false }).modal('show');
+    }
     if (process.env.NODE_ENV === 'development') {console.log("✅ preflight check OK. You can use the app")}
   }
   if (process.env.NODE_ENV === 'development') {console.groupEnd()}
