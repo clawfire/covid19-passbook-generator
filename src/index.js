@@ -652,7 +652,7 @@ window.addEventListener('load', function() {
           newPassbookItem(template, "auxiliaryFields", "valid-from", "Valid from", formatDate(certificateContent.df), "PKDateStyleShort");
           // Certificate valid until
           newPassbookItem(template, "auxiliaryFields", "valid-until", "Valid until", formatDate(certificateContent.du), "PKDateStyleShort");
-          template.expirationDate = formatDate(certificateContent.du, true) + "Z";
+          template.expirationDate = formatDate(certificateContent.du, true);
         });
 
       } else {
