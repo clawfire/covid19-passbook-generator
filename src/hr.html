@@ -29,7 +29,7 @@
 
     <body class="">
         <header id="top-header" class="ui menu" role="banner">
-            <div class="top-container"><a class="skip-link" href="#intro">content</a></div>
+            <div class="top-container"><a class="skip-link" href="#intro">sadržaj</a></div>
             <div class="ui container">
               <svg width="45" height="48" viewBox="0 0 470 504" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M334.667 494H124C115.2 494 108 486.8 108 478V26C108 17.2 115.2 9.99999 124 9.99999H334.667C343.467 9.99999 350.667 17.2 350.667 26V478C350.667 486.8 343.467 494 334.667 494Z" fill="#363155"/>
@@ -54,11 +54,11 @@
               <div class="ui two small statistics">
                 <div class="statistic">
                   <div class="value"><i class="shield alternate icon" aria-hidden="true"></i></div>
-                  <div class="label"><p>generated on your phone</p></div>
+                  <div class="label"><p>generirano na tvojem telefonu</p></div>
                 </div>
                 <div class="statistic">
                   <div class="value"><i class="times circle outline icon" aria-hidden="true"></i></div>
-                  <div class="label"><p>no personal data collection</p></div>
+                  <div class="label"><p>bez pohrane osobnih podataka</p></div>
                 </div>
                 <div class="statistic">
                   <div class="value"><i class="times circle outline icon" aria-hidden="true"></i></div>
@@ -135,11 +135,11 @@
                     <path d="M89 84V71H94V84H89Z" fill="currentColor"/>
                     <path d="M51 41V36H56V41H51Z" fill="currentColor"/>
                   </svg>
-                  Scan my certificate
+                  Skeniraj potvrdu
               </button>
               <button type="button" class="ui fluid basic inverted icon button big" name="scanImage">
                   <i class="file image icon" aria-hidden="true"></i>
-                  Import picture
+                  Uvezi sliku potvrde
               </button>
               <input type="file" id="qrfile" style="display: none;" accept="image/jpeg, image/png">
             </section>
@@ -147,13 +147,13 @@
                 <div class="ui fluid card">
                     <div class="image" id="scannerContainer">
                         <video id="scanner" aria-labelledby="video-desc">
-                            <p>Your browser is not compatible with our technology.</p>
+                            <p>Preglednik nije kompatibilan s našom tehnologijom.</p>
                         </video>
                         <div id="mask"></div>
                     </div>
                     <div class="content">
                         <div class="description" id="video-desc">
-                            <p><i class="qrcode icon" aria-hidden="true"></i> Aim at the QR Code of your certificate to capture.</p>
+                            <p><i class="qrcode icon" aria-hidden="true"></i> Za sken, usmjeri prema QR kodu.</p>
                         </div>
                     </div>
                     <div class="ui bottom attached disabled button" id="flashlight_btn" >
@@ -172,7 +172,7 @@
                     </div>
                     <div class="extra content" id="cardExtraContent">
                     </div>
-                    <button type="button" id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon" aria-hidden="true"></i>Save in your wallet</button>
+                    Spremi u novčanik
                 </div>
                 <button type="button" class="ui fluid violet icon button" name="startScanning">
                     <svg width="24" height="24" viewbox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -240,7 +240,7 @@
                     <path d="M89 84V71H94V84H89Z" fill="currentColor"/>
                     <path d="M51 41V36H56V41H51Z" fill="currentColor"/>
                   </svg>
-                    Scan another certificate
+                    Skeniraj novu potvrdu
                 </button>
                 <button type="button" class="ui fluid basic inverted icon button" name="scanImage">
                     <i class="file image icon" aria-hidden="true"></i>
@@ -253,11 +253,11 @@
               <section id="language" class="row">
                 <h2 class="ui header">
                   <i class="translate icon"></i>
-                  <div class="content">Language</div>
+                  <div class="content">Jezik</div>
                 </h2>
                 <div class="ui form">
                   <div class="field">
-                    <label for="language-selection">Select your language</label>
+                    <label for="language-selection">Odaberi jezik</label>
                     <select name="language-selection" id="language-selector">
                       <option value="bg">български език</option>
                       <option value="cs">Česky</option>
@@ -344,6 +344,7 @@
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1F5;&#x1F1F9;</span> In Portugal, you can download it from the <a href="https://www.sns24.gov.pt/certificado-digital-covid/" title="Visite o site do SNS24 para descarregar o seu certificado">SNS24 dedicated website</a>, or the “SNS24” iOS and Android apps.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1F8;&#x1F1EA;</span> In Sweden, you can download it from the  <a href="https://covidbevis.se/vaccinationsbevis-web/">Swedish E-health agency's Covidbevis website</a>.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1E8;&#x1F1ED;</span> In Switzerland, the certificates are distributed by your canton. Get more information on <a href="https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/covid-zertifikat.html">Federal Office of Public Health</a>.</p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1F9;&#x1F1FC;</span> In Taiwan, you can download it from the  <a href="https://dvc.mohw.gov.tw/vapa/apply/Index.init.ctr">Taiwan Centers for Disease Control's website</a>.</p>
                                 <p itemprop="text">If you know how to download the certificates from health authorities elsewhere, please contact us so we can add the instructions here.</p>
                               </div>
                           </div>
