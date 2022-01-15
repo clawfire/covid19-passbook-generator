@@ -5,6 +5,7 @@
 
 ### Added
 - [![Crowdin](https://badges.crowdin.net/covid19-passbook/localized.svg)](https://crowdin.com/project/covid19-passbook)
+- Mandarin, Ukrainian and Norwegian language
 
 ## [2.2.0] - 2021-11-01
 ### Changed
