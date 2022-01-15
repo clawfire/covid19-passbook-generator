@@ -1,5 +1,11 @@
 ## [Unrealeased]
 
+### Changed
+- Fixed the recovery certificate issue with time that prevent iOS to open the pass in wallet
+
+### Added
+- [![Crowdin](https://badges.crowdin.net/covid19-passbook/localized.svg)](https://crowdin.com/project/covid19-passbook)
+
 ## [2.2.0] - 2021-11-01
 ### Changed
 - Upgrade ua-tester package to fix a security issue
