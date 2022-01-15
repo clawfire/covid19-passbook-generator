@@ -1,7 +1,9 @@
 ## [Unrealeased]
 
+## [2.2.1] - 2022-01-15
 ### Changed
 - Fixed the recovery certificate issue with time that prevent iOS to open the pass in wallet
+- Update dependencies
 
 ### Added
 - [![Crowdin](https://badges.crowdin.net/covid19-passbook/localized.svg)](https://crowdin.com/project/covid19-passbook)
