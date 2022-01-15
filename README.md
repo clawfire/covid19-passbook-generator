@@ -2,9 +2,10 @@
 
 The aim of this project is to let a user scan a EU Digital COVID Certificate with their smartphone, and generate a passbook, without any data stored on a remote server.
 
-## Test it
+[![Crowdin](https://badges.crowdin.net/covid19-passbook/localized.svg)](https://crowdin.com/project/covid19-passbook)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/fabf8679-02a3-4108-b51e-fea63abafff6/deploy-status)](https://app.netlify.com/sites/covid19passbook/deploys)
 
+## Test it
 We are deploying a stable-ish version online [so you can try it out](https://covid19passbook.netlify.app/). Better used on your iPhone but also works on Android and your mac. If you spot any bugs, please reach us here or on social media 😃 . You can also browse the opened issues to see if we already spotted that bug. And if you have any improvement idea, that's also possible to send us your feature requests.
 
 ## Background story
