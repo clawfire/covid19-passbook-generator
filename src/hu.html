@@ -45,7 +45,7 @@
                 <path d="M424.157 77.2089C424.157 92.3195 401.49 92.3195 401.49 77.2089C401.49 62.0982 424.157 62.0982 424.157 77.2089Z" fill="white"/>
                 <path d="M170.824 221.258C187.97 207.435 206.874 196.001 227.078 187.209C241.321 193.358 254.976 200.829 267.842 209.467L227.078 250.123L203.741 226.746L189.269 241.179L219.842 271.671C221.753 273.602 224.352 274.67 227.078 274.67C229.805 274.67 232.404 273.602 234.314 271.671L282.824 223.393C273.422 257.543 254.008 288.137 227.078 311.209C199.614 287.603 179.996 256.222 170.824 221.258ZM227.677 335.209C229.984 335.234 232.213 334.467 234.033 333.063C270.35 304.687 295.697 264.639 305.798 219.766C306.696 215.986 305.389 212.027 302.416 209.55L299.442 207.405L306.824 200.151L292.266 185.643L283.04 194.941C267.74 184.189 251.336 175.045 234.138 167.663L231.884 166.642C229.244 165.619 226.322 165.619 223.682 166.642L221.426 167.663C196.694 178.211 173.68 192.413 153.152 209.754C150.178 212.231 148.872 216.19 149.769 219.97C159.868 264.845 185.214 304.89 221.534 333.266C223.329 334.569 225.481 335.233 227.685 335.209H227.677Z" fill="#FDBE28"/>
               </svg>
-              <h1 id="mainTitle" class="ui header" tabindex="-1">Keep your COVID certificate in your iPhone’s wallet.</h1>
+              <h1 id="mainTitle" class="ui header" tabindex="-1">Tartsa COVID igazolványát az iPhone-ja Wallet-jében.</h1>
             </div>
         </header>
         <main id="main" role="main">
@@ -54,19 +54,19 @@
               <div class="ui two small statistics">
                 <div class="statistic">
                   <div class="value"><i class="shield alternate icon" aria-hidden="true"></i></div>
-                  <div class="label"><p>generated on your phone</p></div>
+                  <div class="label"><p>a telefonján generált</p></div>
                 </div>
                 <div class="statistic">
                   <div class="value"><i class="times circle outline icon" aria-hidden="true"></i></div>
-                  <div class="label"><p>no personal data collection</p></div>
+                  <div class="label"><p>nem szemelyes adatok gyüjtése</p></div>
                 </div>
                 <div class="statistic">
                   <div class="value"><i class="times circle outline icon" aria-hidden="true"></i></div>
-                  <div class="label"><p>no analytics or data sharing</p></div>
+                  <div class="label"><p>nem adatelemzés vagy adatmegosztás</p></div>
                 </div>
                 <div class="statistic">
                   <div class="value"><i class="search icon" aria-hidden="true"></i></div>
-                  <div class="label"><p>open source & transparent</p></div>
+                  <div class="label"><p>nyilt forráskódú és transzparens</p></div>
                 </div>
               </div>
               <button type="button" class="ui fluid primary icon button big" name="startScanning">
@@ -135,11 +135,11 @@
                     <path d="M89 84V71H94V84H89Z" fill="currentColor"/>
                     <path d="M51 41V36H56V41H51Z" fill="currentColor"/>
                   </svg>
-                  Scan my certificate
+                  Beolvassa a tanusítványomat
               </button>
               <button type="button" class="ui fluid basic inverted icon button big" name="scanImage">
                   <i class="file image icon" aria-hidden="true"></i>
-                  Import picture
+                  Kép importálása
               </button>
               <input type="file" id="qrfile" style="display: none;" accept="image/jpeg, image/png">
             </section>
@@ -147,18 +147,18 @@
                 <div class="ui fluid card">
                     <div class="image" id="scannerContainer">
                         <video id="scanner" aria-labelledby="video-desc">
-                            <p>Your browser is not compatible with our technology.</p>
+                            <p>Az ön böngészöje nem kompatibilis a technológiánkkal.</p>
                         </video>
                         <div id="mask"></div>
                     </div>
                     <div class="content">
                         <div class="description" id="video-desc">
-                            <p><i class="qrcode icon" aria-hidden="true"></i> Aim at the QR Code of your certificate to capture.</p>
+                            <p><i class="qrcode icon" aria-hidden="true"></i> Irányítsa az igazolványán található QR kódra, hogy azt beolvassa.</p>
                         </div>
                     </div>
                     <div class="ui bottom attached disabled button" id="flashlight_btn" >
                         <p><i class="lightbulb icon" aria-hidden="true"></i>
-                        <span>Flashlight unavailable</span></p>
+                        <span>Vaku nem áll rendelkezésre </span></p>
                     </div>
                 </div>
             </section>
@@ -172,7 +172,7 @@
                     </div>
                     <div class="extra content" id="cardExtraContent">
                     </div>
-                    <button type="button" id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon" aria-hidden="true"></i>Save in your wallet</button>
+                    <button type="button" id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon" aria-hidden="true"></i>Mentse a Wallet-jébe</button>
                 </div>
                 <button type="button" class="ui fluid violet icon button" name="startScanning">
                     <svg width="24" height="24" viewbox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -240,11 +240,11 @@
                     <path d="M89 84V71H94V84H89Z" fill="currentColor"/>
                     <path d="M51 41V36H56V41H51Z" fill="currentColor"/>
                   </svg>
-                    Scan another certificate
+                    Masik tanusitvány beolvasása
                 </button>
                 <button type="button" class="ui fluid basic inverted icon button" name="scanImage">
                     <i class="file image icon" aria-hidden="true"></i>
-                    Import another picture
+                    Importáljon egy másik képet
                 </button>
             </section>
 
@@ -253,11 +253,11 @@
               <section id="language" class="row">
                 <h2 class="ui header">
                   <i class="translate icon"></i>
-                  <div class="content">Language</div>
+                  <div class="content">Nyelv</div>
                 </h2>
                 <div class="ui form">
                   <div class="field">
-                    <label for="language-selection">Select your language</label>
+                    <label for="language-selection">Válasszon nyelvet</label>
                     <select name="language-selection" id="language-selector">
                       <option value="bg">български език</option>
                       <option value="cs">Česky</option>
@@ -287,11 +287,11 @@
                     </select>
                   </div>
                 </div>
-                <p>If this page is still in English after selecting another language, that means we are missing translations for your selected language. <a href="https://crwd.in/covid19-passbook">Help us to translate</a>.</p>
+                <p>Ha ez az oldal még mindig angol nyelvű, miután egy másik nyelvet választott, az azt jelenti, hogy hiányoznak a kiválasztott nyelvhez tartozó fordítások. <a href="https://crwd.in/covid19-passbook">Segítsen a fordításban</a>.</p>
               </section>
               <section id="faq" class="row">
                   <h2 class="ui header">
-                      <abbr title="Frequently Asked Questions" id="faq-title">FAQ</abbr>
+                      <abbr title="Frequently Asked Questions" id="faq-title">GYIK</abbr>
                   </h2>
                   <div class="ui header"><p class="sub header">Learn more about the project, security, how it works and more.</p></div>
                   <div id="faq-list" class="ui relaxed list" itemscope itemtype="https://schema.org/FAQPage">
@@ -334,13 +334,18 @@
                               <h3 class="header" itemprop="name">How can I get my EU&nbsp;DCC (certificate)?</h3>
                               <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1E7;&#x1F1EC;</span> In Bulgaria, the certificate can be downloaded from the <a href="https://www.his.bg/bg/dgc">Ministry of Health's website</a></p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1E7;&#x1F1EC;</span> In Bulgaria, the certificate can be downloaded from the <a href="https://www.his.bg/bg/dgc">Ministry of Health's website</a></p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1E8;&#x1F1FF;</span> In Czechia, you get your certificate from Ministry of Health <a href="https://ocko.uzis.cz" title="Očkovací portál občana">Vaccination portal</a> or via <i>Tečka</i> app.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1E9;&#x1F1F0;</span> In Denmark, you can get it in the Coronapas mobile app, when you select the travel option.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1EB;&#x1F1F7;</span> In France, you can download it from <a href="https://attestation-vaccin.ameli.fr/" title="Visiter le site Ameli.fr pour télécharger votre certificat">Ameli’s dedicated website</a>.</p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1EC;&#x1F1F7;</span> In Greece, you can download your certificate from <a href="https://eudcc.gov.gr/" title="Επισκεφθείτε το gov.gr για την έκδοση Ευρωπαϊκού ψηφιακού πιστοποιητικού COVID-19">Gov.gr</a>.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1EE;&#x1F1F9;</span> In Italy, you can download it from <a href="https://www.dgc.gov.it/web/">this website</a> using a SPID Identity (Public Digital Identity System) or the European Health Insurance Card (EHIC).</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1F1;&#x1F1FA;</span> In Luxembourg, you can download it from <a href="http://guichet.lu/certificat-vaccination">myGuichet</a>.</p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1F2;&#x1F1F9;</span> In Malta, you can download it from <a href="https://certifikatvaccin.gov.mt/">website of Ministry for Health</a>.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1F5;&#x1F1F9;</span> In Portugal, you can download it from the <a href="https://www.sns24.gov.pt/certificado-digital-covid/" title="Visite o site do SNS24 para descarregar o seu certificado">SNS24 dedicated website</a>, or the “SNS24” iOS and Android apps.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1F8;&#x1F1EA;</span> In Sweden, you can download it from the  <a href="https://covidbevis.se/vaccinationsbevis-web/">Swedish E-health agency's Covidbevis website</a>.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1E8;&#x1F1ED;</span> In Switzerland, the certificates are distributed by your canton. Get more information on <a href="https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/covid-zertifikat.html">Federal Office of Public Health</a>.</p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1F9;&#x1F1FC;</span> In Taiwan, you can download it from the  <a href="https://dvc.mohw.gov.tw/vapa/apply/Index.init.ctr">Taiwan Centers for Disease Control's website</a>.</p>
                                 <p itemprop="text">If you know how to download the certificates from health authorities elsewhere, please contact us so we can add the instructions here.</p>
                               </div>
                           </div>
@@ -462,8 +467,9 @@
             </div>
             <div class="content">
               <p>Sorry but your browser is too old and can't handle the cryptographic mathematic operation required to decode your QR code.</p>
-              <p>For iOS user, iOS 14 is required. If you have an iPhone starting iPhone6S, you need to upgrade iOS to use the app.</p>
-              <p>If you cannot upgrade or don't want, you can open this website on your computer and use it to generate your card.</p>
+              <p>For iOS users, iOS 14 is required. iPhone6S and up are supported but you need to upgrade iOS to use the app.</p>
+              <p>For macOS users, Safari 14 is required.</p>
+              <p>If you cannot upgrade or don't want, you can open this website on your computer (or another browser) and use it to generate your pass.</p>
             </div>
           </div>
 
@@ -498,11 +504,11 @@
             <div class="ui labels" id="buildInfos">
               <div class="ui label">
                 Version
-                <div class="detail">2.0.1</div>
+                <div class="detail">2.2.0</div>
               </div>
               <div class="ui label">
                 Published on
-                <div class="detail">September 26th 2021</div>
+                <div class="detail">November 1st 2021</div>
               </div>
             </div>
           </div>
