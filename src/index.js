@@ -457,11 +457,36 @@ window.addEventListener('load', function() {
         if (process.env.NODE_ENV === 'development') {
           console.groupCollapsed("📷 Listing cameras available")
           console.table(camerasList)
+        }
+        let cameraSelector = document.getElementById('selected-camera');
+        if (process.env.NODE_ENV === 'development') {
+          console.log("Clearing the camera list")
+        }
+        // Clear the selector
+        cameraSelector.innerHTML = "";
+        if (process.env.NODE_ENV === 'development') {
+          console.log("Populating the camera list with %d elements", camerasList.length)
+        }
+        // Iterate throught all camera and populate the selector
+        for (let camera of camerasList) {
+          cameraSelector.innerHTML += `<option value="${camera.id}">${camera.label}</option>`;
+        }
+        if (process.env.NODE_ENV === 'development') {
+          console.log("Binding the camera selector to the scanner")
+        }
+        // Bind the change event to the selector
+        cameraSelector.addEventListener('change', (event) => {
+          scanner.setCamera(event.target.value);
+        })
+        if (process.env.NODE_ENV === 'development') {
+          console.log("Setting the default camera to %s", camerasList[0].label)
+        }
+        // Select the first camera by default
+        cameraSelector.value = camerasList[0].id;
+        scanner.setCamera(cameraSelector.value);
+        if (process.env.NODE_ENV === 'development') {
           console.groupEnd()
         }
-      })
-      scanner.setCamera('environment').then(() => {
-        console.log("✅ Asked the device to use the environment camera")
       })
 
       scanner.hasFlash().then(hasFlash => {
