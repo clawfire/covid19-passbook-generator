@@ -154,6 +154,15 @@
                     <div class="content">
                         <div class="description" id="video-desc">
                             <p><i class="qrcode icon" aria-hidden="true"></i> Наведите на QR-код Вашего сертификата.</p>
+                            <p><i class="sync alternate icon" aria-hidden="true"></i> You can change the camera using the selector below.</p>
+                        </div>
+                        <div class="ui form">
+                          <div class="field">
+                            <label for="camera-list">Select a camera</label>
+                              <select name="camera-list" id="selected-camera">
+                                <option value="">Camera list loading ...</option>
+                              </select>
+                          </div>
                         </div>
                     </div>
                     <div class="ui bottom attached disabled button" id="flashlight_btn" >
@@ -280,7 +289,7 @@
                       <option value="no">Norsk</option>
                       <option value="pl">Polski</option>
                       <option value="pt">Português</option>
-                      <option value="ru">русский язык</option>
+                      <option value="ru">Русский</option>
                       <option value="ro">Română</option>
                       <option value="sk">Slovenčina</option>
                       <option value="sl">Slovenščina</option>
@@ -290,7 +299,7 @@
                     </select>
                   </div>
                 </div>
-                <p>Если после выбора другого языка эта страница по-прежнему остается на английском языке, это означает, что мы пропускаем переводы для выбранного языка. <a href="https://crwd.in/covid19-passbook">Помогите нам перевести</a>.</p>
+                <p>Если после выбора языка страница отображается по-английски, это означает, что мы ещё не перевели сайт на выбранный вами язык. <a href="https://crwd.in/covid19-passbook">Помогите нам перевести</a>.</p>
               </section>
               <section id="faq" class="row">
                   <h2 class="ui header">
@@ -304,10 +313,10 @@
                               <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                                   <ol class="ui ordered list" itemprop="text" role="list">
                                       <li class="item">Удостоверьтесь в достаточности освещения и поместите ваш QR-код в рамки зоны сканирования на экране телефона. Размер визуальной помощи-это размер кода, который нам нужен. Ваш код должен быть плоским (морщинистая бумага не будет хорошо работать).</li>
-                                      <li class="item">Если у вас есть скриншот или картинка вашего кода, вы можете воспользоваться кнопкой "Импорт картинки".</li>
-                                      <li class="item">Убедитесь, что вы используете версию сертификата ЕС. Смотрите следующий вопрос, если вы не знаете, где взять ваш.</li>
-                                      <li class="item">Мы поддерживаем сертификат EU Digital COVID о вакцинации, восстановлении, испытании. Кроме того, при условии, что они следовали за форматом ЕС, они также поддерживаются в Швейцарии и Соединенном Королевстве.</li>
-                                      <li class="item">Если все остальное не удастся, вы можете связаться с нами или <a href="https://github.com/clawfire/covid19-passbook-generator/issues/new?assignees=&labels=bug%2Ctriage&template=bug_report.yml&title=%5BBUG%5D+" title="Submit a bug on Github">открыть выпуск</a>.</li>
+                                      <li class="item">Если у вас есть скриншот или картинка с кодом, воспользуйтесь кнопкой "Импорт картинки".</li>
+                                      <li class="item">Убедитесь, что ваш сертификат в формате ЕС. Смотрите следующий вопрос, если не знаете, где его взять.</li>
+                                      <li class="item">Мы поддерживаем сертификаты в формате ЕС (EU Digital COVID) о вакцинации, перенесённом заболевании или с результатом теста. Кроме того, также поддерживаются сертификаты из Швейцарии и Великобритании, если они были выданы в этом формате.</li>
+                                      <li class="item">Если ничего не работает, связажитесь с нами или <a href="https://github.com/clawfire/covid19-passbook-generator/issues/new?assignees=&labels=bug%2Ctriage&template=bug_report.yml&title=%5BBUG%5D+" title="Submit a bug on Github">открыть выпуск</a>.</li>
                                   </ol>
                               </div>
                           </div>
@@ -315,20 +324,20 @@
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <h3 class="header" itemprop="name">Что это за проект?</h3>
-                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">Это веб-приложение сканирует ваш сертификат EU Digital COVID (вакцина, тест или исцеление) и генерирует из него пароль. После этого вы можете импортировать его в бумажник iPhone или, если вы являетесь пользователем Android, импортировать его в приложение, которое его поддерживает.</div>
+                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">Это приложение сканирует ваш сертификат EU Digital COVID (о вакцине, тесте или перенесённом заболевании) и генерирует файл в формате Passbook. Его можно импортировать его в Apple Wallet на iPhone или, если у вас Android, в одно из приложений, которые поддерживают этот формат.</div>
                           </div>
                         </div>
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                              <h3 class="header" itemprop="name">Можно ли сохранить сертификат на Android?</h3>
+                              <h3 class="header" itemprop="name">Как пользоваться сертификатом в формате Passbook на Android?</h3>
                               <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                  <p itemprop="text">Да! Файл .pkpass можно сохранить и открыть его с помощью приложения, поддерживаяного в этом формате, например:</p>
+                                  <p itemprop="text">Да! Файл .pkpass можно сохранить и открыть его с одного из приложений, которые поддерживают этот формат, например:</p>
                                   <ul itemprop="text">
                                       <li><a href="https://play.google.com/store/apps/details?id=de.stocard.stocard&hl=fr&gl=US">Stocard</a> (Google Play Store)</li>
                                       <li><a href="https://f-droid.org/fr/packages/org.ligi.passandroid/">PassAndroid</a> (F-Droid)</li>
                                       <li><a href="https://play.google.com/store/apps/details?id=io.walletpasses.android">WalletPasses</a> (Google Play Store)</li>
                                   </ul>
-                                  <p itemprop="text">Вы также можете скриншот пройти предварительный просмотр, который мы показываем перед загрузкой; он содержит всю необходимую информацию, которую вы видите на обложке вашего бумажного сертификата.</p>
+                                  <p itemprop="text">Кроме того, можно просто сделать снимок экрана, когда приложение показывает сертификат перед тем, как выдаст вам файл. На этом экране отображается вся необходимая информация, которую вы видите на бумажном сертификате.</p>
                               </div>
                           </div>
                       </div>
@@ -336,39 +345,39 @@
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <h3 class="header" itemprop="name">Как я могу получить свой сертификат ЕС&nbsp;DCC (сертификат)?</h3>
                               <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <p itemprop="text"><span aria-hidden="true">&#x1F1E7;&#x1F1EC;</span> In Bulgaria, the certificate can be downloaded from the <a href="https://www.his.bg/bg/dgc">Ministry of Health's website</a></p>
-                                <p itemprop="text"><span aria-hidden="true">&#x1F1E7;&#x1F1EC;</span> В Болгарии сертификат можно скачать с сайта <a href="https://www.his.bg/bg/dgc">Министерство здравоохранения</a></p>
-                                <p itemprop="text"><span aria-hidden="true">&#x1F1E8;&#x1F1FF;</span> В Чехии вы получаете сертификат от Министерства здравоохранения <a href="https://ocko.uzis.cz" title="Očkovací portál občana">Вакцинацию</a> или через <i>Течка</i>.</p>
-                                <p itemprop="text"><span aria-hidden="true">&#x1F1E9;&#x1F1F0;</span> В Дании Вы можете получить его в мобильном приложении Коронапас, при выборе опции проезда.</p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1E7;&#x1F1EC;</span> В Болгарии сертификат можно скачать с сайта <a href="https://www.his.bg/bg/dgc">Министерства здравоохранения</a></p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1E8;&#x1F1FF;</span> В Чехии сертификат можно получить на сайте <a href="https://ocko.uzis.cz" title="Očkovací portál občana">Министерства здравоохранения</a> или через приложение <i>Tečka</i></p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1E9;&#x1F1F0;</span> В Дании Вы можете получить его в мобильном приложении Коронапас, выбрав режим для поездок.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1EB;&#x1F1F7;</span> Во Франции вы можете загрузить его с сайта <a href="https://attestation-vaccin.ameli.fr/" title="Visiter le site Ameli.fr pour télécharger votre certificat">Ameli на сайте</a>.</p>
-                                <p itemprop="text"><span aria-hidden="true">&#x1F1EC;&#x1F1F7;</span> В Греции вы можете скачать Ваш сертификат от <a href="https://eudcc.gov.gr/" title="Επισκεφθείτε το gov.gr για την έκδοση Ευρωπαϊκού ψηφιακού πιστοποιητικού COVID-19">Гов. гр</a>.</p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1EC;&#x1F1F7;</span> В Греции вы можете скачать Ваш сертификат с сайта <a href="https://eudcc.gov.gr/" title="Επισκεφθείτε το gov.gr για την έκδοση Ευρωπαϊκού ψηφιακού πιστοποιητικού COVID-19">Gov.gr</a>.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1EE;&#x1F1F9;</span> В Италии вы можете загрузить его с <a href="https://www.dgc.gov.it/web/">на этом сайте</a> с использованием идентификатора SPID (Public Digital Identity System) или Европейской карты медицинского страхования (EHIC).</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1F1;&#x1F1FA;</span> В Люксембурге вы можете скачать его с <a href="http://guichet.lu/certificat-vaccination">myGuichet</a>.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1F2;&#x1F1F9;</span> На Мальте можно загрузить его с <a href="https://certifikatvaccin.gov.mt/">сайта Министерства здравоохранения</a>.</p>
-                                <p itemprop="text"><span aria-hidden="true">&#x1F1F5;&#x1F1F9;</span> В Португалии можно загрузить его с сайта <a href="https://www.sns24.gov.pt/certificado-digital-covid/" title="Visite o site do SNS24 para descarregar o seu certificado">SNS24, посвященного</a>, или " SNS24" iOS и Android.</p>
-                                <p itemprop="text"><span aria-hidden="true">&#x1F1F8;&#x1F1EA;</span> В Швеции вы можете загрузить его с сайта  <a href="https://covidbevis.se/vaccinationsbevis-web/">шведского агентства E-heald's Covidbevis на сайте</a>.</p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1F5;&#x1F1F9;</span> В Португалии можно загрузить его с сайта <a href="https://www.sns24.gov.pt/certificado-digital-covid/" title="Visite o site do SNS24 para descarregar o seu certificado">SNS24, посвященного</a>, или с помощью приложения SNS24 на iOS и Android.</p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1F8;&#x1F1EA;</span> В Швеции вы можете загрузить его с сайта  <a href="https://covidbevis.se/vaccinationsbevis-web/">Covidbevis</a>.</p>
+                                <p itemprop="text"><span aria-hidden="true">&#x1F1E8;&#x1F1ED;</span> В Швейцарии сертификаты распространяются вашим кантоном, смотрите сайт <a href="https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/covid-zertifikat.html">Федерального управления общественного здравоохранения</a>.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1E8;&#x1F1ED;</span> В Швейцарии сертификаты распространяются вашим кантоном. Получите дополнительную информацию по <a href="https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/covid-zertifikat.html">Федеральному управлению общественного здравоохранения</a>.</p>
-                                <p itemprop="text"><span aria-hidden="true">&#x1F1F9;&#x1F1FC;</span> На Тайване можно загрузить его с сайта  <a href="https://dvc.mohw.gov.tw/vapa/apply/Index.init.ctr">Тайваньского центра по борьбе с болезнями</a>.</p>
+                                <p itemprop="text">Если вы знаете, как скачать сертификаты у органов здравоохранения в других местах, пожалуйста, свяжитесь с нами, чтобы мы могли добавить здесь инструкции.</p>
                                 <p itemprop="text">Если вы знаете, как скачать сертификаты у органов здравоохранения в других местах, пожалуйста, свяжитесь с нами, чтобы мы могли добавить здесь инструкции.</p>
                               </div>
                           </div>
                         </div>
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                              <h3 class="header" itemprop="name">Как это работает?</h3>
-                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>При сканировании кода мы читаем данные и создаем пароль (файл должен был иметь карту в вашем кошельке). Мы отправляем контрольную сумму для цифровой подписи на наш сервер, без отправки ваших данных. Ваш телефон генерирует окончательный файл и позволяет его сохранить.</p></div>
+                              <h3 class="header" itemprop="name">Как работает приложение?</h3>
+                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>При сканировании кода мы читаем данные и сертификат в формате Passbook (файл, который вы позже откроете на телефоне). Мы отправляем контрольную сумму для цифровой подписи на наш сервер, сами данные остаются на телефоне. Ваш телефон генерирует итоговый файл и позволяет его сохранить.</p></div>
                           </div>
                         </div>
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <h3 class="header" itemprop="name">Он защищенный?</h3>
-                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>Мы приложили много усилий к тому, чтобы сделать его безопасным, как могли. Ваши личные данные никогда не оставляют свой телефон. Для открытия пропуска Apple требуется цифровая подпись. Чтобы сгенерировать это, приложение отправляет на наш сервер только контрольную сумму ваших данных, и невозможно угадать исходное содержимое. Последний шаг происходит на вашем телефоне: перед сохранением прохода вы просматриваете информацию. Мы никого не отслеживаем, не собираем никакой личной информации и не используем печенье.</p></div>
+                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>Мы приложили много усилий к тому, чтобы сделать его безопасным, как могли. Ваши личные данные никогда не покидают телефон. Для того, чтобы файл Passbook можно было открыть на устройствах от Apple, необходима цифровая подпись. Чтобы сгенерировать эту подпись, приложение отправляет на наш сервер контрольную сумму ваших данных, по которой невозможно восстановить исходные данные. Последний шаг происходит на вашем телефоне: генерация файла Passbook. Мы никого не отслеживаем, не собираем никакой личной информации и не используем куки.</p></div>
                           </div>
                         </div>
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <h3 class="header" itemprop="name">Могу я посмотреть код?</h3>
-                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>-Конечно. Вы можете прочесть исходный код и больше копать в том, как он работает на <a href="https://github.com/clawfire/covid19-passbook-generator">страницу Github проекта</a>. Вы даже можете внести свой вклад, если хотите!</p></div>
+                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>Конечно. Исходный код можно найти на <a href="https://github.com/clawfire/covid19-passbook-generator">страница проекта в Github</a>. Изучайте на здоровье, можете даже помочь проекту, если захотите!</p></div>
                           </div>
                         </div>
                       <div class="item">
@@ -376,16 +385,16 @@
                               <h3 class="header" itemprop="name">Как связаться с создателями?</h3>
                               <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                                 <p>
-                                  Это приложение представляет собой оригинальную идею и работу <a href="https://thibaultmilan.com">Thibault Milan</a> (<a href="https://twitter.com/thibaultmilan">@thibaultmilan</a> в Twitter), с помощью <a href="https://www.linkedin.com/in/avagner/">Алена Вагнер</a>, <a href="https://twitter.com/grischard">Гийом Рисшар</a> и советы от <a href="https://twitter.com/alrouen">@alrouen</a>.
+                                  Оригинальную идею предложил и воплотил в жизнь <a href="https://thibaultmilan.com">Thibault Milan</a> (<a href="https://twitter.com/thibaultmilan">@thibaultmilan</a> в Twitter) с помощью <a href="https://www.linkedin.com/in/avagner/">Alain Vagner</a>, <a href="https://twitter.com/grischard">Guillaume Rischard</a> и <a href="https://twitter.com/alrouen">@alrouen</a>.
                                 </p>
 
                                 <p>
-                                  Новинка (с конца 08/2021) Дизайн сделан на <a href="https://www.redisdead.net/">Лоуренса Вагнера</a>.<br>
-                                  Специальные возможности и CSS, сделанные на <a href="https://geoffrey.crofte.fr/en/">Джеффри Крофте</a>.
+                                  Новый дизайн (от 08/2021) разработан <a href="https://www.redisdead.net/">Laurence Vagner</a>.<br>
+                                  Улучшения эргономики и CSS были предложены <a href="https://geoffrey.crofte.fr/en/">Geoffrey Crofte</a>.
                                 </p>
 
                                 <p>
-                                  Вы также можете увидеть полный список авторов <a href="https://github.com/clawfire/covid19-passbook-generator/graphs/contributors">по проекту Github</a>.
+                                  Полный список автором можно найти <a href="https://github.com/clawfire/covid19-passbook-generator/graphs/contributors">на странице Github</a>.
                                 </p>
                               </div>
                           </div>
@@ -393,13 +402,13 @@
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <h3 class="header" itemprop="name">Как я могу помочь?</h3>
-                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>Если вам нравится приложение, не стесняетесь делиться этим с друзьями и семьей. Затем, если вы хотите помочь больше, <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen">посмотрите на вопросы</a>. Речь идет не только о технологиях, а также о задачах, связанных с копированием, проектированием и т.д. Вы можете запустить <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22">с этими вопросами</a> , если вы хотите ознакомиться с проектом.</p>
+                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>Если вам нравится приложение, расскажите о нём друзьям и членам семьи. Если вы хотите помочь больше, <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen">гляньте на список сообщений об ошибках</a>. Среди них наверняка найдутся задачки, связанные с написанием текстов, дизайном и т.д, с которыми, может быть, вы сможете помочь. Начать можно с задач в <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22">списке для новичков</a>.</p>
                           </div>
                         </div>
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <h3 class="header" itemprop="name">Какие у вас сборы?</h3>
-                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>На данный момент это сайт <a href="https://netlify.com/">от Netlify</a> бесплатно (многие MANY благодаря им за поддержку этого проекта) и AWS Lambda стоят мне под € 1/месяц. Вы можете найти отчет о прозрачности <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSUDZX5ZdohZhLWxb1TyTtpamoRtkBg6z-wikv1b2OG1tWeNXwhNHX-a_wzxV5r4qoC9k8UauL3D-ay/pubhtml">от</a> о стоимости и пожертвованиях (использует Google Sheets).</p></div>
+                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>На данный момент это сайт работает <a href="https://netlify.com/">на Netlify</a> забесплатно (ОГРОМНОЕ им спасибо за поддержку проекта!), а также на AWS Lambda за примерно 1 € в месяц. Подробности можно найти в отчете <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSUDZX5ZdohZhLWxb1TyTtpamoRtkBg6z-wikv1b2OG1tWeNXwhNHX-a_wzxV5r4qoC9k8UauL3D-ay/pubhtml">о расходах и пожертвованиях</a> (используются Google Sheets).</p></div>
                           </div>
                           <div class="content">
                             <a href="https://www.producthunt.com/posts/eu-digital-covid-certificate-to-passbook?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-eu-digital-covid-certificate-to-passbook"
@@ -418,7 +427,7 @@
           <div class="ui basic modal" id="modal-offline">
             <div class="ui icon header">
               <p><i class="toggle off icon" aria-hidden="true"></i>
-              Упс! Вы отключены</p>
+              Упс! Нет интернета</p>
             </div>
             <div class="content">
               <p>Вы не сможете сгенерировать новый проход во время автономной работы. Для продолжения работы с приложением необходим доступ к данным.</p>
@@ -426,7 +435,7 @@
             <div class="actions">
               <div class="ui blue basic cancel inverted button">
                 <p><i class="checkmark icon" aria-hidden="true"></i>
-                Я понимаю, закройте это сообщение.</p>
+                Ясно.</p>
               </div>
             </div>
           </div>
@@ -437,12 +446,12 @@
               Ваш браузер не соответствует требованиям этого приложения для работы.</p>
             </div>
             <div class="content">
-              <p>Вы используете Facebook inc. приложение, которое открывает ссылку в режиме предварительного просмотра, но предотвращает загрузку, так что вы не сможете скачать пропуск. Откройте сайт в обычном браузере.</p>
+              <p>Вы используете приложение Facebook, которое открывает ссылку в режиме предварительного просмотра, но не позволяет сохранять файлы, так что вы не сможете скачать сертификат. Откройте сайт в обычном браузере.</p>
             </div>
             <div class="actions">
               <div class="ui blue basic cancel inverted button">
                 <p><i class="checkmark icon" aria-hidden="true"></i>
-                Я понимаю, закройте это сообщение.</p>
+                Ясно.</p>
               </div>
             </div>
           </div>
@@ -453,12 +462,12 @@
               Ваш браузер не соответствует требованиям этого приложения для работы.</p>
             </div>
             <div class="content">
-              <p>Необходимо открыть этот сайт с помощью Safari. Apple не позволяет другим браузерам загружать проходы в приложение Wallet.</p>
+              <p>Необходимо открыть этот сайт с помощью Safari. Apple не позволяет другим браузерам загружать сертификаты в приложение Wallet.</p>
             </div>
             <div class="actions">
               <div class="ui blue basic cancel inverted button">
                 <p><i class="checkmark icon" aria-hidden="true"></i>
-                Я понимаю, закрыть это сообщение</p>
+                Ясно</p>
               </div>
             </div>
           </div>
@@ -469,22 +478,22 @@
               Ваш браузер слишком стар.
             </div>
             <div class="content">
-              <p>Извините, но ваш браузер слишком стар и не может обработать криптографическую математическую операцию, необходимую для декодирования вашего QR-кода.</p>
-              <p>Для пользователей iOS требуется iOS 14. iPhone6S и up поддерживаются, но для работы с приложением необходимо обновить iOS.</p>
+              <p>Извините, но ваш браузер слишком стар и не поддерживает операции шифрования, необходимые для декодирования вашего QR-кода.</p>
+              <p>Для пользователей iOS требуется iOS 14. Для пользователей iOS требуется iOS 14. iPhone6S и выше поддерживаются, но для работы с приложением необходимо обновить iOS.</p>
               <p>Для пользователей macOS требуется Safari 14.</p>
-              <p>Если вы не можете произвести обновление или не хотите, вы можете открыть этот веб-сайт на своем компьютере (или другом браузере) и использовать его для создания своего прохода.</p>
+              <p>Если вы не можете или не хотите обновитьься, можно открыть этот сайт на компьютере (или в другом браузере) и создать сертификат там.</p>
             </div>
           </div>
 
           <div id="error-modal" class="ui modal">
             <i class="close icon" aria-hidden="true"></i>
             <h3 class="header">
-                Только что обнаружена ошибка.
+                Произошла ошибка.
             </h3>
             <div class="content">
               <div class="description">
-                <p>Вы можете помочь нам, отправив информацию об этой ошибке в группу разработки, чтобы предотвратить ее снова.</p>
-                <p>Убедитесь в том, что приведенная ниже информация об ошибках не содержит никакой личной информации. Кроме того, можно добавить контекстную информацию. Спасибо за помощь!</p>
+                <p>Помогите проекту, отправив подробности об этой ошибке разрабочикам, чтобы они её исправили.</p>
+                <p>Убедитесь в том, что приведенная ниже информация об ошибке не содержит личной информации. Если можете, напишите что-нибудь о том, как эта ошибка произошла. Спасибо за помощь!</p>
                 <div class="ui form">
                   <div class="field">
                     <label for="error-msg">Сообщение об ошибке</label>
@@ -496,7 +505,7 @@
             <div class="actions">
               <button type="button" class="ui black deny button" id="error-close">Nope</button>
               <button type="button" class="ui positive right labeled icon button" id="error-send">
-                Yep, send the error
+                Отправить
                 <i class="checkmark icon" aria-hidden="true"></i>
               </button>
             </div>
@@ -510,7 +519,7 @@
                 <div class="detail">2.2.1</div>
               </div>
               <div class="ui label">
-                Опубликовано на
+                Опубликовано:
                 <div class="detail">January 15th 2022</div>
               </div>
             </div>
