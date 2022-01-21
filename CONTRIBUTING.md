@@ -10,6 +10,13 @@ You want to contribute to this project and that's awesome! Below, you'll find so
   - use a `feature` branch
 - When you're submiting a PR, pay attention you have to submit on `clawfire:develop` not on `clawfire:main`
 
+## Translations
+
+Translations are handled [throught Crowdin](https://crowdin.com/project/covid19-passbook) and anyone can contribute. Just register on their platform (even using social login) and you're ready to go. 
+
+Translations may be peer reviewed before publishing.  
+When done, translations are pushed to a PR on `clawfire:develop` and will not land in the app in production before the next release.
+
 ## Ground rules
 
 1. Be sure to use our `.editorconfig` file with your IDE
