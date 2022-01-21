@@ -1,6 +1,6 @@
 {
     "name": "covid19-passbook-generator",
-    "version": "2.2.1",
+    "version": "2.3.0",
     "description": "A simple PWA to scan your EU digital COVID Certificate and generate a passbook from it",
     "main": "index.html",
     "repository": "git@github.com:clawfire/covid19-passbook-generator.git",
@@ -8,20 +8,20 @@
     "license": "NoHarm-draft",
     "private": false,
     "dependencies": {
-        "@pathcheck/dcc-sdk": "^0.0.23",
+        "@pathcheck/dcc-sdk": "^0.0.27",
         "file-saver": "^2.0.5",
         "handlebars": "^4.7.7",
         "iso-3166-1": "^2.1.1",
         "jszip": "^3.7.1",
         "lodash.debounce": "^4.0.8",
-        "node-fetch": "^3.1.0",
+        "node-fetch": "^3.2.0",
         "octokit": "^1.7.1",
         "parcel-bundler": "^1.12.5",
         "qr-scanner": "^1.3.0",
         "ua-parser-js": "^1.0.2"
     },
     "devDependencies": {
-        "sass": "^1.48.0"
+        "sass": "^1.49.0"
     },
     "scripts": {
         "start": "npx parcel serve src/*.html --https && cp node_modules/qr-scanner/qr-scanner-worker.min.js dist/qr-scanner-worker.min.js",
