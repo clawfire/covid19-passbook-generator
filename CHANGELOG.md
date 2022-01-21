@@ -1,5 +1,15 @@
 ## [Unrealeased]
 
+
+## [2.3.0] - 2022-01-21
+
+### Added
+- Camera selection when scanning. You're now able to select which camera you want to use. Front, back, tele-lense. Whatever your device let the browser access to.
+
+### Changed
+- Update from 1.x to 2.5.0 the definition files for vaccines & tests
+- Update LB, UK and NO homepages
+
 ## [2.2.1] - 2022-01-15
 ### Changed
 - Fixed the recovery certificate issue with time that prevent iOS to open the pass in wallet
