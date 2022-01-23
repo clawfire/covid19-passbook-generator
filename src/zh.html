@@ -154,11 +154,11 @@
                     <div class="content">
                         <div class="description" id="video-desc">
                             <p><i class="qrcode icon" aria-hidden="true"></i> 請對準你數位證明上的 QR 碼來拍攝。</p>
-                            <p><i class="sync alternate icon" aria-hidden="true"></i> You can change the camera using the selector below.</p>
+                            <p><i class="sync alternate icon" aria-hidden="true"></i> 你可以使用下面的選項來切換鏡頭。</p>
                         </div>
                         <div class="ui form">
                           <div class="field">
-                            <label for="camera-list">Select a camera</label>
+                            <label for="camera-list">選擇鏡頭</label>
                               <select name="camera-list" id="selected-camera">
                                 <option value="">相機清單載入中 ...</option>
                               </select>
@@ -167,7 +167,7 @@
                     </div>
                     <div class="ui bottom attached disabled button" id="flashlight_btn" >
                         <p><i class="lightbulb icon" aria-hidden="true"></i>
-                        <span>Flashlight unavailable</span></p>
+                        <span>閃光燈無法使用</span></p>
                     </div>
                 </div>
             </section>
@@ -181,7 +181,7 @@
                     </div>
                     <div class="extra content" id="cardExtraContent">
                     </div>
-                    <button type="button" id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon" aria-hidden="true"></i>Save in your wallet</button>
+                    <button type="button" id="saveInWallet" class="ui bottom attached primary big button"><i class="download icon" aria-hidden="true"></i>儲存到你的錢包</button>
                 </div>
                 <button type="button" class="ui fluid violet icon button" name="startScanning">
                     <svg width="24" height="24" viewbox="0 0 111 111" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -249,11 +249,11 @@
                     <path d="M89 84V71H94V84H89Z" fill="currentColor"/>
                     <path d="M51 41V36H56V41H51Z" fill="currentColor"/>
                   </svg>
-                    Scan another certificate
+                    掃描另一個證明
                 </button>
                 <button type="button" class="ui fluid basic inverted icon button" name="scanImage">
                     <i class="file image icon" aria-hidden="true"></i>
-                    Import another picture
+                    匯入另一張圖片
                 </button>
             </section>
 
@@ -312,11 +312,11 @@
                               <h3 class="header" itemprop="name">我無法掃描我的憑證。</h3>
                               <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
                                   <ol class="ui ordered list" itemprop="text" role="list">
-                                      <li class="item">擁有良好的光源，並將 QR 碼與掃描區域邊緣對齊。 The size of the visual aid is the size of the code we need. Your code must be flat (wrinkled paper won't work well).</li>
-                                      <li class="item">If you have a screenshot or a picture of your code, you can use the "Import picture" button.</li>
-                                      <li class="item">Please be sure to use the EU version of your certificate. See the following question if you don't know where to get yours.</li>
-                                      <li class="item">We support the EU Digital COVID certificate of vaccination, recovery, test. The ones from Switzerland and the United Kingdom are also supported if they are following the EU format.</li>
-                                      <li class="item">If all else fails, you can contact us or <a href="https://github.com/clawfire/covid19-passbook-generator/issues/new?assignees=&labels=bug%2Ctriage&template=bug_report.yml&title=%5BBUG%5D+" title="Submit a bug on Github">open an issue</a>.</li>
+                                      <li class="item">擁有良好的光源，並將 QR Code 與掃描區域邊緣對齊。 畫面上顯示的框框大小，是我們需要掃描的 QR Code 代碼的大小。 你的代碼必須是平整的（皺掉的紙本可能會失敗）。</li>
+                                      <li class="item">如果你有 QR Code 的 截圖或圖片，你可以使用「匯入圖片」按鈕。</li>
+                                      <li class="item">請確認你使用正確的歐盟格式證明。 如果不知道如何獲得證明，請參考下列問題。</li>
+                                      <li class="item">我們支援歐盟數位新冠病毒健康證明（疫苗施打、檢測以及治療）。 來自瑞士和英國的證明，若使用歐盟的格式，此網站也支援。</li>
+                                      <li class="item">如果仍然失敗，你可以聯絡我們，或 <a href="https://github.com/clawfire/covid19-passbook-generator/issues/new?assignees=&labels=bug%2Ctriage&template=bug_report.yml&title=%5BBUG%5D+" title="Submit a bug on Github">建立提問</a>。</li>
                                   </ol>
                               </div>
                           </div>
@@ -324,20 +324,20 @@
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <h3 class="header" itemprop="name">這專案是什麼？</h3>
-                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">This web application scans your EU Digital COVID certificate (vaccine, test, or healing) and generates a passbook from it. You can then import it into your iPhone's wallet, or if you're an Android user, import it into an app that supports it.</div>
+                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">這個網頁應用程式掃描你的歐盟數位新冠病毒健康證明（疫苗施打、檢測以及治療）並從中產生一張數位票卡。 然後你可以將其匯入到 iPhone 的錢包，若你使用 Android，則可以使用任何支援的應用程式。</div>
                           </div>
                         </div>
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <h3 class="header" itemprop="name">我可以將證明儲存到 Android 上嗎？</h3>
                               <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                  <p itemprop="text">Yes! You can save the .pkpass file and open it with an application that supports this format, for example:</p>
+                                  <p itemprop="text">可以！ 您可以儲存 .pkpass 檔，並使用支援此格式的應用程式來開啟它，例如：</p>
                                   <ul itemprop="text">
                                       <li><a href="https://play.google.com/store/apps/details?id=de.stocard.stocard&hl=fr&gl=US">Stocard</a> (Google Play Store)</li>
                                       <li><a href="https://f-droid.org/fr/packages/org.ligi.passandroid/">PassAndroid</a> (F-Droid)</li>
                                       <li><a href="https://play.google.com/store/apps/details?id=io.walletpasses.android">WalletPasses</a> (Google Play Store)</li>
                                   </ul>
-                                  <p itemprop="text">You can also screenshot the pass preview we display before download; it contains all the relevant information you see on the cover of your paper certificate.</p>
+                                  <p itemprop="text">在下載數位證明前，你也可以將我們提供的預覽畫面截圖下來；它包含您在實體憑證封面上看到的所有相關資訊。</p>
                               </div>
                           </div>
                       </div>
@@ -358,20 +358,20 @@
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1F8;&#x1F1EA;</span> In Sweden, you can download it from the  <a href="https://covidbevis.se/vaccinationsbevis-web/">Swedish E-health agency's Covidbevis website</a>.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1E8;&#x1F1ED;</span> In Switzerland, the certificates are distributed by your canton. Get more information on <a href="https://www.bag.admin.ch/bag/fr/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/covid-zertifikat.html">Federal Office of Public Health</a>.</p>
                                 <p itemprop="text"><span aria-hidden="true">&#x1F1F9;&#x1F1FC;</span> In Taiwan, you can download it from the  <a href="https://dvc.mohw.gov.tw/vapa/apply/Index.init.ctr">Taiwan Centers for Disease Control's website</a>.</p>
-                                <p itemprop="text">If you know how to download the certificates from health authorities elsewhere, please contact us so we can add the instructions here.</p>
+                                <p itemprop="text">如果以知道如何從其他地方下載來自衛生主管機關的憑證，請與我們聯絡，以便我們在這裡新增說明。</p>
                               </div>
                           </div>
                         </div>
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <h3 class="header" itemprop="name">這是如何運作的？</h3>
-                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>When you scan the code, we read the data and create the passbook (the file needed to have a card in your wallet). We send a checksum for digital signature to our server, without sending your data. Your phone generates the final file and lets you save it.</p></div>
+                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>當掃描 QR Code 時，我們會讀取資料並建立數位證明（在你的手機錢包中使用的檔案格式）。 我們會傳送一組數位簽章檢查碼到我們的伺服器，但不會儲存你的資料。 在你的手機上會產生出最終檔案，讓你可以儲存。</p></div>
                           </div>
                         </div>
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <h3 class="header" itemprop="name">這安全嗎？</h3>
-                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>We put a lot of effort into making it as secure as we could. Your personal data never leaves your phone. Apple requires a digital signature to open a pass. To generate this, the app only sends a checksum of your data to our server, and it's impossible to guess the original content. The last step happens on your phone: you preview your information before saving the pass. We don't track anyone, we don't collect any personal information, and we don't use cookies.</p></div>
+                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>我們花了很多功夫盡力讓它安全。 你的個人資料永遠不會離開你的手機。 Apple 需要數位簽章才能建立數位憑證。 為了產生此簽章，這個網頁只會將你的資料的檢查碼傳送給我們的伺服器，而我們也無法猜測原始內容。 The last step happens on your phone: you preview your information before saving the pass. We don't track anyone, we don't collect any personal information, and we don't use cookies.</p></div>
                           </div>
                         </div>
                       <div class="item">
@@ -389,12 +389,12 @@
                                 </p>
 
                                 <p>
-                                  New (since end of 08/2021) Design proposition made by <a href="https://www.redisdead.net/">Laurence Vagner</a>.<br>
-                                  Accessibility improvements and CSS made by <a href="https://geoffrey.crofte.fr/en/">Geoffrey Crofte</a>.
+                                  新設計（8/2021 月底開始）由 <a href="https://www.redisdead.net/">Laurence Vagner</a> 製作。<br>
+                                  易用性的改善與 CSS 是由 <a href="https://geoffrey.crofte.fr/en/">Geoffrey Crofte</a> 製作。
                                 </p>
 
                                 <p>
-                                  You can also see the complete list of contributors <a href="https://github.com/clawfire/covid19-passbook-generator/graphs/contributors">on the Github project</a>.
+                                  您也可以<a href="https://github.com/clawfire/covid19-passbook-generator/graphs/contributors">在 GitHub 專案</a>上查看貢獻者的完整清單。
                                 </p>
                               </div>
                           </div>
@@ -402,13 +402,13 @@
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
                               <h3 class="header" itemprop="name">我可以如何幫助？</h3>
-                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>If you like the app, don't hesitate to share it with your friends and family. Then, if you want to help more, <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen">take a look at the issues</a>. It's not just about tech; there's also copywriting tasks, design, etc. You can start <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22">with those issues</a> if you want to get familiar with the project.</p>
+                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>如果你喜歡這個應用程式，請多與你的朋友和家人分享。 然後，如果你想提供更多幫助， <a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen">請看現有問題</a>。 不只是技術的問題，還有文案、設計等需要協助。 如果你想熟悉本專案運作，你可以從<a href="https://github.com/clawfire/covid19-passbook-generator/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22">這些問題</a>開始。</p>
                           </div>
                         </div>
                       <div class="item">
                           <div class="content" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                              <h3 class="header" itemprop="name">What are your running fees?</h3>
-                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>So far, this site is <a href="https://netlify.com/">powered by Netlify</a> for free (many MANY thanks to them for their support to this project) and AWS Lambda costs me under €1/month. You can find a <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSUDZX5ZdohZhLWxb1TyTtpamoRtkBg6z-wikv1b2OG1tWeNXwhNHX-a_wzxV5r4qoC9k8UauL3D-ay/pubhtml">transparency report</a> on the cost and donations (uses Google Sheets).</p></div>
+                              <h3 class="header" itemprop="name">網站運作的成本哪裡來？</h3>
+                              <div class="description" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p>到目前為止，這個網站是由 <a href="https://netlify.com/">Netlify</a> 協助免費提供（非常感謝他們對這個專案的支援），另外 AWS Lambda 每個月花了我不到 1 歐元。 你可以在 <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vSUDZX5ZdohZhLWxb1TyTtpamoRtkBg6z-wikv1b2OG1tWeNXwhNHX-a_wzxV5r4qoC9k8UauL3D-ay/pubhtml">透明度報告</a>找到成本和獲得的捐贈資訊（在 Google Sheets ）。</p></div>
                           </div>
                           <div class="content">
                             <a href="https://www.producthunt.com/posts/eu-digital-covid-certificate-to-passbook?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-eu-digital-covid-certificate-to-passbook"
@@ -427,15 +427,15 @@
           <div class="ui basic modal" id="modal-offline">
             <div class="ui icon header">
               <p><i class="toggle off icon" aria-hidden="true"></i>
-              Whoops! You’re offline</p>
+              糟了！ 你目前離線中</p>
             </div>
             <div class="content">
-              <p>You will not be able to generate a new pass while you’re offline. If you want to continue using the app, you will need a data access.</p>
+              <p>當你離線時，您將無法產生新的證明。 如果你要繼續使用應用程式，則需要連線上網。</p>
             </div>
             <div class="actions">
               <div class="ui blue basic cancel inverted button">
                 <p><i class="checkmark icon" aria-hidden="true"></i>
-                I understand, close this message.</p>
+                我了解了，關閉這個訊息。</p>
               </div>
             </div>
           </div>
@@ -443,15 +443,15 @@
           <div class="ui basic modal" id="modal-unsupported-browser-facebook">
             <div class="ui icon header">
               <p><i class="facebook icon" aria-hidden="true"></i>
-              Your browser doesn’t meet the requirements for this app to work.</p>
+              您的瀏覽器不符合此應用程式運作的需求。</p>
             </div>
             <div class="content">
-              <p>You’re using a Facebook inc. app which opens the link in preview mode but prevents downloads, so you won’t be able to download the pass. Open the site in a regular browser.</p>
+              <p>你正在使用 Facebook 公司的應用程式，他支援在預覽模式下開啟連結但不允許下載，因此您將無法儲存數位憑證。 請在一般瀏覽器中開啟網站。</p>
             </div>
             <div class="actions">
               <div class="ui blue basic cancel inverted button">
                 <p><i class="checkmark icon" aria-hidden="true"></i>
-                I understand, close this message.</p>
+                我了解了，關閉這個訊息。</p>
               </div>
             </div>
           </div>
@@ -459,15 +459,15 @@
           <div class="ui basic modal" id="modal-unsupported-browser-safari">
             <div class="ui icon header">
               <p><i class="apple icon" aria-hidden="true"></i>
-              Your browser doesn’t meet the requirements for this app to work.</p>
+              您的瀏覽器不符合此應用程式運作的需求。</p>
             </div>
             <div class="content">
-              <p>You need to open this site using Safari. Apple doesn’t allow other browsers to download passes to the Wallet app.</p>
+              <p>您需要使用 Safari 來開啟此網站。 Apple 不允許其他瀏覽器下載憑證到錢包 App 中。</p>
             </div>
             <div class="actions">
               <div class="ui blue basic cancel inverted button">
                 <p><i class="checkmark icon" aria-hidden="true"></i>
-                I understand, close this message</p>
+                我了解了，關閉這個訊息。</p>
               </div>
             </div>
           </div>
@@ -475,13 +475,13 @@
           <div class="ui basic modal" id="modal-unsupported-old-browser">
             <div class="ui icon header">
               <i class="exclamation circle icon"></i>
-              Your browser is too old.
+              你的瀏灠器太舊了。
             </div>
             <div class="content">
-              <p>Sorry but your browser is too old and can't handle the cryptographic mathematic operation required to decode your QR code.</p>
-              <p>For iOS users, iOS 14 is required. iPhone6S and up are supported but you need to upgrade iOS to use the app.</p>
-              <p>For macOS users, Safari 14 is required.</p>
-              <p>If you cannot upgrade or don't want, you can open this website on your computer (or another browser) and use it to generate your pass.</p>
+              <p>抱歉，但你的瀏覽器太舊了，無法處理解碼 QR Code 密碼所需的數學運算。</p>
+              <p>iOS 使用者必須使用 iOS 14 以上版本。 iPhone 6S 以上均支援，但你需要升級 iOS 才能使用本應用程式。</p>
+              <p>macOS 使用者必須使用 Safari 14 以上版本。</p>
+              <p>如果你無法或不想升級，您可以在你的電腦（或另一個瀏覽器）開啟此網站，並使用它來產生你的數位證明。</p>
             </div>
           </div>
 
@@ -493,7 +493,7 @@
             <div class="content">
               <div class="description">
                 <p>您可以透過將此錯誤的相關資訊傳送給開發團隊來協助我們，以防止它再次發生。</p>
-                <p>Feel free to check that the error information below does not contain any personal information. 若你願意，你也可以加入使用情境資訊。 感謝你的協助！</p>
+                <p>請查看下面的錯誤資訊，裡面不包含任何個資。 若你願意，你也可以加入使用情境以利我們了解發生原因。 感謝你的協助！</p>
                 <div class="ui form">
                   <div class="field">
                     <label for="error-msg">錯誤訊息</label>
