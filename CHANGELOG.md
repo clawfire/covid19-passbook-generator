@@ -1,8 +1,13 @@
 ## [Unrealeased]
 
+## [2.3.1] - 2022-01-30
+### Added
+- Add Netherland, Spain, Estonia and complete Belgium instructions
+
+### Changed
+- Update language select option for zh
 
 ## [2.3.0] - 2022-01-21
-
 ### Added
 - Camera selection when scanning. You're now able to select which camera you want to use. Front, back, tele-lense. Whatever your device let the browser access to.
 
