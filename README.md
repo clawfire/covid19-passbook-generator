@@ -1,12 +1,39 @@
 # COVID-19 passbook Generator
 
+> [!IMPORTANT]
+> **This project is closed (November 2026).** The EU Digital COVID Certificate regulation ended in 2023 and the Apple certificate used to sign the passes has expired, so the generator can no longer produce valid passes. The signing service has been deleted and [covid19passbook.netlify.app](https://covid19passbook.netlify.app/) now shows a farewell page (source in [`/shutdown`](shutdown/)).
+>
+> The code stays here for history. Thank you to everyone who used, translated, contributed to and supported this project. ❤️
+
+## How it looked
+
+The site as it was just before the shutdown (version 2.3.1, last published on January 30th, 2022):
+
+| Home (English) | FAQ | Home (French) |
+| --- | --- | --- |
+| ![Home page in English](docs/screenshots/home-en-desktop.jpg) | ![FAQ section](docs/screenshots/faq-en.jpg) | ![Home page in French](docs/screenshots/home-fr.jpg) |
+
+## In the press
+
+- [Irish Independent: Explainer: how to put your digital Covid cert on your phone](https://www.independent.ie/world-news/explainer-how-to-put-your-digital-covid-cert-on-your-phone/a/134521076.html) (2021)
+- [Silicon Luxembourg: Get Your Covid-19 Certificate On Your Smartphone’s Digital Wallet](https://www.siliconluxembourg.lu/get-your-covid-19-certificate-on-your-smartphone-digital-wallet/) (21/07/2021)
+- [data.public.lu: Keeping your COVID certificate on your smartphone, the Open Data way](https://data.public.lu/en/posts/keeping-your-covid-certificate-on-your-smartphone-the-open-data-way/) (30/06/2021)
+- [Enrique Dans: Here’s how to put your digital vaccination certificate on your Wallet](https://medium.com/enrique-dans/heres-how-to-put-your-digital-vaccination-certificate-on-your-wallet-4c3cb3408e28) (14/08/2021)
+- [Fergal Bowers (RTÉ), on X: “Such a handy way to save your EU Covid Digital Cert”](https://twitter.com/FergalBowers/status/1415245159760023555) (14/07/2021)
+- [Philip Nolan, on X: via Karl Brophy, #TonightVMTV](https://x.com/philipnolan1/status/1415057096916316160) (07/2021)
+- [nwradu blog (Romania): Cum să obții certificatul digital de vaccinare](https://www.nwradu.ro/2021/07/site-certificat-digital-vaccinare-ue/) (01/07/2021)
+- [Hacker News: Save EU Digital Covid Certificate in Your iPhone Wallet](https://news.ycombinator.com/item?id=27681340) (06/2021)
+- [Product Hunt: EU Digital COVID Certificate to Passbook](https://www.producthunt.com/products/eu-digital-covid-certificate-to-passbook) (06/2021)
+
+## About the project
+
 The aim of this project is to let a user scan a EU Digital COVID Certificate with their smartphone, and generate a passbook, without any data stored on a remote server.
 
 [![Crowdin](https://badges.crowdin.net/covid19-passbook/localized.svg)](https://crowdin.com/project/covid19-passbook)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/fabf8679-02a3-4108-b51e-fea63abafff6/deploy-status)](https://app.netlify.com/sites/covid19passbook/deploys)
 
 ## Test it
-We are deploying a stable-ish version online [so you can try it out](https://covid19passbook.netlify.app/). Better used on your iPhone but also works on Android and your mac. If you spot any bugs, please reach us here or on social media 😃 . You can also browse the opened issues to see if we already spotted that bug. And if you have any improvement idea, that's also possible to send us your feature requests.
+~~We are deploying a stable-ish version online so you can try it out.~~ The online version has been shut down. If you want to run the app locally, the last working build configuration is in the git history (`netlify.toml` before the shutdown commit, and `yarn start`). Note that generating a pass also requires a signing service with a valid Apple Pass Type ID certificate.
 
 ## Background story
 Since EU Digital COVID certificates launched in Luxembourg, there's no application to store your certificate digitally. You can go online and download a PDF or use the grayscale version you got by mail.

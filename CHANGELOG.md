@@ -1,5 +1,13 @@
 ## [Unrealeased]
 
+## [3.0.0] - 2026-11-16
+
+### Removed
+- Shut down the service: the site now serves a static farewell page (`/shutdown`). The pass generator, the Netlify functions and the AWS signing service are no longer deployed.
+
+### Added
+- Screenshots of the site before the shutdown in `docs/screenshots`, shown in the README.
+
 
 ## [2.3.0] - 2022-01-21
 
