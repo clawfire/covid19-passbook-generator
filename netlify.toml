@@ -11,9 +11,10 @@
   # (default location) are no longer deployed.
   functions = "shutdown/no-functions"
 
-# Every old URL (language pages, scanner, functions…) lands on the farewell page.
+# Every old URL (language pages, scanner, functions…) shows the farewell page.
 # Non-forced: existing files in /shutdown (index.html, images) are served as-is.
+# (A 301 from "/*" to "/" is dropped by Netlify as a loop, hence the rewrite.)
 [[redirects]]
   from = "/*"
-  to = "/"
-  status = 301
+  to = "/index.html"
+  status = 200
