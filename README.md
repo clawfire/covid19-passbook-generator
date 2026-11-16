@@ -17,7 +17,7 @@ The site as it was just before the shutdown (version 2.3.1, last published on Ja
 
 - [Irish Independent: Explainer: how to put your digital Covid cert on your phone](https://www.independent.ie/world-news/explainer-how-to-put-your-digital-covid-cert-on-your-phone/a/134521076.html) (2021)
 - [Silicon Luxembourg: Get Your Covid-19 Certificate On Your Smartphone’s Digital Wallet](https://www.siliconluxembourg.lu/get-your-covid-19-certificate-on-your-smartphone-digital-wallet/) (21/07/2021)
-- [data.public.lu, Keeping your COVID certificate on your smartphone, the Open Data way](https://data.public.lu/en/posts/keeping-your-covid-certificate-on-your-smartphone-the-open-data-way/) (30/06/2021)
+- [data.public.lu: Keeping your COVID certificate on your smartphone, the Open Data way](https://data.public.lu/en/posts/keeping-your-covid-certificate-on-your-smartphone-the-open-data-way/) (30/06/2021)
 - [Enrique Dans: Here’s how to put your digital vaccination certificate on your Wallet](https://medium.com/enrique-dans/heres-how-to-put-your-digital-vaccination-certificate-on-your-wallet-4c3cb3408e28) (14/08/2021)
 - [Fergal Bowers (RTÉ), on X: “Such a handy way to save your EU Covid Digital Cert”](https://twitter.com/FergalBowers/status/1415245159760023555) (14/07/2021)
 - [Philip Nolan, on X: via Karl Brophy, #TonightVMTV](https://x.com/philipnolan1/status/1415057096916316160) (07/2021)
