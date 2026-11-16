@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Covid19-Passbook — Thank you, and goodbye</title>
+  <link rel="icon" type="image/png" href="/app_icon.png">
+  <meta name="theme-color" content="#016D8A">
+  <meta name="author" content="Thibault Milan">
+  <meta name="description" content="Covid19-Passbook has been shut down. Thank you to everyone who used it, translated it, contributed to it and supported it.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Covid19-Passbook — Thank you, and goodbye">
+  <meta property="og:description" content="The service that put EU Digital COVID Certificates in your iPhone's wallet is now closed. Thank you all.">
+  <meta property="og:image" content="/og.png">
+  <meta property="og:url" content="https://covid19passbook.netlify.app">
+  <meta name="twitter:card" content="summary">
+  <style>
+    :root {
+      --yellow: #FBB320;
+      --yellow-light: #FDD98F;
+      --teal: #016D8A;
+      --teal-medium: #0C87A8;
+      --teal-dark: #074C5F;
+      --violet: #35287C;
+      --violet-dark: #282343;
+      --text: #1d1b2e;
+      --muted: #5b5873;
+      --bg: #ffffff;
+      --soft: #f5f4fa;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+    a { color: var(--teal); }
+    a:hover { color: var(--teal-dark); }
+
+    header {
+      background: var(--teal);
+      color: #fff;
+      padding: 1rem 1.25rem;
+    }
+    header .wrap { display: flex; align-items: center; gap: .9rem; justify-content: center; }
+    header h1 { font-size: clamp(1.15rem, 2.6vw, 1.6rem); margin: 0; font-weight: 800; }
+
+    .wrap { max-width: 980px; margin: 0 auto; }
+
+    main .wrap {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 3rem;
+      padding: 0 1.25rem 3rem;
+    }
+
+    /* The violet "ribbon" card, same shape as the original intro panel */
+    .card {
+      background: var(--violet-dark);
+      color: #fff;
+      padding: 2.25rem 1.75rem 4rem;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3rem), 50% 100%, 0 calc(100% - 3rem));
+      align-self: start;
+      text-align: center;
+    }
+    .card .badge {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--violet-dark);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-size: .8rem;
+      padding: .3rem .7rem;
+      border-radius: 3px;
+    }
+    .card h2 { font-size: 1.6rem; line-height: 1.25; margin: 1rem 0 .5rem; }
+    .card p { margin: 0; color: #d9d6ee; font-size: .95rem; }
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem .75rem;
+      margin: 2rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .stats strong {
+      display: block;
+      font-size: 1.7rem;
+      line-height: 1.1;
+      color: var(--yellow);
+      font-weight: 800;
+    }
+    .stats span { font-size: .85rem; color: #d9d6ee; }
+    .card .dates {
+      margin-top: 2rem;
+      font-size: .8rem;
+      color: #b9b5d6;
+    }
+
+    article { padding-top: 2.25rem; }
+    article h2 {
+      color: var(--teal);
+      font-size: 1.9rem;
+      margin: 0 0 1rem;
+      text-decoration: underline dotted var(--teal-medium);
+      text-underline-offset: .35em;
+    }
+    article h3 { color: var(--teal); font-size: 1.2rem; margin: 2rem 0 .5rem; }
+    article p, article li { font-size: 1.05rem; }
+    .lead { font-size: 1.2rem !important; }
+
+    ol.steps { list-style: none; padding: 0; counter-reset: s; }
+    ol.steps li { counter-increment: s; position: relative; padding-left: 2.3rem; margin-bottom: .7rem; }
+    ol.steps li::before {
+      content: counter(s);
+      position: absolute; left: 0; top: .1rem;
+      width: 1.5rem; height: 1.5rem;
+      background: var(--yellow-light);
+      color: var(--violet-dark);
+      font-weight: 800; font-size: .85rem;
+      display: grid; place-items: center;
+      clip-path: polygon(0 0, 80% 0, 100% 50%, 80% 100%, 0 100%);
+    }
+
+    .thanks {
+      background: var(--soft);
+      border-left: 4px solid var(--yellow);
+      padding: 1.1rem 1.3rem;
+      margin: 2rem 0;
+    }
+    .thanks p { margin: .4rem 0; }
+
+    .lang-switch { font-size: .9rem; margin-bottom: 1.5rem; }
+    .lang-switch a { font-weight: 600; }
+
+    hr { border: 0; border-top: 1px solid #e3e1ee; margin: 3rem 0; }
+
+    footer {
+      text-align: center;
+      font-size: .85rem;
+      color: var(--muted);
+      padding: 2rem 1.25rem 3rem;
+    }
+
+    @media (max-width: 780px) {
+      main .wrap { grid-template-columns: 1fr; gap: 0; padding: 0 0 2rem; }
+      .card { padding: 2rem 1.5rem 3.75rem; }
+      article { padding: 1.75rem 1.25rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <header role="banner">
+    <div class="wrap">
+      <svg width="45" height="48" viewBox="0 0 470 504" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M334.667 494H124C115.2 494 108 486.8 108 478V26C108 17.2 115.2 9.99999 124 9.99999H334.667C343.467 9.99999 350.667 17.2 350.667 26V478C350.667 486.8 343.467 494 334.667 494Z" fill="#363155"/>
+                <path d="M325.58 486.63H133.404C119.315 486.63 107.74 474.694 107.74 460.165V431.108H350.714V460.165C351.226 475.201 339.651 486.63 325.582 486.63H325.58ZM351.224 415.545H108.251V82.5105H351.224V415.545ZM133.402 16.6345H325.559C339.648 16.6345 351.222 28.5692 351.222 43.0985V66.9691L108.248 66.9492V42.5718C108.248 28.5705 119.822 16.6345 133.4 16.6345H133.402ZM325.579 0.54247H133.402C110.766 0.54247 92.1564 19.7345 92.1564 43.0785V460.676C92.1564 484.018 110.766 503.209 133.402 503.209H325.559C348.195 503.209 366.804 484.018 366.804 460.676L366.823 42.5692C366.823 19.7532 348.215 0.54247 325.579 0.54247V0.54247Z" fill="white"/>
+                <path d="M245.49 458.55C245.49 480.762 213.49 480.762 213.49 458.55C213.49 436.318 245.49 436.318 245.49 458.55Z" fill="white"/>
+                <path d="M244.157 458.55C244.157 480.762 212.157 480.762 212.157 458.55C212.157 436.318 244.157 436.318 244.157 458.55Z" fill="white"/>
+                <path d="M198.706 36.5422C195.186 36.5422 192.157 39.6248 192.157 43.2088C192.157 46.7928 195.186 49.8755 198.706 49.8755H257.608C261.128 49.8755 264.157 46.7928 264.157 43.2088C264.157 39.6248 261.129 36.5422 257.608 36.5422H198.706Z" fill="white"/>
+                <path d="M464.951 143.819H457.373V135.932C457.373 133.304 455.359 131.209 452.834 131.209C450.307 131.209 448.294 133.304 448.294 135.932L448.275 143.819H440.697C438.17 143.819 436.157 145.913 436.157 148.543C436.157 151.171 438.17 153.265 440.697 153.265H448.275V161.152C448.275 163.781 450.287 165.876 452.814 165.876C455.341 165.876 457.353 163.781 457.353 161.152V153.265L464.951 153.287C467.478 153.287 469.49 151.192 469.49 148.563C469.49 145.913 467.99 143.819 464.951 143.819Z" fill="white"/>
+                <path d="M62.2396 341.152H54.6729V333.265C54.6729 330.637 52.6636 328.543 50.1409 328.543C47.6182 328.543 45.6089 330.637 45.6089 333.265V341.152H38.0222C35.4996 341.152 33.4902 343.247 33.4902 345.876C33.4902 348.504 35.4996 350.599 38.0222 350.599H45.5889V358.485C45.5889 361.115 47.5996 363.209 50.1209 363.209C52.6436 363.209 54.6529 361.115 54.6529 358.485V350.599H62.2196C64.7422 350.599 66.7516 348.504 66.7516 345.876C67.2836 343.781 64.7622 341.152 62.2396 341.152Z" fill="white"/>
+                <path d="M52.8035 92.4094H40.4021V79.3414C40.4021 75.6868 37.4181 72.5428 33.9488 72.5428C30.4808 72.5428 27.4968 75.6868 27.4968 79.3414V92.4094H14.6101C11.1408 92.4094 8.1568 95.5534 8.1568 99.2094C8.1568 102.864 11.1408 106.008 14.6101 106.008H27.0115V119.076C27.0115 122.731 29.9955 125.876 33.4648 125.876C36.9328 125.876 39.9168 122.731 39.9168 119.076V106.008H52.3195C55.7875 106.008 58.7715 102.864 58.7715 99.2094C59.2555 95.5534 56.2915 92.4094 52.8035 92.4094Z" fill="white"/>
+                <path d="M17.4904 233.201C17.4904 244.767 0.157043 244.767 0.157043 233.201C0.157043 221.656 17.4904 221.656 17.4904 233.201Z" fill="white"/>
+                <path d="M429.49 422.535C429.49 434.1 412.157 434.1 412.157 422.535C412.157 410.989 429.49 410.989 429.49 422.535Z" fill="white"/>
+                <path d="M424.157 77.2089C424.157 92.3195 401.49 92.3195 401.49 77.2089C401.49 62.0982 424.157 62.0982 424.157 77.2089Z" fill="white"/>
+                <path d="M170.824 221.258C187.97 207.435 206.874 196.001 227.078 187.209C241.321 193.358 254.976 200.829 267.842 209.467L227.078 250.123L203.741 226.746L189.269 241.179L219.842 271.671C221.753 273.602 224.352 274.67 227.078 274.67C229.805 274.67 232.404 273.602 234.314 271.671L282.824 223.393C273.422 257.543 254.008 288.137 227.078 311.209C199.614 287.603 179.996 256.222 170.824 221.258ZM227.677 335.209C229.984 335.234 232.213 334.467 234.033 333.063C270.35 304.687 295.697 264.639 305.798 219.766C306.696 215.986 305.389 212.027 302.416 209.55L299.442 207.405L306.824 200.151L292.266 185.643L283.04 194.941C267.74 184.189 251.336 175.045 234.138 167.663L231.884 166.642C229.244 165.619 226.322 165.619 223.682 166.642L221.426 167.663C196.694 178.211 173.68 192.413 153.152 209.754C150.178 212.231 148.872 216.19 149.769 219.97C159.868 264.845 185.214 304.89 221.534 333.266C223.329 334.569 225.481 335.233 227.685 335.209H227.677Z" fill="#FDBE28"/>
+              </svg>
+      <h1>Keep your COVID certificate in your iPhone’s wallet. <span style="opacity:.75;font-weight:600">Not anymore.</span></h1>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <div class="wrap">
+      <aside class="card" aria-labelledby="card-title">
+        <span class="badge">Service closed</span>
+        <h2 id="card-title">Thank you, and goodbye&nbsp;👋</h2>
+        <p>A small side project that ended up in a lot of wallets.</p>
+
+        <ul class="stats" aria-label="The project in numbers">
+          <li><strong>1000s</strong><span>of passes generated</span></li>
+          <li><strong>28</strong><span>languages</span></li>
+          <li><strong>18</strong><span>code contributors</span></li>
+          <li><strong>127</strong><span>GitHub stars</span></li>
+          <li><strong>0</strong><span>personal data collected</span></li>
+          <li><strong>60.5</strong><span>coffees offered ☕</span></li>
+        </ul>
+
+        <p class="dates">June 2021 → November 2026</p>
+      </aside>
+
+      <article>
+        <p class="lang-switch">English · <a href="#fr" hreflang="fr">Version française</a></p>
+
+        <h2>The end of the road</h2>
+        <p class="lead">Covid19-Passbook is now closed. You can no longer generate a pass from this website.</p>
+
+        <p>In June 2021, there was no simple way to carry an EU Digital COVID Certificate on an iPhone without installing yet another app. So we built one that didn't need installing: scan your QR code, get a pass for Apple Wallet, and keep your data on your phone.</p>
+
+        <p>The world has moved on, and so has this project. The EU Digital COVID Certificate regulation expired in mid-2023, and the Apple certificate used to sign the passes has expired too. Without a valid signature, Wallet would refuse the passes anyway. Keeping a broken generator online would only waste people's time, so it's time to close the door properly.</p>
+
+        <h3>What does this mean for you?</h3>
+        <ol class="steps">
+          <li>Passes already in your Wallet are not affected by the shutdown. They are files on your phone; nothing was ever stored on our side.</li>
+          <li>The signing service has been deleted. No server, no data, nothing left running.</li>
+          <li>The source code stays public on <a href="https://github.com/clawfire/covid19-passbook-generator">GitHub</a>, for history, curiosity, or your next project.</li>
+        </ol>
+
+        <div class="thanks">
+          <p><strong>Thank you.</strong></p>
+          <p>To <a href="https://github.com/biou">Alain Vagner</a> for building the signing service with me, to Guillaume Rischard and @alrouen for their advice, to Laurence Vagner for the redesign, and to Geoffrey Crofte for the accessibility work and CSS.</p>
+          <p>To every contributor on <a href="https://github.com/clawfire/covid19-passbook-generator/graphs/contributors">GitHub</a>, every translator on <a href="https://crowdin.com/project/covid19-passbook">Crowdin</a>, everyone who opened an issue or shared the link with their family.</p>
+          <p>To the people who bought us a coffee: you paid for Apple, AWS and Netlify, and 10&nbsp;% went to LGBT non-profits. To Netlify, for hosting the project for free.</p>
+          <p>And to you, for trusting a small open-source tool with something as personal as a health certificate.</p>
+        </div>
+
+        <p>Stay safe, and keep building useful things in the open.<br>— Thibault</p>
+
+        <hr>
+
+        <section id="fr" lang="fr">
+          <p class="lang-switch"><a href="#main" hreflang="en">English</a> · Version française</p>
+
+          <h2>Fin de l’aventure</h2>
+          <p class="lead">Covid19-Passbook est fermé. Il n’est plus possible de générer un pass depuis ce site.</p>
+
+          <p>En juin 2021, il n’existait aucun moyen simple de garder son certificat COVID numérique de l’UE sur iPhone sans installer une énième application. On a donc construit un outil qui ne s’installe pas : on scanne son QR code, on récupère un pass pour Apple Wallet, et les données restent sur le téléphone.</p>
+
+          <p>Le monde est passé à autre chose, et ce projet aussi. Le règlement européen sur le certificat COVID numérique a pris fin mi-2023, et le certificat Apple qui servait à signer les pass a expiré. Sans signature valide, Wallet refuserait de toute façon les pass. Laisser en ligne un générateur cassé ne ferait que vous faire perdre du temps : place à une fermeture en bonne et due forme.</p>
+
+          <h3>Qu’est-ce que ça change pour vous&nbsp;?</h3>
+          <ol class="steps">
+            <li>Les pass déjà présents dans votre Wallet ne sont pas touchés par la fermeture. Ce sont des fichiers sur votre téléphone&nbsp;: rien n’a jamais été stocké de notre côté.</li>
+            <li>Le service de signature a été supprimé. Plus de serveur, plus de données, plus rien qui tourne.</li>
+            <li>Le code source reste public sur <a href="https://github.com/clawfire/covid19-passbook-generator">GitHub</a>, pour l’histoire, la curiosité ou votre prochain projet.</li>
+          </ol>
+
+          <div class="thanks">
+            <p><strong>Merci.</strong></p>
+            <p>À Alain Vagner, qui a construit le service de signature avec moi, à Guillaume Rischard et @alrouen pour leurs conseils, à Laurence Vagner pour le nouveau design, et à Geoffrey Crofte pour le travail d’accessibilité et le CSS.</p>
+            <p>À toutes celles et ceux qui ont contribué sur GitHub, traduit sur Crowdin, ouvert une issue ou simplement partagé le lien avec leur famille.</p>
+            <p>À celles et ceux qui nous ont offert un café&nbsp;: vous avez payé Apple, AWS et Netlify, et 10&nbsp;% sont allés à des associations LGBT. À Netlify, pour avoir hébergé le projet gratuitement.</p>
+            <p>Et à vous, pour avoir confié à un petit outil open source quelque chose d’aussi personnel qu’un certificat de santé.</p>
+          </div>
+
+          <p>Prenez soin de vous, et continuez à construire des choses utiles en open source.<br>— Thibault</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    Covid19-Passbook · 2021–2026 · <a href="https://github.com/clawfire/covid19-passbook-generator">Source code</a> · <a href="https://thibaultmilan.com">thibaultmilan.com</a>
+  </footer>
+</body>
+</html>
